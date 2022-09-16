@@ -1,9 +1,10 @@
 import React from "react";
+import Signup from "../components/Form/Signup";
 
 const SignUpPage = () => {
     return (
-        <div>회원가입페이지입니다~</div>
-    )
+        <Signup />
+    );
 }
 
 export default SignUpPage;

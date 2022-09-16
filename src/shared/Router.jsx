@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import HomePage from "../pages/MainPage";
+import MainPage from "../pages/MainPage";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import MypagePage from "../pages/MypagePage";
@@ -13,7 +13,7 @@ const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" exact element={<HomePage />} />
+                <Route path="/" exact element={<MainPage />} />
                 <Route path="/login" exact element={<LoginPage />} />
                 <Route path="/signup" exact element={<SignUpPage />} />
                 <Route path="/myPage" exact element={<MypagePage />} />
