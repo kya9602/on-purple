@@ -2,7 +2,7 @@ import React from "react";
 
 const Chat = () => {
     return (
-        <div>채팅 페이지입니다~</div>
+        <div>채팅 페이지입니다~ </div>
     )
 }
 
