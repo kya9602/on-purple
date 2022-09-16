@@ -1,8 +1,13 @@
 import React from "react";
+import Header from "../components/Header/Header";
+import Matching from "../components/Matching";
 
 const Profile = () => {
     return (
-        <div>상대 프로필 상세 페이지입니다~</div>
+        <div>
+            <Header />
+            <Matching />
+        </div>
     )
 }
 
