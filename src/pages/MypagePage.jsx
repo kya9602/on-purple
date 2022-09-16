@@ -1,9 +1,9 @@
 import React from "react";
 
-const Mypage = () => {
+const MypagePage = () => {
     return (
         <div>마이페이지입니다~</div>
     )
 }
 
-export default Mypage;
+export default MypagePage;
