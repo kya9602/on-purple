@@ -7,6 +7,7 @@ import MypagePage from "../pages/MypagePage";
 import ChatPage from "../pages/ChatPage";
 import ProfilePage from "../pages/ProfilePage";
 import BoardPage from "../pages/BoardPage";
+import DetailPage from "../pages/DetailPage";
 
 const Router = () => {
     return (
@@ -19,6 +20,7 @@ const Router = () => {
                 <Route path="/chat" exact element={<ChatPage />} />
                 <Route path="/profile" exact element={<ProfilePage />} />
                 <Route path="/board" exact element={<BoardPage />} />
+                <Route path="/detail" exact element={<DetailPage />} />
             </Routes>
         </BrowserRouter>
 
