@@ -7,7 +7,7 @@ const List = () => {
     return (
         <Wrapper to="/detail">
             <Container>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9wwSYTGe4f5X2qxdg-032_8KnECWsNkURN6Jmk8OTM6CjE9ryOG7HtmUz0BFv5JUV8LE&usqp=CAU" alt="이미지 입니다"/>  
+               
             </Container>
         </Wrapper>
     )

@@ -9,6 +9,8 @@ import ProfilePage from "../pages/ProfilePage";
 import BoardPage from "../pages/BoardPage";
 import DetailPage from "../pages/DetailPage";
 import ChatScreen from "../components/Chating/ChatScreen";
+import PostPage from "../pages/PostPage";
+
 
 const Router = () => {
     return (
@@ -23,6 +25,7 @@ const Router = () => {
                 <Route path="/profile" exact element={<ProfilePage />} />
                 <Route path="/board" exact element={<BoardPage />} />
                 <Route path="/detail" exact element={<DetailPage />} />
+                <Route path="/post" exact element={<PostPage />} />
             </Routes>
         </BrowserRouter>
 

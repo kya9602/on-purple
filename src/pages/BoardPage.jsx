@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import List from "../components/Board/List";
 
-
+import { useNavigate } from "react-router";
+import { Button } from "@mui/material";
 
 const Board = () => {
-    const settings = {
+   //Carousel 잠정 보류 해두겠습니다.
+    /*  const settings = {
         dots: true,
         infinite: false,
         speed: 500,
@@ -24,56 +22,47 @@ const Board = () => {
               <img src="src\assets\icons\angle-right.png" alt="다음화살표" />
             </Pre>
           ),
-    };
+    }; */
     
+    const navigate = useNavigate();
 
     return (
         <>
-            {/* <Write >글쓰기</Write> */}
-
+            <Button variant="outlined" color="primary" onClick={()=>navigate("/post")} >글쓰기🖊️</Button>
+            
             <NewPost>
                 <p>New Post</p>
             </NewPost>
             <Container>
-                <Slider {...settings}>
-                  <List/>
-                </Slider>
+                
             </Container>
 
             <Matzip>
-                <p>맛집 추천순</p>                
+                <p>실제 사용자들의 맛집 추천!</p>                
             </Matzip>
             <Container>
-                <Slider {...settings}>
-                    <List />
-                </Slider>
+                
             </Container>
 
             <Review>
                 <p>후기 많은순</p>
             </Review>
             <Container>
-                <Slider {...settings}>
-                    <List />
-                </Slider>
+                
             </Container>
 
             <Date>
                 <p>데이트 장소 추천순</p>
             </Date>
             <Container>
-                <Slider {...settings}>
-                    <List />
-                </Slider>
+                
             </Container>
 
             <Like>
                 <p>좋아요순</p>
             </Like>
             <Container>
-                <Slider {...settings}>
-                    <List />
-                </Slider>
+                
             </Container>
 
 
@@ -88,7 +77,7 @@ export default Board;
 
 //글쓰기 버튼
 /* const Write = styled.button`
-    
+    float: right;
 ` */
 
 // 신규
