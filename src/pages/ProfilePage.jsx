@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header/Header";
 import Matching from "../components/Matching";
 
-const Profile = () => {
+const ProfilePage = () => {
     return (
         <div>
             <Header />
@@ -11,4 +11,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+export default ProfilePage;
