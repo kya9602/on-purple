@@ -8,6 +8,7 @@ import ChatPage from "../pages/ChatPage";
 import ProfilePage from "../pages/ProfilePage";
 import BoardPage from "../pages/BoardPage";
 import DetailPage from "../pages/DetailPage";
+import ChatScreen from "../components/Chating/ChatScreen";
 
 const Router = () => {
     return (
@@ -18,6 +19,7 @@ const Router = () => {
                 <Route path="/signup" exact element={<SignUpPage />} />
                 <Route path="/myPage" exact element={<MypagePage />} />
                 <Route path="/chat" exact element={<ChatPage />} />
+                <Route path="/chat/:roomId" exact element={<ChatScreen />} />
                 <Route path="/profile" exact element={<ProfilePage />} />
                 <Route path="/board" exact element={<BoardPage />} />
                 <Route path="/detail" exact element={<DetailPage />} />

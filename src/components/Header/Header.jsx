@@ -23,7 +23,10 @@ export default Header;
 
 const HeaderContainer = styled.div`
   display: flex;
+  position: fixed;
+  top: 0px;
   background-color: gray;
+  width: 100%;
   height: 70px;
 `
 const LogoImg = styled.div`

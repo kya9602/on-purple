@@ -1,13 +1,13 @@
 import React from "react";
 
 import Header from "../components/Header/Header";
-import Matching from "../components/Matching";
+import Profile_Detail from "../components/Profile/ProfileDetail";
 
 const ProfilePage = () => {
     return (
         <div>
             <Header />
-            <Matching />
+            <Profile_Detail />
         </div>
 
 

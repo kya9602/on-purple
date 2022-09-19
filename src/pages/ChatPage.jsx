@@ -1,9 +1,11 @@
 import React from "react";
+import Chat from "../components/Chating/Chat";
 
 const ChatPage = () => {
     return (
-
-        <div>채팅 페이지입니다~ </div>
+        <div>
+            <Chat />
+        </div>
 
     )
 }
