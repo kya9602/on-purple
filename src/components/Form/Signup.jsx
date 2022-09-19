@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "./moon.jpg";
-import profileImage from "./profile.jpg";
+import logo from "../../assets/icons/moon.jpg";
+import profileImage from "../../assets/icons/profile.jpg";
 import axios from "axios";
 
 const Form = () => {
