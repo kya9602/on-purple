@@ -1,8 +1,13 @@
 import React from "react";
+import Detail from "../components/Board/Detail";
+
 
 const DetailPage = () => {
     return (
-        <div>디테일</div>
+        <>
+            <Detail />
+
+        </>
     )
 }
 
