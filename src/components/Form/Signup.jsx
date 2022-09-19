@@ -1,29 +1,211 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "./moon.jpg";
 import profileImage from "./profile.jpg";
-
+import axios from "axios";
 
 const Form = () => {
     const navigate = useNavigate();
+    // const [file, setFile] = useState(null)
+    // const fileInput = useRef(null)
+
+    // const onChange = (e) => {
+    //     if (e.target.files[0]) {
+    //         setFile(e.target.files[0])
+    //     } else { //업로드 취소할 시
+    //         setImage(profileImage)
+    //         return
+    //     }
+    //     //화면에 프로필 사진 표시
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //         if (reader.readyState === 2) {
+    //             setImage(reader.result)
+    //         }
+    //     }
+    //     reader.readAsDataURL(e.target.files[0])
+    // }
+
+    const [imageUrl, setImageUrl] = useState(profileImage); // img input value
+    const [formData] = useState(new FormData())
+
+    // Event Handler
+    // Img Upload hadler
+    const inputRef = useRef(null);
+    const onUploadImg = useCallback((fileBlob) => {
+        formData.append('file', fileBlob);
+        for (const keyValue of formData) {
+            console.log(keyValue[0] + ", " + keyValue[1])
+        };
+
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            reader.onload = () => {
+                setImageUrl(reader.result);
+                resolve();
+            };
+        });
+
+    }, []);
+
+    const [input, setInput] = useState({
+        username: "",
+        password: "",
+        passwordConfirm: "",
+        imageUrl: "",
+    });
+
+    const [usernameError, setusernameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [passwordConfirmError, setPasswordConfirmError] = useState(false);
+
+
+
+    //유효성검사
+    const onChangeusername = (e) => {
+        // console.log("e.target.value is", e.target.value)
+        // console.log("e.target.value.length is ", e.target.value.length)
+        const usernameRegex = /^[A-Za-z0-9+]{4,10}$/;
+        if ((4 < e.target.value.length < 10 && (usernameRegex.test(e.target.value))))
+            setusernameError(false);
+        else if (e.target.value.length === 0 || !(usernameRegex.test(e.target.value))) {
+            setusernameError(true);
+        }
+
+
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
+
+
+    const onChangePassword = (e) => {
+
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,20}$/;
+
+        if ((8 < e.target.value.length < 20 && (passwordRegex.test(e.target.value)))) setPasswordError(false);
+        else setPasswordError(true);
+
+        if (e.target.value.length === 0 || !(passwordRegex.test(e.target.value))) setPasswordConfirmError(false);
+        else if (e.target === 0 || !(passwordRegex.test(e.target.value))) { setPasswordConfirmError(true); }
+        // setInput(e.target.value);
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
+
+
+    const onChangePasswordConfirm = (e) => {
+        if (input.password === e.target.value) setPasswordConfirmError(false);
+        else setPasswordConfirmError(true);
+        // setPasswordConfirmError(e.target.value);
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
+
+    //유효성 검사
+    const validation = () => {
+        if (!input.username) setusernameError(true);
+        if (!input.password) setPasswordError(true);
+        if (!input.passwordConfirm) setPasswordConfirmError(true);
+
+        if (usernameError && passwordError && passwordConfirmError) return true;
+        else return false;
+    }
+
+    // axios
+    const postHandler = async () => {
+
+        const { nickname, password, passwordConfirm } = input;
+        const user = {
+            nickname: nickname,
+            password: password,
+            passwordConfirm: passwordConfirm
+        };
+
+        formData.append('username', input.username);
+        formData.append('password', input.password);
+        formData.append('passwordConfirm', input.passwordConfirm);
+
+        // console.log(typeof (usernameblob, passwordblob, passwordConfirmblob, contentblob, locationblob));
+        for (const keyValue of formData) {
+            console.log("Ready to data>>", keyValue[0] + ", " + keyValue[1])
+        }
+
+
+        try {
+
+            const response = await axios.post("http://13.209.26.228:8080/user/signup", formData,
+
+                {
+                    headers: {
+                        "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+                        "RefreshToken": localStorage.getItem("RefreshToken"),
+                        'Content-Type': 'multipart/form-data',
+                    }
+                });
+            console.log("👏 Axios Work >>> ", response)
+
+            if (response.status === 200 || 201) {
+                window.alert("회원가입이 완료되었습니다.")
+                console.log("newPosting: ", response.data)
+                navigate('/login') //로그인화면으로
+            } else {
+                console.log("Not Ok")
+                console.error(response)
+            }
+
+        } catch (error) {
+            window.alert("🥒ERROR🥒")
+            console.error(error);
+            setImageUrl("")
+        }
+        console.log(validation());
+
+        if (validation()) {
+
+        }
+        return;
+    };
+
+    useEffect(() => {
+
+    }, []);
+
 
     return (
         <StRegisterBox>
             <StHeader>
                 <StHeaderTitle>회원가입</StHeaderTitle>
             </StHeader>
-            <form style={{ marginTop: "10px" }}>
-                <MyProfile src={profileImage}></MyProfile>
+            <form style={{ marginTop: "10px" }} >
+                {/* <MyProfile src={profileImage}></MyProfile> */}
+                <ImgBox >
+                    <Avatar
+                        src={imageUrl}
+                        style={{ margin: '20px' }}
+                        size={200}
+                        onClick={() => { inputRef.current.click() }} />
+                    <input
+                        type='file'
+                        style={{ display: 'none' }}
+                        accept='image/jpg,impge/png,image/jpeg'
+                        name='profile_img'
+                        onChange={(e) => { onUploadImg(e.target.files[0]) }}
+                        ref={inputRef} />
+                </ImgBox>
+
 
 
                 <InputBox>
                     <StLabel style={{ marginRight: "5px" }}>아이디</StLabel>
                     <StInput
                         type="text"
-                        name="nickname"
-                        id="nickname"
+                        name="username"
+                        id="username"
                         placeholder="아이디를 입력해주세요"
+                        value={input.username}
+                        onChange={onChangeusername}
                     />
                     <StIdCheck>중복확인</StIdCheck>
                 </InputBox>
@@ -33,6 +215,8 @@ const Form = () => {
                     <StLine>❤</StLine>
                 </StLineBox>
 
+
+
                 <InputBox >
                     <StLabel style={{ marginRight: "5px" }}>비밀번호</StLabel>
                     <StInput
@@ -40,6 +224,8 @@ const Form = () => {
                         name="password"
                         id="password"
                         placeholder="비밀번호를 입력해주세요"
+                        onChange={onChangePassword}
+                        value={input.password}
                     />
                 </InputBox>
                 {/* <StSmallWorning>비밀번호 형식을 확인하세요</StSmallWorning> */}
@@ -48,6 +234,9 @@ const Form = () => {
                     <StLine>❤</StLine>
                 </StLineBox>
 
+
+
+
                 <InputBox >
                     <StLabel style={{ marginRight: "5px" }}>비밀번호 재확인</StLabel>
                     <StInput
@@ -55,6 +244,8 @@ const Form = () => {
                         name="passwordConfirm"
                         id="passwordConfirm"
                         placeholder="비밀번호를 재입력해주세요"
+                        onChange={onChangePasswordConfirm}
+                        value={input.passwordConfirm}
                     />
                 </InputBox>
                 {/* <StSmallWorning className="invalid-input">비밀번호가 일치하지 않습니다.</StSmallWorning> */}
@@ -62,6 +253,9 @@ const Form = () => {
                 <StLineBox>
                     <StLine>❤</StLine>
                 </StLineBox>
+
+
+
 
                 <InputBox>
                     <StLabel style={{ marginRight: "5px" }}>닉네임</StLabel>
@@ -81,7 +275,7 @@ const Form = () => {
                 <StLine>❤</StLine>
             </StLineBox>
             <StBtnBox>
-                <JoinBtn >회원가입 완료</JoinBtn>
+                <JoinBtn onClick={() => { postHandler(); console.log("input is", input) }}>회원가입 완료</JoinBtn>
             </StBtnBox>
         </StRegisterBox>
     );
@@ -128,16 +322,34 @@ const StRegisterBox = styled.div`
     background-color: white;
 `;
 
-//이미지 넣는곳 
-const MyProfile = styled.img`
-    border: 7px solid #ec79ec;
+//이미지 박스 
+const ImgBox = styled.div`
+  display  : flex ;
+  justify-content: center;
+`;
+
+//이미지 input
+const Avatar = styled.img`
+   border: 7px solid #ec79ec;
     border-radius: 100px;
     width: 200px;
     height: 200px;
-    margin: 50px auto 50px auto;
     background-size: cover;
-    display: flex;
+    margin-left: 100px;
 `
+
+// //이미지 넣는곳 
+// const MyProfile = styled.img`
+//     border: 7px solid #ec79ec;
+//     border-radius: 100px;
+//     width: 200px;
+//     height: 200px;
+//     margin: 50px auto 50px auto;
+//     background-size: cover;
+//     display: flex;
+// `
+
+
 
 //인풋 박스
 const InputBox = styled.div`
