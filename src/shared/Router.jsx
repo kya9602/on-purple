@@ -11,6 +11,7 @@ import DetailPage from "../pages/DetailPage";
 import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
 
+
 const Router = () => {
     return (
         <BrowserRouter>
