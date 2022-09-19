@@ -1,9 +1,14 @@
 import React from "react";
+import Header from "../components/Header/Header";
+import Mypage from "../components/Mypage/Mypage";
 
 const MypagePage = () => {
     return (
-        <div>마이페이지입니다~</div>
-    )
+        <>
+            <Header />
+            <Mypage />
+        </>
+    );
 }
 
 export default MypagePage;
