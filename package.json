@@ -17,14 +17,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 0a5ab5a7c85f95fd46f7b970c4a8580fb637d8fe
-=======
-
->>>>>>> 34eb9145eeaae5b90d7050d641fd074d5e384cc1
     "react-slick": "^0.29.0",
     "redux": "^4.2.0",
     "slick-carousel": "^1.8.1",
