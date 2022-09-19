@@ -2,56 +2,56 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import logo from "./moon.jpg";
+import logo from "../../assets/icons/moon.jpg";
 
 const Login = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <div >
-            <StHeader>
-                <StHeaderTitle> 우리제목</StHeaderTitle>
-                <StHeaderBody></StHeaderBody>
-                <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
-            </StHeader>
-            <StLoginContainer>
-                <form>
-                    <StUserBox>
-                        <StLaber style={{ marginRight: "18px" }}>아이디</StLaber>
-                        <StLoginInput
-                            type="text"
-                            name="nickname"
-                            placeholder="아이디를 입력해주세요"
-                        />
-                    </StUserBox>
+  return (
+    <div >
+      <StHeader>
+        <StHeaderTitle> 우리제목</StHeaderTitle>
+        <StHeaderBody></StHeaderBody>
+        <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
+      </StHeader>
+      <StLoginContainer>
+        <form>
+          <StUserBox>
+            <StLaber style={{ marginRight: "18px" }}>아이디</StLaber>
+            <StLoginInput
+              type="text"
+              name="nickname"
+              placeholder="아이디를 입력해주세요"
+            />
+          </StUserBox>
 
-                    <StPwBox>
-                        <StLaber style={{ marginRight: "5px" }}>비밀번호</StLaber>
-                        <StLoginInput
-                            type="password"
-                            name="password"
-                            placeholder="비밀번호를 입력해주세요"
-                        />
+          <StPwBox>
+            <StLaber style={{ marginRight: "5px" }}>비밀번호</StLaber>
+            <StLoginInput
+              type="password"
+              name="password"
+              placeholder="비밀번호를 입력해주세요"
+            />
 
-                    </StPwBox>
-                    <StBtnBox>
-                        <StBtn>로그인</StBtn>
-                    </StBtnBox>
-                </form>
+          </StPwBox>
+          <StBtnBox>
+            <StBtn>로그인</StBtn>
+          </StBtnBox>
+        </form>
 
-                <StBtnBox>
-                    <StBtnKaka>카카오톡으로 로그인하기</StBtnKaka>
-                </StBtnBox>
+        <StBtnBox>
+          <StBtnKaka>카카오톡으로 로그인하기</StBtnKaka>
+        </StBtnBox>
 
-                <StBtnBox>
-                    <StBtnNaver>네이버로 로그인하기</StBtnNaver>
-                </StBtnBox>
+        <StBtnBox>
+          <StBtnNaver>네이버로 로그인하기</StBtnNaver>
+        </StBtnBox>
 
-                <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
-            </StLoginContainer>
+        <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
+      </StLoginContainer>
 
-        </div>
-    )
+    </div>
+  )
 
 };
 
