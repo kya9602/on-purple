@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import List from "../components/Board/List";
 
 
+
 const Board = () => {
     const settings = {
         dots: true,
@@ -25,6 +26,7 @@ const Board = () => {
           ),
     };
     
+
     return (
         <>
             {/* <Write >글쓰기</Write> */}
@@ -79,6 +81,7 @@ const Board = () => {
 
     )
 }
+
 
 export default Board;
 
@@ -169,3 +172,4 @@ const NextTo = styled.button`
   right: 3%;
   z-index: 3;
 `;
+
