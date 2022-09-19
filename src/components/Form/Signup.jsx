@@ -7,25 +7,7 @@ import axios from "axios";
 
 const Form = () => {
     const navigate = useNavigate();
-    // const [file, setFile] = useState(null)
-    // const fileInput = useRef(null)
 
-    // const onChange = (e) => {
-    //     if (e.target.files[0]) {
-    //         setFile(e.target.files[0])
-    //     } else { //업로드 취소할 시
-    //         setImage(profileImage)
-    //         return
-    //     }
-    //     //화면에 프로필 사진 표시
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //         if (reader.readyState === 2) {
-    //             setImage(reader.result)
-    //         }
-    //     }
-    //     reader.readAsDataURL(e.target.files[0])
-    // }
 
     const [imageUrl, setImageUrl] = useState(profileImage); // img input value
     const [formData] = useState(new FormData())
