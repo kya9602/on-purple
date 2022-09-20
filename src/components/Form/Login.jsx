@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import logo from "../../assets/icons/moon.jpg";
+import logo from "../../assets/images/moon.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
