@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import logo from "../../assets/icons/moon.jpg";
+import newlogo from "../../assets/images/perple.jpg"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,8 +10,8 @@ const Login = () => {
   return (
     <div >
       <StHeader>
-        <StHeaderTitle> 우리제목</StHeaderTitle>
-        <StHeaderBody></StHeaderBody>
+        <StHeaderTitle> Perple </StHeaderTitle>
+        <StHeaderBody>새로운 만남과 설렘을 갖게 해줄 사람을 찾아보라</StHeaderBody>
         <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
       </StHeader>
       <StLoginContainer>
@@ -66,7 +66,7 @@ const StHeader = styled.div`
     width: 100vw;
     height: 45%;
     content: "";
-    background: url(${logo});
+    background: url(${newlogo});
     position: absolute;
     top: 0;
     left: 0;
@@ -79,20 +79,39 @@ const StHeader = styled.div`
 
 //헤더 타이틀
 const StHeaderTitle = styled.div`
-  margin-top: 5%;
-  font-size: 60px;
+  margin-top: 3%;
+  font-size: 80px;
   font-weight: 600;
+  background: #f7e9f5;
+    background: -webkit-linear-gradient(left, #420255, #f7e9f5);
+    background:    -moz-linear-gradient(right, #420255, #f7e9f5);
+    background:      -o-linear-gradient(right, #420255, #f7e9f5);
+    background:         linear-gradient(to right, #420255, #f7e9f5);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    font-weight: bold;
 `;
 
 //헤더 바디
 const StHeaderBody = styled.div`
-    
+  font-size: 17px;
+  margin-top: 1%;
+  background: #09ffff;
+    background: -webkit-linear-gradient(left, #420255, #09ffff);
+    background:    -moz-linear-gradient(right, #420255, #09ffff);
+    background:      -o-linear-gradient(right, #420255, #09ffff);
+    background:         linear-gradient(to right, #420255, #09ffff);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    font-weight: bold;
 `
 
 //헤더 메인가는 버튼
 const StBtnHeader = styled.button`
   margin-top: 20px;
-  margin-bottom: 3%;
+  margin-bottom: 2%;
   color: #f87288;
   font-size: 25px;
   font-weight: 600;
