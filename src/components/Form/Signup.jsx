@@ -335,20 +335,6 @@ const Avatar = styled.img`
     height: 10vw;
     background-size: cover;
 `
-
-// //이미지 넣는곳 
-// const MyProfile = styled.img`
-//     border: 7px solid #ec79ec;
-//     border-radius: 100px;
-//     width: 200px;
-//     height: 200px;
-//     margin: 50px auto 50px auto;
-//     background-size: cover;
-//     display: flex;
-// `
-
-
-
 //인풋 박스
 const InputBox = styled.div`
     display: flex;
