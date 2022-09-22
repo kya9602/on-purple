@@ -29,4 +29,4 @@ Backend
 <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=Sourcetree&logoColor=white">    
 
 # 와이어프레임
-![image](https://user-images.githubusercontent.com/110080748/190610524-a2625eda-d1f1-43aa-97df-02bf9c3cc5f1.PNG)
+![실전프로젝트!](https://user-images.githubusercontent.com/110080748/191244732-2c801cdb-a0af-4eb6-8e84-18cb2bdf3c7b.jpg)

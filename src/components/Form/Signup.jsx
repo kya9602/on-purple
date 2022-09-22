@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/icons/moon.jpg";
-import profileImage from "../../assets/icons/profile.jpg";
+import logo from "../../assets/images/perple.jpg";
+import profileImage from "../../assets/images/profile.jpg";
 import axios from "axios";
 
 const Form = () => {
@@ -180,7 +180,7 @@ const Form = () => {
 
 
                 <InputBox>
-                    <StLabel style={{ marginRight: "5px" }}>아이디</StLabel>
+                    <StLabel style={{ marginRight: "5px" }}> ❤ 아이디</StLabel>
                     <StInput
                         type="text"
                         name="username"
@@ -189,18 +189,19 @@ const Form = () => {
                         value={input.username}
                         onChange={onChangeusername}
                     />
+                    <StLine>❤</StLine>
                     <StIdCheck>중복확인</StIdCheck>
                 </InputBox>
                 {/* <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning> */}
-                <StsmallLabel style={{ marginBottom: "10px", marginTop: "5px" }}>* 아이디는 영어와 숫자로 4~10자로 입력해주세요. *</StsmallLabel>
+                <StsmallLabel style={{ marginBottom: "1%" }}>* 아이디는 영어와 숫자로 4~10자로 입력해주세요. *</StsmallLabel>
                 <StLineBox>
-                    <StLine>❤</StLine>
+                    {/* <StLine>❤</StLine> */}
                 </StLineBox>
 
 
 
                 <InputBox >
-                    <StLabel style={{ marginRight: "5px" }}>비밀번호</StLabel>
+                    <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호</StLabel>
                     <StInput
                         type="password"
                         name="password"
@@ -209,18 +210,20 @@ const Form = () => {
                         onChange={onChangePassword}
                         value={input.password}
                     />
+                    <StLine>❤</StLine>
+
                 </InputBox>
                 {/* <StSmallWorning>비밀번호 형식을 확인하세요</StSmallWorning> */}
-                <StsmallLabel style={{ marginBottom: "10px" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요. * </StsmallLabel>
+                <StsmallLabel style={{ marginBottom: "1%" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요. * </StsmallLabel>
                 <StLineBox>
-                    <StLine>❤</StLine>
+                    {/* <StLine>❤</StLine> */}
                 </StLineBox>
 
 
 
 
                 <InputBox >
-                    <StLabel style={{ marginRight: "5px" }}>비밀번호 재확인</StLabel>
+                    <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호 재확인</StLabel>
                     <StInput
                         type="password"
                         name="passwordConfirm"
@@ -229,32 +232,36 @@ const Form = () => {
                         onChange={onChangePasswordConfirm}
                         value={input.passwordConfirm}
                     />
+                    <StLine>❤</StLine>
+
                 </InputBox>
                 {/* <StSmallWorning className="invalid-input">비밀번호가 일치하지 않습니다.</StSmallWorning> */}
-                <StsmallLabel style={{ marginBottom: "10px" }}>* 비밀번호를 위에와 동일하게 입력해주세요. *</StsmallLabel>
+                <StsmallLabel style={{ marginBottom: "1%" }}>* 비밀번호를 위에와 동일하게 입력해주세요. *</StsmallLabel>
                 <StLineBox>
-                    <StLine>❤</StLine>
+                    {/* <StLine>❤</StLine> */}
                 </StLineBox>
 
 
 
 
                 <InputBox>
-                    <StLabel style={{ marginRight: "5px" }}>닉네임</StLabel>
+                    <StLabel style={{ marginRight: "5px" }}>❤  닉네임</StLabel>
                     <StInput
                         type="text"
                         name="nickname"
                         id="nickname"
                         placeholder="닉네임을 입력해주세요"
                     />
+                    <StLine>❤</StLine>
+
                     <StIdCheck>중복확인</StIdCheck>
                 </InputBox>
                 {/* <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning> */}
-                <StsmallLabel style={{ marginBottom: "10px", marginTop: "5px" }}>* 닉네임는 한글로 2~6자로 입력해주세요. *</StsmallLabel>
+                <StsmallLabel style={{ marginBottom: "1vw" }}>* 닉네임는 한글로 2~6자로 입력해주세요. *</StsmallLabel>
 
             </form>
             <StLineBox>
-                <StLine>❤</StLine>
+                {/* <StLine>❤</StLine> */}
             </StLineBox>
             <StBtnBox>
                 <JoinBtn onClick={() => { postHandler(); console.log("input is", input) }}>회원가입 완료</JoinBtn>
@@ -287,16 +294,26 @@ const StHeader = styled.div`
 
 //헤더 타이틀
 const StHeaderTitle = styled.div`
-    font-size: 45px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    font-size: 35px;
+    font-weight: 600;
+    margin-top: 2vw;
+    margin-bottom: 1vw;
+    background: #ecd9f7;
+    background: -webkit-linear-gradient(left, #420255, #ecd9f7);
+    background:    -moz-linear-gradient(right, #420255, #ecd9f7);
+    background:      -o-linear-gradient(right, #420255, #ecd9f7);
+    background:         linear-gradient(to right, #420255, #ecd9f7);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    font-weight: bold;
 `
 
 //전체 박스 
 const StRegisterBox = styled.div`
     width: 40vw;
     height: auto;
-    padding-bottom: 2%;
+    padding-bottom: 1%;
     margin: auto;
     margin-top: 7%;
     border: 5px solid #fdc2f0;
@@ -312,12 +329,11 @@ const ImgBox = styled.div`
 
 //이미지 input
 const Avatar = styled.img`
-   border: 7px solid #ec79ec;
+   border: 5px solid #f8b2f8;
     border-radius: 100px;
-    width: 200px;
-    height: 200px;
+    width: 10vw;
+    height: 10vw;
     background-size: cover;
-    margin-left: 100px;
 `
 
 // //이미지 넣는곳 
@@ -341,30 +357,30 @@ const InputBox = styled.div`
 
 //박스안 타이틀
 const StLabel = styled.label`
-  margin-top: 5px;
+  margin-top: 1%;
   color : #6d0488;
   font-weight: bolder;
   padding: 1%;
   text-align: center;
-  font-size: 20px;
+  font-size: 15px;
 `;
 
 //아이디 인풋창
 const StInput = styled.input`
-  margin-top: 5px;
+  margin-top: 1%;
   border: none;
   border-radius: 5px;
-  font-size: 20px; 
+  font-size: 15px; 
   padding:1%;
   :hover{
-    border: 3px solid #f530f5;
+    border: 2px solid #f530f5;
   }
 `;
 
 //아이디 중복확인 버튼
 const StIdCheck = styled.button`
-  margin-left: 5px;
-  border: 3px solid #6e96ee;
+  margin-left: 1%;
+  border: 2px solid #6e96ee;
   background-color: white;
   border-radius: 10px;
   :hover{
@@ -378,7 +394,7 @@ const StIdCheck = styled.button`
 const StsmallLabel = styled.label`
     display: flex;
     justify-content: center;
-    font-size: 12px;
+    font-size: 10px;
     color:gray;
     
 `;
@@ -387,18 +403,17 @@ const StsmallLabel = styled.label`
 const StBtnBox = styled.div`
   justify-content: center;
   display: flex;
-  margin-top: 20px;
+  margin-top: 1%;
 `;
 
 //회원가입 버튼
 const JoinBtn = styled.button`
-  margin-top: 10px;
   background-color: white;
   border: none;
   border-radius: 5px;
   padding: 1%;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   color:#80036f;
   :hover{
     border: none;
@@ -426,5 +441,6 @@ const StLineBox = styled.div`
 
 //구분선
 const StLine = styled.div`
-  
+  margin-top:1.3%;
+  color :#6d0488
 `;
