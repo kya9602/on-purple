@@ -4,59 +4,92 @@ import { useNavigate } from "react-router";
 import TextArea from "../components/Board/TextArea/TextArea";
 import { Button } from "@mui/material";
 import axios from "axios";
+import default_Img from "../assets/images/default-image.jpg";
+import Delete from "../assets/icons/delete.png"
+import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+
+import "./styles.css";
+
+// import required modules
+import { Navigation } from "swiper";
 
 const PostPage = () => {
-      let inputRef;
-      const navigate = useNavigate();
+  let inputRef;
+  const navigate = useNavigate();
 
-      // 게시판 제목, 내용, 사진
-      const [title, setTitle] = useState("");
-      const [content, setContent] = useState("");
-      const [image, setImage] = useState([]);
+  // 게시판 제목, 내용, 사진
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState([]);
 
-      //이미지 업로드 핸들
-      const handleAddImages = (event) => {
-        const imageLists = event.target.files;
-        let imageUrlLists = [...image];
+  //이미지 업로드 핸들
+  const handleAddImages = (event) => {
+    const imageLists = event.target.files;
+    let imageUrlLists = [...image];
 
-        for (let i = 0; i < imageLists.length; i++) {
-          const currentImageUrl = URL.createObjectURL(imageLists[i]);
-          imageUrlLists.push(currentImageUrl);
-        }
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+      window.URL.revokeObjectURL(imageLists[i]);
+    }
+    // 이미지 최대 5개 까지만
+    if (imageUrlLists.length > 5) {
+      window.alert("이미지는 최대 5개까지만 가능합니다😭")
+      imageUrlLists = imageUrlLists.slice(0, 5);
+    }
 
-        if (imageUrlLists.length > 5) {
-          imageUrlLists = imageUrlLists.slice(0, 5);
-        }
+    setImage(imageUrlLists);
+  };
+ 
+  // X버튼 클릭 시 이미지 삭제
+  const handleDeleteImage = (id) => {
+    setImage(image.filter((_, index) => index !== id));
+  };
 
-        setImage(imageUrlLists);
-      };
-      // X버튼 클릭 시 이미지 삭제
-      const handleDeleteImage = (id) => {
-        setImage(image.filter((_, index) => index !== id));
-      };
+  // 이미지, 제목, 내용 모두 작성해야 등록 가능
+  const canSubmit = () => {
+    return image !== "" && content !== "" && title !== "";
+  }
 
-      // 이미지, 제목, 내용 모두 작성해야 등록 가능
-      const canSubmit = useCallback(() => {
-        return image.imageUrl !== "" && content !== "" && title !== "";
-      }, [image, title, content]);
-      const handleSubmit = useCallback(async () => {
-        try {
-          const formData = new FormData();
-          formData.append("title", title);
-          formData.append("content", content);
-          formData.append("imageUrl", image.imageUrl);
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+
+    let req = {
+      title: title,
+      content: content,
+    };
+
+    let json = JSON.stringify(req);
+
+    try {
+      const formData = new FormData();
+
+      const title = new Blob([json], { type: "application/json" });
+      formData.append("title", title);
+
+      const content = new Blob([json], { type: "application/json" });
+      formData.append("content", content);
+
+      formData.append("imageUrl", image);
 
 
-          await axios.post("http://13.209.26.228:8080/post", formData);
-          window.alert("😎등록이 완료되었습니다😎");
-          navigate("/board");
-        } catch (e) {
-          // 서버에서 받은 에러 메시지 출력
-          window.alert("오류발생!" + "😭");
-        }
+      await axios.post("http://13.209.26.228:8080/post", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      window.alert("😎등록이 완료되었습니다😎");
+      navigate("/board");
+    } catch (e) {
+      // 서버에서 받은 에러 메시지 출력
+      window.alert("오류발생!" + "😭");
+    }
 
-      }, [canSubmit]);
+  }, [canSubmit]);
 
   return (
     <div>
@@ -92,14 +125,17 @@ const PostPage = () => {
             ref={(refParam) => (inputRef = refParam)}
             style={{ display: "none" }}
           />
-
-          {image.map((image, id) => (
-            <div key={id}>
-              <img src={image} alt={`${image}-${id}`} />
-              <button onClick={() => handleDeleteImage(id)}>삭제</button>
-            </div>
-          ))}
-
+          {/* <DefaultImage/> */}
+          <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+              {image.map((image, id) => (
+                <SwiperSlide key={id}>
+                  <ImgBox key={id}>                
+                    <DeleteBtn key={id} onClick={() => handleDeleteImage(id)}><img src={Delete} alt="이미지가 없습니다." /></DeleteBtn>
+                    <img src={image} alt={`${image}-${id}`} />
+                  </ImgBox>
+                </SwiperSlide>
+              ))}
+           </Swiper> 
           <Btn>
             <Button
               variant="outlined"
@@ -162,8 +198,32 @@ const UploaderWrapper = styled.div`
 `
 
 const Btn = styled.div`
+    margin-top: 30px;
     button {
         margin: 10px 5px;
         font-size: 1.1rem;
       }
+`
+
+const DeleteBtn = styled.div`
+  margin-bottom: 10px;
+  float:right;
+  width: 20px;
+  height: 20px;
+`
+const ImgBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height: 100%;
+`
+
+const DefaultImage = styled.div`
+  margin-top: 10px;
+  width: 400px;
+  height: 400px;
+  background-image: url(${default_Img});
+  background-repeat: no-repeat;
+  background-position: center;
+
 `

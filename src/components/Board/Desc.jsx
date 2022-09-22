@@ -4,20 +4,20 @@ import styled from "styled-components";
 
 const Desc = () => {
     return(
-        <Wrap>
+        <Container>
             <Box>
-                <p>음식점 이름</p>
+                <p>제목</p>
             </Box>
             <Box>
-                <p>위치</p>
+                <p>Desc</p>
             </Box>
             <Box>
-                <p>추천 메뉴</p>
+                <p>Desc</p>
             </Box>
             <Box>
-                <p>가격</p>
+                <p>Desc</p>
             </Box>
-        </Wrap>
+        </Container>
     )
 }
 
@@ -35,6 +35,6 @@ const Box = styled.div`
     
     font-size: 15px;
 `
-const Wrap = styled.div`
+const Container = styled.div`
     text-align: center;
 `

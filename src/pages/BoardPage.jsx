@@ -20,21 +20,21 @@ const Board = () => {
             </Container>
 
             <Matzip>
-                <p>실제 사용자들의 맛집 추천!</p>                
+                <p>카테고리2</p>                
             </Matzip>
             <Container>
                 
             </Container>
 
             <Review>
-                <p>후기 많은순</p>
+                <p>카테고리3</p>
             </Review>
             <Container>
                 
             </Container>
 
             <Date>
-                <p>데이트 장소 추천순</p>
+                <p>카테고리4</p>
             </Date>
             <Container>
                 

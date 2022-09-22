@@ -5,21 +5,21 @@ import { Link } from "react-router-dom/dist";
 const List = () => {
     
     return (
-        <Wrapper to="/detail">
-            <Container>
-               
-            </Container>
-        </Wrapper>
+        <Container to="/detail">
+            <Wrapper>
+            
+            </Wrapper>
+        </Container>
     )
 }
 
 export default List;
 
-const Container = styled.div`
+const Wrapper = styled.div`
     display: flex;
     padding-bottom: 20px;
 `
-const Wrapper = styled(Link)`
+const Container = styled(Link)`
   margin-left: 6px;
   flex-shrink: 0;
   width: 264.75px;
