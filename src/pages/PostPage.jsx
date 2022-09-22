@@ -8,13 +8,10 @@ import default_Img from "../assets/images/default-image.jpg";
 import Delete from "../assets/icons/delete.png"
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
+// Swiper
 import "swiper/css";
 import "swiper/css/navigation";
-
 import "./styles.css";
-
-// import required modules
 import { Navigation } from "swiper";
 
 const PostPage = () => {
@@ -52,7 +49,7 @@ const PostPage = () => {
 
   // 이미지, 제목, 내용 모두 작성해야 등록 가능
   const canSubmit = () => {
-    return image !== "" && content !== "" && title !== "";
+    return image.length !== 0 && content !== "" && title !== "";
   }
 
   const handleSubmit = useCallback(async (e) => {
@@ -90,7 +87,8 @@ const PostPage = () => {
     }
 
   }, [canSubmit]);
-
+  
+  
   return (
     <div>
       <AddHeader>
@@ -124,18 +122,26 @@ const PostPage = () => {
             onChange={handleAddImages}
             ref={(refParam) => (inputRef = refParam)}
             style={{ display: "none" }}
-          />
-          {/* <DefaultImage/> */}
-          <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+          />        
+          {/* 미리보기 조건부 렌더링 */}        
+          {image.length == 0 ? 
+            /* 이미지가 없으면 default 이미지 출력 */
+            <DefaultImage />  
+            : 
+            /* 있으면 슬라이드 출력 */
+            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
               {image.map((image, id) => (
                 <SwiperSlide key={id}>
-                  <ImgBox key={id}>                
-                    <DeleteBtn key={id} onClick={() => handleDeleteImage(id)}><img src={Delete} alt="이미지가 없습니다." /></DeleteBtn>
+                  <ImgBox>                
+                    <DeleteBtn onClick={() => handleDeleteImage(id)}><img src={Delete} alt="X" /></DeleteBtn>
                     <img src={image} alt={`${image}-${id}`} />
                   </ImgBox>
                 </SwiperSlide>
               ))}
            </Swiper> 
+
+           }
+     
           <Btn>
             <Button
               variant="outlined"
@@ -207,9 +213,10 @@ const Btn = styled.div`
 
 const DeleteBtn = styled.div`
   margin-bottom: 10px;
-  float:right;
+  margin-left: 95%;
   width: 20px;
   height: 20px;
+  
 `
 const ImgBox = styled.div`
   display: flex;
