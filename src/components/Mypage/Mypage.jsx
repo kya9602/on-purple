@@ -4,7 +4,9 @@ import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updatePost, __getDetail } from "../../redux/modules/post";
-import ModalBasic from "./MyPwUpdate";
+import EditModal from "./EditModal";
+import useOnClickOutside from "./useOnClickOutside";
+
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
     ListBox, Listtitle, LovemeBox, LoveCard, MatchingBox, MatchingCard, Avatar, StBodyInput, StButton, AddMyinfo,
@@ -99,8 +101,10 @@ const Mypage = () => {
     };
 
 
-
-
+    const [isClickEdit, setIsClickEdit] = useState(false);
+    const modalRef = useRef();
+    const handleClickOutside = () => setIsClickEdit(false);
+    useOnClickOutside(modalRef, handleClickOutside);
     return (
         <>
             {!input ?
@@ -115,11 +119,15 @@ const Mypage = () => {
                             <OneLine>한줄평으로 나를 소개하세요</OneLine>
                         </InfoBody>
                         {/* 같은 아이디를 가진 사람이 들어왔을때만 보여야함 */}
-
+                        {isClickEdit &&
+                            <EditModal
+                                post={post}
+                                modalRef={modalRef} />
+                        }
 
                         <ModifyBtn onClick={() => setInput(!input)}>수정하기</ModifyBtn>
-                        <ModifyBtn onClick={showModal}>비밀번호 변경</ModifyBtn>
-                        {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+                        <ModifyBtn onClick={() => setIsClickEdit(true)}>비밀번호 변경</ModifyBtn>
+
 
                     </Myinfo>
                     {/* 매칭 된사람 및 나를 좋아요한사람 목록박스 두개 필요 */}
