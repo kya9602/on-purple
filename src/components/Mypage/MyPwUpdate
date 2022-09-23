@@ -1,9 +1,0 @@
-import React from "react";
-
-const MyPwUpdate = () => {
-    return (
-        <>수정화면</>
-    );
-};
-
-export default MyPwUpdate;

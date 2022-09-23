@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updatePost, __getDetail } from "../../redux/modules/post";
+import ModalBasic from "./MyPwUpdate";
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
     ListBox, Listtitle, LovemeBox, LoveCard, MatchingBox, MatchingCard, Avatar, StBodyInput, StButton, AddMyinfo,
@@ -14,6 +15,14 @@ import {
 
 
 const Mypage = () => {
+    // 모달창 노출 여부 state
+    const [modalOpen, setModalOpen] = useState(false);
+
+    // 모달창 노출
+    const showModal = () => {
+        setModalOpen(true);
+    };
+
     const dispatch = useDispatch();
     const [input, setInput] = useState(false);
     const [img, setImg] = useState("");
@@ -109,6 +118,9 @@ const Mypage = () => {
 
 
                         <ModifyBtn onClick={() => setInput(!input)}>수정하기</ModifyBtn>
+                        <ModifyBtn onClick={showModal}>비밀번호 변경</ModifyBtn>
+                        {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+
                     </Myinfo>
                     {/* 매칭 된사람 및 나를 좋아요한사람 목록박스 두개 필요 */}
                     <ListBox>
