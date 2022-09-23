@@ -1,11 +1,58 @@
 // branch mintaek test
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import newlogo from "../../assets/images/perple.jpg"
+import axios from "axios";
+
 
 const Login = () => {
   const navigate = useNavigate();
+
+
+  const initialState = {
+    username: "",
+    password: ""
+  }
+
+  const [inputValue, setInputValue] = useState(initialState);
+
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValue({ ...inputValue, [name]: value })
+  };
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    //빈값 체크
+    if (inputValue.username === "" || inputValue.password === "") {
+      window.alert("아이디와 비밀번호를 입력해주세요.");
+    }
+
+    try {
+      // console.log(payload);
+      const data = await axios.post("http://3.37.88.29:8080/user/login", inputValue);
+      localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
+      localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
+      localStorage.setItem("username", data.data.data.username)
+      console.log(data);
+      navigate('/');
+      // if(data.data.success===false)
+      //     alert("data.data.error.message");
+      // alert("아이디와 비밀번호를 다시 확인해주세요.");
+      // else alert("로그인 성공");
+      // return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      alert("아이디와 비밀번호를 다시 확인해주세요.");
+      // return thunkAPI.rejectWithValue(error);
+    }
+
+    console.log(inputValue);
+
+  };
+
+
 
   return (
     <div >
@@ -15,13 +62,15 @@ const Login = () => {
         <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
       </StHeader>
       <StLoginContainer>
-        <form>
+        <form onSubmit={onSubmitHandler}>
           <StUserBox>
             <StLaber style={{ marginRight: "18px" }}>아이디</StLaber>
             <StLoginInput
               type="text"
-              name="nickname"
+              name="username"
               placeholder="아이디를 입력해주세요"
+              value={inputValue.username}
+              onChange={onChangeHandler}
             />
           </StUserBox>
 
@@ -31,6 +80,8 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="비밀번호를 입력해주세요"
+              value={inputValue.password}
+              onChange={onChangeHandler}
             />
 
           </StPwBox>

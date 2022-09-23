@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/perple.jpg";
 import profileImage from "../../assets/images/profile.jpg";
@@ -15,8 +15,9 @@ const Form = () => {
     // Event Handler
     // Img Upload hadler
     const inputRef = useRef(null);
-    const onUploadImg = useCallback((fileBlob) => {
+    const onUploadImg = (fileBlob) => {
         formData.append('file', fileBlob);
+
         for (const keyValue of formData) {
             console.log(keyValue[0] + ", " + keyValue[1])
         };
@@ -30,19 +31,20 @@ const Form = () => {
             };
         });
 
-    }, []);
+    };
 
     const [input, setInput] = useState({
         username: "",
         password: "",
         passwordConfirm: "",
+        nickname: "",
         imageUrl: "",
     });
 
     const [usernameError, setusernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [passwordConfirmError, setPasswordConfirmError] = useState(false);
-
+    const [nicknameError, setnicknameError] = useState(false);
 
 
     //유효성검사
@@ -85,63 +87,66 @@ const Form = () => {
         setInput({ ...input, [name]: value });
     };
 
+    const onChangenickname = (e) => {
+        // console.log("e.target.value is", e.target.value)
+        // console.log("e.target.value.length is ", e.target.value.length)
+        const nicknameRegex = /^[A-Za-z]{2,6}$/;
+        if ((2 < e.target.value.length < 6 && (nicknameRegex.test(e.target.value))))
+            setnicknameError(false);
+        else if (e.target.value.length === 0 || !(nicknameRegex.test(e.target.value))) {
+            setnicknameError(true);
+        }
+
+
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
     //유효성 검사
     const validation = () => {
         if (!input.username) setusernameError(true);
         if (!input.password) setPasswordError(true);
         if (!input.passwordConfirm) setPasswordConfirmError(true);
+        if (!input.nickname) setnicknameError(true);
 
-        if (usernameError && passwordError && passwordConfirmError) return true;
+        if (usernameError && passwordError && passwordConfirmError && nicknameError) return true;
         else return false;
     }
 
     // axios
-    const postHandler = async () => {
-
-        const { nickname, password, passwordConfirm } = input;
+    const addHandler = async () => {
+        const { username, password, passwordConfirm, nickname } = input;
         const user = {
+            username: username,
             nickname: nickname,
             password: password,
             passwordConfirm: passwordConfirm
         };
+        formData.append("info", user)
 
-        formData.append('username', input.username);
-        formData.append('password', input.password);
-        formData.append('passwordConfirm', input.passwordConfirm);
-
-        // console.log(typeof (usernameblob, passwordblob, passwordConfirmblob, contentblob, locationblob));
-        for (const keyValue of formData) {
-            console.log("Ready to data>>", keyValue[0] + ", " + keyValue[1])
-        }
-
-
+        console.log("user is ", user)
         try {
 
-            const response = await axios.post("http://13.209.26.228:8080/user/signup", formData,
+            const data = await axios.post("http://3.37.88.29:8080/user/signup", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(data);
 
-                {
-                    headers: {
-                        "Authorization": localStorage.getItem("Authorization"),   //accesstoken
-                        "RefreshToken": localStorage.getItem("RefreshToken"),
-                        'Content-Type': 'multipart/form-data',
-                    }
-                });
-            console.log("👏 Axios Work >>> ", response)
-
-            if (response.status === 200 || 201) {
-                window.alert("회원가입이 완료되었습니다.")
-                console.log("newPosting: ", response.data)
-                navigate('/login') //로그인화면으로
-            } else {
-                console.log("Not Ok")
-                console.error(response)
+            if (data.data.success === false)
+                alert(data.data.error.message);
+            else {
+                alert("회원가입이 완료되었습니다.");
+                navigate('/');
             }
-
+            // return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
-            window.alert("🥒ERROR🥒")
-            console.error(error);
-            setImageUrl("")
+            // return thunkAPI.rejectWithValue(error);
+            alert("가입에 실패했습니다");
         }
+
+
+        // }
         console.log(validation());
 
         if (validation()) {
@@ -149,10 +154,6 @@ const Form = () => {
         }
         return;
     };
-
-    useEffect(() => {
-
-    }, []);
 
 
     return (
@@ -170,9 +171,10 @@ const Form = () => {
                         onClick={() => { inputRef.current.click() }} />
                     <input
                         type='file'
+                        id='file'
                         style={{ display: 'none' }}
                         accept='image/jpg,impge/png,image/jpeg'
-                        name='profile_img'
+                        name='file'
                         onChange={(e) => { onUploadImg(e.target.files[0]) }}
                         ref={inputRef} />
                 </ImgBox>
@@ -251,6 +253,8 @@ const Form = () => {
                         name="nickname"
                         id="nickname"
                         placeholder="닉네임을 입력해주세요"
+                        onChange={onChangenickname}
+                        value={input.nickname}
                     />
                     <StLine>❤</StLine>
 
@@ -264,7 +268,7 @@ const Form = () => {
                 {/* <StLine>❤</StLine> */}
             </StLineBox>
             <StBtnBox>
-                <JoinBtn onClick={() => { postHandler(); console.log("input is", input) }}>회원가입 완료</JoinBtn>
+                <JoinBtn onClick={() => { addHandler(); console.log("input is", input) }}>회원가입 완료</JoinBtn>
             </StBtnBox>
         </StRegisterBox>
     );
