@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
+import Footer from "../components/Footer/Footer";
 
 const Board = () => {
    //Carousel 잠정 보류 해두겠습니다.
@@ -64,7 +65,7 @@ const Board = () => {
             <Container>
                 
             </Container>
-
+            <Footer />
 
         </>
 

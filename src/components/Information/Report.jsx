@@ -127,8 +127,8 @@ const ImgInput = styled.input`
     visibility:hidden;
 `
 const PreviewImg = styled.img`
-    width: 101px;
-    height: 101px;
+    width: 102px;
+    height: 102px;
     border-radius:30px;
 `
 const PreviewDeleteButton = styled.button`
