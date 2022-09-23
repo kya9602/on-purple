@@ -1,178 +1,267 @@
-import React, { } from "react";
-import styled from "styled-components";
-import profile from "../../assets/images/profile.jpg"
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import profile from "../../assets/images/profile.jpg";
+import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { updatePost, __getDetail } from "../../redux/modules/post";
+import ModalBasic from "./MyPwUpdate";
+import {
+    MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
+    ListBox, Listtitle, LovemeBox, LoveCard, MatchingBox, MatchingCard, Avatar, StBodyInput, StButton, AddMyinfo,
+    MiniBox, MiniTitle, MiniInput, MiniHeader
+} from "./Mypagestyled";
+
+
+
 
 const Mypage = () => {
+    // 모달창 노출 여부 state
+    const [modalOpen, setModalOpen] = useState(false);
+
+    // 모달창 노출
+    const showModal = () => {
+        setModalOpen(true);
+    };
+
+    const dispatch = useDispatch();
+    const [input, setInput] = useState(false);
+    const [img, setImg] = useState("");
+    const formData = new FormData();
+    const initialState = {
+        OneLine: ""
+    }
+
+
+    const [imageUrl, setImageUrl] = useState(profile); // img input value
+
+    // Event Handler
+    // Img Upload hadler
+    const inputRef = useRef(null);
+    const onUploadImg = useCallback((fileBlob) => {
+        formData.append('file', fileBlob);
+        for (const keyValue of formData) {
+            console.log(keyValue[0] + ", " + keyValue[1])
+        };
+
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            reader.onload = () => {
+                setImageUrl(reader.result);
+                resolve();
+            };
+        });
+
+    }, []);
+
+
+    const params = useParams();
+    const postId = parseInt(params.id);
+    const data = useSelector((state) => state.detail)
+    console.log(data)
+
+    useEffect(() => {
+        dispatch(__getDetail(postId));
+    }, [dispatch])
+
+    const [post, setPost] = useState(initialState)
+
+    const onUpdatePost = async () => {
+        formData.append('file', img);
+        formData.append('OneLine', OneLine);
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        let a = await axios.put(`http://localhost:3001/mypage`, formData,
+            {
+                headers: {
+                    "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+                    "RefreshToken": localStorage.getItem("RefreshToken"),
+                    "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+                }
+            });
+        console.log(a.data.data);
+        dispatch(updatePost({
+            age: a?.data?.data?.age,
+            MBTI: a?.data?.data?.MBTI,
+            id: a?.data?.data?.postId,
+            imageUrl: a?.data?.data?.imageUrl,
+            OneLine: data?.data?.data?.OneLine,
+            content: post.content
+        }));
+
+        setInput(!input)
+    }
+    const onChangeHandler = (event) => {
+        const { name, value } = event.target;
+        setPost({ ...post, [name]: value });
+        console.log(value)
+    };
+
+
+
 
     return (
         <>
-            <MypageBox>
-                {/* 내정보 박스 Myinfo */}
-                <Myinfo>
-                    <Profile src={profile} />
-                    <InfoBody>
-                        <Age> age : 27</Age>
-                        <MBTI>MBTI : ENFP</MBTI>
-                        <OneLine>한줄평으로 나를 소개하세요</OneLine>
-                    </InfoBody>
-                    <ModifyBtn>수정하기</ModifyBtn>
-                </Myinfo>
-                {/* 매칭 된사람 및 나를 좋아요한사람 목록박스 두개 필요 */}
-                <ListBox>
-                    {/* 나를 좋아요한 목록 박스 */}
-                    <LovemeBox>
-                        <Lovetitle>내가 받은 Perple</Lovetitle>
+            {!input ?
+                <MypageBox>
+                    {/* 내정보 박스 Myinfo */}
+                    <Myinfo>
+                        <Profile src={profile} />
+                        <InfoBody>
+                            <Age> age : {data?.data?.age} </Age>
 
-                        <LoveCard src={profile}></LoveCard>
-                        <LoveCard src={profile}></LoveCard>
-                        <LoveCard src={profile}></LoveCard>
-                        <LoveCard src={profile}></LoveCard>
-
-                    </LovemeBox>
-                    {/* 나와 매칭된 사람 목록 박스 */}
-                    <MatchingBox>
-                        <MatchingTitle>나랑 마음이 통한 사람</MatchingTitle>
-
-                        <MatchingCard src={profile}></MatchingCard>
-                        <MatchingCard src={profile}></MatchingCard>
-                        <MatchingCard src={profile}></MatchingCard>
-                        <MatchingCard src={profile}></MatchingCard>
-
-                    </MatchingBox>
-                </ListBox>
+                            <MBTI>MBTI : ENFP</MBTI>
+                            <OneLine>한줄평으로 나를 소개하세요</OneLine>
+                        </InfoBody>
+                        {/* 같은 아이디를 가진 사람이 들어왔을때만 보여야함 */}
 
 
-            </MypageBox>
+                        <ModifyBtn onClick={() => setInput(!input)}>수정하기</ModifyBtn>
+                        <ModifyBtn onClick={showModal}>비밀번호 변경</ModifyBtn>
+                        {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+
+                    </Myinfo>
+                    {/* 매칭 된사람 및 나를 좋아요한사람 목록박스 두개 필요 */}
+                    <ListBox>
+                        {/* 나를 좋아요한 목록 박스 */}
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            <Listtitle>내가 받은 Perple</Listtitle>
+                            <LovemeBox>
+
+                                <LoveCard src={profile}></LoveCard>
+                                <LoveCard src={profile}></LoveCard>
+                                <LoveCard src={profile}></LoveCard>
+                                <LoveCard src={profile}></LoveCard>
+
+                            </LovemeBox>
+                        </div>
+
+                        {/* 나와 매칭된 사람 목록 박스 */}
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            <Listtitle>나랑 마음이 통한 사람</Listtitle>
+
+                            <MatchingBox>
+
+                                <MatchingCard src={profile}></MatchingCard>
+                                <MatchingCard src={profile}></MatchingCard>
+                                <MatchingCard src={profile}></MatchingCard>
+                                <MatchingCard src={profile}></MatchingCard>
+
+                            </MatchingBox>
+                        </div>
+                    </ListBox>
+
+
+                </MypageBox>
+
+
+                :
+                // 수정버튼 누르면 보일 화면모습 
+
+                <SecondMypageBox>
+                    <SecondMyinfo>
+                        <ImgBox >
+                            <Avatar
+                                src={imageUrl}
+                                style={{ margin: '20px' }}
+                                size={200}
+                                onClick={() => { inputRef.current.click() }} />
+                            <input
+                                type='file'
+                                style={{ display: 'none' }}
+                                accept='image/jpg,impge/png,image/jpeg'
+                                name='profile_img'
+                                onChange={(e) => { onUploadImg(e.target.files[0]) }}
+                                ref={inputRef} />
+                        </ImgBox>
+                        <InfoBody>
+                            <Age> age : 27 </Age>
+                            <MBTI>MBTI : ENFP</MBTI>
+                            <StBodyInput
+                                placeholder="한줄로 나를 소개해주세요"
+                                type="text"
+                                name="OneLine"
+                                value={post.OneLine}
+                                className="add-input"
+                                onChange={onChangeHandler} />
+                        </InfoBody>
+                        <StButton onClick={() => { onUpdatePost() }}>수정</StButton>
+                        <StButton onClick={() => { setInput(!input) }}>취소</StButton>
+                    </SecondMyinfo>
+
+                    {/* 아래 추가정보란 적는곳  */}
+                    <AddMyinfo>
+                        <MiniHeader>🌟내 정보를 추가한다면, 상대방과 매칭 될 확률이 높아집니다.🌠</MiniHeader>
+                        <MiniBox>
+                            <MiniTitle>이상형 🎈</MiniTitle>
+                            <MiniInput
+                                placeholder="이상형을 적어주세요"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                        <MiniBox>
+                            <MiniTitle>직업 👄</MiniTitle>
+                            <MiniInput
+                                placeholder="직업 또는 업종을 적어주세요"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                        <MiniBox>
+                            <MiniTitle>취미 👓</MiniTitle>
+                            <MiniInput
+                                placeholder="좋아하는, 함께 했으면 좋겠는 취미를 적어주세요"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                        <MiniBox>
+                            <MiniTitle>반려동물 유무 🐶</MiniTitle>
+                            <MiniInput
+                                placeholder="사랑하는 반려동물이 있다면 자랑해주세요!"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                        <MiniBox>
+                            <MiniTitle>흡연 유무 🚬</MiniTitle>
+                            <MiniInput
+                                placeholder="Yes or No 본인 또는 원하는 상대방의 흡연유무"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                        <MiniBox>
+                            <MiniTitle>음주습관 🍻</MiniTitle>
+                            <MiniInput
+                                placeholder="술을 즐기는 편인지 적어주세요"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                        <MiniBox>
+                            <MiniTitle>좋아하는 영화 🎬</MiniTitle>
+                            <MiniInput
+                                placeholder="좋아하는 영화종류를 적어주세요. 장르가 비슷하면 좋은 호감이 생길수도!?"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                        <MiniBox>
+                            <MiniTitle>사는 지역 🏡</MiniTitle>
+                            <MiniInput
+                                placeholder="사는 곳 또는 주로 활동하는 지역을 적어주세요!"
+                                type="text"
+                                name="myType"
+                            />
+                        </MiniBox>
+                    </AddMyinfo>
+                </SecondMypageBox>
+            }
         </>
     );
 }
 
 export default Mypage;
-
-//---------------------------------------------------------------------------------------------------
-//마이페이지 큰박스
-const MypageBox = styled.div`
-    width: 98vw;
-    height: auto;
-    padding-bottom: 2%;
-    margin: auto;
-    margin-top: 5%;
-    border: 5px solid #fdc2f0;
-    border-radius: 15px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-`
-
-//마이페이지 내정보박스 
-const Myinfo = styled.div`
-    border-bottom-style:solid; 
-    border-bottom-color:gray;
-    border-bottom-width:2px;
-    width: 94vw;
-    /* margin-left: 25vw; */
-    margin-top: 1vw;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2%;
-`
-
-//마이페이지 프로필 사진
-const Profile = styled.img`
-    width: 10vw;
-    height: 10vw; 
-    border-radius: 70%;
-    overflow: hidden;
-    margin: 1vw;
-    justify-content: start;
-`
-
-//내정보 박스 
-const InfoBody = styled.div`
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 1vw;
-`
-
-//나이 박스
-const Age = styled.div`
-    text-align: center;
-    padding: 3%;
-    font-size: 20px;
-`
-
-//MBTI 박스
-const MBTI = styled.div`
-    text-align: center;
-    padding: 3%;
-    font-size:20px;
-    
-`
-
-//한줄평 박스
-const OneLine = styled.div` 
-    text-align: center;
-    padding: 3%;
-    font-size:20px;
-    width: 20vw;
-`
-
-//수정버튼
-const ModifyBtn = styled.button`
-    height: 2vw;
-    margin-top: 10vw;
-    margin-left: 1vw;
-    background-color: white;
-    border: 2px solid #d87dd8;
-    :hover{
-        background-color: #d87dd8;
-        border: 2px solid #d87dd8;
-    }
-`
-
-//리스트 전체 박스
-const ListBox = styled.div`
-  display: flex;
-  margin-top: 2vw;
-`
-
-//나를 좋아요한 사람 목록박스
-const LovemeBox = styled.div`
-  background-color: red;
-  width: 40vw;
-  height: 40vw;
-  margin-right: 2vw;
-`
-
-//좋아요 박스 타이틀
-const Lovetitle = styled.div`
-    
-`
-
-//좋아요한 사람 프로필 사진 
-const LoveCard = styled.img`
-  width: 15vw;
-  height: 15vw;
-`
-
-//매칭된 사람 목록 박스
-const MatchingBox = styled.div`
-  background-color: blue;
-  width: 40vw;
-  height: 40vw;
-  margin-left: 2vw;
-
-`
-
-//매칭 박스 타이틀
-const MatchingTitle = styled.div`
-    
-`
-
-//매칭된 사람 프로필 사진
-const MatchingCard = styled.img`
-  width: 15vw;
-  height: 15vw;
-`

@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "mypage":[{
+    "id": 1,
+    "age":27,
+    "MBTI": "ENFP",
+    "OneLine":"한줄로 나를 소개하세요"
+  },{
+    "id": 2,
+    "age":20,
+    "MBTI": "INFJ",
+    "OneLine":"안녕! 나는 계획형 집순이야"
+  }
+
+]
+}
