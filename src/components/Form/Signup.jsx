@@ -121,7 +121,19 @@ const Form = () => {
             password: password,
             passwordConfirm: passwordConfirm
         };
-        formData.append("info", user)
+
+        let json = JSON.stringify(user);
+        const usernameblob = new Blob([json], { type: "application/json" });
+        formData.append("username", usernameblob);
+
+        const nicknameblob = new Blob([json], { type: "application/json" });
+        formData.append("nickname", nicknameblob);
+
+        const passwordblob = new Blob([json], { type: "application/json" });
+        formData.append("password", passwordblob);
+
+        const passwordConfirmblob = new Blob([json], { type: "application/json" });
+        formData.append("passwordConfirm", passwordConfirmblob);
 
         console.log("user is ", user)
         try {
