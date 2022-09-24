@@ -8,6 +8,7 @@ const Detail = () => {
     return (
         <>
             <Wrapper>
+                <Title><p>제목</p></Title>
                 <ImageContainer>
                 </ImageContainer>
                 <DescContainer>
@@ -49,4 +50,18 @@ const Review = styled.div`
      border-top: 1px solid black;
      margin-top: 50px;
      text-align: center;
+`
+const Title = styled.div`
+    margin: 0 auto;
+    margin-top: 30px;
+    box-shadow: 5px 5px 5px pink;
+    border: 1px solid pink;
+    border-radius: 30px;
+    width: 300px;
+    height: 30px;
+    font-size: 15px;
+    p{
+       margin: 5px;
+    }
+    text-align: center;
 `
