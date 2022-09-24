@@ -4,20 +4,19 @@ import styled from "styled-components";
 
 const Desc = () => {
     return(
-        <Wrap>
+        <>
+        <Container>
             <Box>
-                <p>음식점 이름</p>
+                <p>Desc</p>
             </Box>
             <Box>
-                <p>위치</p>
+                <p>Desc</p>
             </Box>
             <Box>
-                <p>추천 메뉴</p>
+                <p>Desc</p>
             </Box>
-            <Box>
-                <p>가격</p>
-            </Box>
-        </Wrap>
+        </Container>
+        </>
     )
 }
 
@@ -29,12 +28,13 @@ const Box = styled.div`
     box-shadow: 5px 5px 5px pink;
     border: 1px solid pink;
     border-radius: 30px;
-    
     width: 300px;
-    height: 50px;
-    
+    height: 30px;
     font-size: 15px;
+    p{
+       margin: 5px;
+    }
 `
-const Wrap = styled.div`
+const Container = styled.div`
     text-align: center;
 `

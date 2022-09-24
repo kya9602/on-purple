@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 /* import { useDispatch, useSelector } from 'react-redux/';
 import { __getProfileDetail } from "../../redux/modules/profile"; */
-const Profile_Detail = () => {
+const ProfileDetail = () => {
     /* const dispatch = useDispatch();
     const profileDetail = useSelector((state)=> state.profile)
     console.log(profileDetail)
@@ -37,7 +37,7 @@ const Profile_Detail = () => {
     )
 }
 
-export default Profile_Detail;
+export default ProfileDetail;
 
 const Container = styled.div`
     display: flex;

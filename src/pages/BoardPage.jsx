@@ -5,25 +5,7 @@ import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
 
 const Board = () => {
-   //Carousel 잠정 보류 해두겠습니다.
-    /*  const settings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 4,
-        nextArrow: (
-            <NextTo>
-              <img src="src\assets\icons\angle-left.png" alt="이전화살표" />
-            </NextTo>
-          ),
-          prevArrow: (
-            <Pre>
-              <img src="src\assets\icons\angle-right.png" alt="다음화살표" />
-            </Pre>
-          ),
-    }; */
-    
+   
     const navigate = useNavigate();
 
     return (
@@ -38,21 +20,21 @@ const Board = () => {
             </Container>
 
             <Matzip>
-                <p>실제 사용자들의 맛집 추천!</p>                
+                <p>카테고리2</p>                
             </Matzip>
             <Container>
                 
             </Container>
 
             <Review>
-                <p>후기 많은순</p>
+                <p>카테고리3</p>
             </Review>
             <Container>
                 
             </Container>
 
             <Date>
-                <p>데이트 장소 추천순</p>
+                <p>카테고리4</p>
             </Date>
             <Container>
                 
@@ -145,20 +127,4 @@ const Container = styled.div`
     border: 1px solid black;
     
 `
-
-const Pre = styled.button`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  left: 3%;
-  z-index: 3;
-`;
-
-const NextTo = styled.button`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 3%;
-  z-index: 3;
-`;
 

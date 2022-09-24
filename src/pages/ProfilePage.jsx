@@ -1,13 +1,13 @@
 import React from "react";
 
 import Header from "../components/Header/Header";
-import Profile_Detail from "../components/Profile/ProfileDetail";
+import ProfileDetail from "../components/Profile/ProfileDetail";
 
 const ProfilePage = () => {
     return (
         <div>
             <Header />
-            <Profile_Detail />
+            <ProfileDetail />
         </div>
 
 
