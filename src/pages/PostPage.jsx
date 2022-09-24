@@ -21,12 +21,12 @@ const PostPage = () => {
   // 게시판 제목, 내용, 사진
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState([]);
+  const [imageUrl, setImage] = useState([]);
 
   //이미지 업로드 핸들
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
-    let imageUrlLists = [...image];
+    let imageUrlLists = [...imageUrl];
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
@@ -44,12 +44,12 @@ const PostPage = () => {
  
   // X버튼 클릭 시 이미지 삭제
   const handleDeleteImage = (id) => {
-    setImage(image.filter((_, index) => index !== id));
+    setImage(imageUrl.filter((_, index) => index !== id));
   };
 
   // 이미지, 제목, 내용 모두 작성해야 등록 가능
   const canSubmit = () => {
-    return image.length !== 0 && content !== "" && title !== "";
+    return imageUrl.length !== 0 && content !== "" && title !== "";
   }
 
   const handleSubmit = useCallback(async (e) => {
@@ -70,11 +70,10 @@ const PostPage = () => {
 
       const content = new Blob([json], { type: "application/json" });
       formData.append("content", content);
+      formData.append("imageUrl", imageUrl);
 
-      formData.append("imageUrl", image);
 
-
-      await axios.post("http://13.209.26.228:8080/post", formData, {
+      await axios.post("http://3.37.88.29:8080/post", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -124,13 +123,13 @@ const PostPage = () => {
             style={{ display: "none" }}
           />        
           {/* 미리보기 조건부 렌더링 */}        
-          {image.length == 0 ? 
+          {imageUrl.length == 0 ? 
             /* 이미지가 없으면 default 이미지 출력 */
             <DefaultImage />  
             : 
             /* 있으면 슬라이드 출력 */
             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-              {image.map((image, id) => (
+              {imageUrl.map((image, id) => (
                 <SwiperSlide key={id}>
                   <ImgBox>                
                     <DeleteBtn onClick={() => handleDeleteImage(id)}><img src={Delete} alt="X" /></DeleteBtn>
@@ -192,7 +191,6 @@ const AddBody = styled.div`
     flex-wrap: wrap;
     gap: 50px;
 
-    margin-left: 6em;
 `
 
 const UploaderWrapper = styled.div`
@@ -200,7 +198,6 @@ const UploaderWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 15px;
 `
 
 const Btn = styled.div`

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 import Desc from "./Desc";
 
@@ -13,11 +14,9 @@ const Detail = () => {
                     <Desc/>
                 </DescContainer>
             </Wrapper>
-            <Review>
-                <p>리뷰가 담길 공간 입니다</p>
-            </Review>
             <CommentList/>
-            
+            <AddComment/>
+             
         </>
 
     )
@@ -41,6 +40,7 @@ const DescContainer = styled.div`
 `
 const Wrapper = styled.div`
     display: flex;
+    flex-direction: column;
     margin-top: 50px;
 `
 
