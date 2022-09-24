@@ -1,10 +1,12 @@
 import React from "react";
+import Footer from "../components/Footer/Footer";
 
 const MainPage = () => {
     return (
-
-        <div>메인 페이지입니다~</div>
-
+        <div>
+            <div>메인 페이지입니다~</div>
+            <Footer />
+        </div>
     )
 }
 

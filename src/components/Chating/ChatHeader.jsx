@@ -1,13 +1,16 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 const ChatHeader= ()=> {
     const navigate = useNavigate();
     return(
         <ChatHeaderContainerDiv>
             <ChatHeaderLeftDiv>
-                <BackButton onClick={()=>{navigate('/chat');}}>뒤로가기</BackButton>
+                <ChatBackbuttonDiv>
+                    <ArrowBackIosIcon fontSize="large" onClick={()=>{navigate(-1);}}></ArrowBackIosIcon> 
+                </ChatBackbuttonDiv>
                 <ProfileDetailImg
                 src="https://post-phinf.pstatic.net/MjAyMDAzMDFfMTIx/MDAxNTgzMDQ5ODEzODc5.eLwaHPGkxYlj-RGPp5zE7Ghs__H9tYjvXaxdZehOo_cg.yopbH7--a4HJPuHxo_6-gx-gojvo0V0dqSgaem-d1mwg.JPEG/%EC%95%88%EC%9C%A0%EC%A7%842.JPG?type=w1200"
                 onClick={()=>{navigate('/profile');}}
@@ -15,7 +18,10 @@ const ChatHeader= ()=> {
                 <ProfileNicknameH3>닉네임</ProfileNicknameH3>
             </ChatHeaderLeftDiv>
 
-            <ReportButton>신고하기icon</ReportButton>
+            <ReportButtonDiv>
+                <ReportGmailerrorredIcon fontSize="large" onClick={()=>{navigate('/information');}}>신고하기icon</ReportGmailerrorredIcon>
+            </ReportButtonDiv>
+            
         </ChatHeaderContainerDiv>
     )
 }
@@ -32,9 +38,6 @@ const ChatHeaderContainerDiv = styled.div`
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     justify-content: space-between;
 `
-const BackButton = styled.button`
-    text-decoration-line : none;
-`
 
 const ProfileDetailImg = styled.img`
     width: 50px;
@@ -46,15 +49,24 @@ const ProfileDetailImg = styled.img`
     margin-bottom:auto;
 `
 
-const ReportButton = styled.button`
+const ReportButtonDiv = styled.div`
     text-decoration-line : none;
     margin-top: auto;
     margin-bottom:auto;
+    margin-right: 15px;
 `
 
 const ChatHeaderLeftDiv = styled.div`
     display: flex;
+    margin-top: auto;
+    margin-bottom:auto;
 `
+const ChatBackbuttonDiv = styled.div`
+    margin-top: 12px;
+    margin-bottom:12px;
+    margin-left: 10px;
+`
+
 
 const ProfileNicknameH3 = styled.h3`
     margin-top: auto;

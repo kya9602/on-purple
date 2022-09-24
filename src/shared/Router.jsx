@@ -10,6 +10,8 @@ import BoardPage from "../pages/BoardPage";
 import DetailPage from "../pages/DetailPage";
 import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
+import InformationPage from "../pages/InformationPage";
+import ReportPage from "../pages/ReportPage";
 
 
 const Router = () => {
@@ -26,6 +28,8 @@ const Router = () => {
                 <Route path="/board" exact element={<BoardPage />} />
                 <Route path="/detail" exact element={<DetailPage />} />
                 <Route path="/post" exact element={<PostPage />} />
+                <Route path="/information" exact element={<InformationPage />} />
+                <Route path="/report" exact element={<ReportPage />} />
             </Routes>
         </BrowserRouter>
 

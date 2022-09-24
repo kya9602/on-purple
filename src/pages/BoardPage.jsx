@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
+import Footer from "../components/Footer/Footer";
 
 const Board = () => {
    
@@ -46,7 +47,7 @@ const Board = () => {
             <Container>
                 
             </Container>
-
+            <Footer />
 
         </>
 
