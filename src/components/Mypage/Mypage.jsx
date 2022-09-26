@@ -3,7 +3,7 @@ import profile from "../../assets/images/profile.jpg";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { updatePost, __getDetail } from "../../redux/modules/post";
+import { updatePost, __getDetail } from "../../redux/modules/mypage";
 import EditModal from "./EditModal";
 import useOnClickOutside from "./useOnClickOutside";
 
