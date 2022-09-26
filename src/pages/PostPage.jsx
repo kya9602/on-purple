@@ -21,7 +21,7 @@ const PostPage = () => {
   // 게시판 제목, 내용, 사진
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageUrl, setImage] = useState([]);
+  const [imageUrl, setImage] = useState("");
 
   //이미지 업로드 핸들
   const handleAddImages = (event) => {
@@ -31,7 +31,6 @@ const PostPage = () => {
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
-      window.URL.revokeObjectURL(imageLists[i]);
     }
     // 이미지 최대 5개 까지만
     if (imageUrlLists.length > 5) {
@@ -45,6 +44,7 @@ const PostPage = () => {
   // X버튼 클릭 시 이미지 삭제
   const handleDeleteImage = (id) => {
     setImage(imageUrl.filter((_, index) => index !== id));
+
   };
 
   // 이미지, 제목, 내용 모두 작성해야 등록 가능
@@ -64,18 +64,19 @@ const PostPage = () => {
 
     try {
       const formData = new FormData();
-
+      
       const title = new Blob([json], { type: "application/json" });
-      formData.append("title", title);
-
+      formData.append("data", title);
       const content = new Blob([json], { type: "application/json" });
-      formData.append("content", content);
-      formData.append("imageUrl", imageUrl);
+      formData.append("data", content);
+      formData.append("data", imageUrl);
 
-
+      console.log(imageUrl)
       await axios.post("http://3.37.88.29:8080/post", formData, {
         headers: {
           "content-type": "multipart/form-data",
+          Authorization : "Authorization",
+          RefreshToken : "RefreshToken"
         },
       });
       window.alert("😎등록이 완료되었습니다😎");

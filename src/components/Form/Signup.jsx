@@ -8,16 +8,14 @@ import axios from "axios";
 const Form = () => {
     const navigate = useNavigate();
 
-
     const [imageUrl, setImageUrl] = useState(profileImage); // img input value
-    const [formData] = useState(new FormData())
+    const formData =new FormData();
 
     // Event Handler
     // Img Upload hadler
     const inputRef = useRef(null);
     const onUploadImg = (fileBlob) => {
-        formData.append('file', fileBlob);
-
+        
         for (const keyValue of formData) {
             console.log(keyValue[0] + ", " + keyValue[1])
         };
@@ -114,26 +112,28 @@ const Form = () => {
 
     // axios
     const addHandler = async () => {
-        const { username, password, passwordConfirm, nickname } = input;
+        const { username, password, passwordConfirm, nickname, imageUrl } = input;
         const user = {
             username: username,
             nickname: nickname,
             password: password,
-            passwordConfirm: passwordConfirm
+            passwordConfirm: passwordConfirm,
         };
 
         let json = JSON.stringify(user);
         const usernameblob = new Blob([json], { type: "application/json" });
-        formData.append("username", usernameblob);
+        formData.append("username", username);
 
         const nicknameblob = new Blob([json], { type: "application/json" });
-        formData.append("nickname", nicknameblob);
+        formData.append("nickname", nickname);
 
         const passwordblob = new Blob([json], { type: "application/json" });
-        formData.append("password", passwordblob);
+        formData.append("password", password);
 
         const passwordConfirmblob = new Blob([json], { type: "application/json" });
-        formData.append("passwordConfirm", passwordConfirmblob);
+        formData.append("passwordConfirm", passwordConfirm);
+        formData.append('imageUrl', imageUrl);
+        
 
         console.log("user is ", user)
         try {
