@@ -17,7 +17,8 @@ import { Navigation } from "swiper";
 const PostPage = () => {
   let inputRef;
   const navigate = useNavigate();
-
+  const [formData] = useState(new FormData())
+  
   // 게시판 제목, 내용, 사진
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -32,6 +33,7 @@ const PostPage = () => {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
       window.URL.revokeObjectURL(imageLists[i]);
+      formData.append("imageUrl", imageLists[i]);
     }
     // 이미지 최대 5개 까지만
     if (imageUrlLists.length > 5) {
@@ -63,19 +65,17 @@ const PostPage = () => {
     let json = JSON.stringify(req);
 
     try {
-      const formData = new FormData();
-
       const title = new Blob([json], { type: "application/json" });
-      formData.append("title", title);
+      formData.append("data", title);
 
       const content = new Blob([json], { type: "application/json" });
-      formData.append("content", content);
-      formData.append("imageUrl", imageUrl);
-
-
+      formData.append("data", content);
+      
       await axios.post("http://3.37.88.29:8080/post", formData, {
         headers: {
           "content-type": "multipart/form-data",
+          "Authorization": localStorage.getItem("Authorization"), //accesstoken 
+          "RefreshToken": localStorage.getItem("RefreshToken"),
         },
       });
       window.alert("😎등록이 완료되었습니다😎");
