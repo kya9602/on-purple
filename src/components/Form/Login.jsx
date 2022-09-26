@@ -35,7 +35,7 @@ const Login = () => {
       const data = await axios.post("http://3.37.88.29:8080/user/login", inputValue);
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
-      localStorage.setItem("username", data.data.data.username)
+      localStorage.setItem("nickname", data.data.data.nickname)
       console.log(data);
       navigate('/');
       // if(data.data.success===false)
