@@ -9,14 +9,14 @@ const Form = () => {
     const navigate = useNavigate();
 
 
-    const [imageUrl, setImageUrl] = useState(profileImage); // img input value
+    const [imageUrl, setImageUrl] = useState([profileImage]); // img input value
     const [formData] = useState(new FormData())
 
     // Event Handler
     // Img Upload hadler
     const inputRef = useRef(null);
     const onUploadImg = (fileBlob) => {
-        formData.append('file', fileBlob);
+        formData.append('imageUrl', fileBlob);
 
         for (const keyValue of formData) {
             console.log(keyValue[0] + ", " + keyValue[1])
@@ -38,7 +38,7 @@ const Form = () => {
         password: "",
         passwordConfirm: "",
         nickname: "",
-        imageUrl: "",
+        imageUrl: ""
     });
 
     const [usernameError, setusernameError] = useState(false);
@@ -114,26 +114,32 @@ const Form = () => {
 
     // axios
     const addHandler = async () => {
-        const { username, password, passwordConfirm, nickname } = input;
+        const { username, password, passwordConfirm, nickname, } = input;
         const user = {
             username: username,
             nickname: nickname,
             password: password,
-            passwordConfirm: passwordConfirm
+            passwordConfirm: passwordConfirm,
         };
+        // formData.append("username", username)
+        // formData.append("nickname", nickname)
+        // formData.append("password", password)
+        // formData.append("passwordConfirm", passwordConfirm)
+
+        // formData.append("info", user)
 
         let json = JSON.stringify(user);
         const usernameblob = new Blob([json], { type: "application/json" });
-        formData.append("username", usernameblob);
+        formData.append("info", usernameblob);
 
         const nicknameblob = new Blob([json], { type: "application/json" });
-        formData.append("nickname", nicknameblob);
+        formData.append("info", nicknameblob);
 
         const passwordblob = new Blob([json], { type: "application/json" });
-        formData.append("password", passwordblob);
+        formData.append("info", passwordblob);
 
         const passwordConfirmblob = new Blob([json], { type: "application/json" });
-        formData.append("passwordConfirm", passwordConfirmblob);
+        formData.append("info", passwordConfirmblob);
 
         console.log("user is ", user)
         try {
@@ -149,7 +155,7 @@ const Form = () => {
                 alert(data.data.error.message);
             else {
                 alert("회원가입이 완료되었습니다.");
-                navigate('/');
+                navigate('/login');
             }
             // return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
@@ -168,13 +174,15 @@ const Form = () => {
     };
 
 
+
+
     return (
         <StRegisterBox>
             <StHeader>
                 <StHeaderTitle>회원가입</StHeaderTitle>
             </StHeader>
             <form style={{ marginTop: "10px" }} >
-                {/* <MyProfile src={profileImage}></MyProfile> */}
+
                 <ImgBox >
                     <Avatar
                         src={imageUrl}
@@ -183,10 +191,10 @@ const Form = () => {
                         onClick={() => { inputRef.current.click() }} />
                     <input
                         type='file'
-                        id='file'
+                        id='imageUrl'
                         style={{ display: 'none' }}
                         accept='image/jpg,impge/png,image/jpeg'
-                        name='file'
+                        name='imageUrl'
                         onChange={(e) => { onUploadImg(e.target.files[0]) }}
                         ref={inputRef} />
                 </ImgBox>
@@ -206,6 +214,8 @@ const Form = () => {
                     <StLine>❤</StLine>
                     <StIdCheck>중복확인</StIdCheck>
                 </InputBox>
+                {input.username.length <= 0 ? null : usernameError ? <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning> :
+                    <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>올바른 아이디형식입니다!</div>}
                 {/* <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning> */}
                 <StsmallLabel style={{ marginBottom: "1%" }}>* 아이디는 영어와 숫자로 4~10자로 입력해주세요. *</StsmallLabel>
                 <StLineBox>
@@ -227,7 +237,8 @@ const Form = () => {
                     <StLine>❤</StLine>
 
                 </InputBox>
-                {/* <StSmallWorning>비밀번호 형식을 확인하세요</StSmallWorning> */}
+                {input.password.length <= 0 ? null : passwordError ? <StSmallWorning>비밀번호 형식을 확인하세요</StSmallWorning> :
+                    <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>안전한 비밀번호입니다!</div>}
                 <StsmallLabel style={{ marginBottom: "1%" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요. * </StsmallLabel>
                 <StLineBox>
                     {/* <StLine>❤</StLine> */}
@@ -249,7 +260,8 @@ const Form = () => {
                     <StLine>❤</StLine>
 
                 </InputBox>
-                {/* <StSmallWorning className="invalid-input">비밀번호가 일치하지 않습니다.</StSmallWorning> */}
+                {passwordConfirmError &&
+                    <StSmallWorning className="invalid-input">비밀번호가 일치하지 않습니다.</StSmallWorning>}
                 <StsmallLabel style={{ marginBottom: "1%" }}>* 비밀번호를 위에와 동일하게 입력해주세요. *</StsmallLabel>
                 <StLineBox>
                     {/* <StLine>❤</StLine> */}
@@ -273,14 +285,13 @@ const Form = () => {
                     <StIdCheck>중복확인</StIdCheck>
                 </InputBox>
                 {/* <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning> */}
+                {input.nickname.length <= 0 ? null : nicknameError ? <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning> :
+                    <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>올바른 닉네임형식입니다!</div>}
                 <StsmallLabel style={{ marginBottom: "1vw" }}>* 닉네임는 한글로 2~6자로 입력해주세요. *</StsmallLabel>
 
             </form>
-            <StLineBox>
-                {/* <StLine>❤</StLine> */}
-            </StLineBox>
             <StBtnBox>
-                <JoinBtn onClick={() => { addHandler(); console.log("input is", input) }}>회원가입 완료</JoinBtn>
+                <JoinBtn onClick={() => { addHandler(); console.log("input type is", typeof (input)) }}>회원가입 완료</JoinBtn>
             </StBtnBox>
         </StRegisterBox>
     );
