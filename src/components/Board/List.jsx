@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom/dist";
+import Card from "./Card";
 
 const List = () => {
-    
+
     return (
-        <Container to="/detail">
-            <Wrapper>
-            
-            </Wrapper>
-        </Container>
+        <Wrapper>
+            <Card />
+        </Wrapper>
+
     )
 }
 
@@ -17,7 +17,11 @@ export default List;
 
 const Wrapper = styled.div`
     display: flex;
-    padding-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 4vw;
+    margin: 0 auto;
+    margin-left: 1vw;
+    margin-top: 10px;
 `
 const Container = styled(Link)`
   margin-left: 6px;
