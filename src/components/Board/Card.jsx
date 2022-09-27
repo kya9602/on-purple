@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = () => {
+const Card = ({item}) => {
     return (
         <>
             <Item>
-                <Image>이미지 박스</Image>
+                <Image src={item.imageUrl} alt="" />
                 <TitleContentWrapper>
-                    <Title>Title</Title>
-                    <Content>Desc</Content>   
+                    <Title>{item.title}</Title>
+                    <Content>{item.content}</Content>   
                 </TitleContentWrapper>
                 <DescContainer>
-                    <Writer>작성자</Writer>
-                    <Like>💜100</Like>
+                    <Writer>{item.nickname}</Writer>
+                    <Like>💜{item.likes}</Like>
                 </DescContainer>
-                    <Date>yyyy.mm.dd</Date>
+                    <Date>{item.createdAt[0]}.0{item.createdAt[1]}.{item.createdAt[2]}</Date>
             </Item>
         </>
     )
@@ -26,16 +26,16 @@ const Item = styled.div`
     border: 2px solid #9C7FCB;
     border-radius: 15px;
     width: 46%;
-    height: 30vh;
+    height: 33vh;
     box-shadow:2px 2px 2px grey;
 `
 
-const Image = styled.div`
+const Image = styled.img`
     border: 1px solid #d1b7fa;
     border-radius: 15px;
     width: 90%;
     height: 58%;
-    margin: 0 auto;
+    margin-left: 2vw;
     margin-top: 1vw;
 `
 

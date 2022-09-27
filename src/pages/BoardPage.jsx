@@ -22,10 +22,3 @@ const Board = () => {
 
 
 export default Board;
-
-
-//글쓰기 버튼
-const Write = styled.button`
-    float: right;
-`
-
