@@ -29,5 +29,6 @@ Backend
 <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=Sourcetree&logoColor=white">    
 
 # 와이어프레임
-[실전프로젝트!.pdf](https://github.com/jeongseoe/Dating-APP/files/9661021/default.pdf)
+![실전프로젝트! (1)](https://user-images.githubusercontent.com/110080748/192676235-e32f6c86-012c-45e9-98da-6fd601010b79.jpg)
+
 
