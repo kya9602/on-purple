@@ -1,13 +1,32 @@
 import styled from "styled-components";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/perple.jpg";
 import profileImage from "../../assets/images/profile.jpg";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { __checkUsername, __checkNickname } from "../../redux/modules/user";
 
 const Form = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const initialState = {
+        username: '',
+        nickname: '',
+        password: '',
+        passwordConfirm: '',
+        imageUrl: ''
+    }
+
+    const [user, setUser] = useState(initialState);
+
+
+
+    const onChangeHandler = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value, });
+    };
 
     const [imageUrl, setImageUrl] = useState([profileImage]); // img input value
     const [formData] = useState(new FormData())
@@ -33,93 +52,15 @@ const Form = () => {
 
     };
 
-    const [input, setInput] = useState({
-        username: "",
-        password: "",
-        passwordConfirm: "",
-        nickname: "",
-        imageUrl: ""
-    });
 
-    const [usernameError, setusernameError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [passwordConfirmError, setPasswordConfirmError] = useState(false);
-    const [nicknameError, setnicknameError] = useState(false);
-
-
-    //유효성검사
-    const onChangeusername = (e) => {
-        // console.log("e.target.value is", e.target.value)
-        // console.log("e.target.value.length is ", e.target.value.length)
-        const usernameRegex = /^[A-Za-z0-9+]{4,10}$/;
-        if ((4 < e.target.value.length < 10 && (usernameRegex.test(e.target.value))))
-            setusernameError(false);
-        else if (e.target.value.length === 0 || !(usernameRegex.test(e.target.value))) {
-            setusernameError(true);
-        }
-
-
-        const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
-    };
-
-
-    const onChangePassword = (e) => {
-
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,20}$/;
-
-        if ((8 < e.target.value.length < 20 && (passwordRegex.test(e.target.value)))) setPasswordError(false);
-        else setPasswordError(true);
-
-        if (e.target.value.length === 0 || !(passwordRegex.test(e.target.value))) setPasswordConfirmError(false);
-        else if (e.target === 0 || !(passwordRegex.test(e.target.value))) { setPasswordConfirmError(true); }
-        // setInput(e.target.value);
-        const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
-    };
-
-
-    const onChangePasswordConfirm = (e) => {
-        if (input.password === e.target.value) setPasswordConfirmError(false);
-        else setPasswordConfirmError(true);
-        // setPasswordConfirmError(e.target.value);
-        const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
-    };
-
-    const onChangenickname = (e) => {
-        // console.log("e.target.value is", e.target.value)
-        // console.log("e.target.value.length is ", e.target.value.length)
-        const nicknameRegex = /^[A-Za-z]{2,6}$/;
-        if ((2 < e.target.value.length < 6 && (nicknameRegex.test(e.target.value))))
-            setnicknameError(false);
-        else if (e.target.value.length === 0 || !(nicknameRegex.test(e.target.value))) {
-            setnicknameError(true);
-        }
-
-
-        const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
-    };
-    //유효성 검사
-    const validation = () => {
-        if (!input.username) setusernameError(true);
-        if (!input.password) setPasswordError(true);
-        if (!input.passwordConfirm) setPasswordConfirmError(true);
-        if (!input.nickname) setnicknameError(true);
-
-        if (usernameError && passwordError && passwordConfirmError && nicknameError) return true;
-        else return false;
-    }
 
     // axios
     const addHandler = async () => {
-        const { username, password, passwordConfirm, nickname, } = input;
-        const user = {
-            username: username,
-            nickname: nickname,
-            password: password,
-            passwordConfirm: passwordConfirm,
+
+        if (user.username.trim() === "" || user.nickname.trim() === "" || user.password.trim() === "" || user.passwordConfirm.trim() === "") {
+            return alert("모든 칸을 채워주세요! 👀")
+        } else if (user.imageUrl.trim === "") {
+            return alert("사진을 등록해주세요! 😎")
         };
         // formData.append("username", username)
         // formData.append("nickname", nickname)
@@ -142,165 +83,285 @@ const Form = () => {
         formData.append("info", passwordConfirmblob);
 
         console.log("user is ", user)
-        try {
 
-            const data = await axios.post("http://3.37.88.29:8080/user/signup", formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log(data);
 
-            if (data.data.success === false)
-                alert(data.data.error.message);
-            else {
-                alert("회원가입이 완료되었습니다.");
-                navigate('/login');
+        const data = await axios.post("http://3.37.88.29:8080/user/signup", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
-            // return thunkAPI.fulfillWithValue(data.data);
-        } catch (error) {
-            // return thunkAPI.rejectWithValue(error);
-            alert("가입에 실패했습니다");
+        });
+
+        console.log(data.data);
+
+        if (data.data.success) {
+            alert('회원가입이 완료되었습니다');
+            navigate('/login');
         }
-
-
-        // }
-        console.log(validation());
-
-        if (validation()) {
-
+        else {
+            window.alert(data.error.message)
         }
+        setUser(initialState);
+    };
+
+
+    //유효성검사 
+    const regexUsername = /^[A-Za-z0-9+]{4,12}$/;
+    const regexNickname = /^[A-Za-z0-9+]{4,12}$/;
+    const regexPassword = /^[A-Za-z0-9]{4,20}$/;
+
+
+
+    //아이디 중복 체크
+    const usernameCheckHandler = async (e) => {
+        e.preventDefault();
+        const { username } = user;
+        const member = {
+            username: username
+        };
+        dispatch(__checkUsername(member));
+
         return;
     };
 
 
+    //닉네임 중복 체크
+    const nicknameCheckHandler = async (e) => {
+        e.preventDefault();
+        const { nickname } = user;
+        const member = {
+            nickname: nickname
+        };
+        dispatch(__checkNickname(member));
 
+        return;
+    };
 
     return (
-        <StRegisterBox>
+        <div>
             <StHeader>
-                <StHeaderTitle>회원가입</StHeaderTitle>
+                <StHeaderTitle> Perple </StHeaderTitle>
+                <StHeaderBody>새로운 만남과 설렘을 갖게 해줄 사람을 찾아보라</StHeaderBody>
             </StHeader>
-            <form style={{ marginTop: "10px" }} >
+            <StRegisterBox>
+                <StminiHeader>
+                    <StminiHeaderTitle>회원가입</StminiHeaderTitle>
+                </StminiHeader>
+                <form style={{ marginTop: "10px" }} >
 
-                <ImgBox >
-                    <Avatar
-                        src={imageUrl}
-                        style={{ margin: '20px' }}
-                        size={200}
-                        onClick={() => { inputRef.current.click() }} />
-                    <input
-                        type='file'
-                        id='imageUrl'
-                        style={{ display: 'none' }}
-                        accept='image/jpg,impge/png,image/jpeg'
-                        name='imageUrl'
-                        onChange={(e) => { onUploadImg(e.target.files[0]) }}
-                        ref={inputRef} />
-                </ImgBox>
-
-
-
-                <InputBox>
-                    <StLabel style={{ marginRight: "5px" }}> ❤ 아이디</StLabel>
-                    <StInput
-                        type="text"
-                        name="username"
-                        id="username"
-                        placeholder="아이디를 입력해주세요"
-                        value={input.username}
-                        onChange={onChangeusername}
-                    />
-                    <StLine>❤</StLine>
-                    <StIdCheck>중복확인</StIdCheck>
-                </InputBox>
-                {input.username.length <= 0 ? null : usernameError ? <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning> :
-                    <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>올바른 아이디형식입니다!</div>}
-                {/* <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning> */}
-                <StsmallLabel style={{ marginBottom: "1%" }}>* 아이디는 영어와 숫자로 4~10자로 입력해주세요. *</StsmallLabel>
-                <StLineBox>
-                    {/* <StLine>❤</StLine> */}
-                </StLineBox>
+                    <ImgBox >
+                        <Avatar
+                            src={imageUrl}
+                            style={{ margin: '20px' }}
+                            size={200}
+                            onClick={() => { inputRef.current.click() }} />
+                        <input
+                            type='file'
+                            id='imageUrl'
+                            style={{ display: 'none' }}
+                            accept='image/jpg,impge/png,image/jpeg'
+                            name='imageUrl'
+                            onChange={(e) => { onUploadImg(e.target.files[0]) }}
+                            ref={inputRef} />
+                    </ImgBox>
 
 
 
-                <InputBox >
-                    <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호</StLabel>
-                    <StInput
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="비밀번호를 입력해주세요"
-                        onChange={onChangePassword}
-                        value={input.password}
-                    />
-                    <StLine>❤</StLine>
+                    <InputBox>
+                        <StLabel style={{ marginRight: "5px" }}> ❤ 아이디</StLabel>
+                        <StInput
+                            type="text"
+                            name="username"
+                            id="username"
+                            placeholder="아이디를 입력해주세요"
+                            value={user.username}
+                            onChange={onChangeHandler}
+                            maxLength="10"
+                        />
+                        <StLine>❤</StLine>
+                        <StIdCheck content={"check"} onClick={usernameCheckHandler}>중복확인</StIdCheck>
+                    </InputBox>
 
-                </InputBox>
-                {input.password.length <= 0 ? null : passwordError ? <StSmallWorning>비밀번호 형식을 확인하세요</StSmallWorning> :
-                    <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>안전한 비밀번호입니다!</div>}
-                <StsmallLabel style={{ marginBottom: "1%" }}>* 비밀번호는 영어, 숫자 포함 8자이상 20자이하로 입력해주세요. * </StsmallLabel>
-                <StLineBox>
-                    {/* <StLine>❤</StLine> */}
-                </StLineBox>
+                    {/*정규표현식 충족 ? 사용가능한 아이디 : 정규표현식 알려주기 */}
+
+                    {user.username &&
+
+                        (regexUsername.test(user.username) ?
+                            (<div style={{ textAlign: "center" }}>
+                                <div style={{ fontSize: "13px", color: "blue", fontWeight: "600" }}>올바른 아이디형식입니다!</div>
+                                <CheckLabel>중복확인을 해주세요!!!🧐</CheckLabel>
+                            </div>)
+                            :
+                            (<div style={{ textAlign: "center" }}>
+                                <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning>
+                                <StsmallLabel>영어와 숫자로 4-12글자수로 적어주세요</StsmallLabel>
+                            </div>))
+
+                    }
 
 
 
 
-                <InputBox >
-                    <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호 재확인</StLabel>
-                    <StInput
-                        type="password"
-                        name="passwordConfirm"
-                        id="passwordConfirm"
-                        placeholder="비밀번호를 재입력해주세요"
-                        onChange={onChangePasswordConfirm}
-                        value={input.passwordConfirm}
-                    />
-                    <StLine>❤</StLine>
-
-                </InputBox>
-                {passwordConfirmError &&
-                    <StSmallWorning className="invalid-input">비밀번호가 일치하지 않습니다.</StSmallWorning>}
-                <StsmallLabel style={{ marginBottom: "1%" }}>* 비밀번호를 위에와 동일하게 입력해주세요. *</StsmallLabel>
-                <StLineBox>
-                    {/* <StLine>❤</StLine> */}
-                </StLineBox>
 
 
+                    <InputBox >
+                        <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호</StLabel>
+                        <StInput
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="비밀번호를 입력해주세요"
+                            onChange={onChangeHandler}
+                            value={user.password}
+                            maxLength="20"
+                        />
+                        <StLine>❤</StLine>
+                    </InputBox>
+                    {
+                        user.password &&
+                        (regexPassword.test(user.password) ?
+                            (<div style={{ textAlign: "center" }}>
+                                <div style={{ fontSize: "13px", color: "blue", fontWeight: "600" }}>안전한 비밀번호입니다!</div>
+                            </div>)
+                            :
+                            (<div style={{ textAlign: "center" }}>
+                                <StSmallWorning>비밀번호 형식을 확인하세요</StSmallWorning>
+                                <StsmallLabel>영어와 숫자로 4-20글자수로 적어주세요</StsmallLabel>
+                            </div>
+                            )
+                        )
+                    }
 
 
-                <InputBox>
-                    <StLabel style={{ marginRight: "5px" }}>❤  닉네임</StLabel>
-                    <StInput
-                        type="text"
-                        name="nickname"
-                        id="nickname"
-                        placeholder="닉네임을 입력해주세요"
-                        onChange={onChangenickname}
-                        value={input.nickname}
-                    />
-                    <StLine>❤</StLine>
 
-                    <StIdCheck>중복확인</StIdCheck>
-                </InputBox>
-                {/* <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning> */}
-                {input.nickname.length <= 0 ? null : nicknameError ? <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning> :
-                    <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>올바른 닉네임형식입니다!</div>}
-                <StsmallLabel style={{ marginBottom: "1vw" }}>* 닉네임는 한글로 2~6자로 입력해주세요. *</StsmallLabel>
 
-            </form>
-            <StBtnBox>
-                <JoinBtn onClick={() => { addHandler(); console.log("input type is", typeof (input)) }}>회원가입 완료</JoinBtn>
-            </StBtnBox>
-        </StRegisterBox>
+
+                    <InputBox >
+                        <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호 재확인</StLabel>
+                        <StInput
+                            type="password"
+                            name="passwordConfirm"
+                            id="passwordConfirm"
+                            placeholder="비밀번호를 재입력해주세요"
+                            onChange={onChangeHandler}
+                            value={user.passwordConfirm}
+                            maxLength="20"
+                        />
+                        <StLine>❤</StLine>
+                    </InputBox>
+                    {
+                        user.passwordConfirm &&
+                        (user.password !== user.passwordConfirm ?
+                            (<div style={{ textAlign: "center" }}>
+                                <StSmallWorning>비밀번호가 일치하지않습니다😨</StSmallWorning>
+                            </div>)
+                            // <StSmallWorning className="invalid-input">비밀번호가 일치하지 않습니다.</StSmallWorning>
+                            :
+                            // <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>안전한 비밀번호입니다!</div>
+                            (<div style={{ textAlign: "center" }}>
+                                <div style={{ fontSize: "13px", color: "blue", fontWeight: "600" }}>비밀번호가 일치합니다 😆 </div>
+                            </div>)
+
+                        )
+                    }
+
+
+
+
+
+                    <InputBox>
+                        <StLabel style={{ marginRight: "5px" }}>❤  닉네임</StLabel>
+                        <StInput
+                            type="text"
+                            name="nickname"
+                            id="nickname"
+                            placeholder="닉네임을 입력해주세요"
+                            onChange={onChangeHandler}
+                            value={user.nickname}
+                            maxLength="6"
+                        />
+                        <StLine>❤</StLine>
+                        <StIdCheck content={"check"} onClick={nicknameCheckHandler}>중복확인</StIdCheck>
+                    </InputBox>
+
+                    {/* 정규표현식 충족 ? 사용가능한 아이디 : 정규표현식 알려주기*/}
+                    {user.nickname &&
+                        (regexNickname.test(user.nickname) ?
+                            (<div style={{ textAlign: "center" }}>
+                                <div style={{ fontSize: "13px", color: "blue", fontWeight: "600" }}>올바른 닉네임형식입니다!</div>
+                                <CheckLabel>자, 이제 중복확인을 해주세요!!!🧐</CheckLabel>
+                            </div>
+                            )
+                            :
+                            (<div style={{ textAlign: "center" }}>
+                                <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning>
+                                <StsmallLabel>영어와 숫자로 4-12글자수로 적어주세요</StsmallLabel>
+                            </div>
+                            ))
+
+                    }
+
+
+                </form>
+                <StBtnBox>
+                    <JoinBtn onClick={() => { addHandler(); console.log("user is", user) }}>회원가입 완료</JoinBtn>
+                </StBtnBox>
+            </StRegisterBox>
+        </div>
     );
 }
 
 export default Form;
 
-//헤더박스
+//배경 헤더 박스
 const StHeader = styled.div`
+  width: 100%;
+  height: auto;
+  text-align: center;
+  ::after { 
+    width: 100vw;
+    height: 35%;
+    content: "";
+    background: url(${logo});
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+    background-size: cover;}
+`
+
+//배경 헤더 로고 타이틀
+const StHeaderTitle = styled.div`
+  font-size: 80px;
+  font-weight: 600;
+  background: #f7e9f5;
+  background: -webkit-linear-gradient(left, #420255, #f7e9f5);
+  background:    -moz-linear-gradient(right, #420255, #f7e9f5);
+  background:      -o-linear-gradient(right, #420255, #f7e9f5);
+  background:         linear-gradient(to right, #420255, #f7e9f5);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  padding-top: 70px;
+`
+//배경 헤더 로고 안내글
+const StHeaderBody = styled.div`
+  font-size: 17px;
+  margin-top: 1%;
+  background: #09ffff;
+  background: -webkit-linear-gradient(left, #420255, #09ffff);
+  background:    -moz-linear-gradient(right, #420255, #09ffff);
+  background:      -o-linear-gradient(right, #420255, #09ffff);
+  background:         linear-gradient(to right, #420255, #09ffff);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  font-weight: bold;
+`
+
+//회원가입 헤더박스
+const StminiHeader = styled.div`
   width: 100%;
   height: auto;
   text-align: center;
@@ -308,7 +369,6 @@ const StHeader = styled.div`
     width: 100vw;
     height: 45%;
     content: "";
-    background: url(${logo});
     position: absolute;
     top: 0;
     left: 0;
@@ -319,33 +379,38 @@ const StHeader = styled.div`
 }
 `
 
-//헤더 타이틀
-const StHeaderTitle = styled.div`
+//회원가입 헤더 타이틀
+const StminiHeaderTitle = styled.div`
     font-size: 35px;
     font-weight: 600;
-    margin-top: 2vw;
-    margin-bottom: 1vw;
-    background: #ecd9f7;
-    background: -webkit-linear-gradient(left, #420255, #ecd9f7);
-    background:    -moz-linear-gradient(right, #420255, #ecd9f7);
-    background:      -o-linear-gradient(right, #420255, #ecd9f7);
-    background:         linear-gradient(to right, #420255, #ecd9f7);
+    margin-top: 20px;
+    background: #420255;
+    background: -webkit-linear-gradient(left, #ecd9f7, #420255);
+    background:    -moz-linear-gradient(right, #ecd9f7, #420255);
+    background:      -o-linear-gradient(right, #ecd9f7, #420255);
+    background:         linear-gradient(to right, #ecd9f7, #420255);
     -webkit-background-clip: text;
             background-clip: text;
     color: transparent;
     font-weight: bold;
+    @media all and (max-width: 750px) {
+    margin-bottom: 15px;
+  }
 `
 
 //전체 박스 
 const StRegisterBox = styled.div`
+    margin-bottom: 30px;
     width: 40vw;
     height: auto;
     padding-bottom: 1%;
     margin: auto;
-    margin-top: 7%;
-    border: 5px solid #fdc2f0;
-    border-radius: 15px;
+    margin-top: 150px;
+    border: 3px solid #adaaad;
     background-color: white;
+    @media all and (max-width: 750px) {
+     width: 600px;
+  }
 `;
 
 //이미지 박스 
@@ -358,9 +423,14 @@ const ImgBox = styled.div`
 const Avatar = styled.img`
    border: 5px solid #f8b2f8;
     border-radius: 100px;
-    width: 10vw;
-    height: 10vw;
+    width: 8vw;
+    height: 8vw;
     background-size: cover;
+    @media all and (max-width: 750px) {
+     width: 20vw;
+     height: 20vw;
+     border: 3px solid #f8b2f8;
+  }
 `
 //인풋 박스
 const InputBox = styled.div`
@@ -375,31 +445,44 @@ const StLabel = styled.label`
   font-weight: bolder;
   padding: 1%;
   text-align: center;
-  font-size: 15px;
+  font-size: 18px;
+  @media all and (max-width: 750px) {
+     font-size: 15px;
+  }
 `;
 
 //아이디 인풋창
 const StInput = styled.input`
   margin-top: 1%;
   border: none;
-  border-radius: 5px;
-  font-size: 15px; 
+  font-size: 18px; 
   padding:1%;
   :hover{
-    border: 2px solid #f530f5;
+  border-bottom-style:solid; 
+  border-bottom-color:#80036f;
+  border-bottom-width:2px;
+  }
+  @media all and (max-width: 750px) {
+     font-size: 15px;
   }
 `;
 
 //아이디 중복확인 버튼
 const StIdCheck = styled.button`
-  margin-left: 1%;
+  margin-left: 1.5%;
   border: 2px solid #6e96ee;
   background-color: white;
   border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
   :hover{
     border: none;
     background-color: #4097df;
     color:white;
+  }
+  @media all and (max-width: 750px) {
+     font-size: 12px;
+     
   }
 `;
 
@@ -407,10 +490,24 @@ const StIdCheck = styled.button`
 const StsmallLabel = styled.label`
     display: flex;
     justify-content: center;
-    font-size: 10px;
+    font-size: 14px;
     color:gray;
-    
+    @media all and (max-width: 750px) {
+     font-size: 12px;
+  }
 `;
+
+//중복확인 안내 라벨
+const CheckLabel = styled.label`
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    color:#424242;
+    font-weight: 600;
+    @media all and (max-width: 750px) {
+     font-size: 12px;
+  }
+`
 
 //버튼 박스
 const StBtnBox = styled.div`
@@ -426,7 +523,7 @@ const JoinBtn = styled.button`
   border-radius: 5px;
   padding: 1%;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 25px;
   color:#80036f;
   :hover{
     border: none;
@@ -434,26 +531,30 @@ const JoinBtn = styled.button`
     color:white;
     font-weight: 800;
     padding: 1%;
-  
 }
+@media all and (max-width: 750px) {
+    font-size: 20px;
+  }
 `;
 
-//비밀번호 오류 라벨
+//인풋 값 오류 라벨
 const StSmallWorning = styled.label`
-  font-size: 12px;
+  font-size: 14px;
   color: red;
   font-weight: 600;
-  margin-left:45% ;
+  @media all and (max-width: 750px) {
+    font-size: 12px;
+  }
 `;
 
-//구분선 박스 
-const StLineBox = styled.div`
-  justify-content: center;
-  display: flex;
-`;
 
 //구분선
 const StLine = styled.div`
-  margin-top:1.3%;
-  color :#6d0488
+  margin-top:1.6%;
+  color :#6d0488;
+  font-size: 18px;
+  text-align: center;
+ @media all and (max-width: 750px) {
+    font-size: 15px;
+  } 
 `;
