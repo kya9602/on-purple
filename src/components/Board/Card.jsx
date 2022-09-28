@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 const Card = ({item}) => {
+    const navigate = useNavigate();
     return (
         <>
-            <Item>
+            <Item onClick={()=>{navigate(`/detail/${item.postId}`)}}>
                 <Image src={item.imageUrl} alt="" />
                 <TitleContentWrapper>
                     <Title>{item.title}</Title>
@@ -12,9 +13,9 @@ const Card = ({item}) => {
                 </TitleContentWrapper>
                 <DescContainer>
                     <Writer>{item.nickname}</Writer>
-                    <Like>💜{item.likes}</Like>
+                    <Like>💜{item.likes} 개</Like>
                 </DescContainer>
-                    <Date>{item.createdAt[0]}.0{item.createdAt[1]}.{item.createdAt[2]}</Date>
+                    <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
             </Item>
         </>
     )

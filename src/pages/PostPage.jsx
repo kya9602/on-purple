@@ -10,9 +10,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Swiper
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "./styles.css";
-import { Navigation } from "swiper";
+import { Pagination } from "swiper";
 
 const PostPage = () => {
   let inputRef;
@@ -128,12 +128,12 @@ const PostPage = () => {
             <DefaultImage />  
             : 
             /* 있으면 슬라이드 출력 */
-            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+            <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
               {imageUrl.map((image, id) => (
                 <SwiperSlide key={id}>
                   <ImgBox>                
                     <DeleteBtn onClick={() => handleDeleteImage(id)}><img src={Delete} alt="X" /></DeleteBtn>
-                    <img src={image} alt={`${image}-${id}`} />
+                    <img src={image} alt="" />
                   </ImgBox>
                 </SwiperSlide>
               ))}

@@ -6,9 +6,9 @@ const AddComment = () => {
         <Container>
             <Text
                 className="text"
-                placeholder="댓글을 입력하세요"
+                placeholder="댓글 달기.."
             />
-            <AddButton>등록</AddButton>
+            <AddButton>게시</AddButton>
         </Container>
     )
 }
@@ -16,16 +16,17 @@ const AddComment = () => {
 export default AddComment;
 
 const Container = styled.div`
-    justify-content: center;
     display: flex;
-    gap: 20px;
+    gap: 10px;
 `
 const AddButton = styled.button`
-    width: 80px;
-    height: 70px;
+    width: 15vw;
+    height: 4.5vh;
+    margin: 0 auto;
 `
 
-const Text =styled.textarea`
-    width: 800px;
-    height: 70px;
+const Text =styled.input`
+    width: 100%;
+    height: 4.5vh;
+
 `
