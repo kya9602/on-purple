@@ -1,15 +1,34 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom/dist";
+import Card from "./Card";
+import { useDispatch, useSelector } from "react-redux";
+import { __getPosts } from "../../redux/modules/board";
 
 const List = () => {
-    
+    const dispatch = useDispatch();
+
+    const {isLoading, error, post} = useSelector((state)=> state.post)
+    console.log(post)
+    useEffect(() => {
+        dispatch(__getPosts());
+    }, [dispatch])
+    if (isLoading) return "Loading..."
+
+    if (error) {
+        return <>{error.message}</>
+    }
+
+    if (post.length === 0) {
+        return <>😴게시물이 존재하지 않습니다😴</>
+    }
+
     return (
-        <Container to="/detail">
+        <ListContainer>
             <Wrapper>
-            
+                {post.map((item)=>(<Card item={item} key={item.postId}/>))}
             </Wrapper>
-        </Container>
+        </ListContainer>
+
     )
 }
 
@@ -17,15 +36,12 @@ export default List;
 
 const Wrapper = styled.div`
     display: flex;
-    padding-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 4vw;
+    margin: 0 auto;
+    margin-left: 1vw;
+    margin-top: 10px;
 `
-const Container = styled(Link)`
-  margin-left: 6px;
-  flex-shrink: 0;
-  width: 264.75px;
-  height: 100%;
-  position: relative;
-  transition-property: transform;
-  text-decoration: none;
-  color: inherit;
-`;
+const ListContainer = styled.div`
+    
+`

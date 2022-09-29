@@ -35,7 +35,7 @@ const Login = () => {
       const data = await axios.post("http://3.37.88.29:8080/user/login", inputValue);
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
-      localStorage.setItem("username", data.data.data.username)
+      localStorage.setItem("nickname", data.data.data.nickname)
       console.log(data);
       navigate('/');
       // if(data.data.success===false)
@@ -64,7 +64,7 @@ const Login = () => {
       <StLoginContainer>
         <form onSubmit={onSubmitHandler}>
           <StUserBox>
-            <StLaber style={{ marginRight: "18px" }}>아이디</StLaber>
+            <StLaber style={{ marginRight: "15px" }}>아이디</StLaber>
             <StLoginInput
               type="text"
               name="username"
@@ -97,8 +97,9 @@ const Login = () => {
         <StBtnBox>
           <StBtnNaver>네이버로 로그인하기</StBtnNaver>
         </StBtnBox>
-
-        <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
+        <StJoinBtnBox>
+          <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
+        </StJoinBtnBox>
       </StLoginContainer>
 
     </div>
@@ -115,7 +116,7 @@ const StHeader = styled.div`
   text-align: center;
   ::after { 
     width: 100vw;
-    height: 45%;
+    height: 35%;
     content: "";
     background: url(${newlogo});
     position: absolute;
@@ -130,7 +131,6 @@ const StHeader = styled.div`
 
 //헤더 타이틀
 const StHeaderTitle = styled.div`
-  margin-top: 3%;
   font-size: 80px;
   font-weight: 600;
   background: #f7e9f5;
@@ -142,6 +142,7 @@ const StHeaderTitle = styled.div`
             background-clip: text;
     color: transparent;
     font-weight: bold;
+    padding-top: 70px;
 `;
 
 //헤더 바디
@@ -182,13 +183,17 @@ const StBtnHeader = styled.button`
 //로그인 전체적인 큰 박스
 const StLoginContainer = styled.div`
   margin: auto;
+  margin-top: 90px;
+
   background-color: white;
   width: 40vw;
   height: auto;
   padding-bottom: 2%;
-  border-radius: 20px;
-  border: 3px solid #fdc2f0;
+  border: 3px solid #adaaad;
   /* background-color: red; */
+  @media all and (max-width: 750px) {
+     width: 600px;
+  }
 `;
 
 
@@ -205,6 +210,9 @@ const StPwBox = styled.div`
   justify-content:center;
   margin-top: 20px;
   margin-bottom: 30px;
+  @media all and (max-width: 750px) {
+    margin-bottom: 15px;
+  }
 `;
 
 //인풋창 디자인
@@ -216,6 +224,12 @@ const StLoginInput = styled.input`
   :hover{
     border: 3px solid #f530f5;
   }
+  @media all and (max-width: 750px) {
+    font-size : 14px;
+    :hover{
+      border:2px solid #f530f5;
+    }
+  }
 `;
 
 //작은 박스안에 "아이디 비밀번호"
@@ -224,6 +238,9 @@ const StLaber = styled.label`
   color : #6d0488;
   font-weight: bolder;
   font-size: 18px;
+  @media all and (max-width: 750px) {
+    font-size : 14px;
+  }
 `;
 
 //버튼들 박스
@@ -231,6 +248,9 @@ const StBtnBox = styled.div`
   justify-content: center;
   display: flex;
   margin-top: 20px;
+  @media all and (max-width : 750px) {
+    margin-top: 10px;
+  }
 `;
 
 //버튼 디자인
@@ -238,32 +258,43 @@ const StBtn = styled.button`
   margin-top: 10px;
   background-color: white;
   border: none;
-  border-radius: 5px;
   padding: 1%;
   font-weight: bold;
   font-size: 17px;
-
+  border-bottom-style:solid; 
+  border-bottom-color:#80036f;
+  border-bottom-width:2px;
   :hover{
     border: none;
     background-color: #80036f;
     color:white;
     font-weight: 800;
     padding: 1%;
-  
+    border-radius: 5px;
 }
+@media all and (max-width: 750px) {
+    font-size : 14px;
+  }
 `;
 
 const StBtnKaka = styled.button`
   margin-top: 10px;
   background-color: white;
   border:none;
-  border-radius: 5px;
   font-weight: bold;
   font-size: 17px;
+  border-bottom-style:solid; 
+  border-bottom-color:#fcda1a;
+  border-bottom-width:2px;
 
   :hover{
     background-color:#fcda1a;
     padding: 1%;
+    border-radius: 5px;
+
+  }
+  @media all and (max-width: 750px) {
+    font-size : 14px;
   }
 `;
 
@@ -272,15 +303,26 @@ const StBtnNaver = styled.button`
   margin-bottom: 20px;
   background-color: white;
   border:none;
-  border-radius: 5px;
   font-weight: bold;
   font-size: 17px;
-
+  border-bottom-style:solid; 
+  border-bottom-color:#3cad08;
+  border-bottom-width:2px;
   :hover{
     background-color:#3cad08;
+    border-radius: 5px;
     padding: 1%;
   }
+  @media all and (max-width: 750px) {
+    font-size : 14px;
+  }
 `;
+
+//회원가입 버튼 박스
+const StJoinBtnBox = styled.div`
+  margin-bottom  :10px ;
+  margin-right: 10px;
+`
 
 //회원가입 버튼
 const StSignBtn = styled.button`
@@ -290,10 +332,12 @@ const StSignBtn = styled.button`
   font-size: 15px;
   font-weight: 600;
   float: right;
-  margin-right: 10px;
   :hover{
     background-color: #110eb9;
     color: white;
     border-radius: 5px;
+  }
+  @media all and (max-width: 750px) {
+    font-size : 14px;
   }
 `;

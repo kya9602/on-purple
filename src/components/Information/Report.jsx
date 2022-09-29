@@ -27,11 +27,7 @@ const Report = () => {
       };
 
     //Report
-    
-
-
-
-
+   
     return (
         <ReportContainerDiv>
             
