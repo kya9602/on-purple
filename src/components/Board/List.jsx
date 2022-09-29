@@ -3,14 +3,12 @@ import styled from "styled-components";
 import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../../redux/modules/board";
-import { useNavigate } from "react-router";
+
 const List = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-    
+
     const {isLoading, error, post} = useSelector((state)=> state.post)
     console.log(post)
-    
     useEffect(() => {
         dispatch(__getPosts());
     }, [dispatch])

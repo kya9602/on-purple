@@ -1,23 +1,59 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
-import AddComment from "./AddComment";
+import { useSelector, useDispatch  } from "react-redux";
+import {  useParams } from "react-router";
+import { __getPostsDetail } from "../../redux/modules/board";
+import AddComment from "./AddComment"
+
+// Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "./styles.css";
+import { Pagination } from "swiper";
 import CommentList from "./CommentList";
-import Desc from "./Desc";
+
 
 const Detail = () => {
+    const dispatch = useDispatch();
+    const { isLoading , error, detail } = useSelector((state) => state.post);
+    const {postId} = useParams();
+
+    useEffect(() => {
+        dispatch(__getPostsDetail(postId));
+    }, [dispatch])
+
+    if (isLoading) return "😴로딩중이에요..😴"
+
+    if (error) {
+        return <>{error.message}</>
+    }
+
     return (
         <>
-            <Wrapper>
-                <Title><p>제목</p></Title>
-                <ImageContainer>
-                </ImageContainer>
-                <DescContainer>
-                    <Desc/>
-                </DescContainer>
-            </Wrapper>
+            <Title>{detail.title}</Title>
+            <NameDateWrapper>
+                <Name>{detail.nickname}</Name>
+                <Date>{detail.createdAt[0]}-{detail.createdAt[1]}-{detail.createdAt[2]} </Date>
+            </NameDateWrapper>
+            <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+                {detail.imgList.map((image, id)=> (
+                       <SwiperSlide key={id}>
+                        <ImgBox>
+                            <img src={image} alt=""/>
+                        </ImgBox>
+                       </SwiperSlide>
+                ))}
+            </Swiper>
+            <Likes>💜{detail.likes}개</Likes> 
+            <Content>{detail.content}</Content>
+            
+            <div style={{marginTop:"10px"}}>
             <CommentList/>
+            </div>
+            <div style={{marginTop:"10px"}}>
             <AddComment/>
-             
+            </div>
         </>
 
     )
@@ -25,43 +61,37 @@ const Detail = () => {
 
 export default Detail;
 
-const ImageContainer = styled.div`
-    width: 500px;
-    height: 600px;
-    margin: 0 auto;
-    border: 1px solid grey;
-    border-radius: 15px;
-`
-
-const DescContainer = styled.div`
-    width: 800px;
-    height: 600px;
-    margin: 0 auto;
-    border: 1px solid grey;
-`
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-`
-
-const Review = styled.div`
-     margin: 0 auto;
-     border-top: 1px solid black;
-     margin-top: 50px;
-     text-align: center;
-`
 const Title = styled.div`
-    margin: 0 auto;
-    margin-top: 30px;
-    box-shadow: 5px 5px 5px pink;
-    border: 1px solid pink;
-    border-radius: 30px;
-    width: 300px;
-    height: 30px;
-    font-size: 15px;
-    p{
-       margin: 5px;
-    }
+    font-size: 8vw;
     text-align: center;
+`
+const Name = styled.div`
+    font-size: 3vw;
+    float: right;
+`
+const Date = styled.div`
+    font-size: 3vw;
+`
+const NameDateWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
+const Likes = styled.div`
+    font-size: 4vw;
+`
+
+const Content = styled.div`
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 90%;
+    height: 45vh;
+    /* border: 1px solid #9E87BA; */
+    font-size: 20px;
+`
+
+const ImgBox = styled.div`
+    width: 100%;
+    height: 100%;
+    margin-top: 3vw;
 `

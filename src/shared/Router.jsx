@@ -26,7 +26,7 @@ const Router = () => {
                 <Route path="/chat/:roomId" exact element={<ChatScreen />} />
                 <Route path="/profile" exact element={<ProfilePage />} />
                 <Route path="/board" exact element={<BoardPage />} />
-                <Route path="/detail" exact element={<DetailPage />} />
+                <Route path="/detail/:postId" exact element={<DetailPage />} />
                 <Route path="/post" exact element={<PostPage />} />
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />

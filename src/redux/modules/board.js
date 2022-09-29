@@ -6,13 +6,27 @@ export const __getPosts = createAsyncThunk(
     async (payload, thunkAPI) => {
         try {
             const data = await axios.get(`http://3.37.88.29:8080/post`);
-            /* console.log(data.data.data) */
+           /*  console.log(data) */
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
         }
     }
 );
+
+export const __getPostsDetail = createAsyncThunk(
+  "GET_POSTS_DETAIL",
+  async (payload, thunkAPI) => {
+      try {
+          const data = await axios.get(`http://3.37.88.29:8080/post/${payload}`);
+          return thunkAPI.fulfillWithValue(data.data.data);
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error.code);
+      }
+  }
+);
+
+
 
 // createAsyncThunk 생성하기
 export const __deletePosts = createAsyncThunk(
@@ -30,6 +44,17 @@ export const __deletePosts = createAsyncThunk(
 
 const initialState = {
     post: [],
+    detail: {
+      postId:0,
+      nickname:"",
+      title:"",
+      content:"",
+      imgList:[],
+      likes:0,
+      createdAt:[],
+      commentResponseDtoList : [],
+      modifiedAt:[],
+    },
     error: null,
     isLoading: false,
   }
@@ -39,9 +64,9 @@ export const postSlice = createSlice({
     initialState,
     reducers: {
       updataCard: (state, action) => {
-        axios.patch(`http://3.37.88.29:8080/post${action.payload.id}`, action.payload)
-      }
-  
+        axios.patch(`http://3.37.88.29:8080/post${action.payload.postId}`, action.payload)
+      },
+
     },
     extraReducers: {
       [__getPosts.fulfilled]: (state, action) => {
@@ -55,8 +80,19 @@ export const postSlice = createSlice({
       [__getPosts.pending]: (state) => {
         state.isLoading = true; 
       },
-  
-  
+
+      [__getPostsDetail.fulfilled]: (state, action) => {
+        state.isLoading = false;
+        state.detail = action.payload;
+      },
+      [__getPostsDetail.rejected]: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      },
+      [__getPostsDetail.pending]: (state) => {
+        state.isLoading = true; 
+      },
+      
       [__deletePosts.pending]: (state, action) => {
         state.isLoading = true
       },
