@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import styled from "styled-components"
+import { useSelector, useDispatch  } from "react-redux";
+import { addComment } from "../../redux/modules/comment";
+import { useParams } from "react-router";
 
-const AddComment = () => {
+const AddComment = (detail) => {
+    const [comment, setComment] = useState("")
+    const { postId } = useParams();
+    console.log(postId)
+    
     return(
         <Container>
             <Text

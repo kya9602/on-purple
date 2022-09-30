@@ -18,7 +18,6 @@ const Detail = () => {
     const dispatch = useDispatch();
     const { isLoading , error, detail } = useSelector((state) => state.post);
     const {postId} = useParams();
-
     useEffect(() => {
         dispatch(__getPostsDetail(postId));
     }, [dispatch])
@@ -52,7 +51,7 @@ const Detail = () => {
             <CommentList/>
             </div>
             <div style={{marginTop:"10px"}}>
-            <AddComment/>
+            <AddComment detail={detail}/>
             </div>
         </>
 

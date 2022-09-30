@@ -7,7 +7,7 @@ const Commnent = ()=>{
             <p>유저이름</p>
             <CmContainer>
             <div>댓글댓글댓글댓글댓글</div>
-            <div>좋아요버튼</div>
+            <div>💜숫자</div>
             </CmContainer>
         </>
     )

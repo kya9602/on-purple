@@ -63,10 +63,6 @@ export const postSlice = createSlice({
     name: "post",
     initialState,
     reducers: {
-      updataCard: (state, action) => {
-        axios.patch(`http://3.37.88.29:8080/post${action.payload.postId}`, action.payload)
-      },
-
     },
     extraReducers: {
       [__getPosts.fulfilled]: (state, action) => {

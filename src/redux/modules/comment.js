@@ -39,7 +39,7 @@ export const commentSlice = createSlice({
         //댓글추가
         addComment: (state, action) => {
             state.comment.push(action.payload);
-            axios.post("http://13.209.26.228:8080/comment/", action.payload);
+            axios.post(`http://3.37.88.29:8080/comment/${state}`, action.payload);
         }
     },
     extraReducers: {

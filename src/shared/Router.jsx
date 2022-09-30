@@ -12,7 +12,7 @@ import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
-
+import EditPage from "../pages/EditPage";
 
 const Router = () => {
     return (
@@ -27,6 +27,7 @@ const Router = () => {
                 <Route path="/profile" exact element={<ProfilePage />} />
                 <Route path="/board" exact element={<BoardPage />} />
                 <Route path="/detail/:postId" exact element={<DetailPage />} />
+                <Route path="/edit/:postId" exact element={<EditPage />} />
                 <Route path="/post" exact element={<PostPage />} />
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
