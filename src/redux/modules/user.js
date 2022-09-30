@@ -1,7 +1,17 @@
-import { createAsyncThunk, } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+import instance from "../../shared/api";
 
 
+export const setUserDB = createAsyncThunk("setUserImage", async () => {
+    try {
+        const response = await instance.get("/api/user/userInfo");
+        const userInfo = response.data;
+        return { userInfo };
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 
 export const __checkUsername = createAsyncThunk(
@@ -60,3 +70,26 @@ export const __logout = createAsyncThunk(
         }
     }
 );
+
+export const userSlice = createSlice({
+
+    name: "user",
+    initialState: {
+        user: null //user has not loged in
+    },
+    reducers: {
+
+        logout(state) {
+            localStorage.removeItem("Authorization")   //로그아웃은 token, username 제거
+            localStorage.removeItem("RefreshToken")
+            localStorage.removeItem("nickname")
+        }
+    },
+});
+
+
+
+
+
+export const { logout } = userSlice.actions;
+export default userSlice.reducer;
