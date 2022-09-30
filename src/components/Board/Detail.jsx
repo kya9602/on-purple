@@ -21,7 +21,6 @@ const Detail = () => {
     useEffect(() => {
         dispatch(__getPostsDetail(postId));
     }, [dispatch])
-
     if (isLoading) return "😴로딩중이에요..😴"
 
     if (error) {
