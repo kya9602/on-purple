@@ -10,7 +10,7 @@ import useOnClickOutside from "./useOnClickOutside";
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
     ListBox, Listtitle, LovemeBox, LoveCard, MatchingBox, MatchingCard, Avatar, StBodyInput, StButton, AddMyinfo,
-    MiniBox, MiniTitle, MiniInput, MiniHeader
+    MiniBox, MiniTitle, MiniInput, MiniHeader, StBtbBox
 } from "./Mypagestyled";
 
 

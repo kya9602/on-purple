@@ -37,12 +37,13 @@ const Login = () => {
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("nickname", data.data.data.nickname)
       console.log(data);
-      navigate('/');
-      // if(data.data.success===false)
-      //     alert("data.data.error.message");
-      // alert("아이디와 비밀번호를 다시 확인해주세요.");
-      // else alert("로그인 성공");
-      // return thunkAPI.fulfillWithValue(data.data);
+
+      if (data) {
+        navigate('/signupadd');
+      } else if (data === 0) {
+        navigate('/')
+      }
+
     } catch (error) {
       alert("아이디와 비밀번호를 다시 확인해주세요.");
       // return thunkAPI.rejectWithValue(error);
@@ -57,8 +58,8 @@ const Login = () => {
   return (
     <div >
       <StHeader>
-        <StHeaderTitle> Perple </StHeaderTitle>
-        <StHeaderBody>새로운 만남과 설렘을 갖게 해줄 사람을 찾아보라</StHeaderBody>
+        <StHeaderTitle> On Purple </StHeaderTitle>
+        <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
         <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
       </StHeader>
       <StLoginContainer>
@@ -184,17 +185,23 @@ const StBtnHeader = styled.button`
 const StLoginContainer = styled.div`
   margin: auto;
   margin-top: 90px;
-
   background-color: white;
-  width: 40vw;
+  width: 800px;
   height: auto;
   padding-bottom: 2%;
   border: 3px solid #adaaad;
   /* background-color: red; */
-  @media all and (max-width: 750px) {
+  @media all and (max-width: 880px) {
      width: 600px;
   }
+  @media all and (max-width : 680px) {
+    width: 400px;
+  }
+  @media all and (max-width : 480px) {
+    width: 350px;
+  }
 `;
+
 
 
 //로그인박스 안에 아이디 박스
@@ -213,6 +220,9 @@ const StPwBox = styled.div`
   @media all and (max-width: 750px) {
     margin-bottom: 15px;
   }
+  @media all and (max-width : 400px) {
+    margin-bottom: 10px;
+  }
 `;
 
 //인풋창 디자인
@@ -230,6 +240,12 @@ const StLoginInput = styled.input`
       border:2px solid #f530f5;
     }
   }
+  @media all and (max-width : 400px) {
+    font-size : 12px;
+    :hover{
+      border:1px solid #f530f5;
+    }
+  }
 `;
 
 //작은 박스안에 "아이디 비밀번호"
@@ -241,6 +257,9 @@ const StLaber = styled.label`
   @media all and (max-width: 750px) {
     font-size : 14px;
   }
+  @media all and (max-width : 400px) {
+    font-size : 12px;
+  }
 `;
 
 //버튼들 박스
@@ -249,6 +268,9 @@ const StBtnBox = styled.div`
   display: flex;
   margin-top: 20px;
   @media all and (max-width : 750px) {
+    margin-top: 10px;
+  }
+  @media all and (max-width : 400px) {
     margin-top: 10px;
   }
 `;

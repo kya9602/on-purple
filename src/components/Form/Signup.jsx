@@ -139,8 +139,8 @@ const Form = () => {
     return (
         <div>
             <StHeader>
-                <StHeaderTitle> Perple </StHeaderTitle>
-                <StHeaderBody>새로운 만남과 설렘을 갖게 해줄 사람을 찾아보라</StHeaderBody>
+                <StHeaderTitle> On Purple </StHeaderTitle>
+                <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
             </StHeader>
             <StRegisterBox>
                 <StminiHeader>
@@ -254,9 +254,7 @@ const Form = () => {
                             (<div style={{ textAlign: "center" }}>
                                 <StSmallWorning>비밀번호가 일치하지않습니다😨</StSmallWorning>
                             </div>)
-                            // <StSmallWorning className="invalid-input">비밀번호가 일치하지 않습니다.</StSmallWorning>
                             :
-                            // <div style={{ marginLeft: "45%", fontSize: "13px", color: "blue", fontWeight: "600" }}>안전한 비밀번호입니다!</div>
                             (<div style={{ textAlign: "center" }}>
                                 <div style={{ fontSize: "13px", color: "blue", fontWeight: "600" }}>비밀번호가 일치합니다 😆 </div>
                             </div>)
@@ -303,7 +301,7 @@ const Form = () => {
 
                 </form>
                 <StBtnBox>
-                    <JoinBtn onClick={() => { addHandler(); console.log("user is", user) }}>회원가입 완료</JoinBtn>
+                    <JoinBtn onClick={() => { addHandler(); console.log("user is", user); navigate('/signupAdd'); }}>회원가입 완료</JoinBtn>
                 </StBtnBox>
             </StRegisterBox>
         </div>
