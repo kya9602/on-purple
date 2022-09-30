@@ -12,7 +12,7 @@ import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
-
+import SignupAdd from "../pages/SignupAdd";
 
 const Router = () => {
     return (
@@ -30,6 +30,7 @@ const Router = () => {
                 <Route path="/post" exact element={<PostPage />} />
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
+                <Route path="/signupadd" exact element={<SignupAdd />} />
             </Routes>
         </BrowserRouter>
 
