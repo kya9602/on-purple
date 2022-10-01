@@ -1,55 +1,27 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useSprings } from "react-spring/hooks";
 import { useGesture } from "react-with-gesture";
+import { __getMain } from "../../redux/modules/main";
 import Card from "./Card";
+
 
 import "./Deck.css";
 
 
 
-//db
-const objs = [
-  {
-    pics: [
-      "http://img.tf.co.kr/article/home/2022/02/23/202273711645596568.jpg"
-    ],
-    name: "이은지",
-    age: 29,
-    /* distance: "서울",
-    text: "짧은소개" */
-  },
-  {
-    pics: [
-      "https://v-phinf.pstatic.net/20220621_231/1655788898269qilbT_JPEG/cropped_band_crop_2022-06-21_0219470.jpg?type=w1000"
-  ],
-    name: "미미",
-    age: 22,
-    /* distance: "인천",
-    text:
-      "짧은소개" */
-  },
-  {
-    pics: [
-      "https://mblogthumb-phinf.pstatic.net/MjAyMDEyMjBfNDAg/MDAxNjA4NDM4NjQwMjIz.SEOPy-YwMlzPf1O4fN948vSu9O-0CQ2hnS8x_VnCXcIg.CS19Satxf_Rg6Zuv4gju0FGzfo3r2r_X4tVXO28e25Yg.JPEG.cwmylee/IMG_5218.JPG?type=w800"
-  ],
-    name: "이영지",
-    age: 21,
-    /* distance: "대전",
-    text: "짧은소개" */
-  },
-  {
-    pics: [    
-      "https://images.chosun.com/resizer/LBHLdv9vB0M4sCv7V03liNNTqdc=/464x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/EYJJLS4XTNCBU3S6BP3STTVXFY.jpg"
-  ],
-    name: "안유진",
-    age: 20,
-    /* distance: "원주",
-    text:
-      "짧은소개" */
-  }
-];
+
+function Deck() {
+const dispatch = useDispatch();
+
+/* DB */
+const {data, isLoading, error} = useSelector((state)=> state.main)
+//console.log(data)
+  
+/* 보여줄 카드 갯수. */
 const cards = [];
-for(let i=0;i<objs.length;i++){
+for(let i=0;i<data.length;i++){
   cards.push(i);
 }
 
@@ -70,20 +42,22 @@ const trans = (r, s) =>
   `perspective(1500px) rotateX(0deg) rotateY(${r /
     10}deg) rotateZ(${r}deg) scale(${s})`;
 
-function Deck() {
+
+  
+  useEffect(() => {
+    dispatch(__getMain());
+  }, [dispatch])
+  
+
   const [gone] = useState(() => new Set());
 
   const [props, set] = useSprings(cards.length, i => ({
     ...to(i),
     from: from(i)
   }));
-
-
-
-
   
-  /* const [lastDirection, setLastDirection] = useState('') */
-  /* 제스쳐를 이용한 */
+
+  /* 제스쳐 */
   const bind = useGesture(
     ({
       args: [index],
@@ -112,10 +86,10 @@ function Deck() {
 
         
         if(x>600){          
-          console.log(objs[i].name)
+          console.log(data[i].nickname)
           console.log('좋아요')
         }if(x<-600){
-          console.log(objs[i].name)
+          console.log(data[i].nickname)
           console.log('싫어요')
         } /* if(x===0){
           console.log(objs[i].name)
@@ -144,8 +118,9 @@ function Deck() {
       scale={scale}
       trans={trans}
       cards={cards}
-      objs={objs}
+      objs={data}
       bind={bind}
+      /* imageUrlArry={imageUrlArry} */
     />
   ));
 }

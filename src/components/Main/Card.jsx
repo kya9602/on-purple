@@ -3,9 +3,9 @@ import { animated, interpolate } from "react-spring/hooks";
 
 
 
-function Card({ i, x, y, rot, scale, trans, bind, objs, }){
+function Card({ i, x, y, rot, scale, trans, bind, objs  }){
     
-    const { name, age, distance, text, pics } = objs[i];
+    const { nickname, age, area, introduction, imageUrl } = objs[i];
      
     return (
       <div>
@@ -29,17 +29,14 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }){
         >
           <div className="CardContainer">        
 
-            {pics.map(pic => (
-                  <div 
-                  key={pic}
+                  <div                   
                   className="Cardimage" 
-                  style={{ backgroundImage: `url(${pic})` }}></div>
-                      ))}
+                  style={{ backgroundImage: `url(${imageUrl})` }}></div>                      
 
-            <h2>{name},</h2>
+            <h2>{nickname},</h2>
             <h2>{age}</h2>
-            <h4>{distance}</h4>
-            <h4>{text}</h4>
+            <h4>{area}</h4>
+            <h4>{introduction}</h4>
           </div>
         </animated.div>
       </animated.div>
