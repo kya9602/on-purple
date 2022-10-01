@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import newlogo from "../../assets/images/perple.jpg"
 import axios from "axios";
-
+import { KAKAO_AUTH_URL } from "../Form/kakao/Auth";
+import kakao from "../../assets/images/kakao.png";
+import naver from "../../assets/images/naver.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -92,11 +94,13 @@ const Login = () => {
         </form>
 
         <StBtnBox>
-          <StBtnKaka>카카오톡으로 로그인하기</StBtnKaka>
+          <StBtnKaka onClick={() => { window.location.href = KAKAO_AUTH_URL }}>
+            <img src={kakao} alt="카카오로긘" />
+          </StBtnKaka>
         </StBtnBox>
 
         <StBtnBox>
-          <StBtnNaver>네이버로 로그인하기</StBtnNaver>
+          <StBtnNaver><img src={naver} alt="네이버로그인" /></StBtnNaver>
         </StBtnBox>
         <StJoinBtnBox>
           <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
@@ -293,6 +297,8 @@ const StBtn = styled.button`
     font-weight: 800;
     padding: 1%;
     border-radius: 5px;
+  cursor: pointer;
+
 }
 @media all and (max-width: 750px) {
     font-size : 14px;
@@ -303,40 +309,24 @@ const StBtnKaka = styled.button`
   margin-top: 10px;
   background-color: white;
   border:none;
-  font-weight: bold;
-  font-size: 17px;
-  border-bottom-style:solid; 
-  border-bottom-color:#fcda1a;
-  border-bottom-width:2px;
-
-  :hover{
-    background-color:#fcda1a;
-    padding: 1%;
-    border-radius: 5px;
-
-  }
+  cursor: pointer;
   @media all and (max-width: 750px) {
-    font-size : 14px;
+    img{
+  width: 140px;
+      }
   }
+ 
 `;
 
 const StBtnNaver = styled.button`
-  margin-top: 10px;
-  margin-bottom: 20px;
   background-color: white;
   border:none;
-  font-weight: bold;
-  font-size: 17px;
-  border-bottom-style:solid; 
-  border-bottom-color:#3cad08;
-  border-bottom-width:2px;
-  :hover{
-    background-color:#3cad08;
-    border-radius: 5px;
-    padding: 1%;
-  }
+  margin-bottom: 10px;
+  cursor: pointer;
   @media all and (max-width: 750px) {
-    font-size : 14px;
+    img{
+  width: 140px;
+      }
   }
 `;
 
@@ -358,6 +348,8 @@ const StSignBtn = styled.button`
     background-color: #110eb9;
     color: white;
     border-radius: 5px;
+  cursor: pointer;
+
   }
   @media all and (max-width: 750px) {
     font-size : 14px;
