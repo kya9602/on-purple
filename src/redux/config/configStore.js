@@ -12,7 +12,7 @@ const store = configureStore({
         post,
         comment,
         mypage: detailSlice.actions,
-        logout
+        logout,
         main,
 
     }
