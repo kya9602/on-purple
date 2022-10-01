@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import styled from "styled-components"
+import axios from "axios";
+import { useSelector, useDispatch  } from "react-redux";
+import { __addComment } from "../../redux/modules/comment";
+import { useParams } from "react-router";
 
-const AddComment = () => {
+const AddComment = (detail) => {
+    console.log(detail)
+    const dispatch = useDispatch();
+    const [comment, setComment] = useState({
+        comment:"",
+    })
+    
+    const {postId} = useParams();
+    
+    const inputHandler = (e) => {
+        const { name, value } = e.target
+        setComment({ ...comment , [name]: value });
+      };
+
+    console.log(postId)
+    const addHandler = async (comment) => {
+        let data = await axios.post(`http://3.37.88.29:8080/comment/${postId}`,
+          { postId: postId, comment: comment },
+          {
+            headers: {
+              "Authorization": localStorage.getItem("Authorization"),
+              "RefreshToken": localStorage.getItem("RefreshToken")
+            }
+          })
+        console.log(data)
+      };
     return(
         <Container>
             <Text
-                className="text"
+                type="text"
+                name="comment"
                 placeholder="댓글 달기.."
+                onChange={inputHandler}
+                value={comment.comment}
             />
-            <AddButton>게시</AddButton>
+            <AddButton onClick={()=>{addHandler(comment.comment)}}>게시</AddButton>
         </Container>
     )
 }

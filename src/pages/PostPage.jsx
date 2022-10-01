@@ -93,25 +93,6 @@ const PostPage = () => {
       <AddHeader>
         💖여러분의 후기를 남겨주세요💖
       </AddHeader>
-      <SubmitBtn>
-        {canSubmit() ? (
-          <Button
-            onClick={handleSubmit}
-            className="success-button"
-            variant="outlined"
-          >
-            등록하기😃
-          </Button>
-        ) : (
-          <Button
-            className="disable-button"
-            variant="outlined"
-            size="large"
-          >
-            사진과 내용을 모두 입력하세요😭
-          </Button>
-        )}
-      </SubmitBtn>
       <AddBody>
         <UploaderWrapper>
           <input
@@ -138,7 +119,6 @@ const PostPage = () => {
                 </SwiperSlide>
               ))}
            </Swiper> 
-
            }
      
           <Btn>
@@ -149,11 +129,29 @@ const PostPage = () => {
             >
               😎사진 고르기😎
             </Button>
-
           </Btn>
         </UploaderWrapper>
         <TextArea setTitle={setTitle} setContent={setContent} title={title} content={content} />
       </AddBody>
+      <SubmitBtn>
+        {canSubmit() ? (
+          <Button
+            onClick={handleSubmit}
+            className="success-button"
+            variant="outlined"
+          >
+            등록하기😃
+          </Button>
+        ) : (
+          <Button
+            className="disable-button"
+            variant="outlined"
+            size="large"
+          >
+            사진과 내용을 모두 입력하세요😭
+          </Button>
+        )}
+      </SubmitBtn>
     </div>
   );
 }
