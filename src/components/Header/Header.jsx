@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { __logout, logout } from "../../redux/modules/user";
 import useDetectClose from "./useDetectClose";
+import { __getProfileDetail } from "../../redux/modules/profile";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -11,16 +13,25 @@ const Header = () => {
 
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
 
-
   //로그아웃
   const onClickHandler = () => {
     dispatch(__logout());
     dispatch(logout());
     window.alert("로그아웃 되었습니다");
-    navigate('/list');
+    navigate('/');
   };
 
   const token = localStorage.getItem('RefreshToken')
+
+  //object-fit : cover 이미지 설정시 사용해보기
+  const { data } = useParams();
+  const { profile } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(__getProfileDetail(data));
+    // console.log(data)
+  }, [dispatch])
+
 
 
   return (
@@ -29,7 +40,7 @@ const Header = () => {
       <LogoImg>로고이미지</LogoImg>
       <Title>타이틀</Title>
       <UserSet>
-        <UserInfo>@@@님안녕하세요</UserInfo>
+        <UserInfo>${ }님안녕하세요</UserInfo>
 
         <DropDownContainer>
           <DropdownBtn onClick={myPageHandler} ref={myPageRef}> 이미지</DropdownBtn>
@@ -41,9 +52,11 @@ const Header = () => {
                 >마이페이지 가기</LinkWrapper>
               </Li>
               <Li>
-                <LinkWrapper
-                  onClick={() => navigate("/mypage")}
-                >메뉴1</LinkWrapper>
+                {token === null ? <LinkWrapper onClick={() => navigate('/login')}>
+                  로그인
+                </LinkWrapper> : <LinkWrapper onClick={onClickHandler}>
+                  로그아웃
+                </LinkWrapper>}
               </Li>
               <Li>
                 <LinkWrapper
@@ -97,6 +110,7 @@ const UserInfo = styled.div`
 const DropDownContainer = styled.div`
   position: relative;
   text-align: center;
+  width: 100px;
 `;
 
 //프로필이미지 들어가야할 버튼
@@ -111,12 +125,14 @@ const DropdownBtn = styled.div`
   margin-left: 15px;
   `;
 
+//메뉴박스
 const Menu = styled.div`
-  background: gray;
-  position: absolute;
+border: 2px solid black;
+  background: #fdfcfc;
+  margin-top: 13px;
   top: 52px;
   left: 50%;
-  width: 100px;
+  width: 160px;
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -131,12 +147,12 @@ const Menu = styled.div`
     height: 0;
     width: 0;
     position: absolute;
-    top: -3px;
-    left: 50%;
+    top: -6px;
+    left: 75%;
     transform: translate(-50%, -50%);
     border: 12px solid transparent;
     border-top-width: 0;
-    border-bottom-color: gray;
+    border-bottom-color: black;
   }
 
   ${({ isDropped }) =>
@@ -160,7 +176,7 @@ const Ul = styled.ul`
   }
 
   list-style-type: none;
-  padding: 0;
+  padding: 0%;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -170,9 +186,13 @@ const Ul = styled.ul`
 
 const Li = styled.li``;
 
+
+//드롭다운  메뉴
 const LinkWrapper = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   text-decoration: none;
   color: white;
   cursor: pointer;
+  background-color: red;
+  width: 120px;
 `;
