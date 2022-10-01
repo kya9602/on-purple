@@ -1,12 +1,14 @@
 import React from "react";
 import Footer from "../components/Footer/Footer";
+import Deck from "../components/Main/Deck";
 import Header from "../components/Header/Header";
+
 
 const MainPage = () => {
     return (
         <div>
             <Header />
-            <div>메인 페이지입니다~</div>
+                <Deck />
             <Footer />
         </div>
     )
