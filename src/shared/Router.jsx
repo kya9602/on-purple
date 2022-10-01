@@ -13,7 +13,7 @@ import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
 import SignupAdd from "../pages/SignupAdd";
-import Oauth2Handler from "../components/Form/Oauth2Handeler";
+import Oauth2Handler from "../components/Form/kakao/Oauth2Handeler";
 import NewSignUpPage from "../pages/NewSignupPage";
 
 const Router = () => {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import newlogo from "../../assets/images/perple.jpg"
 import axios from "axios";
-import { KAKAO_AUTH_URL } from "./Auth";
+import { KAKAO_AUTH_URL } from "../Form/kakao/Auth";
 import kakao from "../../assets/images/kakao.png";
 import naver from "../../assets/images/naver.png";
 
