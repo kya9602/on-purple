@@ -6,6 +6,7 @@ import { __addComment } from "../../redux/modules/comment";
 import { useParams } from "react-router";
 
 const AddComment = (detail) => {
+    console.log(detail)
     const dispatch = useDispatch();
     const [comment, setComment] = useState({
         comment:"",
