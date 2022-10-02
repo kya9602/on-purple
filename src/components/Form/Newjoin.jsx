@@ -6,6 +6,7 @@ import profileImage from "../../assets/images/profile.jpg";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { __checkUsername, __checkNickname } from "../../redux/modules/user";
+import { width } from "@mui/system";
 
 const Newjoin = () => {
     const navigate = useNavigate();
@@ -94,13 +95,14 @@ const Newjoin = () => {
         console.log(data.data);
 
         if (data.data.success) {
-            alert('회원가입이 완료되었습니다');
-            navigate('/login');
+            alert('다음 step으로 넘어가주세요~');
+            // navigate('/login');
+
         }
         else {
             window.alert(data.error.message)
         }
-        setUser(initialState);
+        setUser.preventDefault();
     };
 
 
@@ -144,9 +146,9 @@ const Newjoin = () => {
             </StHeader> */}
 
             <StRegisterBox>
-                <StminiHeader>
+                {/* <StminiHeader>
                     <StminiHeaderTitle>회원가입</StminiHeaderTitle>
-                </StminiHeader>
+                </StminiHeader> */}
                 <form style={{ marginTop: "10px" }} >
 
                     <ImgBox >
@@ -168,7 +170,10 @@ const Newjoin = () => {
 
 
                     <InputBox>
-                        <StLabel style={{ marginRight: "5px" }}> ❤ 아이디</StLabel>
+                        <div style={{ display: "flex", gap: "30px", }}>
+                            <StLabel style={{ paddingLeft: "110px" }}> ❤ 아이디 ❤</StLabel>
+                            <StIdCheck content={"check"} onClick={usernameCheckHandler}>중복확인</StIdCheck>
+                        </div>
                         <StInput
                             type="text"
                             name="username"
@@ -178,8 +183,7 @@ const Newjoin = () => {
                             onChange={onChangeHandler}
                             maxLength="10"
                         />
-                        <StLine>❤</StLine>
-                        <StIdCheck content={"check"} onClick={usernameCheckHandler}>중복확인</StIdCheck>
+                        <StLine></StLine>
                     </InputBox>
 
                     {/*정규표현식 충족 ? 사용가능한 아이디 : 정규표현식 알려주기 */}
@@ -205,7 +209,7 @@ const Newjoin = () => {
 
 
                     <InputBox >
-                        <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호</StLabel>
+                        <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호 ❤</StLabel>
                         <StInput
                             type="password"
                             name="password"
@@ -215,7 +219,7 @@ const Newjoin = () => {
                             value={user.password}
                             maxLength="20"
                         />
-                        <StLine>❤</StLine>
+                        <StLine></StLine>
                     </InputBox>
                     {
                         user.password &&
@@ -237,7 +241,7 @@ const Newjoin = () => {
 
 
                     <InputBox >
-                        <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호 재확인</StLabel>
+                        <StLabel style={{ marginRight: "5px" }}>❤ 비밀번호 재확인 ❤</StLabel>
                         <StInput
                             type="password"
                             name="passwordConfirm"
@@ -247,7 +251,7 @@ const Newjoin = () => {
                             value={user.passwordConfirm}
                             maxLength="20"
                         />
-                        <StLine>❤</StLine>
+                        <StLine></StLine>
                     </InputBox>
                     {
                         user.passwordConfirm &&
@@ -268,7 +272,10 @@ const Newjoin = () => {
 
 
                     <InputBox>
-                        <StLabel style={{ marginRight: "5px" }}>❤  닉네임</StLabel>
+                        <div style={{ display: "flex", gap: "30px" }}>
+                            <StLabel style={{ paddingLeft: "110px" }}>❤ 닉네임 ❤</StLabel>
+                            <StIdCheck content={"check"} onClick={nicknameCheckHandler}>중복확인</StIdCheck>
+                        </div>
                         <StInput
                             type="text"
                             name="nickname"
@@ -278,8 +285,7 @@ const Newjoin = () => {
                             value={user.nickname}
                             maxLength="6"
                         />
-                        <StLine>❤</StLine>
-                        <StIdCheck content={"check"} onClick={nicknameCheckHandler}>중복확인</StIdCheck>
+                        <StLine></StLine>
                     </InputBox>
 
                     {/* 정규표현식 충족 ? 사용가능한 아이디 : 정규표현식 알려주기*/}
@@ -301,11 +307,11 @@ const Newjoin = () => {
 
 
                 </form>
-                {/* <StBtnBox>
-                    <JoinBtn onClick={() => { addHandler(); console.log("user is", user); navigate('/signupAdd'); }}>회원가입 완료</JoinBtn>
-                </StBtnBox> */}
+                <StBtnBox>
+                    <JoinBtn onClick={() => { addHandler(); console.log("user is", user); }}>기본정보 입력완료 👆</JoinBtn>
+                </StBtnBox>
             </StRegisterBox>
-        </div>
+        </div >
     );
 }
 
@@ -400,70 +406,79 @@ const StminiHeaderTitle = styled.div`
 //전체 박스 
 const StRegisterBox = styled.div`
     margin-bottom: 30px;
-    width: 40vw;
+    width: 300px;
     height: auto;
     padding-bottom: 1%;
     margin: auto;
-    margin-top: 150px;
-    border: 3px solid #adaaad;
     background-color: white;
-    @media all and (max-width: 750px) {
+    /* @media all and (max-width: 750px) {
      width: 600px;
-  }
+  } */
 `;
 
 //이미지 박스 
 const ImgBox = styled.div`
   display  : flex ;
   justify-content: center;
+  width: 300px;
 `;
 
 //이미지 input
 const Avatar = styled.img`
-   border: 5px solid #f8b2f8;
-    border-radius: 100px;
-    width: 8vw;
-    height: 8vw;
+   /* border: 5px solid #f8b2f8; */
+    /* border-radius: 100px; */
+    width: 200px;
+    height: 200px;
     background-size: cover;
-    @media all and (max-width: 750px) {
+    cursor: pointer;
+    /* @media all and (max-width: 750px) {
      width: 20vw;
      height: 20vw;
      border: 3px solid #f8b2f8;
-  }
+  } */
 `
 //인풋 박스
 const InputBox = styled.div`
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    
 `;
 
 //박스안 타이틀
 const StLabel = styled.label`
-  margin-top: 1%;
+  margin-top: 7%;
   color : #6d0488;
   font-weight: bolder;
   padding: 1%;
   text-align: center;
-  font-size: 18px;
-  @media all and (max-width: 750px) {
-     font-size: 15px;
-  }
+  font-size: 15px;
+
 `;
 
 //아이디 인풋창
 const StInput = styled.input`
   margin-top: 1%;
   border: none;
-  font-size: 18px; 
+  font-size: 12px; 
   padding:1%;
-  :hover{
+  font-size: 14px;
+  text-align: center;
+
   border-bottom-style:solid; 
   border-bottom-color:#80036f;
-  border-bottom-width:2px;
+  border-bottom-width:1px;
+
+  &:focus{
+    outline:none;
+    border-bottom-style:solid; 
+    border-bottom-color:#80036f;
+    border-bottom-width:3px;
   }
-  @media all and (max-width: 750px) {
+  
+  /* @media all and (max-width: 750px) {
      font-size: 15px;
-  }
+  } */
 `;
 
 //아이디 중복확인 버튼
@@ -473,16 +488,15 @@ const StIdCheck = styled.button`
   background-color: white;
   border-radius: 10px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
+  height: 30px;
+  margin-top: 25px;
   :hover{
     border: none;
     background-color: #4097df;
     color:white;
   }
-  @media all and (max-width: 750px) {
-     font-size: 12px;
-     
-  }
+
 `;
 
 //인풋 참고사항 라벨
@@ -517,12 +531,13 @@ const StBtnBox = styled.div`
 
 //회원가입 버튼
 const JoinBtn = styled.button`
+  margin-top: 25px;
   background-color: white;
   border: none;
   border-radius: 5px;
-  padding: 1%;
+  padding: 3%;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   color:#80036f;
   :hover{
     border: none;
@@ -530,10 +545,11 @@ const JoinBtn = styled.button`
     color:white;
     font-weight: 800;
     padding: 1%;
+    cursor: pointer;
 }
-@media all and (max-width: 750px) {
+/* @media all and (max-width: 750px) {
     font-size: 20px;
-  }
+  } */
 `;
 
 //인풋 값 오류 라벨
