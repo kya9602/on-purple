@@ -1,11 +1,13 @@
 
 import styled from "@emotion/styled";
+import { useState } from "react";
 import { animated, interpolate } from "react-spring/hooks";
 
 
 
 function Card({ i, x, y, rot, scale, trans, bind, objs  }){
-    
+  
+  
     const { nickname, age, area, introduction, imageUrl } = objs[i];
      
     return (
@@ -53,7 +55,7 @@ const CardContainer = styled.div`
 
 
 
-margin-top: 80px;
+margin-top: 300px;
 
 .Container {
   position: absolute;

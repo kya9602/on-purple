@@ -56,9 +56,11 @@ function HomeGuide() {
                 {DB.map(data=>(
                     <SwiperSlide key={data.pics} >
                         {({ isActive }) => (
-                            <div>Current slide is {isActive ? 'active' : 'not active'}</div>
-                        )}
 
+                            <div>Current slide is {isActive ? 'active' : 'not active'}</div>
+                            
+                        )}
+            
                         <img src={data.pics} />
                         <div>
                             <h3>{data.H3}</h3>

@@ -12,7 +12,6 @@ import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
-import SignupAdd from "../pages/SignupAdd";
 import GuidePage from "../pages/GuidePage";
 import EditPage from "../pages/EditPage";
 // import SignupAdd from "../pages/SignupAdd";
@@ -37,9 +36,7 @@ const Router = () => {
                 <Route path="/post" exact element={<PostPage />} />
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
-                <Route path="/signupadd" exact element={<SignupAdd />} />
                 <Route path="/guide" exact element={<GuidePage />} />
-                {/* <Route path="/signupadd" exact element={<SignupAdd />} /> */}
                 <Route path="kakao" exact element={<Oauth2Handler />} />
             </Routes>
         </BrowserRouter>
