@@ -228,8 +228,8 @@ export default function VerticalLinearStepper() {
         console.log(data.data);
 
         if (data.data.success) {
-            alert('마지막 step으로 넘어가주세요~~!');
-
+            alert('회원가입이 완료되었습니다.');
+            handleFinish();
         }
         else {
             window.alert(data.error.message)
@@ -549,12 +549,6 @@ export default function VerticalLinearStepper() {
 
                             </AddMyinfo>
                         </form>
-
-
-
-                        <StBtbBox>
-                            <StButton onClick={() => { addaddHandler(); console.log("input is", input) }}> 추가 필수정보도 작성완료 😘 👆</StButton>
-                        </StBtbBox>
                     </SecondMypageBox>
                 </>
         }
@@ -635,18 +629,22 @@ export default function VerticalLinearStepper() {
 
                                 <Box sx={{ mb: 2 }}>
                                     <div>
-                                        <Button
-                                            className={classes.root}
-                                            variant="contained"
-                                            onClick={() => { addHandler(); }}
-                                            sx={{ mt: 1, mr: 1 }}
-                                        >
-                                            {index === steps.length - 1 ? "Finish" : "Continue"}
-                                        </Button>
-
-
-
-
+                                        {index === 0 ?
+                                            <Button
+                                                className={classes.root}
+                                                variant="contained"
+                                                onClick={() => { addHandler(); }}
+                                                sx={{ mt: 1, mr: 1 }}
+                                            >
+                                                "Continue"
+                                            </Button>
+                                            : index === 1 ?
+                                                <Button
+                                                    className={classes.root}
+                                                    variant="contained"
+                                                    onClick={() => { addaddHandler(); }}
+                                                    sx={{ mt: 1, mr: 1 }}
+                                                >끝</Button> : null}
                                         <Button
                                             disabled={index === 0}
                                             onClick={handleBack}
@@ -668,7 +666,7 @@ export default function VerticalLinearStepper() {
                 {/* 마지막 회원가입 완료 스텝 */}
                 {activeStep === steps.length && (
                     <Paper square elevation={0} sx={{ p: 3 }}>
-                        <Typography>회원가입을 완료했습니다!</Typography>
+                        <Typography>이제, 모든 준비를 마쳤습니다!!! </Typography>
 
 
                         <Button onClick={handleFinish}>완료!</Button>
