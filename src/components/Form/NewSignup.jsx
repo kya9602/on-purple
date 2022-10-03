@@ -1,4 +1,3 @@
-// import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -7,7 +6,6 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -736,7 +734,6 @@ const Description = styled.div`
     font-size: 14px;   
 `
 
-
 ///회원가입 스타일
 
 //전체 박스 
@@ -842,8 +839,6 @@ const CheckLabel = styled.label`
   }
 `
 
-
-
 //인풋 값 오류 라벨
 const StSmallWorning = styled.label`
   font-size: 14px;
@@ -888,7 +883,6 @@ const SecondMypageBox = styled.div`
     background-color: white;
     display: flex;
     flex-direction: column;
-
 `
 
 //작틀
@@ -897,8 +891,6 @@ const SecondMyinfo = styled.div`
     display: flex;
     margin-left: 10px;
 `
-
-
 
 //나이 인풋창
 const AgeInput = styled.input`
@@ -943,7 +935,6 @@ const StSelect = styled.select`
 
 `
 
-
 //지역인풋값
 const Location = styled.input`
   margin  : auto ;
@@ -980,7 +971,6 @@ const StBodyInput = styled.textarea`
       outline: none;
       border: 2px solid #80036f;
     }
-
 `
 
 //완료버튼창 박스
@@ -1007,8 +997,6 @@ const StButton = styled.button`
     background-color: #ffffae;
     border : none;
   }
-  
- 
 `
 
 //------------------------------------------------------------------------------------------------------------------------
