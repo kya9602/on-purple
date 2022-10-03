@@ -1,36 +1,55 @@
-import React, {useEffect} from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../../redux/modules/board";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { useState } from "react";
 
 const List = () => {
     const dispatch = useDispatch();
-
-    const {isLoading, error, post} = useSelector((state)=> state.post)
-    console.log(post)
+    const { isLoading, error, post } = useSelector((state) => state.post)
+    const [bottom, setBottom] = useState(null);
+	const bottomObserver = useRef(null);
+    
     useEffect(() => {
         dispatch(__getPosts());
     }, [dispatch])
-    if (isLoading) return "Loading..."
+    
+    useEffect(() => {
+		const observer = new IntersectionObserver(
+			entries => {
+				if (entries[0].isIntersecting) {
+					const { page, totalElement, limit } = post.pageData;
+					if (totalElement < limit * (page - 1)) {
+						return;
+					}
+					post.getProductList({ page: page + 1 });
+				}
+			},
+			{ threshold: 0.25, rootMargin: '80px' },
+		);
+		bottomObserver.current = observer;
+	}, []);
 
-    if (error) {
-        return <>{error.message}</>
-    }
-
-    if (post.length === 0) {
-        return <>😴게시물이 존재하지 않습니다😴</>
-    }
+    useEffect(() => {
+		const observer = bottomObserver.current;
+		if (bottom) {
+			observer.observe(bottom);
+		}
+		return () => {
+			if (bottom) {
+				observer.unobserve(bottom);
+			}
+		};
+	}, [bottom]);
 
     return (
-        <ListContainer>
+        <>
             <Wrapper>
-                
-                {post.map((item)=>(<Card item={item} key={item.postId}/>))}
-
-            </Wrapper>
-        </ListContainer>
+                {post.map((item) => (<Card item={item} key={item.postId} />))}
+                <div ref={setBottom}/>
+            </Wrapper>    
+        </>
 
     )
 }
@@ -44,7 +63,4 @@ const Wrapper = styled.div`
     margin: 0 auto;
     margin-left: 1vw;
     margin-top: 10px;
-`
-const ListContainer = styled.div`
-    
-`
+    `

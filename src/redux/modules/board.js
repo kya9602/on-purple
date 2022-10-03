@@ -6,7 +6,7 @@ export const __getPosts = createAsyncThunk(
     async (payload, thunkAPI) => {
         try {
             const data = await axios.get(`${process.env.REACT_APP_HOST}/post`);
-           /*  console.log(data) */
+            console.log(data)
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
@@ -19,6 +19,7 @@ export const __getPostsDetail = createAsyncThunk(
   async (payload, thunkAPI) => {
       try {
           const data = await axios.get(`${process.env.REACT_APP_HOST}/post/${payload}`);
+         /*  console.log(data) */
           return thunkAPI.fulfillWithValue(data.data.data);
       } catch (error) {
           return thunkAPI.rejectWithValue(error.code);
@@ -43,7 +44,7 @@ export const __deletePosts = createAsyncThunk(
   
 
 const initialState = {
-    post: [],
+    post:[],
     detail: {
       postId:0,
       nickname:"",
@@ -75,7 +76,8 @@ export const postSlice = createSlice({
         state.error = action.payload;
       },
       [__getPosts.pending]: (state) => {
-        state.isLoading = true; 
+        state.isLoading = true;
+
       },
 
       [__getPostsDetail.fulfilled]: (state, action) => {
