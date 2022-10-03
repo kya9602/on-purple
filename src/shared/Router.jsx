@@ -34,9 +34,7 @@ const Router = () => {
                 <Route path="/post" exact element={<PostPage />} />
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
-                {/* <Route path="/signupadd" exact element={<SignupAdd />} /> */}
                 <Route path="kakao" exact element={<Oauth2Handler />} />
-                {/* <Route path="/newsignup" exact element={<NewSignUpPage />} /> */}
             </Routes>
         </BrowserRouter>
 
