@@ -14,9 +14,9 @@ import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
 import GuidePage from "../pages/GuidePage";
 import EditPage from "../pages/EditPage";
-// import SignupAdd from "../pages/SignupAdd";
 import Oauth2Handler from "../components/Form/kakao/Oauth2Handeler";
-import NewSignUpPage from "../pages/NewSignupPage";
+import KakaoAddPage from "../pages/KakaoAddPage";
+import NewSignup from "../pages/NewSignuploadPage";
 
 
 const Router = () => {
@@ -25,7 +25,8 @@ const Router = () => {
             <Routes>
                 <Route path="/" exact element={<MainPage />} />
                 <Route path="/login" exact element={<LoginPage />} />
-                <Route path="/signup" exact element={<NewSignUpPage />} />
+                <Route path="/signup" exact element={<NewSignup />} />
+                <Route path="/kakaoAddSignup" exact element={<KakaoAddPage />} />
                 <Route path="/myPage" exact element={<MypagePage />} />
                 <Route path="/chat" exact element={<ChatPage />} />
                 <Route path="/chat/:roomId" exact element={<ChatScreen />} />
@@ -38,6 +39,7 @@ const Router = () => {
                 <Route path="/report" exact element={<ReportPage />} />
                 <Route path="/guide" exact element={<GuidePage />} />
                 <Route path="kakao" exact element={<Oauth2Handler />} />
+                <Route path="/kakao" exact element={<Oauth2Handler />} />
             </Routes>
         </BrowserRouter>
 

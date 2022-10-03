@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import axios from "axios";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { __getUser } from "../../redux/modules/signup";
 import logo from "../../assets/images/perple.jpg";
 
-const SignUpPlus = () => {
+
+const KakaoAddSignup = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [input, setInput] = useState({
         age: "",
@@ -38,9 +42,28 @@ const SignUpPlus = () => {
     const accessToken = localStorage.getItem("Authorization"); //accesstoken 
     const refreshToken = localStorage.getItem("RefreshToken") //refreshToken
 
+
+
+    const { userId } = useParams();
+    const { user, isLoding, error } = useSelector((state) => state.user);
+
+
+
+    const userData = user.data;
+    console.log("data is", userData)
+
+    useEffect(() => {
+        dispatch(__getUser(userId));
+    }, [dispatch])
+
+
+
     // axios
     const addHandler = async () => {
 
+        if (input.age.trim() === "" || input.mbti.trim() === "" || input.introduction.trim() === "" || input.area.trim() === "") {
+            return alert("모든 칸을 채워주세요! 👀")
+        };
 
         const { age, mbti, introduction, idealType, job, hobby, drink, pet, smoke, likeMovieType, area } = input;
         const user = {
@@ -62,6 +85,7 @@ const SignUpPlus = () => {
 
 
 
+
         const data = await axios.post(`${process.env.REACT_APP_HOST}/profile`, user, {
             headers: {
                 Authorization: `${accessToken}`,
@@ -72,12 +96,14 @@ const SignUpPlus = () => {
         console.log(data.data);
 
         if (data.data.success) {
-            alert('마지막 step으로 넘어가주세요~~!');
-            // navigate('/');
+            alert('모든 정보입력이 완료되었습니다~~');
+            navigate('/');
         }
         else {
             window.alert(data.error.message)
         }
+
+
         setInput(input);
     };
 
@@ -85,12 +111,69 @@ const SignUpPlus = () => {
 
     return (
         <>
-            {/* <StHeader>
-            <StHeaderTitle> On Purple </StHeaderTitle>
-            <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
-        </StHeader> */}
+            <StHeader>
+                <StHeaderTitle> On Purple </StHeaderTitle>
+                <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
+            </StHeader>
             <SecondMypageBox>
                 <form>
+                    <SecondMyinfo>
+                        <InfoBodyBox>
+                            <MiniHeader>🌟 필수로 입력해주세요!  🌠</MiniHeader>
+
+                            <AgeInput
+                                placeholder="당신의 나이는 몇살인가요 ??"
+                                type="text"
+                                name="age"
+                                value={input.age}
+                                className="text"
+                                onChange={onChangeHandler}
+                            />
+                            <StSelect
+                                name='mbti'
+                                type="text"
+                                defaultValue="default"
+                                onChange={onChangeHandler}
+                                required>
+                                <MBTIInput value="default" disabled> MBTI를 골라주세요</MBTIInput>
+                                <option value="ISTJ">I S T J</option>
+                                <option value="ISTP">I S T P</option>
+                                <option value="ISFJ">I S F J</option>
+                                <option value="ISFP">I S F P</option>
+                                <option value="INFJ">I N F J</option>
+                                <option value="INFP">I N F P</option>
+                                <option value="INTJ">I N T J</option>
+                                <option value="INTP">I N T P</option>
+                                <option value="ESTP">E S T P</option>
+                                <option value="ESTJ">E S T J</option>
+                                <option value="ESFP">E S F P</option>
+                                <option value="ESFJ">E S F J</option>
+                                <option value="ENFP">E N F P</option>
+                                <option value="ENFJ">E N F J</option>
+                                <option value="ENTP">E N T P</option>
+                                <option value="ENTJ">E N T J</option>
+
+                            </StSelect>
+
+                            <Location
+                                placeholder="당신이 사는 지역은 어디인가요 ??"
+                                type="text"
+                                name="area"
+                                value={input.area}
+                                className="text"
+                                onChange={onChangeHandler}
+                            />
+
+                            <StBodyInput
+                                placeholder="한줄로 10자 이상 나를 소개해주세요~"
+                                type="text"
+                                name="introduction"
+                                minLength={10}
+                                value={input.introduction}
+                                onChange={onChangeHandler} />
+                        </InfoBodyBox>
+                    </SecondMyinfo>
+
 
 
                     {/* {age, mbti, introduction, 
@@ -181,7 +264,57 @@ const SignUpPlus = () => {
 
 }
 
-export default SignUpPlus;
+export default KakaoAddSignup;
+
+const StHeader = styled.div`
+  width: 100%;
+  height: auto;
+  text-align: center;
+  ::after { 
+    width: 100vw;
+    height: 250px;
+    content: "";
+    background: url(${logo});
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+    background-size: cover;}
+`
+
+//배경 헤더 로고 타이틀
+const StHeaderTitle = styled.div`
+  font-size: 80px;
+  font-weight: 600;
+  background: #f7e9f5;
+  background: -webkit-linear-gradient(left, #420255, #f7e9f5);
+  background:    -moz-linear-gradient(right, #420255, #f7e9f5);
+  background:      -o-linear-gradient(right, #420255, #f7e9f5);
+  background:         linear-gradient(to right, #420255, #f7e9f5);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  padding-top: 70px;
+`
+//배경 헤더 로고 안내글
+const StHeaderBody = styled.div`
+  font-size: 17px;
+  margin-top: 1%;
+  background: #09ffff;
+  background: -webkit-linear-gradient(left, #420255, #09ffff);
+  background:    -moz-linear-gradient(right, #420255, #09ffff);
+  background:      -o-linear-gradient(right, #420255, #09ffff);
+  background:         linear-gradient(to right, #420255, #09ffff);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  font-weight: bold;
+`
+
+//---------------------------------------------------------
+
 
 //기본 인포 바디 
 const InfoBodyBox = styled.div`
@@ -191,41 +324,165 @@ const InfoBodyBox = styled.div`
 
 //큰틀
 const SecondMypageBox = styled.div`
-    width:300px;
+    width:500px;
     height: auto;
     padding-bottom: 2%;
-    margin-top: 15px;
+    margin-top:80px;
+    /* border: 3px solid #fdc2f0; */
     border-radius: 15px;
     background-color: white;
     display: flex;
     flex-direction: column;
- `
+    align-items: center;
+`
+
+//작틀
+const SecondMyinfo = styled.div`
+/* background-color: red; */
+    border-bottom-style:solid; 
+    border-bottom-color:purple;
+    border-bottom-width:5px;
+    width: 450px;
+    /* margin-left: 25vw; */
+    display: flex;
+    margin-left:auto;
+    margin-right: auto;
+    justify-content: center;
+    padding-bottom: 5%;
+`
+
+
+
+//나이 인풋창
+const AgeInput = styled.input`
+  margin  : auto ;
+  margin-top: 10px;
+  height: 35px;
+  width: 300px;
+  font-size: 14px;
+  word-break: keep-all;
+  border: none;
+  border-bottom:2px solid #80036f;
+  &:focus {
+      outline: none;
+      border-bottom: 2px solid #80036f;
+    }
+    text-align: center;
+`
+
+//엠비티아이 드롭다운옵션
+const MBTIInput = styled.option`
+  display: flex;
+  
+`
+//엠비티아이 옵션 헤드
+const StSelect = styled.select`
+  color: #797979;
+  width:300px;
+  height: 30px;
+  border: none;
+  border-bottom:2px solid #80036f;
+  padding-left: 5px;
+  display: flex;
+  margin  : auto ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+  &:focus {
+      outline: none;
+      border-bottom: 2px solid #80036f;
+    }
+    /* @media all and (max-width : 750px) {
+    font-size: 12px; 
+    width : 200px;
+    height: 30px;
+  } */
+`
+
+
+//지역인풋값
+const Location = styled.input`
+  margin  : auto ;
+  margin-bottom: 20px;
+  height: 35px;
+  width: 300px;
+  font-size: 14px;
+  word-break: keep-all;
+  border: none;
+  border-bottom:2px solid #80036f;
+
+  /* @media all and (max-width : 750px) {
+  font-size: 14px; 
+  width : 40vw;
+  height: 10vw;
+  } */
+  &:focus {
+      outline: none;
+      border-bottom: 2px solid #80036f;
+    }
+    text-align: center;
+
+    /* @media all and (max-width : 750px) {
+    font-size: 12px; 
+    width : 150px;
+    height: 30px;
+  } */
+`
+
+
+//한줄소개 인풋창
+const StBodyInput = styled.textarea`
+  margin-top: 1%;
+  border: 2px solid #80036f;
+  /* border-radius: 5px; */
+  font-size: 14px; 
+  padding:1%;
+  width: 400px;
+  height: 80px;
+  word-break: keep-all;
+  :hover{
+    border: 2px solid #f797f7;
+  }
+  &:focus {
+      outline: none;
+      border: 2px solid #80036f;
+    }
+ /* @media all and (max-width : 750px) {
+    font-size: 14px; 
+    width : 40vw;
+    height: 10vw;
+  } */
+`
 
 //완료버튼창 박스
 const StBtbBox = styled.div`
-                        height: 50px;
-                        margin-top: 15px;
-                        display: flex;
-                        justify-content:center;
-                        width : 400px;
-                        margin-left: 10px;
-                        `
+  height: 50px;
+  margin-top: 15px;
+  display: flex;
+  justify-content:center;
+  width : 300px;
+  margin-left: 10px;
+`
 
 //수정 완료버튼창
 const StButton = styled.button`
-                        cursor: pointer;
-                        height: 40px;
-                        width: 300px;
-                        font-size: 16px;
-                        border: 2px solid purple;
-                        font-weight: 600;
-                        background-color: white;
-                        :hover{
-                            color : #f56589;
-                        background-color: #ffffae;
-                        border : none;
+cursor: pointer;
+  height: 40px;
+  width: 300px;
+  font-size: 16px;
+  border: 2px solid purple;
+  font-weight: 600;
+  background-color: white;
+  :hover{
+    color : #f56589;
+    background-color: #ffffae;
+    border : none;
   }
+  
+ 
 `
+
 
 
 //마이페이지 추가 정보란 제일큰박스
