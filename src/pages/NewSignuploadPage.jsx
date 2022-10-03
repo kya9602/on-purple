@@ -1,9 +1,9 @@
 import React from "react";
-import SignupStep from "../components/Form/SignupStep";
+import NewSignup from "../components/Form/NewSignup";
 
 const NewSignUpPage = () => {
     return (
-        <SignupStep />
+        <NewSignup />
     );
 }
 

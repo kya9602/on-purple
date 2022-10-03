@@ -190,8 +190,8 @@ const DropdownBtn = styled.div`
 
 //메뉴박스
 const Menu = styled.div`
-border: 2px solid black;
-  background: #fdfcfc;
+/* border: 2px solid black; */
+  background-color:white;
   margin-top: 13px;
   top: 52px;
   left: 50%;
@@ -215,7 +215,7 @@ border: 2px solid black;
     transform: translate(-50%, -50%);
     border: 12px solid transparent;
     border-top-width: 0;
-    border-bottom-color: black;
+    /* border-bottom-color: #ffb6e3; */
   }
 
   ${({ isDropped }) =>
@@ -254,8 +254,10 @@ const Li = styled.li``;
 const LinkWrapper = styled.div`
   font-size: 14px;
   text-decoration: none;
-  color: white;
   cursor: pointer;
-  background-color: red;
+  border-radius: 4px;
+  background: linear-gradient(40deg, #f5a2f5, #ffba3a);
+  color:white;
+  font-weight: bolder;
   width: 120px;
 `;
