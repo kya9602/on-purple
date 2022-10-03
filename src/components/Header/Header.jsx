@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { __logout, logout } from "../../redux/modules/user";
 import useDetectClose from "./useDetectClose";
 import { __getUser } from "../../redux/modules/signup";
+import profile from "../../assets/images/profile.jpg";
+import logo from "../../assets/images/perple.jpg";
 
 
 const Header = () => {
@@ -46,38 +48,58 @@ const Header = () => {
 
   return (
     <HeaderContainer>
+      {token === null ? <LogoImg>Off</LogoImg>
+        : <LogoImg>On</LogoImg>}
+      <Title>Purple</Title>
+      <UserSet >
+        {token === null ? <UserInfo>
+          안녕하세요
+        </UserInfo>
+          : <UserInfo>
+            {userData?.nickname}님 안녕하세요
+          </UserInfo>}
 
-      <LogoImg>로고이미지</LogoImg>
-      <Title>타이틀</Title>
-      <UserSet>
-
-        <UserInfo>{userData?.nickname}님 안녕하세요</UserInfo>
 
         <DropDownContainer>
           <DropdownBtn onClick={myPageHandler} ref={myPageRef}>
-            <img src={userData?.imageUrl} alt="프로필" />
+            {token === null ? <img src={profile} alt="프로필" />
+              : <img src={userData?.imageUrl} alt="프로필" />}
+
           </DropdownBtn>
           <Menu isDropped={myPageIsOpen}>
             <Ul>
-              <Li>
-                <LinkWrapper
-                  onClick={() => navigate("/mypage")}
-                >마이페이지 가기</LinkWrapper>
-              </Li>
-              <Li>
-                {token === null ? <LinkWrapper onClick={() => navigate('/login')}>
-                  로그인
-                </LinkWrapper> : <LinkWrapper onClick={onClickHandler}>
-                  로그아웃
-                </LinkWrapper>}
-              </Li>
-              <Li>
-                {token !== null ? <LinkWrapper onClick={() => navigate('/post')}>
-                  글쓰기
-                </LinkWrapper> : null}
+              {token === null ?
+                <>
+                  <Li>
+                    <LinkWrapper onClick={() => navigate('/login')}>
+                      로그인
+                    </LinkWrapper>
+                  </Li>
+                  <Li>
+                    <LinkWrapper onClick={() => navigate('/signup')}>
+                      회원가입
+                    </LinkWrapper>
+                  </Li>
+                </>
 
-              </Li>
-
+                :
+                <><Li>
+                  <LinkWrapper onClick={onClickHandler}>
+                    로그아웃
+                  </LinkWrapper>
+                </Li>
+                  <Li>
+                    <LinkWrapper
+                      onClick={() => navigate("/mypage")}
+                    >마이페이지 가기</LinkWrapper>
+                  </Li>
+                  <Li>
+                    <LinkWrapper onClick={() => navigate('/post')}>
+                      글쓰기
+                    </LinkWrapper>
+                  </Li>
+                </>
+              }
             </Ul>
           </Menu>
         </DropDownContainer>
@@ -96,9 +118,20 @@ const HeaderContainer = styled.div`
   display: flex;
   position: fixed;
   top: 0px;
-  background-color: gray;
+  /* background-color: gray; */
   width: 100%;
   height: 70px;
+  ::after { 
+    width: 100vw;
+    height: 70px;
+    content: "";
+    background: url(${logo});
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+    background-size: cover;}
 `
 const LogoImg = styled.div`
   flex:1;
@@ -107,7 +140,17 @@ const LogoImg = styled.div`
 
 const Title = styled.div`
   flex:1;
-  margin-top: 20px
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 20px;
+  background: #f7e9f5;
+  background: -webkit-linear-gradient(left, #420255, #f7e9f5);
+  background:    -moz-linear-gradient(right, #420255, #f7e9f5);
+  background:      -o-linear-gradient(right, #420255, #f7e9f5);
+  background:         linear-gradient(to right, #420255, #f7e9f5);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
 `
 const UserSet = styled.div`
     display: flex;
@@ -115,8 +158,9 @@ const UserSet = styled.div`
 `
 
 const UserInfo = styled.div`
-  margin-left: auto;
-  margin-top: 12px
+  /* margin-left: auto; */
+  margin-top: 15px;
+  text-align: center;
 `
 
 //-----------------------드롭다운------------------------------
@@ -130,13 +174,13 @@ const DropDownContainer = styled.div`
 //프로필이미지 들어가야할 버튼
 const DropdownBtn = styled.div`
   cursor: pointer;
-  background-color: red;
+  background-color: purple;
   width: 50px;
   height: 50px; 
   border-radius: 70%;
   overflow: hidden;
-  margin-right: 15px;
-  margin-left: 15px;
+  margin-right: 10px;
+  margin-left: 20px;
   img{
     height: 100%;
     width: 100%;
