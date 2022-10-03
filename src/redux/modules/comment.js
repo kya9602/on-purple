@@ -5,7 +5,7 @@ export const __addComment = createAsyncThunk(
   "ADD_COMMENT",
   async (payload, thunkAPI) => {
       try {
-          const data = await axios.get(`http://3.37.88.29:8080/comment/${payload}`);
+          const data = await axios.get(`${process.env.REACT_APP_HOST}/comment/${payload}`);
           return thunkAPI.fulfillWithValue(data.data.data);
       } catch (error) {
           return thunkAPI.rejectWithValue(error.code);
@@ -17,7 +17,8 @@ export const __getComments = createAsyncThunk(
     "GET_COMMENTS",
     async (payload, thunkAPI) => {
         try {
-            const data = await axios.get(`http://13.209.26.228:8080/comment/${payload}`);
+            const data = await axios.get(`${process.env.REACT_APP_HOST}/comment/${payload}`);
+            /* console.log(data) */
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
@@ -31,13 +32,13 @@ export const __deleteComments = createAsyncThunk(
     // 처리할 비동기 함수
     async (payload) => {
       // 서버에서 데이터를 삭제
-      const res = await axios.delete(`http://13.209.26.228:8080/comment/${payload}`);
+      const res = await axios.delete(`${process.env.REACT_APP_HOST}/comment/${payload}`);
       // action의 payload 리턴
       return res.data;
     }
   );
 
-const initialState = {
+const initialState = {  
     comment: {
       comment:"",
       commentId:"",

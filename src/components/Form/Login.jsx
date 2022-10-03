@@ -35,6 +35,7 @@ const Login = () => {
     try {
       // console.log(payload);
       const data = await axios.post(`${process.env.REACT_APP_HOST}/user/login`, inputValue);
+
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("nickname", data.data.data.nickname)
