@@ -1,40 +1,24 @@
 import React, { useState } from "react";
-import { useRef } from "react";
 import { useEffect } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { useSprings } from "react-spring/hooks";
-import { useGesture } from "react-with-gesture";
-import { __getMain } from "../../redux/modules/main?after";
-import Card from "./Card?after";
+import { useDispatch, useSelector } from "react-redux";
+import { useSprings } from 'react-spring'
+import { useGesture } from "react-use-gesture";
+import { __getMain } from "../../redux/modules/main";
+import Card from "./Card";
+
+
 
 
 function Deck() {
 const dispatch = useDispatch();
 
-
- 
-
 /* DB */
-/* const { data } = useSelector((state)=> state.main) */
-
-const { data, isLoading, error } = useSelector(
-  state => ({
-    data: state.main,
-    isLoading : state.main,
-    errorn : state.main
-  }),
-  shallowEqual,
-);
-
-useEffect(() => {
-  dispatch(__getMain());
-}, [dispatch])
-
-
-
+const {data, isLoading, error} = useSelector((state)=> state.main)
+//console.log(data)
+  
 /* 보여줄 카드 갯수. */
 const cards = [];
-for(let i=0;i<data.data.length;i++){
+for(let i=0;i<data.length;i++){
   cards.push(i);
 }
 
@@ -55,6 +39,11 @@ const from = i => ({ rot: 0, scale: 1.5, y: -1000 });
 const trans = (r, s) =>
   `perspective(1500px) rotateX(0deg) rotateY(${r /
     10}deg) rotateZ(${r}deg) scale(${s})`;
+
+
+  
+  
+  
 
   const [gone] = useState(() => new Set());
 
@@ -92,12 +81,11 @@ const trans = (r, s) =>
         const scale = down ? 1.1 : 1;
 
         
-        console.log(index)
         if(x>600){          
-          console.log(data.data[i].nickname)
+          console.log(data[i].nickname)
           console.log('좋아요')
         }if(x<-600){
-          console.log(data.data[i].nickname)
+          console.log(data[i].nickname)
           console.log('싫어요')
         } /* if(x===0){
           console.log(objs[i].name)
@@ -116,12 +104,21 @@ const trans = (r, s) =>
     }
   );  
 
+  useEffect(() => {
+    dispatch(__getMain());
+  }, [dispatch])
+  if (isLoading) return "😴로딩중이에요..😴"
+  if (error) {
+      return <>{error.message}</>
+  }
   
 
-  return props.map(({ x, y, rot, scale }, i) => (
+  return props.map(({ x, y, rot, scale ,props ,set}, i) => (
     <Card
       key={i}
 
+      props={props}
+      set={set}
       i={i}
       x={x}
       y={y}
@@ -129,7 +126,7 @@ const trans = (r, s) =>
       scale={scale}
       trans={trans}
       cards={cards}
-      objs={data.data}
+      objs={data}
       bind={bind}
       /* imageUrlArry={imageUrlArry} */
     />

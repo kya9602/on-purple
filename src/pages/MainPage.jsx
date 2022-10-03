@@ -1,7 +1,8 @@
 import React from "react";
 import Footer from "../components/Footer/Footer";
-import Deck from "../components/Main/Deck";
 import Header from "../components/Header/Header";
+import Deck from "../components/Main/Deck";
+//import Test from "../components/Main/test";
 
 
 const MainPage = () => {

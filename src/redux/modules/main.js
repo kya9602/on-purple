@@ -39,13 +39,6 @@ extraReducers: {
       state.isLoading = false;
       state.data = action.payload;
     },
-    [__getMain.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [__getMain.pending]: (state) => {
-      state.isLoading = true;
-    },
 }})
 
 export default mainSlice.reducer;

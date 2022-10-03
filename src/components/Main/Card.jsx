@@ -1,11 +1,10 @@
 
 import styled from "@emotion/styled";
-import { useState } from "react";
-import { animated, interpolate } from "react-spring/hooks";
+import { animated, interpolate } from "react-spring";
 
 
 
-function Card({ i, x, y, rot, scale, trans, bind, objs  }){
+function Card({ i, x, y, rot, scale, trans, bind, objs, props,  }){
   
   
     const { nickname, age, area, introduction, imageUrl } = objs[i];
@@ -55,7 +54,7 @@ const CardContainer = styled.div`
 
 
 
-margin-top: 300px;
+margin-top: 80px;
 
 .Container {
   position: absolute;
@@ -81,7 +80,7 @@ margin-top: 300px;
   will-change: transform;
   border-radius: 10px;
   box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
-    0 10px 10px -10px rgba(50, 50, 73, 0.3);
+  0 10px 10px -10px rgba(50, 50, 73, 0.3);
   
 }
 
