@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __logout, logout } from "../../redux/modules/user";
 import useDetectClose from "./useDetectClose";
 import { __getUser } from "../../redux/modules/signup";
-import jwt_decode from "jwt-decode";
+
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,9 @@ const Header = () => {
         <UserInfo>{userData?.nickname}님 안녕하세요</UserInfo>
 
         <DropDownContainer>
-          <DropdownBtn onClick={myPageHandler} ref={myPageRef}> 이미지</DropdownBtn>
+          <DropdownBtn onClick={myPageHandler} ref={myPageRef}>
+            <img src={userData?.imageUrl} alt="프로필" />
+          </DropdownBtn>
           <Menu isDropped={myPageIsOpen}>
             <Ul>
               <Li>
@@ -70,9 +72,10 @@ const Header = () => {
                 </LinkWrapper>}
               </Li>
               <Li>
-                <LinkWrapper
-                  onClick={() => navigate("/mypage")}
-                >메뉴1</LinkWrapper>
+                {token !== null ? <LinkWrapper onClick={() => navigate('/post')}>
+                  글쓰기
+                </LinkWrapper> : null}
+
               </Li>
 
             </Ul>
@@ -134,6 +137,11 @@ const DropdownBtn = styled.div`
   overflow: hidden;
   margin-right: 15px;
   margin-left: 15px;
+  img{
+    height: 100%;
+    width: 100%;
+    border-radius: 70%;
+  };
   `;
 
 //메뉴박스

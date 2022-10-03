@@ -5,12 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 import logo from "../../assets/images/perple.jpg";
 
-import {
-    InfoBodyBox, AgeInput, MBTIInput, SecondMypageBox, SecondMyinfo, StBodyInput, StButton,
-    AddMyinfo, MiniBox, MiniTitle, MiniInput, MiniHeader, StBtbBox, StSelect
-} from "../Mypage/Mypagestyled";
-
-const Form = () => {
+const SignUpPlus = () => {
     const navigate = useNavigate();
 
     const [input, setInput] = useState({
@@ -46,15 +41,13 @@ const Form = () => {
     // axios
     const addHandler = async () => {
 
-        if (input.age.trim() === "" || input.mbti.trim() === "" || input.introduction.trim() === "" || input.area.trim() === "") {
-            return alert("모든 칸을 채워주세요! 👀")
-        };
 
         const { age, mbti, introduction, idealType, job, hobby, drink, pet, smoke, likeMovieType, area } = input;
         const user = {
             age: age,
             mbti: mbti,
             introduction: introduction,
+            area: area,
 
             idealType: idealType,
             job: job,
@@ -63,12 +56,13 @@ const Form = () => {
             pet: pet,
             smoke: smoke,
             likeMovieType: likeMovieType,
-            area: area,
         };
         console.log("user is ", user)
 
 
-        const data = await axios.post(`http://3.37.88.29:8080/profile`, user, {
+
+
+        const data = await axios.post(`${process.env.REACT_APP_HOST}/profile`, user, {
             headers: {
                 Authorization: `${accessToken}`,
                 RefreshToken: `${refreshToken}`,
@@ -78,8 +72,8 @@ const Form = () => {
         console.log(data.data);
 
         if (data.data.success) {
-            alert('추가정보가 입력되었습니다~ ');
-            navigate('/');
+            alert('마지막 step으로 넘어가주세요~~!');
+            // navigate('/');
         }
         else {
             window.alert(data.error.message)
@@ -90,62 +84,21 @@ const Form = () => {
 
 
     return (
-        <> <StHeader>
+        <>
+            {/* <StHeader>
             <StHeaderTitle> On Purple </StHeaderTitle>
             <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
-        </StHeader>
+        </StHeader> */}
             <SecondMypageBox>
                 <form>
-                    <SecondMyinfo>
-                        <InfoBodyBox>
-                            <AgeInput
-                                placeholder="당신의 나이는 몇살인가요 ??"
-                                type="text"
-                                name="age"
-                                value={input.age}
-                                className="text"
-                                onChange={onChangeHandler}
-                            />
-                            <StSelect
-                                name='mbti'
-                                type="text"
-                                defaultValue="default"
-                                onChange={onChangeHandler}
-                                required>
-                                <MBTIInput value="default" disabled> MBTI를 골라주세요</MBTIInput>
-                                <option value="ISTJ">I S T J</option>
-                                <option value="ISTP">I S T P</option>
-                                <option value="ISFJ">I S F J</option>
-                                <option value="ISFP">I S F P</option>
-                                <option value="INFJ">I N F J</option>
-                                <option value="INFP">I N F P</option>
-                                <option value="INTJ">I N T J</option>
-                                <option value="INTP">I N T P</option>
-                                <option value="ESTP">E S T P</option>
-                                <option value="ESTJ">E S T J</option>
-                                <option value="ESFP">E S F P</option>
-                                <option value="ESFJ">E S F J</option>
-                                <option value="ENFP">E N F P</option>
-                                <option value="ENFJ">E N F J</option>
-                                <option value="ENTP">E N T P</option>
-                                <option value="ENTJ">E N T J</option>
 
-                            </StSelect>
-                            <StBodyInput
-                                placeholder="한줄로 나를 소개해주세요"
-                                type="text"
-                                name="introduction"
-                                value={input.introduction}
-                                onChange={onChangeHandler} />
-                        </InfoBodyBox>
-                    </SecondMyinfo>
 
                     {/* {age, mbti, introduction, 
                     idealType, job, hobby, drink. pet, smoke, likeMovieType, area} */}
 
                     {/* 아래 추가정보란 적는곳  */}
                     <AddMyinfo>
-                        <MiniHeader>🌟내 정보를 추가한다면🌟<br />🌠상대방과 매칭 될 확률이 높아집니다.🌠</MiniHeader>
+                        <MiniHeader>🌟 필수 입력란은 아닙니다 🌠</MiniHeader>
                         <MiniBox>
                             <MiniTitle>이상형 🎈</MiniTitle>
                             <MiniInput
@@ -216,20 +169,11 @@ const Form = () => {
                                 onChange={onChangeHandler}
                             />
                         </MiniBox>
-                        <MiniBox>
-                            <MiniTitle>사는 지역 🏡</MiniTitle>
-                            <MiniInput
-                                placeholder="사는 곳 또는 주로 활동하는 지역을 적어주세요!"
-                                type="text"
-                                name="area"
-                                value={input.area}
-                                onChange={onChangeHandler}
-                            />
-                        </MiniBox>
+
                     </AddMyinfo>
                 </form>
                 <StBtbBox>
-                    <StButton onClick={() => { addHandler(); console.log("input is", input) }}>작성완료 😘</StButton>
+                    <StButton onClick={() => { addHandler(); console.log("input is", input) }}> 추가 필수정보도 작성완료 😘 👆</StButton>
                 </StBtbBox>
             </SecondMypageBox>
         </>
@@ -237,53 +181,118 @@ const Form = () => {
 
 }
 
-export default Form;
+export default SignUpPlus;
 
-const StHeader = styled.div`
-  width: 100%;
-  height: auto;
-  text-align: center;
-  ::after { 
-    width: 100vw;
-    height: 35%;
-    content: "";
-    background: url(${logo});
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 0.5;
-    background-size: cover;
-    }
+//기본 인포 바디 
+const InfoBodyBox = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
-//배경 헤더 로고 타이틀
-const StHeaderTitle = styled.div`
-  font-size: 80px;
-  font-weight: 600;
-  background: #f7e9f5;
-  background: -webkit-linear-gradient(left, #420255, #f7e9f5);
-  background:    -moz-linear-gradient(right, #420255, #f7e9f5);
-  background:      -o-linear-gradient(right, #420255, #f7e9f5);
-  background:         linear-gradient(to right, #420255, #f7e9f5);
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  font-weight: bold;
-  padding-top: 70px;
-  `
+//큰틀
+const SecondMypageBox = styled.div`
+    width:300px;
+    height: auto;
+    padding-bottom: 2%;
+    margin-top: 15px;
+    border-radius: 15px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+ `
 
-//배경 헤더 로고 안내글
-const StHeaderBody = styled.div`
-font-size: 17px;
-margin-top: 1%;
-background: #09ffff;
-background: -webkit-linear-gradient(left, #420255, #09ffff);
-background:    -moz-linear-gradient(right, #420255, #09ffff);
-background:      -o-linear-gradient(right, #420255, #09ffff);
-background:         linear-gradient(to right, #420255, #09ffff);
--webkit-background-clip: text;
-        background-clip: text;
-color: transparent;
-font-weight: bold;
+//완료버튼창 박스
+const StBtbBox = styled.div`
+                        height: 50px;
+                        margin-top: 15px;
+                        display: flex;
+                        justify-content:center;
+                        width : 400px;
+                        margin-left: 10px;
+                        `
+
+//수정 완료버튼창
+const StButton = styled.button`
+                        cursor: pointer;
+                        height: 40px;
+                        width: 300px;
+                        font-size: 16px;
+                        border: 2px solid purple;
+                        font-weight: 600;
+                        background-color: white;
+                        :hover{
+                            color : #f56589;
+                        background-color: #ffffae;
+                        border : none;
+  }
+`
+
+
+//마이페이지 추가 정보란 제일큰박스
+const AddMyinfo = styled.div`
+  width: 400px;
+  height: auto;
+`
+
+//마이페이지 추가 정보란 낱개박스
+const MiniBox = styled.div`
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  /* @media all and (max-width:750px) {
+    height: 30px;
+  } */
+`
+//마이페이지 낱개 박스 타이틀
+const MiniTitle = styled.div`
+  margin-top: 1.3%;
+  width: 130px;
+  height: 1.5em;
+  text-align: center;
+  background-color: #bebaba;
+  border-radius: 5px;
+  font-size: 14px;
+  /* @media all and (max-width : 750px) {
+    font-size: 14px; 
+    width : 24vw;
+    height: 1.5em;
+  } */
+`
+
+//마이페이지 낱개 박스 인풋
+const MiniInput = styled.input`
+  margin: 1%;
+  text-align: center;
+  width: 300px;
+  margin-left: 2vw;
+  height: 1.5em;
+  border-radius: 5px;
+  border: 2px solid gray;
+  font-size: 14px;
+  /* @media all and (max-width : 750px) {
+    font-size: 12px; 
+    width : 60vw;
+    height: 1.5em;
+  } */
+`
+
+//마이페이지 추가정보란 헤더
+const MiniHeader = styled.div`
+  /* border : 2px solid gray; */
+  border-radius: 5px;
+  padding: 1%;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+    font-weight: bolder;
+  color: purple;
+  width: 400px;
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+  /* @media all and (max-width : 800px) {
+    font-size: 16px; 
+    width : 100vw;
+    height: 30px;
+    margin-bottom: 15px;
+  } */
 `

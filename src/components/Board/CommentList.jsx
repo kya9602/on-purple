@@ -43,7 +43,6 @@ export default CommentList;
 
 const Container = styled.div`
     width: 100vw;
-    height: 80%;
+    height: 50vh;
     margin: 0 auto;
-    border-top: 1px solid grey;
 `

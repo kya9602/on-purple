@@ -36,19 +36,30 @@ const Detail = () => {
     const goEdit = () => {
         navigate(`/edit/${postId}`)
     }
-
+    
+    const getNickname = localStorage.getItem("nickname")
+    /* console.log(detail.nickname) */
     return (
         <>
-            <Button variant="outlined" onClick={goEdit}>수정</Button>
-            <Button variant="outlined" color="error" onClick={() => {
-                setShow(true)
-            }}>삭제</Button>
-
             <Title>{detail.title}</Title>
-            <NameDateWrapper>
-                <Date>{detail.createdAt[0]}-{detail.createdAt[1]}-{detail.createdAt[2]} </Date>
-            </NameDateWrapper>
-            {/* <div style={{ margin:"0 auto"}}> */}
+
+            <DateButtonWrapper>
+                {getNickname === detail.nickname ?
+                    (
+                        <>
+                            <Button variant="outlined" onClick={goEdit}>수정</Button>
+                            <Button variant="outlined" color="error" onClick={() => { setShow(true) }}>삭제</Button>
+                        </>
+                    ) :
+                    null}
+            </DateButtonWrapper>
+            <Date>{detail.createdAt[0]}-{detail.createdAt[1]}-{detail.createdAt[2]} </Date>
+            
+            <NameLikesWrap>
+                <Name>{detail.nickname}</Name>
+                <Likes>💜{detail.likes}개</Likes>
+            </NameLikesWrap>
+            
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
                 {detail.imgList.map((image, id) => (
                     <SwiperSlide key={id}>
@@ -58,18 +69,13 @@ const Detail = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            {/* </div> */}
-            <div style={{display:"flex", alignItems:"center"}}>
-            <Name>{detail.nickname}</Name>
-            <Likes>💜{detail.likes}개</Likes>
-            </div>
-            <Content>{detail.content}</Content>
+            <Content><p>{detail.content}</p></Content>
 
             <div style={{ marginTop: "10px" }}>
                 <AddComment detail={detail} />
             </div>
-            
-        {/* Modal */}
+
+            {/* Modal */}
             <Dialog open={show}>
                 <DialogContent style={{ position: "relative" }}>
                     <IconButton
@@ -88,10 +94,12 @@ const Detail = () => {
                                     setShow(false);
                                     // 모달의 예 버튼 클릭시 게시물 삭제
                                     await axios.delete(`${process.env.REACT_APP_HOST}/post/${postId}`,
-                                    { headers: {
-                                        "Authorization": localStorage.getItem("Authorization"),
-                                        "RefreshToken": localStorage.getItem("RefreshToken")
-                                      }}
+                                        {
+                                            headers: {
+                                                "Authorization": localStorage.getItem("Authorization"),
+                                                "RefreshToken": localStorage.getItem("RefreshToken")
+                                            }
+                                        }
                                     );
                                     alert("게시물이 삭제되었습니다😎");
                                     navigate("/board");
@@ -127,11 +135,14 @@ const Name = styled.div`
     float: right;
 `
 const Date = styled.div`
+    margin: auto;
     font-size: 1rem;
 `
-const NameDateWrapper = styled.div`
+const DateButtonWrapper = styled.div`
+    align-items: center;
     display: flex;
     float: right;
+    gap: 10px;
 `
 
 const Likes = styled.div`
@@ -140,10 +151,10 @@ const Likes = styled.div`
 
 const Content = styled.div`
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 30px;
     width: 90%;
     height: 45vh;
-    /* border: 1px solid #9E87BA; */
+    border-top: 1px solid #9E87BA;
     font-size: 20px;
 `
 
@@ -151,4 +162,13 @@ const ImgBox = styled.div`
     width: 100%;
     height: 100%;
     margin-top: 3vw;
+`
+
+const NameLikesWrap = styled.div`
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    margin-top:20px;
+    padding-left: 10px;
+    padding-right: 10px;
 `

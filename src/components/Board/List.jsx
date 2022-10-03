@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../../redux/modules/board";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const List = () => {
     const dispatch = useDispatch();
@@ -25,7 +26,9 @@ const List = () => {
     return (
         <ListContainer>
             <Wrapper>
+                
                 {post.map((item)=>(<Card item={item} key={item.postId}/>))}
+
             </Wrapper>
         </ListContainer>
 
