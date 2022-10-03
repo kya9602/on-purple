@@ -19,7 +19,7 @@ export const __checkUsername = createAsyncThunk(
     async (payload, thunkAPI) => {
         try {
             console.log(payload);
-            const data = await axios.post(`http://3.37.88.29:8080/user/idCheck/${payload.username}`);
+            const data = await axios.post(`${process.env.REACT_APP_HOST}/user/idCheck/${payload.username}`);
             console.log(data);
             if (data.data.success === false)
                 alert(data.data.error.message);
@@ -39,7 +39,7 @@ export const __checkNickname = createAsyncThunk(
     async (payload, thunkAPI) => {
         try {
             console.log(payload);
-            const data = await axios.post(`http://3.37.88.29:8080/user/nicknameCheck/${payload.nickname}`);
+            const data = await axios.post(`${process.env.REACT_APP_HOST}/user/nicknameCheck/${payload.nickname}`);
             console.log(data);
             if (data.data.success === false)
                 alert(data.data.error.message);
@@ -58,8 +58,7 @@ export const __logout = createAsyncThunk(
     "data/getComments",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload);
-            const data = await axios.post(`http://3.38.192.170:8080/api/member/logout`,
+            const data = await axios.post(`${process.env.REACT_APP_HOST}/user/logout`, payload,
                 {
                     headers: {
                         "Authorization": localStorage.getItem("Authorization"),   //accesstoken
@@ -67,6 +66,7 @@ export const __logout = createAsyncThunk(
                     }
                 });
         } catch (error) {
+            console.log('로그아웃 실패')
         }
     }
 );
@@ -86,8 +86,6 @@ export const userSlice = createSlice({
         }
     },
 });
-
-
 
 
 

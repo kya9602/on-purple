@@ -14,7 +14,7 @@ import { Navigation, Pagination } from "swiper";
 function HomeGuide() {
 
     const DB = [
-    {
+    {   
         pics:'https://cdn.magloft.com/github/swiper/images/page-001.jpg',
         H3:'Slide 1',
         H4:'회원가입 하기'
@@ -41,29 +41,32 @@ function HomeGuide() {
     },
 ]
 
-
     return (
       <>
-      <SwiperContainer>
-        <Swiper
-        slidesPerView={5}
-        centeredSlides={true}
-        spaceBetween={30}
-            pagination={true}
-            navigation={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-        >
-            {DB.map(data=>(
-            <SwiperSlide>
-                {/* <img src={data.pics} /> */}
-                <div>
-                    <h3>{data.H3}</h3>
-                    <h4>{data.H4}</h4>
-                </div>            
-            </SwiperSlide>
-            ))}
-        </Swiper>
+        <SwiperContainer>
+            <Swiper
+                slidesPerView={5}
+                centeredSlides={true}
+                spaceBetween={30}
+                pagination={true}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+            >
+                {DB.map(data=>(
+                    <SwiperSlide key={data.pics} >
+                        {({ isActive }) => (
+                            <div>Current slide is {isActive ? 'active' : 'not active'}</div>
+                        )}
+
+                        <img src={data.pics} />
+                        <div>
+                            <h3>{data.H3}</h3>
+                            <h4>{data.H4}</h4>
+                        </div>            
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </SwiperContainer>
       
       </>
@@ -87,13 +90,15 @@ const SwiperContainer = styled.div`
 
 
 .swiper-slide {       
-  max-width: 350px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   text-align: center;
   font-size: 18px;
   background: lightgray;
   border-radius: 15px;
+
+  filter: brightness( ${(props)=> props.per || '30%' } );
 
   /* Center slide text vertically */
   display: -webkit-box;

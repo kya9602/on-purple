@@ -1,19 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-const Commnent = ()=>{
+const Comments = ({comment})=>{
+    
     return(
         <>
-            <p>유저이름</p>
+            <p>{comment.nickname}</p>
             <CmContainer>
-            <div>댓글댓글댓글댓글댓글</div>
-            <div>좋아요버튼</div>
+            <div>{comment.comment}</div>
+            <div>💜{comment.likes}</div>
             </CmContainer>
         </>
     )
 }
 
-export default Commnent
+export default Comments
 
 const CmContainer = styled.div`
     display: flex;

@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 //마이페이지 큰박스
 export const MypageBox = styled.div`
-    width: 98vw;
+    width: 95vw;
     height: auto;
     padding-bottom: 2%;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 90px;
     border: 5px solid #fdc2f0;
     border-radius: 15px;
     background-color: white;
@@ -21,7 +21,7 @@ export const Myinfo = styled.div`
     border-bottom-style:solid; 
     border-bottom-color:gray;
     border-bottom-width:2px;
-    width: 94vw;
+    width: 85vw;
     /* margin-left: 25vw; */
     margin-top: 1vw;
     display: flex;
@@ -31,11 +31,11 @@ export const Myinfo = styled.div`
 
 //마이페이지 프로필 사진
 export const Profile = styled.img`
-    width: 10vw;
-    height: 10vw; 
+    width: 120px;
+    height: 120px; 
     border-radius: 70%;
     overflow: hidden;
-    margin: 1vw;
+    margin: 2.5vw;
     justify-content: start;
 `
 
@@ -50,14 +50,14 @@ export const InfoBody = styled.div`
 export const Age = styled.div`
     text-align: center;
     padding: 3%;
-    font-size: 20px;
+    font-size: 16px;
 `
 
 //MBTI 박스
 export const MBTI = styled.div`
     text-align: center;
     padding: 3%;
-    font-size:20px;
+    font-size:16px;
     
 `
 
@@ -65,13 +65,13 @@ export const MBTI = styled.div`
 export const OneLine = styled.div` 
     text-align: center;
     padding: 3%;
-    font-size:20px;
+    font-size:16px;
     width: 20vw;
 `
 
 //수정버튼
 export const ModifyBtn = styled.button`
-    height: 2vw;
+    height: 25px;
     margin-top: 10vw;
     margin-left: 1vw;
     background-color: white;
@@ -186,11 +186,11 @@ export const MatchingCard = styled.img`
 export const StBodyInput = styled.textarea`
   margin-top: 1%;
   border: 2px solid #f797f7;
-  border-radius: 5px;
-  font-size: 18px; 
+  /* border-radius: 5px; */
+  font-size: 12px; 
   padding:1%;
-  width: 30vw;
-  height: 7vw;
+  width: 180px;
+  height: 60px;
   word-break: keep-all;
   :hover{
     border: 2px solid #f797f7;
@@ -199,19 +199,19 @@ export const StBodyInput = styled.textarea`
       outline: none;
       border: 2px solid gray;
     }
- @media all and (max-width : 750px) {
+ /* @media all and (max-width : 750px) {
     font-size: 14px; 
     width : 40vw;
     height: 10vw;
-  }
+  } */
 `
 //완료버튼창 박스
 export const StBtbBox = styled.div`
   height: 50px;
-  margin-top: 30px;
+  margin-top: 15px;
   display: flex;
-  justify-content:right;
-  width : 90vw;
+  justify-content:center;
+  width : 200px;
 `
 
 //수정 완료버튼창
@@ -238,11 +238,10 @@ export const StButton = styled.button`
 
 //수정큰틀
 export const SecondMypageBox = styled.div`
-    width: 94vw;
+    width:300px;
     height: auto;
     padding-bottom: 2%;
-    margin: auto;
-    margin-top: 90px;
+    margin-top: 15px;
     border: 3px solid #fdc2f0;
     border-radius: 15px;
     background-color: white;
@@ -253,14 +252,14 @@ export const SecondMypageBox = styled.div`
 
 //수정 마이페이지틀
 export const SecondMyinfo = styled.div`
-  border-bottom-style:solid; 
+  /* border-bottom-style:solid; 
     border-bottom-color:gray;
-    border-bottom-width:2px;
-    width: 88vw;
+    border-bottom-width:2px; */
+    width: 300px;
     /* margin-left: 25vw; */
     display: flex;
     justify-content: center;
-    padding-bottom: 2%;
+    /* padding-bottom: 2%; */
 `
 
 
@@ -347,38 +346,26 @@ export const MiniHeader = styled.div`
     margin-bottom: 15px;
   }
 `
-//--------------------------------------------------------------------------------------
-//---------로그인 최초 추가설정 스타일----------------------------------------------------
-//--------------------------------------------------------------------------------------
-
-
+//기본 인포 바디 
+export const InfoBodyBox = styled.div`
+display: flex;
+flex-direction: column;
+`
 //나이 인풋창
 export const AgeInput = styled.input`
   margin  : auto ;
   margin-top: 10px;
   height: 35px;
-  width: 250px;
-  font-size: 18px;
+  width: 180px;
+  font-size: 12px;
   word-break: keep-all;
   border: none;
   border-bottom:2px solid #f797f7;
-
-  @media all and (max-width : 750px) {
-  font-size: 14px; 
-  width : 40vw;
-  height: 10vw;
-  }
   &:focus {
       outline: none;
       border-bottom: 2px solid gray;
     }
     text-align: center;
-
-    @media all and (max-width : 750px) {
-    font-size: 12px; 
-    width : 150px;
-    height: 30px;
-  }
 `
 
 //엠비티아이 드롭다운옵션
@@ -389,8 +376,8 @@ export const MBTIInput = styled.option`
 //엠비티아이 옵션 헤드
 export const StSelect = styled.select`
   color: #797979;
-  width: 300px;
-  height: 40px;
+  width: 180px;
+  height: 30px;
   border: none;
   border-bottom:2px solid #f797f7;
   padding-left: 5px;
@@ -399,20 +386,14 @@ export const StSelect = styled.select`
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
-  font-size: 18px;
+  font-size: 12px;
   &:focus {
       outline: none;
       border-bottom: 2px solid gray;
     }
-    @media all and (max-width : 750px) {
+    /* @media all and (max-width : 750px) {
     font-size: 12px; 
     width : 200px;
     height: 30px;
-  }
-`
-
-//기본 인포 바디 
-export const InfoBodyBox = styled.div`
-  display: flex;
-  flex-direction: column;
+  } */
 `

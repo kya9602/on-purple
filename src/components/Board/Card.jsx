@@ -12,7 +12,7 @@ const Card = ({item}) => {
                     <Content>{item.content}</Content>   
                 </TitleContentWrapper>
                 <DescContainer>
-                    <Writer>{item.nickname}</Writer>
+                    <Writer>by.{item.nickname}</Writer>
                     <Like>💜{item.likes} 개</Like>
                 </DescContainer>
                     <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>

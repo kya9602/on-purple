@@ -7,17 +7,16 @@ import { __getMain } from "../../redux/modules/main";
 import Card from "./Card";
 
 
-import "./Deck.css";
-
-
-
-
 function Deck() {
 const dispatch = useDispatch();
 
 /* DB */
 const {data, isLoading, error} = useSelector((state)=> state.main)
-//console.log(data)
+
+const [userDB, setUserDB] = useState('');
+
+//console.log(userDB);
+console.log(data)
   
 /* 보여줄 카드 갯수. */
 const cards = [];
@@ -45,9 +44,7 @@ const trans = (r, s) =>
 
 
   
-  useEffect(() => {
-    dispatch(__getMain());
-  }, [dispatch])
+  
   
 
   const [gone] = useState(() => new Set());
@@ -108,6 +105,18 @@ const trans = (r, s) =>
         setTimeout(() => gone.clear() || set(i => to(i)), 600);
     }
   );  
+
+  useEffect(() => {
+    dispatch(__getMain());
+    setUserDB(data);
+  }, [dispatch])
+
+  if (isLoading) return "😴로딩중이에요..😴"
+  if (error) {
+      return <>{error.message}</>
+  }
+  
+
   return props.map(({ x, y, rot, scale }, i) => (
     <Card
       key={i}
