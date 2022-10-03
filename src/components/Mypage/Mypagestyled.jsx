@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 //마이페이지 큰박스
 export const MypageBox = styled.div`
-    width: 98vw;
+    width: 95vw;
     height: auto;
     padding-bottom: 2%;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 90px;
     border: 5px solid #fdc2f0;
     border-radius: 15px;
     background-color: white;
@@ -21,7 +21,7 @@ export const Myinfo = styled.div`
     border-bottom-style:solid; 
     border-bottom-color:gray;
     border-bottom-width:2px;
-    width: 94vw;
+    width: 85vw;
     /* margin-left: 25vw; */
     margin-top: 1vw;
     display: flex;
@@ -31,11 +31,11 @@ export const Myinfo = styled.div`
 
 //마이페이지 프로필 사진
 export const Profile = styled.img`
-    width: 10vw;
-    height: 10vw; 
+    width: 120px;
+    height: 120px; 
     border-radius: 70%;
     overflow: hidden;
-    margin: 1vw;
+    margin: 2.5vw;
     justify-content: start;
 `
 
@@ -50,14 +50,14 @@ export const InfoBody = styled.div`
 export const Age = styled.div`
     text-align: center;
     padding: 3%;
-    font-size: 20px;
+    font-size: 16px;
 `
 
 //MBTI 박스
 export const MBTI = styled.div`
     text-align: center;
     padding: 3%;
-    font-size:20px;
+    font-size:16px;
     
 `
 
@@ -65,13 +65,13 @@ export const MBTI = styled.div`
 export const OneLine = styled.div` 
     text-align: center;
     padding: 3%;
-    font-size:20px;
+    font-size:16px;
     width: 20vw;
 `
 
 //수정버튼
 export const ModifyBtn = styled.button`
-    height: 2vw;
+    height: 25px;
     margin-top: 10vw;
     margin-left: 1vw;
     background-color: white;
