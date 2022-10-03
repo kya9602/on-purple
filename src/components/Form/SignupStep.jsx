@@ -7,9 +7,9 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Newjoin from "./Newjoin";
-import NewSignAdd from "./NewSignAdd";
-import NewSignUpPlus from "./NewSignupPlus";
+import Signup from "./Signup";
+import SignAdd from "./SignAdd";
+import SignPlus from "./SignPlus";
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -21,18 +21,19 @@ const steps = [
     {
         label: "기본정보",
         description: `기본정보 입력!`,
-        content: <Newjoin />
+        content:
+            <Signup />
     },
     {
         label: "추가 필수정보 입력",
         description:
             "추가 필수 정보입니다. 입력해주세요",
-        content: <NewSignAdd />
+        content: <SignAdd />
     },
     {
         label: "추가 정보입력",
         description: `추가정보를 입력하면 매칭될 확률이 높아집니다!`,
-        content: <NewSignUpPlus />
+        content: <SignPlus />
     }
 ];
 
@@ -77,8 +78,8 @@ export default function VerticalLinearStepper() {
     };
 
     const handleFinish = () => {
-        alert("회원가입이 완료되었습니다~!")
-        navigate('/login');
+        alert("바로 로그인 되었습니다!!!")
+        navigate('/');
     }
 
     const navigate = useNavigate();
@@ -122,7 +123,6 @@ export default function VerticalLinearStepper() {
                                             onClick={handleNext}
                                             sx={{ mt: 1, mr: 1 }}
                                         >
-
                                             {index === steps.length - 1 ? "Finish" : "Continue"}
                                         </Button>
 
