@@ -25,6 +25,7 @@ for(let i=0;i<data.length;i++){
   cards.push(i);
 }
 
+/* 보여줄 카드의 css */
 const to = i => ({
   x: 0,
   y: i * -10,

@@ -13,6 +13,7 @@ import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
 import SignupAdd from "../pages/SignupAdd";
+import GuidePage from "../pages/GuidePage";
 
 const Router = () => {
     return (
@@ -31,6 +32,7 @@ const Router = () => {
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
                 <Route path="/signupadd" exact element={<SignupAdd />} />
+                <Route path="/guide" exact element={<GuidePage />} />
             </Routes>
         </BrowserRouter>
 
