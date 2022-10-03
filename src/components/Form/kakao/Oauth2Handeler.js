@@ -1,5 +1,4 @@
 import axios from "axios";
-import win from "global";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 // import List from "../../pages/List";
