@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import MainPage from "../pages/MainPage";
 import LoginPage from "../pages/LoginPage";
-import SignUpPage from "../pages/SignUpPage";
+// import SignUpPage from "../pages/SignUpPage";
 import MypagePage from "../pages/MypagePage";
 import ChatPage from "../pages/ChatPage";
 import ProfilePage from "../pages/ProfilePage";
@@ -13,7 +13,7 @@ import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
 import EditPage from "../pages/EditPage";
-import SignupAdd from "../pages/SignupAdd";
+// import SignupAdd from "../pages/SignupAdd";
 import Oauth2Handler from "../components/Form/kakao/Oauth2Handeler";
 import NewSignUpPage from "../pages/NewSignupPage";
 
@@ -23,7 +23,7 @@ const Router = () => {
             <Routes>
                 <Route path="/" exact element={<MainPage />} />
                 <Route path="/login" exact element={<LoginPage />} />
-                <Route path="/signup" exact element={<SignUpPage />} />
+                <Route path="/signup" exact element={<NewSignUpPage />} />
                 <Route path="/myPage" exact element={<MypagePage />} />
                 <Route path="/chat" exact element={<ChatPage />} />
                 <Route path="/chat/:roomId" exact element={<ChatScreen />} />
@@ -34,9 +34,9 @@ const Router = () => {
                 <Route path="/post" exact element={<PostPage />} />
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
-                <Route path="/signupadd" exact element={<SignupAdd />} />
+                {/* <Route path="/signupadd" exact element={<SignupAdd />} /> */}
                 <Route path="kakao" exact element={<Oauth2Handler />} />
-                <Route path="/newsignup" exact element={<NewSignUpPage />} />
+                {/* <Route path="/newsignup" exact element={<NewSignUpPage />} /> */}
             </Routes>
         </BrowserRouter>
 

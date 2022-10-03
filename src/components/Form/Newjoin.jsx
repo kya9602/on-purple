@@ -86,7 +86,7 @@ const Newjoin = () => {
         console.log("user is ", user)
 
 
-        const data = await axios.post("http://3.37.88.29:8080/user/signup", formData, {
+        const data = await axios.post(`${process.env.REACT_APP_HOST}/user/signup`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
