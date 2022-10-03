@@ -7,15 +7,17 @@ const Card = ({item}) => {
         <>
             <Item onClick={()=>{navigate(`/detail/${item.postId}`)}}>
                 <Image src={item.imageUrl} alt="" />
-                <TitleContentWrapper>
+                
+                <Container>
                     <Title>{item.title}</Title>
-                    <Content>{item.content}</Content>   
-                </TitleContentWrapper>
-                <DescContainer>
-                    <Writer>by.{item.nickname}</Writer>
-                    <Like>💜{item.likes} 개</Like>
-                </DescContainer>
-                    <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
+                    <Content>{item.content}</Content>  
+                    <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date> 
+                </Container>
+ 
+                <WriterLikeWrapper>
+                    <Writer>by <b>{item.nickname}</b></Writer>
+                    <Like>💜 {item.likes}</Like>
+                </WriterLikeWrapper>
             </Item>
         </>
     )
@@ -24,25 +26,26 @@ const Card = ({item}) => {
 export default Card;
 
 const Item = styled.div`
+    max-width: 760px;
     border: 2px solid #9C7FCB;
-    border-radius: 15px;
-    width: 46%;
-    height: 33vh;
-    box-shadow:2px 2px 2px grey;
+    border-radius: 5px;
+    width: 100%;
+    height: 53vh;
+    box-shadow:5px 5px 5px grey;
+    margin : 0.7rem;
+    margin-right: 18px;
 `
 
-const Image = styled.img`
-    border: 1px solid #d1b7fa;
-    border-radius: 15px;
-    width: 90%;
-    height: 58%;
-    margin-left: 2vw;
-    margin-top: 1vw;
+const Image = styled.img` 
+    width: 100%;
+    height: 67%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 `
 
 const Title = styled.div`
-    font-size: 15px;
     font-weight: bold;
+    font-size: 20px;
     float: left;
     margin: 10px;
 `
@@ -52,29 +55,30 @@ const Content = styled.div`
     margin-left: 10px;
 `
 
-const TitleContentWrapper = styled.div`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
 `
 
-const DescContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
 const Writer = styled.div`
-    float: left;
-    margin-left: 2vw;
-    margin-top: 1vh;
+    margin-left: 10px;
 `
 
 const Like = styled.div`
-    float: right;
     margin-right: 10px;
-    margin-top: 1vh;
 `
 
 const Date = styled.div`
-    float: right;
-    margin-top: 0.5vh;
-    margin-right: 2vw;
+    margin: auto;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+`
+
+const WriterLikeWrapper = styled.div`
+    border-top: 1px solid #9C7FCB;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
 `
