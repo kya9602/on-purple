@@ -46,10 +46,10 @@ const Detail = () => {
 
             <Title>{detail.title}</Title>
             <NameDateWrapper>
-                <Name>{detail.nickname}</Name>
                 <Date>{detail.createdAt[0]}-{detail.createdAt[1]}-{detail.createdAt[2]} </Date>
             </NameDateWrapper>
-            <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+            {/* <div style={{ margin:"0 auto"}}> */}
+            <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
                 {detail.imgList.map((image, id) => (
                     <SwiperSlide key={id}>
                         <ImgBox>
@@ -58,12 +58,13 @@ const Detail = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
+            {/* </div> */}
+            <div style={{display:"flex", alignItems:"center"}}>
+            <Name>{detail.nickname}</Name>
             <Likes>💜{detail.likes}개</Likes>
+            </div>
             <Content>{detail.content}</Content>
 
-            <div style={{ marginTop: "10px" }}>
-                <CommentList />
-            </div>
             <div style={{ marginTop: "10px" }}>
                 <AddComment detail={detail} />
             </div>
@@ -86,7 +87,7 @@ const Detail = () => {
                                 onClick={async () => {
                                     setShow(false);
                                     // 모달의 예 버튼 클릭시 게시물 삭제
-                                    await axios.delete(`http://3.37.88.29:8080/post/${postId}`,
+                                    await axios.delete(`${process.env.REACT_APP_HOST}/post/${postId}`,
                                     { headers: {
                                         "Authorization": localStorage.getItem("Authorization"),
                                         "RefreshToken": localStorage.getItem("RefreshToken")
@@ -118,24 +119,23 @@ const Detail = () => {
 
 export default Detail;
 
-const Title = styled.div`
-    font-size: 8vw;
+const Title = styled.h1`
     text-align: center;
 `
 const Name = styled.div`
-    font-size: 3vw;
+    font-size: 1rem;
     float: right;
 `
 const Date = styled.div`
-    font-size: 3vw;
+    font-size: 1rem;
 `
 const NameDateWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
+    float: right;
 `
 
 const Likes = styled.div`
-    font-size: 4vw;
+    font-size: 1rem;
 `
 
 const Content = styled.div`

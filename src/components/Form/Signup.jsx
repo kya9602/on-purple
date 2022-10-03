@@ -85,7 +85,7 @@ const Form = () => {
         console.log("user is ", user)
 
 
-        const data = await axios.post("http://3.37.88.29:8080/user/signup", formData, {
+        const data = await axios.post("http://3.34.139.137:8080/user/signup", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

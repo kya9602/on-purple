@@ -13,17 +13,19 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination } from "swiper";
+import Category from "../components/Board/Category";
 
 const PostPage = () => {
   let inputRef;
   const navigate = useNavigate();
   const [formData] = useState(new FormData())
-  
-  // 게시판 제목, 내용, 사진
+
+  // 게시판 제목, 내용, 사진, 카테고리
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImage] = useState([]);
-
+  const [category, setCategory] = useState("")
+  
   //이미지 업로드 핸들
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
@@ -43,7 +45,7 @@ const PostPage = () => {
 
     setImage(imageUrlLists);
   };
- 
+
   // X버튼 클릭 시 이미지 삭제
   const handleDeleteImage = (id) => {
     setImage(imageUrl.filter((_, index) => index !== id));
@@ -51,7 +53,7 @@ const PostPage = () => {
 
   // 이미지, 제목, 내용 모두 작성해야 등록 가능
   const canSubmit = () => {
-    return imageUrl.length !== 0 && content !== "" && title !== "";
+    return imageUrl.length !== 0 && content !== "" && title !== "" && category !=="";
   }
 
   const handleSubmit = useCallback(async (e) => {
@@ -60,6 +62,7 @@ const PostPage = () => {
     let req = {
       title: title,
       content: content,
+      category: category
     };
 
     let json = JSON.stringify(req);
@@ -70,8 +73,11 @@ const PostPage = () => {
 
       const content = new Blob([json], { type: "application/json" });
       formData.append("data", content);
-      
-      await axios.post("http://3.37.88.29:8080/post", formData, {
+
+      const category = new Blob([json], { type: "application/json" });
+      formData.append("data", category)
+
+      await axios.post(`${process.env.REACT_APP_HOST}/post`, formData, {
         headers: {
           "content-type": "multipart/form-data",
           "Authorization": localStorage.getItem("Authorization"), //accesstoken 
@@ -86,8 +92,8 @@ const PostPage = () => {
     }
 
   }, [canSubmit]);
-  
-  
+
+
   return (
     <div>
       <AddHeader>
@@ -102,25 +108,24 @@ const PostPage = () => {
             onChange={handleAddImages}
             ref={(refParam) => (inputRef = refParam)}
             style={{ display: "none" }}
-          />        
-          {/* 미리보기 조건부 렌더링 */}        
-          {imageUrl.length == 0 ? 
+          />
+          {/* 미리보기 조건부 렌더링 */}
+          {imageUrl.length == 0 ?
             /* 이미지가 없으면 default 이미지 출력 */
-            <DefaultImage />  
-            : 
+            <DefaultImage />
+            :
             /* 있으면 슬라이드 출력 */
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
               {imageUrl.map((image, id) => (
                 <SwiperSlide key={id}>
-                  <ImgBox>                
+                  <ImgBox>
                     <DeleteBtn onClick={() => handleDeleteImage(id)}><img src={Delete} alt="X" /></DeleteBtn>
                     <img src={image} alt="" />
                   </ImgBox>
                 </SwiperSlide>
               ))}
-           </Swiper> 
-           }
-     
+            </Swiper>
+          }
           <Btn>
             <Button
               variant="outlined"
@@ -129,7 +134,8 @@ const PostPage = () => {
             >
               😎사진 고르기😎
             </Button>
-          </Btn>
+          </Btn>          
+          <Category setCategory={setCategory} category={category}/>
         </UploaderWrapper>
         <TextArea setTitle={setTitle} setContent={setContent} title={title} content={content} />
       </AddBody>
