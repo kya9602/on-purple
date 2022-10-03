@@ -34,17 +34,18 @@ const Login = () => {
 
     try {
       // console.log(payload);
-      const data = await axios.post("http://3.37.88.29:8080/user/login", inputValue);
+      const data = await axios.post(`${process.env.REACT_APP_HOST}/user/login`, inputValue);
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("nickname", data.data.data.nickname)
       console.log(data);
-
-      if (data) {
-        navigate('/signupadd');
-      } else if (data === 0) {
-        navigate('/')
+      if (data.data.success === false) {
+        alert("data.data.error.message");
+        alert("아이디와 비밀번호를 다시 확인해주세요.");
       }
+      else alert("로그인이 완료되었습니다!!");
+      navigate('/');
+
 
     } catch (error) {
       alert("아이디와 비밀번호를 다시 확인해주세요.");
