@@ -1,22 +1,16 @@
 import React from "react";
-import styled from "styled-components";
-
-import { useNavigate } from "react-router";
-import { Button } from "@mui/material";
 import Footer from "../components/Footer/Footer";
 import List from "../components/Board/List";
-
+import Header from "../components/Header/Header"
 const Board = () => {
-   
-    const navigate = useNavigate();
 
     return (
         <>
-            <Button variant="outlined" color="primary" onClick={()=>navigate("/post")} >글쓰기🖊️</Button>
+            <Header/>
+            <div style={{marginTop:"80px"}}>
             <List/>
-            <Footer />
+            </div>
         </>
-
     )
 }
 
