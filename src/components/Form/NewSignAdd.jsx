@@ -5,7 +5,6 @@ import axios from "axios";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "../../assets/images/perple.jpg";
-import jwt_decode from "jwt-decode";
 
 
 const SignUpAdd = () => {
@@ -73,13 +72,10 @@ const SignUpAdd = () => {
     };
     console.log("user is ", user)
 
-    var token = localStorage.getItem("Authorization");
-    var decoded = jwt_decode(token);
-    console.log(decoded)
-    const userId = decoded.userId;
 
 
-    const data = await axios.post(`${process.env.REACT_APP_HOST}/profile/${userId}`, user, {
+
+    const data = await axios.post(`${process.env.REACT_APP_HOST}/profile/`, user, {
       headers: {
         Authorization: `${accessToken}`,
         RefreshToken: `${refreshToken}`,
