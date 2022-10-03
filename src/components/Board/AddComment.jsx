@@ -38,7 +38,7 @@ const AddComment = (detail) => {
   };
   return (
     <>
-      <Container onClick={openModal} style={{ height: modalOpen ? "50%" : "50px" }}>
+      <Container onClick={openModal} style={{ height: modalOpen ? "300px" : "40px" }}>
         <div style={{ display: "flex", gap:"10px" }}>
           <Text
             style={{}}
