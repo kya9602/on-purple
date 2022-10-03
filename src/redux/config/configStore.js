@@ -5,6 +5,7 @@ import logout from "../modules/user";
 import post from "../modules/board"
 import comment from "../modules/comment";
 import main from "../modules/main";
+import user from "../modules/signup";
 
 const store = configureStore({
     reducer: {
@@ -14,7 +15,7 @@ const store = configureStore({
         mypage: detailSlice.actions,
         logout,
         main,
-
+        user
     }
 })
 

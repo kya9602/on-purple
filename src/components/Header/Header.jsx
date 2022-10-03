@@ -5,7 +5,8 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { __logout, logout } from "../../redux/modules/user";
 import useDetectClose from "./useDetectClose";
-import { __getProfileDetail } from "../../redux/modules/profile";
+import { __getUser } from "../../redux/modules/signup";
+import jwt_decode from "jwt-decode";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -21,15 +22,24 @@ const Header = () => {
     navigate('/');
   };
 
+  // var token = localStorage.getItem("Authorization");
+  // var decoded = jwt_decode(token);
+  // console.log(decoded)
+
   const token = localStorage.getItem('RefreshToken')
 
   //object-fit : cover 이미지 설정시 사용해보기
-  const { data } = useParams();
-  const { profile } = useSelector((state) => state.post);
+
+  const { userId } = useParams();
+  const { user, isLoding, error } = useSelector((state) => state.user);
+
+
+
+  const userData = user.data;
+  // console.log("data is", userData)
 
   useEffect(() => {
-    dispatch(__getProfileDetail(data));
-    // console.log(data)
+    dispatch(__getUser(userId));
   }, [dispatch])
 
 
@@ -40,7 +50,8 @@ const Header = () => {
       <LogoImg>로고이미지</LogoImg>
       <Title>타이틀</Title>
       <UserSet>
-        <UserInfo>${ }님안녕하세요</UserInfo>
+
+        <UserInfo>{userData?.nickname}님 안녕하세요</UserInfo>
 
         <DropDownContainer>
           <DropdownBtn onClick={myPageHandler} ref={myPageRef}> 이미지</DropdownBtn>

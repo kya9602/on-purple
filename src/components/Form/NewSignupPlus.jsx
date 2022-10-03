@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import styled from "styled-components";
 import logo from "../../assets/images/perple.jpg";
+import jwt_decode from "jwt-decode";
 
 const SignUpPlus = () => {
     const navigate = useNavigate();
@@ -41,9 +42,6 @@ const SignUpPlus = () => {
     // axios
     const addHandler = async () => {
 
-        if (input.age.trim() === "" || input.mbti.trim() === "" || input.introduction.trim() === "" || input.area.trim() === "") {
-            return alert("모든 칸을 채워주세요! 👀")
-        };
 
         const { age, mbti, introduction, idealType, job, hobby, drink, pet, smoke, likeMovieType, area } = input;
         const user = {
@@ -63,7 +61,13 @@ const SignUpPlus = () => {
         console.log("user is ", user)
 
 
-        const data = await axios.post(`http://3.37.88.29:8080/profile`, user, {
+
+        var token = localStorage.getItem("Authorization");
+        var decoded = jwt_decode(token);
+        console.log(decoded)
+        const userId = decoded.userId;
+
+        const data = await axios.post(`${process.env.REACT_APP_HOST}/profile/${userId}`, user, {
             headers: {
                 Authorization: `${accessToken}`,
                 RefreshToken: `${refreshToken}`,

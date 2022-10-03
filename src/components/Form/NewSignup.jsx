@@ -86,6 +86,7 @@ export default function VerticalLinearStepper() {
 
 
 
+
     return (
         <>
             <StHeader>
@@ -110,8 +111,8 @@ export default function VerticalLinearStepper() {
                             </StepLabel>
 
                             <StepContent>
-                                <Typography>{step.description}</Typography>
-                                <Typography>{step.content}</Typography>
+                                <Description>{step.description}</Description>
+                                <Description>{step.content}</Description>
 
                                 <Box sx={{ mb: 2 }}>
                                     <div>
@@ -215,3 +216,7 @@ const StHeaderBody = styled.div`
   color: transparent;
   font-weight: bold;
 `
+
+const Description = styled.div`
+    font-size: 14px;
+  `
