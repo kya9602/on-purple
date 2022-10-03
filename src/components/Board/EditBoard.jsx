@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import { __getPostsDetail } from "../../redux/modules/board";
 import default_Img from "../../assets/images/default-image.jpg"
 import Delete from "../../assets/icons/delete.png"
+import Category from "./Category";
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -23,7 +24,8 @@ const EditBoard = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [imageUrl, setImage] = useState([]);
-    
+    const [category, setCategory] = useState("")
+
     const { postId } = useParams();
     const [formData] = useState(new FormData())
 
@@ -38,7 +40,7 @@ const EditBoard = () => {
     };
     
     const canSubmit = () => {
-        return detail.imgList.length !== 0 && content !== "" && title !== "";
+        return detail.imgList.length !== 0 && content !== "" && title !== "" && category !=="";
     }
 
     const handleAddImages = (event) => {
@@ -66,6 +68,7 @@ const EditBoard = () => {
         let req = {
           title: title,
           content: content,
+          category: category
         };
     
         let json = JSON.stringify(req);
@@ -77,7 +80,10 @@ const EditBoard = () => {
           const content = new Blob([json], { type: "application/json" });
           formData.append("data", content);
           
-          await axios.put(`http://3.37.88.29:8080/post/${postId}`, formData, {
+          const category = new Blob([json], { type: "application/json" });
+          formData.append("data", category)
+
+          await axios.put(`http://3.34.139.137:8080/post/${postId}`, formData, {
             headers: {
               "content-type": "multipart/form-data",
               "Authorization": localStorage.getItem("Authorization"), //accesstoken 
@@ -134,6 +140,7 @@ const EditBoard = () => {
               😎사진 고르기😎
             </Button>
           </Btn>
+          <Category setCategory={setCategory} category={category}/>
         </UploaderWrapper>
         <TextAreaWrapper>
             <input
