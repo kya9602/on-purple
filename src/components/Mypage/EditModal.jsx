@@ -75,7 +75,7 @@ const EditModal = (props) => {
 
     return (
         <Modal ref={props.modalRef}>
-            <p>비밀번호를 변경하시겠습니까?</p>
+            <div>비밀번호를 변경하시겠습니까?</div>
             <TitleWrapper backgroundColor={{ color: "ivory" }}>
                 <StyledTextarea
                     value={password}
