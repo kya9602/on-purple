@@ -4,8 +4,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import logo from "../../assets/images/perple.jpg";
-import jwt_decode from "jwt-decode";
+import { __getUser } from "../../redux/modules/signup";
 
 
 const SignUpAdd = () => {
@@ -42,12 +41,21 @@ const SignUpAdd = () => {
   const accessToken = localStorage.getItem("Authorization"); //accesstoken 
   const refreshToken = localStorage.getItem("RefreshToken") //refreshToken
 
-  // const { profile } = useSelector((state) => state.post);
-  // const { postId } = useParams();
 
-  // useEffect(() => {
-  //     dispatch(__getPostsDetail(postId));
-  // }, [dispatch])
+
+  const { userId } = useParams();
+  const { user, isLoding, error } = useSelector((state) => state.user);
+
+
+
+  const userData = user.data;
+  console.log("data is", userData)
+
+  useEffect(() => {
+    dispatch(__getUser(userId));
+  }, [dispatch])
+
+
 
   // axios
   const addHandler = async () => {
@@ -73,13 +81,11 @@ const SignUpAdd = () => {
     };
     console.log("user is ", user)
 
-    var token = localStorage.getItem("Authorization");
-    var decoded = jwt_decode(token);
-    console.log(decoded)
-    const userId = decoded.userId;
 
 
-    const data = await axios.post(`${process.env.REACT_APP_HOST}/profile/${userId}`, user, {
+
+
+    const data = await axios.post(`${process.env.REACT_APP_HOST}/profile`, user, {
       headers: {
         Authorization: `${accessToken}`,
         RefreshToken: `${refreshToken}`,
@@ -95,6 +101,8 @@ const SignUpAdd = () => {
     else {
       window.alert(data.error.message)
     }
+
+
     setInput(input);
   };
 

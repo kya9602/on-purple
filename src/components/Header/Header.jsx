@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __logout, logout } from "../../redux/modules/user";
 import useDetectClose from "./useDetectClose";
 import { __getUser } from "../../redux/modules/signup";
-import jwt_decode from "jwt-decode";
+
 
 const Header = () => {
   const dispatch = useDispatch();
