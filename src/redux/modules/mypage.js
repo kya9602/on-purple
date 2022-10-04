@@ -1,43 +1,61 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-const initialState = {
-    data: [],
-    isLoading: false,
-    error: null,
-};
+
 
 export const __getDetail = createAsyncThunk(
     "data/getDetail",
     async (payload, thunkAPI) => {
+        console.log("payload is ", payload)
         try {
-            const data = await axios.get(`${process.env.REACT_APP_HOST}/mypage`, payload,
+            const data = await axios.get(`${process.env.REACT_APP_HOST}/profile/${payload}`,
                 {
                     headers: {
                         "Authorization": localStorage.getItem("Authorization"),   //accesstoken
                         "RefreshToken": localStorage.getItem("RefreshToken"),
-                        "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
                     }
                 });
             console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
-            return thunkAPI.rejectWithValue(error);
+            return thunkAPI.rejectWithValue(error.code);
         }
     }
 );
 
+const initialState = {
+    data: {
+        profileId: "",
+        nickname: "",
+        imageUrl: "",
+        imageList: null,
+        age: "",
+        mbti: "",
+        introduction: "",
+        idealType: "",
+        job: "",
+        hobby: "",
+        drink: "",
+        pet: "",
+        smoke: "",
+        likeMovieType: "",
+        area: ""
+    },
+    isLoading: false,
+    error: null,
+};
+
 export const detailSlice = createSlice({
 
-    name: "detail",
+    name: "data",
     initialState,
     reducers: {
-        updatePost: (state, action) => {
-            console.log(action.payload)
-            //     let index = state.data.findIndex(post => post.postId === action.payload.id);
-            //     state.data.splice(index, 1, action.payload);
-            state.data.data = action.payload
-        }
+        // updatePost: (state, action) => {
+        //     console.log(action.payload)
+        //     //     let index = state.data.findIndex(post => post.postId === action.payload.id);
+        //     //     state.data.splice(index, 1, action.payload);
+        //     state.data.data = action.payload
+        // }
     },
     extraReducers: {
         [__getDetail.pending]: (state) => {

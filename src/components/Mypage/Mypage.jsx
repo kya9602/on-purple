@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { updatePost, __getDetail } from "../../redux/modules/mypage";
 import EditModal from "./EditModal";
 import useOnClickOutside from "./useOnClickOutside";
-import { __getMain } from "../../redux/modules/main";
 
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
@@ -58,14 +57,14 @@ const Mypage = () => {
     }, []);
 
 
-    const params = useParams();
-    const postId = parseInt(params.id);
-    const data = useSelector((state) => state.detail)
+    const { profileId } = useParams();
+    const data = useSelector((state) => state.data);
     console.log(data)
 
     useEffect(() => {
-        dispatch(__getDetail(postId));
+        dispatch(__getDetail(profileId));
     }, [dispatch])
+
 
     const [post, setPost] = useState(initialState)
 
@@ -106,21 +105,6 @@ const Mypage = () => {
     const modalRef = useRef();
     const handleClickOutside = () => setIsClickEdit(false);
     useOnClickOutside(modalRef, handleClickOutside);
-
-
-
-
-    const { profileId } = useParams();
-    const { main, isLoding, error } = useSelector((state) => state.main);
-
-
-
-    // const userData = user.data;
-    console.log("data is", main)
-
-    useEffect(() => {
-        dispatch(__getMain(profileId));
-    }, [dispatch])
 
 
 
