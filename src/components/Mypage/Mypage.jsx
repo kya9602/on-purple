@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import { updatePost, __getDetail } from "../../redux/modules/mypage";
 import EditModal from "./EditModal";
 import useOnClickOutside from "./useOnClickOutside";
+import { __getMain } from "../../redux/modules/main";
 
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
     ListBox, Listtitle, LovemeBox, LoveCard, MatchingBox, MatchingCard, Avatar, StBodyInput, StButton, AddMyinfo,
-    MiniBox, MiniTitle, MiniInput, MiniHeader, StBtbBox
+    MiniBox, MiniTitle, MiniInput, MiniHeader, BtnBox
 } from "./Mypagestyled";
 
 
@@ -74,7 +75,7 @@ const Mypage = () => {
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }
-        let a = await axios.put(`http://localhost:3001/mypage`, formData,
+        let a = await axios.put(`${process.env.REACT_APP_HOST}/mypage`, formData,
             {
                 headers: {
                     "Authorization": localStorage.getItem("Authorization"),   //accesstoken
@@ -105,29 +106,49 @@ const Mypage = () => {
     const modalRef = useRef();
     const handleClickOutside = () => setIsClickEdit(false);
     useOnClickOutside(modalRef, handleClickOutside);
+
+
+
+
+    const { profileId } = useParams();
+    const { main, isLoding, error } = useSelector((state) => state.main);
+
+
+
+    // const userData = user.data;
+    console.log("data is", main)
+
+    useEffect(() => {
+        dispatch(__getMain(profileId));
+    }, [dispatch])
+
+
+
     return (
         <>
             {!input ?
                 <MypageBox>
                     {/* 내정보 박스 Myinfo */}
                     <Myinfo>
-                        <Profile src={profile} />
-                        <InfoBody>
-                            <Age> age : {data?.data?.age} </Age>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                            <Profile src={profile} />
+                            <InfoBody>
+                                <Age> age : {data?.data?.age} </Age>
 
-                            <MBTI>MBTI : ENFP</MBTI>
-                            <OneLine>한줄평으로 나를 소개하세요</OneLine>
-                        </InfoBody>
-                        {/* 같은 아이디를 가진 사람이 들어왔을때만 보여야함 */}
-                        {isClickEdit &&
-                            <EditModal
-                                post={post}
-                                modalRef={modalRef} />
-                        }
-
-                        <ModifyBtn onClick={() => setInput(!input)}>수정하기</ModifyBtn>
-                        <ModifyBtn onClick={() => setIsClickEdit(true)}>비밀번호 변경</ModifyBtn>
-
+                                <MBTI>MBTI : ENFP</MBTI>
+                                <OneLine>한줄평으로 나를 소개하세요</OneLine>
+                            </InfoBody>
+                            {/* 같은 아이디를 가진 사람이 들어왔을때만 보여야함 */}
+                            {isClickEdit &&
+                                <EditModal
+                                    post={post}
+                                    modalRef={modalRef} />
+                            }
+                        </div>
+                        <BtnBox>
+                            <ModifyBtn onClick={() => setInput(!input)}>수정하기</ModifyBtn>
+                            <ModifyBtn onClick={() => setIsClickEdit(true)}>비밀번호 변경</ModifyBtn>
+                        </BtnBox>
 
                     </Myinfo>
                     {/* 매칭 된사람 및 나를 좋아요한사람 목록박스 두개 필요 */}
@@ -137,8 +158,6 @@ const Mypage = () => {
                             <Listtitle>내가 받은 Perple</Listtitle>
                             <LovemeBox>
 
-                                <LoveCard src={profile}></LoveCard>
-                                <LoveCard src={profile}></LoveCard>
                                 <LoveCard src={profile}></LoveCard>
                                 <LoveCard src={profile}></LoveCard>
 
@@ -151,8 +170,6 @@ const Mypage = () => {
 
                             <MatchingBox>
 
-                                <MatchingCard src={profile}></MatchingCard>
-                                <MatchingCard src={profile}></MatchingCard>
                                 <MatchingCard src={profile}></MatchingCard>
                                 <MatchingCard src={profile}></MatchingCard>
 
