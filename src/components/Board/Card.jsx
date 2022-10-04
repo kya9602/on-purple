@@ -12,11 +12,13 @@ const Card = ({item}) => {
                     <Title>{item.title}</Title>
                     <Content>{item.content}</Content>  
                     <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
+                    
+                    <WriterLikeWrapper>
+                        <Writer>by <b>{item.nickname}</b></Writer>
+                        <Like>💜 {item.likes}</Like>
+                    </WriterLikeWrapper>
+
                 </Container>
-                <WriterLikeWrapper>
-                    <Writer>by <b>{item.nickname}</b></Writer>
-                    <Like>💜 {item.likes}</Like>
-                </WriterLikeWrapper>
             </Item>
         </>
     )
@@ -38,7 +40,7 @@ const Item = styled.div`
 
 const Image = styled.img` 
     width: 100%;
-    height: 67%;
+    height: 66%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 `
@@ -83,4 +85,5 @@ const WriterLikeWrapper = styled.div`
     height: 30px;
     -webkit-box-pack: justify;
     font-size: 0.8rem;
+    padding-bottom: 10px;
 `
