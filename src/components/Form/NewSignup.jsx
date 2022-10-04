@@ -1010,6 +1010,7 @@ const StBodyInput = styled.textarea`
   width: 300px;
   height: 80px;
   word-break: keep-all;
+  margin: auto;
   :hover{
     border: 2px solid #f797f7;
   }
