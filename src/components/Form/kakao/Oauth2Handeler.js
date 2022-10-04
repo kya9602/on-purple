@@ -28,7 +28,7 @@ const Oauth2Handler = () => {
                 localStorage.setItem("RefreshToken", res.headers.refreshtoken);    //예시로 로컬에 저장함    
                 localStorage.setItem("nickname", res.data.nickname);
 
-                window.alert("로그인에 성공했습니다.");
+                window.alert("로그인에 성공했습니다. ");
                 navigate('/');
             })
             .catch((err) => {

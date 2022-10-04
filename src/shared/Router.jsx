@@ -17,34 +17,31 @@ import EditPage from "../pages/EditPage";
 import Oauth2Handler from "../components/Form/kakao/Oauth2Handeler";
 import KakaoAddPage from "../pages/KakaoAddPage";
 import NewSignup from "../pages/NewSignuploadPage";
-import { CookiesProvider } from 'react-cookie';
 
 
 const Router = () => {
     return (
-        <CookiesProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" exact element={<MainPage />} />
-                    <Route path="/login" exact element={<LoginPage />} />
-                    <Route path="/signup" exact element={<NewSignup />} />
-                    <Route path="/kakaoAddSignup" exact element={<KakaoAddPage />} />
-                    <Route path="/myPage" exact element={<MypagePage />} />
-                    <Route path="/chat" exact element={<ChatPage />} />
-                    <Route path="/chat/:roomId" exact element={<ChatScreen />} />
-                    <Route path="/profile" exact element={<ProfilePage />} />
-                    <Route path="/board" exact element={<BoardPage />} />
-                    <Route path="/detail/:postId" exact element={<DetailPage />} />
-                    <Route path="/edit/:postId" exact element={<EditPage />} />
-                    <Route path="/post" exact element={<PostPage />} />
-                    <Route path="/information" exact element={<InformationPage />} />
-                    <Route path="/report" exact element={<ReportPage />} />
-                    <Route path="/guide" exact element={<GuidePage />} />
-                    <Route path="kakao" exact element={<Oauth2Handler />} />
-                    <Route path="/kakao" exact element={<Oauth2Handler />} />
-                </Routes>
-            </BrowserRouter>
-        </CookiesProvider>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" exact element={<MainPage />} />
+                <Route path="/login" exact element={<LoginPage />} />
+                <Route path="/signup" exact element={<NewSignup />} />
+                <Route path="/kakaoAddSignup" exact element={<KakaoAddPage />} />
+                <Route path="/myPage" exact element={<MypagePage />} />
+                <Route path="/chat" exact element={<ChatPage />} />
+                <Route path="/chat/:roomId" exact element={<ChatScreen />} />
+                <Route path="/profile" exact element={<ProfilePage />} />
+                <Route path="/board" exact element={<BoardPage />} />
+                <Route path="/detail/:postId" exact element={<DetailPage />} />
+                <Route path="/edit/:postId" exact element={<EditPage />} />
+                <Route path="/post" exact element={<PostPage />} />
+                <Route path="/information" exact element={<InformationPage />} />
+                <Route path="/report" exact element={<ReportPage />} />
+                <Route path="/guide" exact element={<GuidePage />} />
+                <Route path="kakao" exact element={<Oauth2Handler />} />
+                <Route path="/kakao" exact element={<Oauth2Handler />} />
+            </Routes>
+        </BrowserRouter>
 
     );
 }
