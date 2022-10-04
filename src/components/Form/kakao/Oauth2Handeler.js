@@ -162,7 +162,7 @@ const Oauth2Handler = () => {
 
     return (
         <>
-            {cookies[COOKIE_KEY] ? null : ( // 쿠키값이 있으면 null (즉, 모달닫기를 눌렀으면,)
+            {cookies[COOKIE_KEY] !== null ? null : ( // 쿠키값이 있으면 null (즉, 모달닫기를 눌렀으면,)
                 <>
                     <StHeader>
                         <StHeaderTitle> On Purple </StHeaderTitle>

@@ -7,6 +7,8 @@ import AddComment from "./AddComment"
 import { __deletePosts } from "../../redux/modules/board";
 import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
+import delete2 from "../../assets/icons/delete2.png"
+import edit from "../../assets/icons/edit.png"
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -45,17 +47,17 @@ const Detail = () => {
             <DateButtonWrapper>
                 {getNickname === detail.nickname ?
                     (
-                        <>
-                            <Button variant="outlined" onClick={goEdit}>수정</Button>
-                            <Button variant="outlined" color="error" onClick={() => { setShow(true) }}>삭제</Button>
-                        </>
+                     <div style={{gap:"10px", marginRight:"10px"}}>
+                        <EditButton onClick={goEdit}><img src={edit} alt=""/></EditButton>
+                        <DeleteButton onClick={() => { setShow(true) }}><img src={delete2} alt=""/></DeleteButton>
+                     </div>
                     ) :
                     null}
             </DateButtonWrapper>
             <Date>{detail.createdAt[0]}-{detail.createdAt[1]}-{detail.createdAt[2]} </Date>
             
             <View>
-                <div>조회 수: {detail.view}</div>
+                <div>View : {detail.view}</div>
             </View>
             
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
@@ -128,8 +130,8 @@ const Title = styled.h1`
 `
 
 const Date = styled.div`
-    margin: auto;
     font-size: 1rem;
+    margin-left: 12px;
 `
 const DateButtonWrapper = styled.div`
     align-items: center;
@@ -167,4 +169,31 @@ const NameLikeWrap = styled.div`
     align-items: center;
     gap:10px;
     margin-top:10px
+`
+const EditButton = styled.button`
+    width: 40px;
+    height: 30px;
+    border: none;
+    margin: 0 0 auto 0;
+    margin-top: 5px;
+    background-color: white;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+`
+
+const DeleteButton = styled.button`
+width: 40px;
+    height: 30px;
+    border: none;
+    margin: 0 0 auto 0;
+    margin-top: 5px;
+    background-color: white;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `
