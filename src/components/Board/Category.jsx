@@ -120,12 +120,15 @@ export default Category;
 
 const CategoryContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    width: 400px;
 `
 const StLabel = styled.label`
     display: flex;
     flex-direction: column;
     text-align: center;
     gap:8px;
+    margin-left: 10px;
 `
 
 const StInput = styled.input`
@@ -144,7 +147,7 @@ const StInput = styled.input`
         background: white;
         border: 0.2em solid orange;
         border-radius: 15px;
-        padding: 1em;
+        padding: 3px;
         color: #e4794d;
     }
     display: none;

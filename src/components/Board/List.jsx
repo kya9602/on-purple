@@ -9,6 +9,7 @@ const List = () => {
     const dispatch = useDispatch();
     const { isLoading, error, post } = useSelector((state) => state.post)
     console.log(post)
+    
     useEffect(() => {
         dispatch(__getPosts());
     }, [dispatch])
