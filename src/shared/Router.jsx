@@ -12,10 +12,12 @@ import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
+import GuidePage from "../pages/GuidePage";
 import EditPage from "../pages/EditPage";
 import Oauth2Handler from "../components/Form/kakao/Oauth2Handeler";
 import KakaoAddPage from "../pages/KakaoAddPage";
 import NewSignup from "../pages/NewSignuploadPage";
+
 
 const Router = () => {
     return (
@@ -35,8 +37,9 @@ const Router = () => {
                 <Route path="/post" exact element={<PostPage />} />
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
+                <Route path="/guide" exact element={<GuidePage />} />
+                <Route path="kakao" exact element={<Oauth2Handler />} />
                 <Route path="/kakao" exact element={<Oauth2Handler />} />
-
             </Routes>
         </BrowserRouter>
 

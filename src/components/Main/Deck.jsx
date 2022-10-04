@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSprings } from "react-spring/hooks";
-import { useGesture } from "react-with-gesture";
+import { useSprings } from 'react-spring'
+import { useGesture } from "react-use-gesture";
 import { __getMain } from "../../redux/modules/main";
 import Card from "./Card";
-
-
-import "./Deck.css";
 
 
 
@@ -25,6 +22,7 @@ for(let i=0;i<data.length;i++){
   cards.push(i);
 }
 
+/* 보여줄 카드의 css */
 const to = i => ({
   x: 0,
   y: i * -10,
@@ -44,9 +42,7 @@ const trans = (r, s) =>
 
 
   
-  useEffect(() => {
-    dispatch(__getMain());
-  }, [dispatch])
+  
   
 
   const [gone] = useState(() => new Set());
@@ -107,10 +103,22 @@ const trans = (r, s) =>
         setTimeout(() => gone.clear() || set(i => to(i)), 600);
     }
   );  
-  return props.map(({ x, y, rot, scale }, i) => (
+
+  useEffect(() => {
+    dispatch(__getMain());
+  }, [dispatch])
+  if (isLoading) return "😴로딩중이에요..😴"
+  if (error) {
+      return <>{error.message}</>
+  }
+  
+
+  return props.map(({ x, y, rot, scale ,props ,set}, i) => (
     <Card
       key={i}
 
+      props={props}
+      set={set}
       i={i}
       x={x}
       y={y}

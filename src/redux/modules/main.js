@@ -5,8 +5,9 @@ export const __getMain = createAsyncThunk(
     "/main",
     async (payload, thunkAPI) => {
         try {
+          
             const data = await axios.get(`${process.env.REACT_APP_HOST}/main`);
-            console.log(data.data.data)
+            //console.log(data.data.data);
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
@@ -37,13 +38,6 @@ extraReducers: {
     [__getMain.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
-    },
-    [__getMain.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [__getMain.pending]: (state) => {
-      state.isLoading = true;
     },
 }})
 
