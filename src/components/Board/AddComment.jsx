@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styled from "styled-components"
 import axios from "axios";
 import { useParams } from "react-router";
 import CommentList from "./CommentList";
-
+import { useDispatch } from "react-redux";
+import { createComment } from "../../redux/modules/comment";
+import writecomment from "../../assets/icons/writecomment.png"
 const AddComment = (detail) => {
   /* console.log(detail) */
+  const dispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState(false);
   const [comment, setComment] = useState({
     comment: "",
@@ -30,23 +33,24 @@ const AddComment = (detail) => {
           "Authorization": localStorage.getItem("Authorization"),
           "RefreshToken": localStorage.getItem("RefreshToken")
         }
-      })
-    if (data.data.success) {
-      window.location.reload()
-    }
-    console.log(data)
+      },)
+     .then((response)=>{
+        dispatch(createComment(response?.data?.data));
+    })
+    setComment("")
   };
+
   return (
     <>
-      <Container onClick={openModal} style={{ height: modalOpen ? "300px" : "40px" }}>
-        <div style={{ display: "flex", gap:"10px" }}>
+      <Container style={{ zIndex:"1" ,height: modalOpen ? "500px" : "50px" }}>
+      <More onClick={openModal}><img src={writecomment} alt=""/></More>
+        <div style={{ display: "flex", gap:"10px", marginLeft:"30px" }}>
           <Text
-            style={{}}
             type="text"
             name="comment"
             placeholder="댓글 달기.."
             onChange={inputHandler}
-            value={comment.comment}
+            value={comment.comment || ""}
           />
           <AddButton onClick={() => { addHandler(comment.comment) }}>게시</AddButton>
         </div>
@@ -64,14 +68,36 @@ const Container = styled.div`
     position: fixed;
     transition: all 1000ms;
     bottom: 0;
+    background-color: white;
 `
 const AddButton = styled.button`
     width: 15vw;
     height: 4.5vh;
+    border: none;
+    background-color: #DEBAF3;
+    border-radius: 80px;
+    font-weight: bold;
+    color: white;
 `
 
 const Text = styled.input`
-    width: 100%;
+    width: 350px;
     height: 4.5vh;
-  
+    font-size: 15px;
+    border: none;
+    
+    &:focus{
+      outline: none;
+      border-bottom: 1px solid black;
+    }
+`
+const More = styled.div`
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    img {
+      object-fit: cover;
+      width: 50px;
+      height: 100%;
+     }
 `
