@@ -1,4 +1,3 @@
-// import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -7,7 +6,6 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -20,6 +18,7 @@ import axios from "axios";
 import profileImage from "../../assets/images/profile.jpg";
 import { __checkUsername, __checkNickname } from "../../redux/modules/user";
 import { __getUser } from "../../redux/modules/signup";
+import { __logout, logout } from "../../redux/modules/user";
 
 
 
@@ -48,7 +47,7 @@ export default function VerticalLinearStepper() {
         setUserinfo({ ...userinfo, [name]: value, });
     };
 
-    const [imageUrl, setImageUrl] = useState([profileImage]); // img input value
+    const [imageUrl, setImageUrl] = useState(""); // img input value
     const [formData] = useState(new FormData())
 
     // Event Handler
@@ -117,7 +116,7 @@ export default function VerticalLinearStepper() {
             window.alert(data.error.message)
         }
 
-        setUserinfo.preventDefault();
+        setUserinfo(initialState);
 
     };
 
@@ -173,6 +172,8 @@ export default function VerticalLinearStepper() {
         const { name, value } = e.target;
         setInput({ ...input, [name]: value, });
     };
+
+
 
     const accessToken = localStorage.getItem("Authorization"); //accesstoken 
     const refreshToken = localStorage.getItem("RefreshToken") //refreshToken
@@ -234,7 +235,7 @@ export default function VerticalLinearStepper() {
         else {
             window.alert(data.error.message)
         }
-        setInput(input);
+        input(initialState);
     };
 
 
@@ -255,11 +256,23 @@ export default function VerticalLinearStepper() {
                         <form style={{ marginTop: "10px" }} >
 
                             <ImgBox >
-                                <Avatar
-                                    src={imageUrl}
-                                    style={{ margin: '20px' }}
-                                    size={200}
-                                    onClick={() => { inputRef.current.click() }} />
+
+                                {imageUrl !== "" ?
+                                    <Avatar
+                                        src={imageUrl}
+                                        style={{ margin: '20px' }}
+                                        size={200}
+                                        onClick={() => { inputRef.current.click() }} /> :
+                                    <Avatar
+                                        src={profileImage}
+                                        alt="기본이미지"
+                                        style={{ margin: '20px' }}
+                                        size={200}
+                                        onClick={() => { inputRef.current.click() }}
+                                    />
+                                }
+
+
                                 <input
                                     type='file'
                                     id='imageUrl'
@@ -421,6 +434,7 @@ export default function VerticalLinearStepper() {
                         <form>
                             <SecondMyinfo>
                                 <InfoBodyBox>
+                                    <MiniHeader>🌟 필수로 입력해주어야 합니다~🌠</MiniHeader>
                                     <AgeInput
                                         placeholder="당신의 나이는 몇살인가요 ??"
                                         type="text"
@@ -582,9 +596,29 @@ export default function VerticalLinearStepper() {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
+
+    const onClickHandler = () => {
+        dispatch(__logout());
+        dispatch(logout());
+        handleBack();
+    };
+
+
+    const onChangeReset = () => {
+        setImageUrl('');
+    }
+
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
     };
+
+    const onClickResetHandler = () => {
+        dispatch(__logout());
+        dispatch(logout());
+        handleReset();
+    };
+
 
     const handleReset = () => {
         setActiveStep(0);
@@ -645,16 +679,24 @@ export default function VerticalLinearStepper() {
                                                     onClick={() => { addaddHandler(); }}
                                                     sx={{ mt: 1, mr: 1 }}
                                                 >끝</Button> : null}
-                                        <Button
-                                            disabled={index === 0}
-                                            onClick={handleBack}
-                                            sx={{ mt: 1, mr: 1 }}
-                                        >
-                                            Back
-                                        </Button>
 
 
-
+                                        {index === 0 ?
+                                            <Button
+                                                disabled={index === 0}
+                                                onClick={handleBack}
+                                                sx={{ mt: 1, mr: 1 }}
+                                            >
+                                                Back
+                                            </Button>
+                                            : index === 1 ?
+                                                <Button
+                                                    disabled={index === 0}
+                                                    onClick={() => { onClickHandler(); onChangeReset(); }}
+                                                    sx={{ mt: 1, mr: 1 }}
+                                                >
+                                                    Back
+                                                </Button> : null}
                                     </div>
                                 </Box>
                             </StepContent>
@@ -672,7 +714,7 @@ export default function VerticalLinearStepper() {
                         <Button onClick={handleFinish}>완료!</Button>
 
 
-                        <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                        <Button onClick={onClickResetHandler} sx={{ mt: 1, mr: 1 }}>
                             다시 작성하기
                         </Button>
 
@@ -735,7 +777,6 @@ const StHeaderBody = styled.div`
 const Description = styled.div`
     font-size: 14px;   
 `
-
 
 ///회원가입 스타일
 
@@ -842,8 +883,6 @@ const CheckLabel = styled.label`
   }
 `
 
-
-
 //인풋 값 오류 라벨
 const StSmallWorning = styled.label`
   font-size: 14px;
@@ -874,6 +913,8 @@ const StLine = styled.div`
 const InfoBodyBox = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 400px;
 `
 
 //큰틀
@@ -888,7 +929,6 @@ const SecondMypageBox = styled.div`
     background-color: white;
     display: flex;
     flex-direction: column;
-
 `
 
 //작틀
@@ -897,8 +937,6 @@ const SecondMyinfo = styled.div`
     display: flex;
     margin-left: 10px;
 `
-
-
 
 //나이 인풋창
 const AgeInput = styled.input`
@@ -943,7 +981,6 @@ const StSelect = styled.select`
 
 `
 
-
 //지역인풋값
 const Location = styled.input`
   margin  : auto ;
@@ -980,7 +1017,6 @@ const StBodyInput = styled.textarea`
       outline: none;
       border: 2px solid #80036f;
     }
-
 `
 
 //완료버튼창 박스
@@ -1007,8 +1043,6 @@ const StButton = styled.button`
     background-color: #ffffae;
     border : none;
   }
-  
- 
 `
 
 //------------------------------------------------------------------------------------------------------------------------

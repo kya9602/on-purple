@@ -11,7 +11,7 @@ export const __getDetail = createAsyncThunk(
     "data/getDetail",
     async (payload, thunkAPI) => {
         try {
-            const data = await axios.get(`http://localhost:3001/mypage`, payload,
+            const data = await axios.get(`${process.env.REACT_APP_HOST}/mypage`, payload,
                 {
                     headers: {
                         "Authorization": localStorage.getItem("Authorization"),   //accesstoken
