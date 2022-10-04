@@ -4,7 +4,7 @@ import Comment from "./Comment";
 import { useDispatch, useSelector } from "react-redux";
 import { __getComments } from "../../redux/modules/comment";
 import { useParams } from "react-router";
-import Comments from "./Comment";
+
 
 const CommentList = () => {
     const dispatch = useDispatch()
@@ -12,9 +12,6 @@ const CommentList = () => {
     const {postId} = useParams();
     const {isLoading, error, comment} = useSelector((state)=> state?.comment)
     
-    const commentList = comment.data
-    /* console.log(commentList) */
-
     useEffect(()=>{
         dispatch(__getComments(postId));
     },[dispatch])
@@ -22,17 +19,17 @@ const CommentList = () => {
     if (isLoading) return "Loading..."
 
     if (error) {
-        return <>{error.message}</>
+        return <>{error?.message}</>
     }
 
-    if (comment.length === 0) {
-        return <>😴댓글이 존재하지 않습니다. 댓글을 남겨주세요😴</>
+    if (comment.length == 0) {
+        return <div style={{textAlign:"center", marginTop:"10px"}}>😴댓글이 존재하지 않습니다. 댓글을 남겨주세요😴</div>
     }
 
     return (
         <>
             <Container>
-                {commentList?.map((comment)=>(<Comments comment={comment} key={comment.commentId}/>))}
+                {comment.data.map((item)=>(<Comment item={item} key={item.commentId}/>))}
             </Container>
         </>
 

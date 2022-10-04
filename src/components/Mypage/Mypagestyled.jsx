@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 //마이페이지 큰박스
 export const MypageBox = styled.div`
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     width: 95vw;
     height: auto;
-    padding-bottom: 2%;
+    padding-bottom: 10%;
     margin: auto;
     margin-top: 90px;
-    border: 5px solid #fdc2f0;
+    border: 1px solid #fdc2f0;
     border-radius: 15px;
     background-color: white;
     display: flex;
@@ -25,14 +26,16 @@ export const Myinfo = styled.div`
     /* margin-left: 25vw; */
     margin-top: 1vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding-bottom: 2%;
 `
 
 //마이페이지 프로필 사진
 export const Profile = styled.img`
-    width: 120px;
-    height: 120px; 
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    width: 100px;
+    height: 100px; 
     border-radius: 70%;
     overflow: hidden;
     margin: 2.5vw;
@@ -44,20 +47,22 @@ export const InfoBody = styled.div`
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 1vw;
+    text-align: center;
+    width: 50vw;
 `
 
 //나이 박스
 export const Age = styled.div`
     text-align: center;
     padding: 3%;
-    font-size: 16px;
+    font-size: 14px;
 `
 
 //MBTI 박스
 export const MBTI = styled.div`
     text-align: center;
     padding: 3%;
-    font-size:16px;
+    font-size:14px;
     
 `
 
@@ -65,15 +70,21 @@ export const MBTI = styled.div`
 export const OneLine = styled.div` 
     text-align: center;
     padding: 3%;
-    font-size:16px;
-    width: 20vw;
+    font-size:14px;
+    width: 50vw;
+`
+//버튼 박스
+export const BtnBox = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 `
 
 //수정버튼
 export const ModifyBtn = styled.button`
+    cursor: pointer;
     height: 25px;
-    margin-top: 10vw;
-    margin-left: 1vw;
+    margin-left: 2vw;
     background-color: white;
     border: 2px solid #d87dd8;
     :hover{
@@ -102,25 +113,14 @@ export const Listtitle = styled.div`
 
 //나를 좋아요한 사람 목록박스
 export const LovemeBox = styled.div`
-  width: 70%;
   margin: 0px auto;
-
   display: grid;
   /* align-items: center; */
   justify-content: center;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 5%;
   grid-row-gap: 5%;
-  
-  @media screen and (max-width: 900px){
-    /* width: 80%; */
-    grid-template-columns: repeat(1, 1fr);
-    grid-row-gap: 3%;
-  }
-  @media screen and (max-width: 600px){
-    grid-template-columns: repeat(1, 1fr);
-    grid-row-gap: 1%;
-  } 
+ 
 `
 
 
@@ -131,8 +131,8 @@ export const LoveCard = styled.img`
     background-color: #8adafd;
     border-radius: 10px;
     padding : 1%;
-    width: 13vw;
-    height:13vw;
+    width: 150px;
+    height:150px;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -140,36 +140,24 @@ export const LoveCard = styled.img`
 
 //매칭된 사람 목록 박스
 export const MatchingBox = styled.div`
-  width: 70%;
   margin: 0px auto;
-
   display: grid;
   /* align-items: center; */
   justify-content: center;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 5%;
   grid-row-gap: 5%;
-  
-  @media screen and (max-width: 900px){
-    /* width: 80%; */
-    grid-template-columns: repeat(1, 1fr);
-    grid-row-gap: 40px;
-  }
-  @media screen and (max-width: 600px){
-    grid-template-columns: repeat(1, 1fr);
-    grid-row-gap: 50px;
-  } 
 `
 
 //매칭된 사람 프로필 사진
 export const MatchingCard = styled.img`
-    margin: auto;
+     margin: auto;
     margin-left: 2vw;
     background-color: #8adafd;
     border-radius: 10px;
     padding : 1%;
-    width: 13vw;
-    height:13vw;
+    width: 150px;
+    height:150px;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
