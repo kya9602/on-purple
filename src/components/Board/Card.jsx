@@ -11,9 +11,8 @@ const Card = ({item}) => {
                 <Container>
                     <Title>{item.title}</Title>
                     <Content>{item.content}</Content>  
-                    <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date> 
+                    <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
                 </Container>
- 
                 <WriterLikeWrapper>
                     <Writer>by <b>{item.nickname}</b></Writer>
                     <Like>💜 {item.likes}</Like>
@@ -34,6 +33,7 @@ const Item = styled.div`
     box-shadow:5px 5px 5px grey;
     margin : 0.7rem;
     margin-right: 18px;
+    box-sizing: inherit;
 `
 
 const Image = styled.img` 
@@ -80,5 +80,7 @@ const WriterLikeWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 45px;
+    height: 30px;
+    -webkit-box-pack: justify;
+    font-size: 0.8rem;
 `

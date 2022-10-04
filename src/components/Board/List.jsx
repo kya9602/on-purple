@@ -8,8 +8,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const List = () => {
     const dispatch = useDispatch();
     const { isLoading, error, post } = useSelector((state) => state.post)
-    
-    
+    console.log(post)
     useEffect(() => {
         dispatch(__getPosts());
     }, [dispatch])
@@ -29,7 +28,6 @@ export default List;
 const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 4vw;
     margin: 0 auto;
     margin-left: 1vw;
     margin-top: 10px;

@@ -128,7 +128,7 @@ export default function VerticalLinearStepper() {
     //아이디 중복 체크
     const usernameCheckHandler = async (e) => {
         e.preventDefault();
-        const { username } = user;
+        const { username } = userinfo;
         const member = {
             username: username
         };
@@ -139,7 +139,7 @@ export default function VerticalLinearStepper() {
     //닉네임 중복 체크
     const nicknameCheckHandler = async (e) => {
         e.preventDefault();
-        const { nickname } = user;
+        const { nickname } = userinfo;
         const member = {
             nickname: nickname
         };
