@@ -8,7 +8,8 @@ import useDetectClose from "./useDetectClose";
 import { __getUser } from "../../redux/modules/signup";
 import profile from "../../assets/images/profile.jpg";
 import logo from "../../assets/images/perple.jpg";
-
+import Onlogo from "../../assets/images/On 소문자.svg";
+import Offlogo from "../../assets/images/Off 소문자.svg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -48,16 +49,11 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      {token === null ? <LogoImg>Off</LogoImg>
-        : <LogoImg>On</LogoImg>}
+      {token === null ? <LogoImg><img src={Offlogo} alt="로그인 안된상태" /></LogoImg>
+        : <LogoImg><img src={Onlogo} alt="로그인 된상태" /></LogoImg>}
       <Title>Purple</Title>
       <UserSet >
-        {token === null ? <UserInfo>
-          안녕하세요
-        </UserInfo>
-          : <UserInfo>
-            {userData?.nickname}님 안녕하세요
-          </UserInfo>}
+
 
 
         <DropDownContainer>
@@ -83,11 +79,12 @@ const Header = () => {
                 </>
 
                 :
-                <><Li>
-                  <LinkWrapper onClick={onClickHandler}>
-                    로그아웃
-                  </LinkWrapper>
-                </Li>
+                <>
+                  <Li>
+                    <LinkWrapper onClick={onClickHandler}>
+                      로그아웃
+                    </LinkWrapper>
+                  </Li>
                   <Li>
                     <LinkWrapper
                       onClick={() => navigate("/mypage")}
@@ -130,12 +127,17 @@ const HeaderContainer = styled.div`
     top: 0;
     left: 0;
     z-index: -1;
-    opacity: 0.5;
+    /* opacity: 0.8; */
+    /* filter: invert(10%); */
+    /* filter: brightness(120%); */
     background-size: cover;}
 `
 const LogoImg = styled.div`
-  flex:1;
-  margin-top: 20px;
+  box-shadow: 5px 5px 10px;
+  margin-left: 10px;
+  margin-top: 8px;
+  height: 55px;
+  filter: invert(91%) sepia(12%) saturate(205%) hue-rotate(248deg) brightness(103%) contrast(94%);
 `
 
 const Title = styled.div`
@@ -151,6 +153,7 @@ const Title = styled.div`
   -webkit-background-clip: text;
           background-clip: text;
   color: transparent;
+  text-align: center;
 `
 const UserSet = styled.div`
     display: flex;
