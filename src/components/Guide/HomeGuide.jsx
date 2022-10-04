@@ -32,12 +32,12 @@ function HomeGuide() {
     {
         pics:'https://cdn.magloft.com/github/swiper/images/page-004.jpg',
         H3:'Slide 4',
-        H4:'보드 이용하기'
+        H4:'채팅 하기'
     },
     {
         pics:'https://cdn.magloft.com/github/swiper/images/page-005.jpg',
         H3:'Slide 5',
-        H4:'보드 이용하기'
+        H4:'시작 하기'
     },
 ]
 
@@ -45,9 +45,9 @@ function HomeGuide() {
       <>
         <SwiperContainer>
             <Swiper
-                slidesPerView={5}
+                slidesPerView={2}
                 centeredSlides={true}
-                spaceBetween={30}
+                spaceBetween={10}
                 pagination={true}
                 navigation={true}
                 modules={[Pagination, Navigation]}
@@ -55,17 +55,12 @@ function HomeGuide() {
             >
                 {DB.map(data=>(
                     <SwiperSlide key={data.pics} >
-                        {({ isActive }) => (
-
-                            <div>Current slide is {isActive ? 'active' : 'not active'}</div>
-                            
-                        )}
-            
+                                    
                         <img src={data.pics} />
                         <div>
                             <h3>{data.H3}</h3>
                             <h4>{data.H4}</h4>
-                        </div>            
+                        </div>
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -87,7 +82,7 @@ const SwiperContainer = styled.div`
 
 
 .swiper-wrapper{
-    max-width: 80%;
+    max-width: 90%;
 }
 
 
@@ -100,7 +95,7 @@ const SwiperContainer = styled.div`
   background: lightgray;
   border-radius: 15px;
 
-  filter: brightness( ${(props)=> props.per || '30%' } );
+  /* filter: brightness( ${(props)=> props.per || '30%' } ); */
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -127,7 +122,7 @@ const SwiperContainer = styled.div`
   object-fit: cover;
 }
 .swiper-slide div {
-    width: 100%;
+    max-width: 100%;
     height: 17vh;
 }
 

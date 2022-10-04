@@ -4,7 +4,7 @@ import { animated, interpolate } from "react-spring";
 
 
 
-function Card({ i, x, y, rot, scale, trans, bind, objs, props,  }){
+function Card({ i, x, y, rot, scale, trans, bind, objs, }){
   
   
     const { nickname, age, area, introduction, imageUrl } = objs[i];
@@ -52,35 +52,39 @@ export default Card;
 
 const CardContainer = styled.div`
 
-
-
-margin-top: 80px;
-
-.Container {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  will-change: transform;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+.Container {  
+  margin-top: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 300px;
+  margin-right: 300px;
+
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  will-change: transform;
+  
+  
 }
 
 .CardContainer {
-  margin-bottom: 80px;
-  padding: 5px;
   background-color: white;
   background-size: auto 85%;
   background-repeat: no-repeat;
   background-position: center center;
   width: 45vh;
   max-width: 300px;
-  height: 550px;
-  max-height: 570px;
+  height: 85vh;
+  max-height: 450px;
   will-change: transform;
   border-radius: 10px;
-  box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
-  0 10px 10px -10px rgba(50, 50, 73, 0.3);
+  box-shadow: 0 1px 21px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
   
 }
 
@@ -94,7 +98,7 @@ margin-top: 80px;
   background-size: 100%;
   background-repeat: no-repeat;
   max-height: 570px;
-  height: 380px;
+  height: 330px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   
@@ -122,13 +126,5 @@ h4:last-of-type {
 
 .card > div {
   height: 380px !important;
-}
-
-.slider-control-bottomcenter {
-  bottom: -15px !important;
-}
-
-.slider-control-bottomcenter > ul > li > button {
-  color: salmon !important;
 }
 `
