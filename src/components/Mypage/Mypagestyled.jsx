@@ -65,6 +65,10 @@ export const MBTI = styled.div`
     font-size:14px;
     
 `
+//한줄평 안은 박스
+export const OnlineBox = styled.div`
+  
+`
 
 //한줄평 박스
 export const OneLine = styled.div` 
