@@ -8,12 +8,12 @@ import { useNavigate, useParams } from "react-router";
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    /* const [category, setCatecory] = useState("me"); */
+    /* const [category, setCatecory] = useState("meet"); */
     const { isLoading, error, post } = useSelector((state) => state?.post)
     /* console.log(post) */
    
-    const { Category } =useParams();
-    console.log(Category)
+    const { Category } = useParams();
+    /* console.log(Category) */
 
  /*    const categories = [
         {

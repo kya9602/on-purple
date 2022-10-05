@@ -4,7 +4,7 @@ import axios from "axios";
 export const __getPosts = createAsyncThunk(
     "GET_POSTS",
     async (payload, thunkAPI) => {
-      /* console.log(payload) */
+      /* console.log(payload) 무한스크롤&page=0&size=10*/
         try {
             const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}`);
             /* console.log(data) */
@@ -47,6 +47,23 @@ export const __deletePosts = createAsyncThunk(
     }
   );
   
+export const __likePost = createAsyncThunk(
+    "LIKE_POST",
+    async (payload, thunkAPI) => {
+        try {
+            const data = await axios.post(`${process.env.REACT_APP_HOST}/like/${payload}`,{
+              headers: {
+                "Authorization": localStorage.getItem("Authorization"),
+                "RefreshToken": localStorage.getItem("RefreshToken")
+              }
+            });
+            console.log(data)
+            return payload
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.code);
+        }
+    }
+);
 
 const initialState = {
     post:[],
@@ -84,7 +101,6 @@ export const postSlice = createSlice({
         state.isLoading = true;
 
       },
-
       [__getPostsDetail.fulfilled]: (state, action) => {
         state.isLoading = false;
         state.detail = action.payload;
@@ -96,12 +112,24 @@ export const postSlice = createSlice({
       [__getPostsDetail.pending]: (state) => {
         state.isLoading = true; 
       },
-      
+
+      [__likePost.pending]: (state) => {
+        state.isLoading = true; 
+      },
+      [__likePost.fulfilled]: (state, action) => {
+        console.log(action)
+        state.isLoading = false; 
+        state.detail = action.payload; 
+      },
+      [__likePost.rejected]: (state, action) => {
+        state.isLoading = false; 
+        state.error = action.payload; 
+      },
+
       [__deletePosts.pending]: (state, action) => {
         state.isLoading = true
       },
-      // fullflled 되었을 때, 서버에서 받아온 데이터를 state에 넣어줌!
-      // 첫번째 파라미터는 redux의 state이고 두번째 파라미터는 action
+      
       [__deletePosts.fulfilled]: (state, action) => {
         state.list = action.payload;
       },

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { __getPostsDetail } from "../../redux/modules/board";
 import AddComment from "./AddComment"
-import { __deletePosts } from "../../redux/modules/board";
+import { __deletePosts,__likePost } from "../../redux/modules/board";
 import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
 import delete2 from "../../assets/icons/delete2.png"
@@ -24,7 +24,8 @@ const Detail = () => {
     const [show, setShow] = useState(false);
     const { isLoading, error, detail } = useSelector((state) => state.post);
     const { postId } = useParams();
-    console.log(detail)
+    console.log(postId)
+    
     useEffect(() => {
         dispatch(__getPostsDetail(postId));
     }, [dispatch])
@@ -38,8 +39,13 @@ const Detail = () => {
         navigate(`/edit/${postId}`)
     }
     
+    const onLike = (event) => {
+        event.preventDefault();
+        dispatch(__likePost(postId));
+    };
     const getNickname = localStorage.getItem("nickname")
     /* console.log(detail.nickname) */
+
     return (
         <>
             <Title>{detail.title}</Title>
@@ -72,7 +78,7 @@ const Detail = () => {
 
             <NameLikeWrap>
                 <div style={{fontSize:"1.2rem", marginLeft:"22px", fontWeight:"bold"}}>{detail.nickname}</div>
-                <div style={{fontSize:"1rem"}}>💜 {detail.likes}개</div>
+                <div style={{fontSize:"1rem", display:"flex"}}><span onClick={onLike}>💜</span> {detail.likes}개</div>
             </NameLikeWrap>
             
             <Content><p>{detail.content}</p></Content>

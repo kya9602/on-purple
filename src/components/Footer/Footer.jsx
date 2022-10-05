@@ -16,7 +16,7 @@ const Footer = () =>{
                     <HomeIcon fontSize="large" />
                 </MainContainer>
             </Link>
-            <Link to="/board">
+            <Link to="/board/taste">
                 <MainContainer>
                     <DashboardIcon fontSize="large" />
                 </MainContainer>

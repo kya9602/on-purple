@@ -6,7 +6,8 @@ import { __getComments } from "../../redux/modules/comment";
 import { useParams } from "react-router";
 
 
-const CommentList = () => {
+const CommentList = (props) => {
+    console.log(props)
     const dispatch = useDispatch()
     
     const {postId} = useParams();
