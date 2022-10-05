@@ -26,6 +26,9 @@ const AddComment = (detail) => {
   };
 
   const addHandler = async (comment) => {
+    if(comment.trim()===""){
+      return alert("댓글을 입력해주세요")
+    }
     let data = await axios.post(`${process.env.REACT_APP_HOST}/comment/${postId}`,
       { postId: postId, comment: comment },
       {

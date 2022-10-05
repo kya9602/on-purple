@@ -168,8 +168,7 @@ export default PostPage;
 
 const AddHeader = styled.div`
     text-align: center;
-    font-size: 32px;
-    font-weight: 15px;
+    font-size: 22px;
     margin: 20px 0;
 `
 
