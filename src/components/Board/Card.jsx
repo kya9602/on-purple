@@ -6,18 +6,20 @@ const Card = ({item}) => {
     return (
         <>
             <Item onClick={()=>{navigate(`/detail/${item.postId}`)}}>
-                <Image src={item.imageUrl} alt="" />
-                
+                <ImageDiv>
+                    <Image src={item.imageUrl} alt="" />
+                </ImageDiv>
                 <Container>
-                    <Title>{item.title}</Title>
-                    <Content>{item.content}</Content>  
-                    <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date> 
-                </Container>
- 
-                <WriterLikeWrapper>
-                    <Writer>by <b>{item.nickname}</b></Writer>
-                    <Like>💜 {item.likes}</Like>
-                </WriterLikeWrapper>
+                    <TitleContainer>
+                        <Title>{item.title}</Title>
+                        <Content>{item.content}</Content>  
+                        <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
+                    </TitleContainer>
+                    <WriterLikeWrapper>
+                        <Writer>by <b>{item.nickname}</b></Writer>
+                        <Like>💜 {item.likes}</Like>
+                    </WriterLikeWrapper>
+                </Container>                
             </Item>
         </>
     )
@@ -35,10 +37,16 @@ const Item = styled.div`
     margin : 0.7rem;
     margin-right: 18px;
 `
+const ImageDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
 const Image = styled.img` 
-    width: 100%;
-    height: 67%;
+    max-width: 50vh;
+    max-height: 280px;
+    height: 280px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 `
@@ -56,8 +64,15 @@ const Content = styled.div`
 `
 
 const Container = styled.div`
+    border-top: 1px solid #9C7FCB;
+    margin-top: auto;
     display: flex;
     flex-direction: column;
+`
+const TitleContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    
 `
 
 const Writer = styled.div`
