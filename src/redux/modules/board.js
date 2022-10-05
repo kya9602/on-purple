@@ -18,13 +18,13 @@ export const __getPosts = createAsyncThunk(
 export const __getPostsDetail = createAsyncThunk(
   "GET_POSTS_DETAIL",
   async (payload, thunkAPI) => {
-      try {
-          const data = await axios.get(`${process.env.REACT_APP_HOST}/post/${payload}`);
-         /*  console.log(data) */
-          return thunkAPI.fulfillWithValue(data.data.data);
-      } catch (error) {
-          return thunkAPI.rejectWithValue(error.code);
-      }
+    try {
+      const data = await axios.get(`${process.env.REACT_APP_HOST}/post/${payload}`);
+      /*  console.log(data) */
+      return thunkAPI.fulfillWithValue(data.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
   }
 );
 
@@ -66,39 +66,39 @@ export const __likePost = createAsyncThunk(
 );
 
 const initialState = {
-    post:[],
-    detail: {
-      postId:0,
-      nickname:"",
-      title:"",
-      content:"",
-      imgList:[],
-      likes:0,
-      createdAt:[],
-      commentResponseDtoList : [],
-      modifiedAt:[],
-      category:"",
-    },
-    error: null,
-    isLoading: false,
-  }
+  post: [],
+  detail: {
+    postId: 0,
+    nickname: "",
+    title: "",
+    content: "",
+    imgList: [],
+    likes: 0,
+    createdAt: [],
+    commentResponseDtoList: [],
+    modifiedAt: [],
+    category: "",
+  },
+  error: null,
+  isLoading: false,
+}
 
 export const postSlice = createSlice({
-    name: "post",
-    initialState,
-    reducers: {
+  name: "post",
+  initialState,
+  reducers: {
+  },
+  extraReducers: {
+    [__getPosts.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.post = action.payload;
     },
-    extraReducers: {
-      [__getPosts.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        state.post = action.payload;
-      },
-      [__getPosts.rejected]: (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      },
-      [__getPosts.pending]: (state) => {
-        state.isLoading = true;
+    [__getPosts.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__getPosts.pending]: (state) => {
+      state.isLoading = true;
 
       },
       [__getPostsDetail.fulfilled]: (state, action) => {
