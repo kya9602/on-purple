@@ -1,17 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
-import instance from "../../shared/api";
-
-
-export const setUserDB = createAsyncThunk("setUserImage", async () => {
-    try {
-        const response = await instance.get("/api/user/userInfo");
-        const userInfo = response.data;
-        return { userInfo };
-    } catch (error) {
-        console.log(error);
-    }
-});
 
 
 export const __checkUsername = createAsyncThunk(

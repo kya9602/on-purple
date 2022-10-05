@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const Card = ({item}) => {
+    /* console.log(item.category) */
     const navigate = useNavigate();
     return (
         <>
@@ -15,11 +16,16 @@ const Card = ({item}) => {
                         <Content>{item.content}</Content>  
                         <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
                     </TitleContainer>
+                    <Title>{item.title}</Title>
+                    <Content>{item.content}</Content>                   
+                    <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
                     <WriterLikeWrapper>
                         <Writer>by <b>{item.nickname}</b></Writer>
                         <Like>💜 {item.likes}</Like>
                     </WriterLikeWrapper>
+
                 </Container>                
+
             </Item>
         </>
     )
@@ -36,6 +42,7 @@ const Item = styled.div`
     box-shadow:5px 5px 5px grey;
     margin : 0.7rem;
     margin-right: 18px;
+    box-sizing: inherit;
 `
 const ImageDiv = styled.div`
     display: flex;
@@ -47,6 +54,8 @@ const Image = styled.img`
     max-width: 50vh;
     max-height: 280px;
     height: 280px;
+    width: 100%;
+    height: 66%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 `
@@ -95,5 +104,8 @@ const WriterLikeWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 45px;
+    height: 48px;
+    -webkit-box-pack: justify;
+    font-size: 0.8rem;
+    padding-bottom: 10px;
 `

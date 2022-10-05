@@ -97,7 +97,7 @@ const DeleteBtn = styled.button`
     }
 `
 const EditBtn = styled.button`
-     width: 40px;
+    width: 40px;
     height: 30px;
     border: none;
     margin: 0 0 auto 0;

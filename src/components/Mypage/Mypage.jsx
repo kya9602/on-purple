@@ -3,15 +3,14 @@ import profile from "../../assets/images/profile.jpg";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { updatePost, __getDetail } from "../../redux/modules/mypage";
-import EditModal from "./EditModal";
-import useOnClickOutside from "./useOnClickOutside";
-import { __getMain } from "../../redux/modules/main";
+import { __getLikeprofile, __getMypage, updatePost } from "../../redux/modules/mypage";
+import EditModal from "./modal/EditModal";
+import useOnClickOutside from "./modal/useOnClickOutside";
 
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
     ListBox, Listtitle, LovemeBox, LoveCard, MatchingBox, MatchingCard, Avatar, StBodyInput, StButton, AddMyinfo,
-    MiniBox, MiniTitle, MiniInput, MiniHeader, BtnBox
+    MiniBox, MiniTitle, MiniInput, MiniHeader, BtnBox, OnlineBox
 } from "./Mypagestyled";
 
 
@@ -57,15 +56,17 @@ const Mypage = () => {
 
     }, []);
 
+    //마이페이지 처음 기본정보 불러오기
+    const { mypage } = useSelector((state) => state?.mypage);
+    console.log("mypage is", mypage?.profileId)
 
-    const params = useParams();
-    const postId = parseInt(params.id);
-    const data = useSelector((state) => state.detail)
-    console.log(data)
+
 
     useEffect(() => {
-        dispatch(__getDetail(postId));
+        dispatch(__getMypage(mypage.profileId));
     }, [dispatch])
+
+
 
     const [post, setPost] = useState(initialState)
 
@@ -85,16 +86,13 @@ const Mypage = () => {
             });
         console.log(a.data.data);
         dispatch(updatePost({
-            age: a?.data?.data?.age,
-            MBTI: a?.data?.data?.MBTI,
-            id: a?.data?.data?.postId,
-            imageUrl: a?.data?.data?.imageUrl,
-            OneLine: data?.data?.data?.OneLine,
-            content: post.content
+
         }));
 
         setInput(!input)
     }
+
+
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setPost({ ...post, [name]: value });
@@ -110,19 +108,6 @@ const Mypage = () => {
 
 
 
-    const { profileId } = useParams();
-    const { main, isLoding, error } = useSelector((state) => state.main);
-
-
-
-    // const userData = user.data;
-    console.log("data is", main)
-
-    useEffect(() => {
-        dispatch(__getMain(profileId));
-    }, [dispatch])
-
-
 
     return (
         <>
@@ -131,12 +116,15 @@ const Mypage = () => {
                     {/* 내정보 박스 Myinfo */}
                     <Myinfo>
                         <div style={{ display: "flex", justifyContent: "center" }}>
-                            <Profile src={profile} />
+                            {/* <Profile src={mypage.imageUrl} /> */}
                             <InfoBody>
-                                <Age> age : {data?.data?.age} </Age>
+                                {/* <Age> age :{mypage.age}</Age> */}
 
-                                <MBTI>MBTI : ENFP</MBTI>
-                                <OneLine>한줄평으로 나를 소개하세요</OneLine>
+                                {/* <MBTI>MBTI :{mypage.mbti} </MBTI> */}
+                                <OnlineBox>
+                                    <OneLine>한 줄 소개</OneLine>
+                                    {/* <OneLine>{mypage.introduction}</OneLine> */}
+                                </OnlineBox>
                             </InfoBody>
                             {/* 같은 아이디를 가진 사람이 들어왔을때만 보여야함 */}
                             {isClickEdit &&
@@ -290,3 +278,4 @@ const Mypage = () => {
 }
 
 export default Mypage;
+

@@ -10,6 +10,7 @@ import profile from "../../assets/images/profile.jpg";
 import logo from "../../assets/images/perple.jpg";
 import Onlogo from "../../assets/images/On 소문자.svg";
 import Offlogo from "../../assets/images/Off 소문자.svg";
+import { __getMypage } from "../../redux/modules/mypage";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -33,18 +34,25 @@ const Header = () => {
 
   //object-fit : cover 이미지 설정시 사용해보기
 
-  const { userId } = useParams();
+  const { userId, profileId } = useParams();
   const { user, isLoding, error } = useSelector((state) => state.user);
 
-
-
   const userData = user.data;
-  // console.log("data is", userData)
+  // console.log("data is", user)
+  // console.log(userData)
+
+  // useEffect(() => {
+  //   dispatch(__getUser(userId));
+  // }, [__getUser])
+
+
+  //마이페이지 들어가는
+  const { mypage } = useSelector((state) => state.mypage);
+  console.log("mypage is", mypage.profileId)
 
   useEffect(() => {
-    dispatch(__getUser(userId));
-  }, [dispatch])
-
+    dispatch(__getMypage(profileId));
+  }, [__getMypage])
 
 
   return (
@@ -81,18 +89,18 @@ const Header = () => {
                 :
                 <>
                   <Li>
-                    <LinkWrapper onClick={onClickHandler}>
-                      로그아웃
-                    </LinkWrapper>
-                  </Li>
-                  <Li>
                     <LinkWrapper
-                      onClick={() => navigate("/mypage")}
+                      onClick={() => navigate(`/mypage/${profileId}`)}
                     >마이페이지 가기</LinkWrapper>
                   </Li>
                   <Li>
                     <LinkWrapper onClick={() => navigate('/post')}>
                       글쓰기
+                    </LinkWrapper>
+                  </Li>
+                  <Li>
+                    <LinkWrapper onClick={onClickHandler}>
+                      로그아웃
                     </LinkWrapper>
                   </Li>
                 </>
