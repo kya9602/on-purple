@@ -31,7 +31,7 @@ const Router = () => {
                 <Route path="/chat" exact element={<ChatPage />} />
                 <Route path="/chat/:roomId" exact element={<ChatScreen />} />
                 <Route path="/profile" exact element={<ProfilePage />} />
-                <Route path="/board" exact element={<BoardPage />} />
+                <Route path="/board/:Category" exact element={<BoardPage />} />
                 <Route path="/detail/:postId" exact element={<DetailPage />} />
                 <Route path="/edit/:postId" exact element={<EditPage />} />
                 <Route path="/post" exact element={<PostPage />} />
@@ -42,8 +42,6 @@ const Router = () => {
                 <Route path="/kakao" exact element={<Oauth2Handler />} />
             </Routes>
         </BrowserRouter>
-
-
     );
 }
 

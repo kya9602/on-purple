@@ -34,7 +34,7 @@ export const __getUser = createAsyncThunk(
 
 const initialState = {
   user: {
-    userId: "",
+    userId: 0,
     nickname: "",
     imageUrl: "",
     imgList: "",

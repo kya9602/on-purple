@@ -57,14 +57,13 @@ const Mypage = () => {
     }, []);
 
     //마이페이지 처음 기본정보 불러오기
-    const data = useSelector((state) => state?.data);
-    console.log("data is", data)
-    const { profileId } = useParams();
-    // console.log(profileId)
+    const { mypage } = useSelector((state) => state?.mypage);
+    console.log("mypage is", mypage?.profileId)
+
 
 
     useEffect(() => {
-        dispatch(__getMypage(profileId));
+        dispatch(__getMypage(mypage.profileId));
     }, [dispatch])
 
 
