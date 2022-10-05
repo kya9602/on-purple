@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { __getPostsDetail } from "../../redux/modules/board";
 import AddComment from "./AddComment"
-import axios from "axios";
-import CommentList from "./CommentList";
+import { __deletePosts } from "../../redux/modules/board";
 import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
+import delete2 from "../../assets/icons/delete2.png"
+import edit from "../../assets/icons/edit.png"
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,7 +24,7 @@ const Detail = () => {
     const [show, setShow] = useState(false);
     const { isLoading, error, detail } = useSelector((state) => state.post);
     const { postId } = useParams();
-
+    console.log(detail)
     useEffect(() => {
         dispatch(__getPostsDetail(postId));
     }, [dispatch])
@@ -46,19 +47,18 @@ const Detail = () => {
             <DateButtonWrapper>
                 {getNickname === detail.nickname ?
                     (
-                        <>
-                            <Button variant="outlined" onClick={goEdit}>수정</Button>
-                            <Button variant="outlined" color="error" onClick={() => { setShow(true) }}>삭제</Button>
-                        </>
+                     <div style={{gap:"10px", marginRight:"10px"}}>
+                        <EditButton onClick={goEdit}><img src={edit} alt=""/></EditButton>
+                        <DeleteButton onClick={() => { setShow(true) }}><img src={delete2} alt=""/></DeleteButton>
+                     </div>
                     ) :
                     null}
             </DateButtonWrapper>
             <Date>{detail.createdAt[0]}-{detail.createdAt[1]}-{detail.createdAt[2]} </Date>
             
-            <NameLikesWrap>
-                <Name>{detail.nickname}</Name>
-                <Likes>💜{detail.likes}개</Likes>
-            </NameLikesWrap>
+            <View>
+                <div>View : {detail.view}</div>
+            </View>
             
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
                 {detail.imgList.map((image, id) => (
@@ -69,8 +69,13 @@ const Detail = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <Content><p>{detail.content}</p></Content>
 
+            <NameLikeWrap>
+                <div style={{fontSize:"1.2rem", marginLeft:"22px", fontWeight:"bold"}}>{detail.nickname}</div>
+                <div style={{fontSize:"1rem"}}>💜 {detail.likes}개</div>
+            </NameLikeWrap>
+            
+            <Content><p>{detail.content}</p></Content>
             <div style={{ marginTop: "10px" }}>
                 <AddComment detail={detail} />
             </div>
@@ -93,14 +98,7 @@ const Detail = () => {
                                 onClick={async () => {
                                     setShow(false);
                                     // 모달의 예 버튼 클릭시 게시물 삭제
-                                    await axios.delete(`${process.env.REACT_APP_HOST}/post/${postId}`,
-                                        {
-                                            headers: {
-                                                "Authorization": localStorage.getItem("Authorization"),
-                                                "RefreshToken": localStorage.getItem("RefreshToken")
-                                            }
-                                        }
-                                    );
+                                    dispatch(__deletePosts(postId))
                                     alert("게시물이 삭제되었습니다😎");
                                     navigate("/board");
                                 }}
@@ -130,13 +128,10 @@ export default Detail;
 const Title = styled.h1`
     text-align: center;
 `
-const Name = styled.div`
-    font-size: 1rem;
-    float: right;
-`
+
 const Date = styled.div`
-    margin: auto;
     font-size: 1rem;
+    margin-left: 12px;
 `
 const DateButtonWrapper = styled.div`
     align-items: center;
@@ -145,13 +140,9 @@ const DateButtonWrapper = styled.div`
     gap: 10px;
 `
 
-const Likes = styled.div`
-    font-size: 1rem;
-`
-
 const Content = styled.div`
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 12px;
     width: 90%;
     height: 45vh;
     border-top: 1px solid #9E87BA;
@@ -164,11 +155,45 @@ const ImgBox = styled.div`
     margin-top: 3vw;
 `
 
-const NameLikesWrap = styled.div`
+const View = styled.div`
     display: flex; 
     align-items: center;
     justify-content: space-between;
     margin-top:20px;
     padding-left: 10px;
     padding-right: 10px;
+`
+
+const NameLikeWrap = styled.div`
+    display: flex;
+    align-items: center;
+    gap:10px;
+    margin-top:10px
+`
+const EditButton = styled.button`
+    width: 40px;
+    height: 30px;
+    border: none;
+    margin: 0 0 auto 0;
+    margin-top: 5px;
+    background-color: white;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+`
+
+const DeleteButton = styled.button`
+width: 40px;
+    height: 30px;
+    border: none;
+    margin: 0 0 auto 0;
+    margin-top: 5px;
+    background-color: white;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `

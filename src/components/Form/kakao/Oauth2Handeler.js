@@ -38,13 +38,8 @@ const Oauth2Handler = () => {
             })
     };
 
-
-
-
-
     return null;
 };
 
 
 export default Oauth2Handler;
-

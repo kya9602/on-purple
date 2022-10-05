@@ -4,8 +4,9 @@ import axios from "axios";
 export const __getPosts = createAsyncThunk(
     "GET_POSTS",
     async (payload, thunkAPI) => {
+      /* console.log(payload) */
         try {
-            const data = await axios.get(`${process.env.REACT_APP_HOST}/post`);
+            const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}`);
             /* console.log(data) */
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
@@ -36,8 +37,12 @@ export const __deletePosts = createAsyncThunk(
     // 처리할 비동기 함수
     async (payload) => {
       // 서버에서 데이터를 삭제
-      const res = await axios.delete(`${process.env.REACT_APP_HOST}/post/${payload}`);
-      // action의 payload 리턴
+      const res = await axios.delete(`${process.env.REACT_APP_HOST}/post/${payload}`,{
+        headers: {
+          "Authorization": localStorage.getItem("Authorization"),
+          "RefreshToken": localStorage.getItem("RefreshToken")
+        }
+      });
       return res.data;
     }
   );
