@@ -1,60 +1,164 @@
-import React, { Suspense ,useEffect,useState,useRef,useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../../redux/modules/board";
-import useFetch from "./customFecth";
-
+import useInfiniteScroll from "./useInfiniteScroll";
 
 const List = () => {
     const dispatch = useDispatch();
-    const { post } = useSelector((state) => state.post)
-    const [page, setPage] = useState(1);
-    const { loading, error, formattedList = [] } = useFetch(page, `${process.env.REACT_APP_HOST}/post`);
-    const row = useRef(null);
+    const [category, setCatecory] = useState("meet");
+    const { isLoading, error, post } = useSelector((state) => state?.post)
+    console.log(post)
+    const onChangeHandler = (e) => {
+        setCatecory(e.currentTarget.value);
+    };
+    const categories = [
+        {
+            name: "맛집 추천",
+            value: "taste"
+        },
+        {
+            name: "데이트 코스 추천",
+            value: "dateCourse"
+        },
+        {
+            name: "번개 만남",
+            value: "meet"
+        },
+        {
+            name: "한잔 하실 분?",
+            value: "bar"
+        },
+        {
+            name: "드라이브 하실 분?",
+            value: "drive"
+        },
+        {
+            name: "패션",
+            value: "fashion"
+        },
 
-    const handleObserver = useCallback((entries) => {
-        const target = entries[0];
-        if (target.isIntersecting) {
-          setPage((prev) => prev + 1);
-        }
-      }, []);
+    ];
+
+    const Taste = post.filter((post) => {
+        return post.category === "taste"
+    })
+    /* console.log(Taste) */
+    const Meet = post.filter((post) => {
+        return post.category === "meet"
+    })
+    /* console.log(Meet) */
+
+    const Date = post.filter((post) => {
+        return post.category === "dateCourse"
+    })
+
+    const Bar = post.filter((post) => {
+        return post.category === "bar"
+    })
+
+    const Drive = post.filter((post) => {
+        return post.category === "drive"
+    })
+
+    const Fashion = post.filter((post) => {
+        return post.category === "fashion"
+    })
+
+
 
     useEffect(() => {
         dispatch(__getPosts());
     }, [dispatch])
 
-    useEffect(() => {
-        const option = {
-          root: null,
-          rootMargin: "20px",
-          threshold: 0
-        };
-        const observer = new IntersectionObserver(handleObserver, option);
-        if (row.current) observer.observe(row.current);
-      }, [handleObserver]);
 
+    //-------------------- 무한 스크롤 ------------------//
+    const [count, setCount] = useState(5);
+    const [ref, setRef] = useInfiniteScroll((entry, observer) => {
+        loadMorePosts();
+    });
+    function loadMorePosts() {
+        setCount(v => {
+            if (v + 1 <= post?.length) return v + 1;
+            else return v;
+        });
+    }
+    /* {post.slice(0, count).map((item) => (<Card item={item} key={item?.postId} />))} */
     return (
         <>
             <Wrapper>
-                <CategoryContaier>
-                    <Box><p>맛집</p></Box>
-                    <Box><p>데이트</p></Box>
-                    <Box><p>술</p></Box>
-                    <Box><p>드라이브</p></Box>
-                    <Box><p>번개</p></Box>
-                    <Box><p>패션</p></Box>
-                </CategoryContaier>
-                <Suspense fallback={<div>Loading</div>}>
-                {post.map((item) => (<Card item={item} key={item.postId} />))}
-                </Suspense>
-                {loading && <p>Loading...</p>}
-                {error && <p>Error!</p>}
-                <div ref={row} />
+                <select onChange={onChangeHandler} value={category}>
+                    {categories.map((categories) => (
+                        <option value={categories.value} key={categories.name}>
+                            {categories.name}
+                        </option>
+                    ))}
+                </select>
+                {category == "taste"
+                    ? Taste.map((item) => {
+                        return (
+                            <Card
+                                item={item}
+                                key={item?.postId}
+                                value={item?.category}
+                            />
+                        );
+                    })
+                    : category == "dateCourse"
+                        ? Date.map((item) => {
+                            return (
+                                <Card
+                                    item={item}
+                                    key={item?.postId}
+                                    value={item?.category}
+                                />
+                            );
+                        })
+                        :
+                        category == "bar"
+                            ? Bar.map((item) => {
+                                return (
+                                    <Card
+                                        item={item}
+                                        key={item?.postId}
+                                        value={item?.category}
+                                    />
+                                );
+                            })
+                            : category == "drive"
+                                ? Drive.map((item) => {
+                                    return (
+                                        <Card
+                                            item={item}
+                                            key={item?.postId}
+                                            value={item?.category}
+                                        />
+                                    );
+                                })
+                                : category == "fashion"
+                                    ? Fashion.map((item) => {
+                                        return (
+                                            <Card
+                                                item={item}
+                                                key={item?.postId}
+                                                value={item?.category}
+                                            />
+                                        );
+                                    })
+                                    : Meet.map((item) => {
+                                        return (
+                                            <Card
+                                                item={item}
+                                                key={item?.postId}
+                                                value={item?.category}
+                                            />
+                                        );
+                                    })}
             </Wrapper>
         </>
     )
-    }
+}
 
 export default List;
 
@@ -64,29 +168,5 @@ const Wrapper = styled.div`
     margin: 0 auto;
     margin-left: 1vw;
     margin-top: 10px;
-`
-const CategoryContaier = styled.div`
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    width: 400px;
-    margin: auto;
-    gap: 10px;
-`
-const Box = styled.div`
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-    background-color: #5B63B7;
-    width: 100px;
-    height: 30px;
-        p{
-            font-weight: 600;
-            margin-top: 5px;
-            color: whitesmoke;
-        }
-        :hover{
-            cursor: pointer;
-            box-shadow: 2.5px 2.5px 2.5px gray;
-        }
+    height: 100%;
 `
