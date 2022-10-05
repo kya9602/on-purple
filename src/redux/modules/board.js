@@ -4,8 +4,9 @@ import axios from "axios";
 export const __getPosts = createAsyncThunk(
     "GET_POSTS",
     async (payload, thunkAPI) => {
+      /* console.log(payload) */
         try {
-            const data = await axios.get(`${process.env.REACT_APP_HOST}/post/`);
+            const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}`);
             /* console.log(data) */
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {

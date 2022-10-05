@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const Card = ({item}) => {
-    console.log(item)
+    /* console.log(item.category) */
     const navigate = useNavigate();
     return (
         <>
