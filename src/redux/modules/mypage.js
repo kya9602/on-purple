@@ -4,7 +4,7 @@ import axios from 'axios';
 export const __getMypage = createAsyncThunk(
     "data/Mypage",
     async (payload, thunkAPI) => {
-        console.log(payload)
+        console.log("payload is ", payload)
         try {
             const data = await axios.get(`${process.env.REACT_APP_HOST}/mypage/${payload}`,
                 {
@@ -13,8 +13,8 @@ export const __getMypage = createAsyncThunk(
                         "RefreshToken": localStorage.getItem("RefreshToken"),
                     }
                 });
-            console.log(data);
-            return thunkAPI.fulfillWithValue(data.data);
+            console.log(data.data.data);
+            return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
         }
@@ -25,25 +25,24 @@ export const __getMypage = createAsyncThunk(
 
 
 const initialState = {
-    data: []
-    // {
-    //     profileId: "",
-    //     nickname: "",
-    //     imageUrl: "",
-    //     imageList: null,
-    //     age: "",
-    //     mbti: "",
-    //     introduction: "",
-    //     idealType: "",
-    //     job: "",
-    //     hobby: "",
-    //     drink: "",
-    //     pet: "",
-    //     smoke: "",
-    //     likeMovieType: "",
-    //     area: "",
-    //     likeResponseDtoList: []
-    // }
+    mypage: {
+        profileId: 0,
+        nickname: "",
+        imageUrl: "",
+        imageList: null,
+        age: "",
+        mbti: "",
+        introduction: "",
+        idealType: "",
+        job: "",
+        hobby: "",
+        drink: "",
+        pet: "",
+        smoke: "",
+        likeMovieType: "",
+        area: "",
+        likeResponseDtoList: []
+    }
     ,
     isLoading: false,
     error: null,
@@ -54,36 +53,12 @@ export const detailSlice = createSlice({
     name: "mypage",
     initialState,
     reducers: {
-        updatePost: (state, action) => {
-            console.log(action.payload)
-            //     let index = state.data.findIndex(post => post.postId === action.payload.id);
-            //     state.data.splice(index, 1, action.payload);
-            state.data.data = action.payload
-        }
     },
     extraReducers: {
         [__getMypage.fulfilled]: (state, action) => {
             state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.data = action.payload;
-            console.log("action is ", action)
-
-            // {
-            //     profileId: action.payload.data[0].profileId,
-            //     nickname: action.payload.data[0].nickname,
-            //     imageUrl: action.payload.data[0].imageUrl,
-            //     imageList: action.payload.data[0].imageList,
-            //     age: action.payload.data[0].age,
-            //     mbti: action.payload.data[0].mbti,
-            //     introduction: action.payload.data[0].introduction,
-            //     idealType: action.payload.data[0].idealType,
-            //     job: action.payload.data[0].job,
-            //     hobby: action.payload.data[0].hobby,
-            //     drink: action.payload.data[0].drink,
-            //     pet: action.payload.data[0].pet,
-            //     smoke: action.payload.data[0].smoke,
-            //     likeMovieType: action.payload.data[0].likeMovieType,
-            //     area: action.payload.data[0].area,
-            // };
+            state.mypage = action.payload;
+            // console.log("action is ", action.payload)
         },
         [__getMypage.pending]: (state) => {
             state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.

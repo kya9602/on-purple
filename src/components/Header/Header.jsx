@@ -37,20 +37,22 @@ const Header = () => {
   const { userId, profileId } = useParams();
   const { user, isLoding, error } = useSelector((state) => state.user);
 
-  const data = useSelector((state) => state.data);
-  console.log(data)
-
   const userData = user.data;
   // console.log("data is", user)
+  // console.log(userData)
 
-  useEffect(() => {
-    dispatch(__getUser(userId));
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(__getUser(userId));
+  // }, [__getUser])
 
+
+  //마이페이지 들어가는
+  const { mypage } = useSelector((state) => state.mypage);
+  console.log("mypage is", mypage.profileId)
 
   useEffect(() => {
     dispatch(__getMypage(profileId));
-  }, [profileId])
+  }, [__getMypage])
 
 
   return (
