@@ -27,7 +27,7 @@ const Router = () => {
                 <Route path="/login" exact element={<LoginPage />} />
                 <Route path="/signup" exact element={<NewSignup />} />
                 <Route path="/kakaoAddSignup" exact element={<KakaoAddPage />} />
-                <Route path="/myPage" exact element={<MypagePage />} />
+                <Route path="/myPage/:profileId" exact element={<MypagePage />} />
                 <Route path="/chat" exact element={<ChatPage />} />
                 <Route path="/chat/:roomId" exact element={<ChatScreen />} />
                 <Route path="/profile" exact element={<ProfilePage />} />
