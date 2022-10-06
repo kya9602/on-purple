@@ -22,13 +22,14 @@ const Detail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
-    const { isLoading, error, detail } = useSelector((state) => state.post);
+    const { isLoading, error, detail } = useSelector((state) => state?.post);
     const { postId } = useParams();
-    console.log(postId)
-    
+    /* console.log(detail) */
+
     useEffect(() => {
         dispatch(__getPostsDetail(postId));
-    }, [dispatch])
+    }, [])
+
     if (isLoading) return "😴로딩중이에요..😴"
 
     if (error) {
@@ -45,13 +46,13 @@ const Detail = () => {
     };
     const getNickname = localStorage.getItem("nickname")
     /* console.log(detail.nickname) */
-
+    
     return (
         <>
-            <Title>{detail.title}</Title>
+            <Title>{detail?.title}</Title>
 
             <DateButtonWrapper>
-                {getNickname === detail.nickname ?
+                {getNickname === detail?.nickname ?
                     (
                      <div style={{gap:"10px", marginRight:"10px"}}>
                         <EditButton onClick={goEdit}><img src={edit} alt=""/></EditButton>
@@ -60,14 +61,14 @@ const Detail = () => {
                     ) :
                     null}
             </DateButtonWrapper>
-            <Date>{detail.createdAt[0]}-{detail.createdAt[1]}-{detail.createdAt[2]} </Date>
+            <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
             
             <View>
-                <div>View : {detail.view}</div>
+                <div>View : {detail?.view}</div>
             </View>
             
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
-                {detail.imgList.map((image, id) => (
+                {detail?.imgList?.map((image, id) => (
                     <SwiperSlide key={id}>
                         <ImgBox>
                             <img src={image} alt="" />
@@ -77,11 +78,11 @@ const Detail = () => {
             </Swiper>
 
             <NameLikeWrap>
-                <div style={{fontSize:"1.2rem", marginLeft:"22px", fontWeight:"bold"}}>{detail.nickname}</div>
-                <div style={{fontSize:"1rem", display:"flex"}}><span onClick={onLike}>💜</span> {detail.likes}개</div>
+                <div style={{fontSize:"1.2rem", marginLeft:"22px", fontWeight:"bold"}}>{detail?.nickname}</div>
+                <div style={{fontSize:"1rem", display:"flex"}}><span onClick={onLike}>💜</span> {detail?.likes}개</div>
             </NameLikeWrap>
             
-            <Content><p>{detail.content}</p></Content>
+            <Content><p>{detail?.content}</p></Content>
             <div style={{ marginTop: "10px" }}>
                 <AddComment detail={detail} />
             </div>
@@ -106,7 +107,7 @@ const Detail = () => {
                                     // 모달의 예 버튼 클릭시 게시물 삭제
                                     dispatch(__deletePosts(postId))
                                     alert("게시물이 삭제되었습니다😎");
-                                    navigate("/board");
+                                    navigate("/board/taste");
                                 }}
                             >
                                 예

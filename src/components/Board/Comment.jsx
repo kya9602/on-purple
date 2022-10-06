@@ -4,11 +4,16 @@ import { __deleteComments } from "../../redux/modules/comment";
 import { useDispatch } from "react-redux";
 import delete2 from "../../assets/icons/delete2.png"
 import edit from "../../assets/icons/edit.png"
-
+import { __likeComment } from "../../redux/modules/comment";
 const Comments = ({item})=>{
     const dispatch = useDispatch();
     const id = item.commentId
     const getNickname = localStorage.getItem("nickname")
+    console.log(item)
+    const onLike = (event) => {
+        event.preventDefault();
+        dispatch(__likeComment(id));
+    };
     
     return(
         <div style={{margin:"10px",borderTop:"1px solid #cc9ce7" }}>
@@ -31,7 +36,7 @@ const Comments = ({item})=>{
             
             <CmLikeContainer>
                 <CM>{item.comment}</CM>
-                <span>💜 {item.likes}</span>
+                <span onClick={onLike}>💜 {item.likes}</span>
             </CmLikeContainer>
             
             <TRWrapper>

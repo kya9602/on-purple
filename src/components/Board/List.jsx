@@ -54,7 +54,7 @@ const List = () => {
       if (error) {
         return <div>{error.message}</div>;
       }
-    
+
 //----------------------navigateButton------------------//
     const goDrive = () =>{
         navigate("/board/drive")
@@ -74,7 +74,7 @@ const List = () => {
     const goFashion = () =>{
         navigate("/board/fashion")
     }
-
+    
     /* console.log(category) */
     //-------------------- 무한 스크롤 ------------------//
    /*  const [count, setCount] = useState(5);

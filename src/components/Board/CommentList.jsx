@@ -6,13 +6,13 @@ import { __getComments } from "../../redux/modules/comment";
 import { useParams } from "react-router";
 
 
-const CommentList = (props) => {
-    console.log(props)
+const CommentList = () => {
     const dispatch = useDispatch()
     
     const {postId} = useParams();
     const {isLoading, error, comment} = useSelector((state)=> state?.comment)
-    
+    /* console.log(comment) */
+
     useEffect(()=>{
         dispatch(__getComments(postId));
     },[dispatch])
@@ -23,14 +23,17 @@ const CommentList = (props) => {
         return <>{error?.message}</>
     }
 
-    if (comment.length == 0) {
+    if (comment.comment === "") {
         return <div style={{textAlign:"center", marginTop:"10px"}}>😴댓글이 존재하지 않습니다. 댓글을 남겨주세요😴</div>
     }
 
+    if (comment.length == 0){
+        return <div style={{textAlign:"center", marginTop:"10px"}}>😴댓글이 존재하지 않습니다. 댓글을 남겨주세요😴</div>
+    }
     return (
         <>
             <Container>
-                {comment.data.map((item)=>(<Comment item={item} key={item.commentId}/>))}
+                {comment?.map((item)=>(<Comment item={item} key={item?.commentId}/>))}
             </Container>
         </>
 

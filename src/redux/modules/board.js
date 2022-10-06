@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { current } from "@reduxjs/toolkit";
 
 export const __getPosts = createAsyncThunk(
     "GET_POSTS",
@@ -18,9 +19,10 @@ export const __getPosts = createAsyncThunk(
 export const __getPostsDetail = createAsyncThunk(
   "GET_POSTS_DETAIL",
   async (payload, thunkAPI) => {
+    /* console.log(payload) */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/post/${payload}`);
-      /*  console.log(data) */
+       /* console.log(data.data.data) */
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -50,15 +52,19 @@ export const __deletePosts = createAsyncThunk(
 export const __likePost = createAsyncThunk(
     "LIKE_POST",
     async (payload, thunkAPI) => {
+      /* console.log(payload) */
         try {
-            const data = await axios.post(`${process.env.REACT_APP_HOST}/like/${payload}`,{
+            const data = await axios.post(`${process.env.REACT_APP_HOST}/post/like/${payload}`,{},{
               headers: {
                 "Authorization": localStorage.getItem("Authorization"),
-                "RefreshToken": localStorage.getItem("RefreshToken")
+                "RefreshToken": localStorage.getItem("RefreshToken"),
               }
             });
-            console.log(data)
-            return payload
+            /* if(data.data.success === false){
+              window.alert("본인에게 좋아요를 할 수 없습니다")
+            } */
+            /* console.log(data.data) */
+            return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
         }
@@ -78,6 +84,7 @@ const initialState = {
     commentResponseDtoList: [],
     modifiedAt: [],
     category: "",
+    view:0,
   },
   error: null,
   isLoading: false,
@@ -89,21 +96,21 @@ export const postSlice = createSlice({
   reducers: {
   },
   extraReducers: {
-    [__getPosts.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.post = action.payload;
-    },
-    [__getPosts.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [__getPosts.pending]: (state) => {
-      state.isLoading = true;
+      [__getPosts.fulfilled]: (state, action) => {
+        state.isLoading = false;
+        state.post = action.payload;
+      },
+      [__getPosts.rejected]: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      },
+      [__getPosts.pending]: (state) => {
+        state.isLoading = true;
 
       },
       [__getPostsDetail.fulfilled]: (state, action) => {
         state.isLoading = false;
-        state.detail = action.payload;
+        state.detail= action.payload;
       },
       [__getPostsDetail.rejected]: (state, action) => {
         state.isLoading = false;
@@ -117,9 +124,14 @@ export const postSlice = createSlice({
         state.isLoading = true; 
       },
       [__likePost.fulfilled]: (state, action) => {
-        console.log(action)
         state.isLoading = false; 
-        state.detail = action.payload; 
+        if(action.payload === false){
+          state.detail.likes -= 1;
+         } else {
+          state.detail.likes += 1;
+         }
+        /* console.log("payload",action.payload)
+        console.log("state",current(state.detail)) */
       },
       [__likePost.rejected]: (state, action) => {
         state.isLoading = false; 
@@ -131,7 +143,7 @@ export const postSlice = createSlice({
       },
       
       [__deletePosts.fulfilled]: (state, action) => {
-        state.list = action.payload;
+        state.detail = action.payload;
       },
       [__deletePosts.rejected]: (state, action) => {
         
