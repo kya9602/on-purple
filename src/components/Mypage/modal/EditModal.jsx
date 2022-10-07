@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Modal from "./Modal";
@@ -75,7 +75,8 @@ const EditModal = (props) => {
 
     return (
         <Modal ref={props.modalRef}>
-            <div>비밀번호를 변경하시겠습니까?</div>
+            <Header>비밀번호를 변경하시겠습니까?</Header>
+
             <TitleWrapper backgroundColor={{ color: "ivory" }}>
                 <StyledTextarea
                     value={password}
@@ -85,6 +86,8 @@ const EditModal = (props) => {
                     backgroundColor={{ color: "ivory" }} />
             </TitleWrapper>
             {renderErrorMessage("password")}
+
+
             <TitleWrapper backgroundColor={{ color: "ivory" }}>
                 <StyledTextarea
                     value={newPassword}
@@ -94,21 +97,20 @@ const EditModal = (props) => {
                     onChange={(e) => handleChangeInput(e, setNewPassword)} />
             </TitleWrapper>
             {renderErrorMessage("newPassword")}
-            <newPasswordWrapper backgroundColor={{ color: "ivory" }}>
+
+
+            <TitleWrapper backgroundColor={{ color: "ivory" }}>
                 <StyledTextarea
                     value={newPassword}
                     type="password"
                     placeholder="새 비밀번호를 재입력해주세요."
-                    backgroundColor={{ color: "ivory" }}
                     onChange={(e) => handleChangeInput(e, setNewPasswordConfirm)} />
-            </newPasswordWrapper>
+            </TitleWrapper>
             {renderErrorMessage("newPasswordConfirm")}
+
+
             <ButtonWrapper>
-                <CommonButton
-                    backgroundColor={{ color: "ivory" }}
-                    newPasswordColor={{ color: "ivory" }}>
-                    <div onClick={handleClickUpdatePost}>수정하기</div>
-                </CommonButton>
+                <Btn onClick={handleClickUpdatePost}>수정하기</Btn>
             </ButtonWrapper>
         </Modal>
     );
@@ -117,26 +119,56 @@ const EditModal = (props) => {
 
 export default EditModal;
 
-const StyledTextarea = styled.textarea`
-  width: 100%;
-  height: 100%;
-  background-color: ${prop => prop.backgroundColor};
-  border: none;
-  resize: none;
-`;
+const Header = styled.div`
+    margin-top: 65px;
+    margin-bottom: 50px;
+    font-size : 25px;
+    font-weight: 600;
+`
 
 const TitleWrapper = styled.div`
-    
+  margin-top : 15px ;
+  height: 25px;
 `
 
-const StyledInput = styled.div`
-    
-`
+const StyledTextarea = styled.input`
+  width: 80%;
+  height: 80%;
+  background-color: ${prop => prop.backgroundColor};
+  margin-top: 1%;
+  border: none;
+  font-size: 12px; 
+  padding:1%;
+  font-size: 14px;
+
+  border-bottom-style:solid; 
+  border-bottom-color:#333033;
+  border-bottom-width:1px;
+
+  &:focus{
+    outline:none;
+    border-bottom-style:solid; 
+    border-bottom-color:#80036f;
+    border-bottom-width:3px;
+  }
+`;
+
 
 const ButtonWrapper = styled.div`
-    
+  margin-top  : 40px ;
 `
 
-const CommonButton = styled.button`
-    
+const Btn = styled.button`
+  border : none;
+  background-color : white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 3%;
+  cursor: pointer;
+:hover{
+    background-color: #80036f;
+    color:white;
+    padding: 3%;
+
+}
 `
