@@ -26,26 +26,26 @@ const Header = () => {
     navigate('/');
   };
 
-  // var token = localStorage.getItem("Authorization");
-  // var decoded = jwt_decode(token);
-  // console.log(decoded)
-
   const token = localStorage.getItem('RefreshToken')
 
   //object-fit : cover 이미지 설정시 사용해보기
 
 
   const { user, isLoding, error } = useSelector((state) => state.user);
-
+  
   const userData = user.data;
-  console.log("data is", user)
+
+console.log("data is", user)
   // console.log(userData)
 
   useEffect(() => {
     dispatch(__getUser());
   }, [__getUser])
 
-
+  useEffect(() => {
+    dispatch(__getUser(userId));
+  }, [__getUser])
+  
 
 
 

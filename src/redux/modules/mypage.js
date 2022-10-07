@@ -1,7 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from "axios";
 
+//user info 정보 불러오기
 export const __getMypage = createAsyncThunk(
+
     "data/Mypage",
     async (payload, thunkAPI) => {
         try {
@@ -17,13 +19,17 @@ export const __getMypage = createAsyncThunk(
 
             return thunkAPI.rejectWithValue(error.code);
         }
+      });
+      // console.log('get data is', data.data.data)
+      return thunkAPI.fulfillWithValue(data.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
     }
+  }
 );
 
-
-
-
 const initialState = {
+
     mypage: {
         profileId: 0,
         nickname: "",
@@ -42,11 +48,10 @@ const initialState = {
         area: "",
         likeResponseDtoList: [],
         likedResponeDtoList: []
-    }
-    ,
-    isLoading: false,
+    },
     error: null,
-};
+    isLoading: false,
+}
 
 export const detailSlice = createSlice({
     name: "mypage",
@@ -70,8 +75,10 @@ export const detailSlice = createSlice({
         },
 
 
-    }
-});
+
+  }
+})
 
 export const { updatePost } = detailSlice.actions;
 export default detailSlice;
+
