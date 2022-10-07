@@ -6,19 +6,17 @@ const Card = ({item}) => {
     const navigate = useNavigate();
     return (
         <>
-            <Item onClick={()=>{navigate(`/detail/${item.postId}`)}}>
-                <ImageDiv>
-                    <Image src={item.imageUrl} alt="" />
-                </ImageDiv>
+
+            <Item onClick={()=>{navigate(`/detail/${item?.postId}`)}}>
+                <Image src={item?.imageUrl} alt="" />
+                
                 <Container>
-                    <TitleContainer>
-                        <Title>{item.title}</Title>
-                        <Content>{item.content}</Content>  
-                        <Date>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Date>
-                    </TitleContainer>
+                    <Title>{item?.title}</Title>
+                    <Content>{item?.content}</Content>                   
+                    <Date>{item?.createdAt[0]}.{item?.createdAt[1]}.{item?.createdAt[2]}</Date>
                     <WriterLikeWrapper>
-                        <Writer>by <b>{item.nickname}</b></Writer>
-                        <Like>💜 {item.likes}</Like>
+                        <Writer>by <b>{item?.nickname}</b></Writer>
+                        <Like>💜 {item?.likes}</Like>
                     </WriterLikeWrapper>
 
                 </Container>                

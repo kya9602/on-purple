@@ -113,7 +113,7 @@ export default function VerticalLinearStepper() {
             handleNext();
         }
         else {
-            window.alert(data.error.message)
+            alert("중복확인 및 형식을 다시 확인하여 입력해주세요");
         }
 
         setUserinfo(initialState);
@@ -122,8 +122,8 @@ export default function VerticalLinearStepper() {
 
     //유효성검사 
     const regexUsername = /^[A-Za-z0-9+]{4,12}$/;
-    const regexNickname = /^[A-Za-z0-9+]{4,12}$/;
-    const regexPassword = /^[A-Za-z0-9]{4,20}$/;
+    const regexNickname = /^[가-힣0-9+]{2,8}$/;
+    const regexPassword = /^[A-Za-z0-9+]{4,20}$/;
 
     //아이디 중복 체크
     const usernameCheckHandler = async (e) => {
@@ -314,7 +314,7 @@ export default function VerticalLinearStepper() {
                                     :
                                     (<div style={{ textAlign: "center" }}>
                                         <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning>
-                                        <StsmallLabel>영어와 숫자로 4-12글자수로 적어주세요</StsmallLabel>
+                                        <StsmallLabel>숫자는 선택적으로 영어를 포함하여 4-12글자수로 적어주세요</StsmallLabel>
                                     </div>))
 
                             }
@@ -405,7 +405,7 @@ export default function VerticalLinearStepper() {
                                     :
                                     (<div style={{ textAlign: "center" }}>
                                         <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning>
-                                        <StsmallLabel>영어와 숫자로 4-12글자수로 적어주세요</StsmallLabel>
+                                        <StsmallLabel>한글과 숫자로만 2-8자리</StsmallLabel>
                                     </div>
                                     ))
 

@@ -87,8 +87,9 @@ const Text = styled.input`
     width: 350px;
     height: 4.5vh;
     font-size: 15px;
+    margin-left: 20px;
     border: none;
-    
+    border-bottom:1px solid grey ;
     &:focus{
       outline: none;
       border-bottom: 1px solid black;
