@@ -30,24 +30,24 @@ const Header = () => {
 
   //object-fit : cover 이미지 설정시 사용해보기
 
-  const { userId, profileId } = useParams();
+
   const { user, isLoding, error } = useSelector((state) => state.user);
   
   const userData = user.data;
 
+console.log("data is", user)
+  // console.log(userData)
+
+  useEffect(() => {
+    dispatch(__getUser());
+  }, [__getUser])
 
   useEffect(() => {
     dispatch(__getUser(userId));
   }, [__getUser])
   
 
-  //마이페이지 들어가는
-  const { mypage } = useSelector((state) => state?.mypage);
-  /* console.log(mypage) */
-  useEffect(() => {
-    dispatch(__getMypage(mypage.profileId));
-  }, [__getMypage])
-  
+
 
   return (
     <HeaderContainer>
@@ -84,7 +84,7 @@ const Header = () => {
                 <>
                   <Li>
                     <LinkWrapper
-                      onClick={() => navigate(`/mypage/${profileId}`)}
+                      onClick={() => navigate(`/mypage/${user?.data?.userId}`)}
                     >마이페이지 가기</LinkWrapper>
                   </Li>
                   <Li>
