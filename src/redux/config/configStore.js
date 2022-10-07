@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import profile from "../modules/profile";
-import mypage from "../modules/mypage";
+import detailSlice from "../modules/mypage";
 import logout from "../modules/user";
 import post from "../modules/board"
 import comment from "../modules/comment";
@@ -12,7 +12,7 @@ const store = configureStore({
         profile,
         post,
         comment,
-        mypage,
+        mypage: detailSlice.reducer,
         logout,
         main,
         user

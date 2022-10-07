@@ -4,7 +4,6 @@ import axios from 'axios';
 export const __getMypage = createAsyncThunk(
     "data/Mypage",
     async (payload, thunkAPI) => {
-        console.log("payload is ", payload)
         try {
             const data = await axios.get(`${process.env.REACT_APP_HOST}/mypage/${payload}`,
                 {
@@ -13,9 +12,9 @@ export const __getMypage = createAsyncThunk(
                         "RefreshToken": localStorage.getItem("RefreshToken"),
                     }
                 });
-            console.log(data.data.data);
-            return thunkAPI.fulfillWithValue(data.data.data);
+            return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
+
             return thunkAPI.rejectWithValue(error.code);
         }
     }
@@ -41,7 +40,8 @@ const initialState = {
         smoke: "",
         likeMovieType: "",
         area: "",
-        likeResponseDtoList: []
+        likeResponseDtoList: [],
+        likedResponeDtoList: []
     }
     ,
     isLoading: false,
@@ -49,16 +49,17 @@ const initialState = {
 };
 
 export const detailSlice = createSlice({
-
     name: "mypage",
     initialState,
     reducers: {
+
     },
     extraReducers: {
+
         [__getMypage.fulfilled]: (state, action) => {
             state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
             state.mypage = action.payload;
-            // console.log("action is ", action.payload)
+            console.log("action is ", action.payload)
         },
         [__getMypage.pending]: (state) => {
             state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
@@ -73,4 +74,4 @@ export const detailSlice = createSlice({
 });
 
 export const { updatePost } = detailSlice.actions;
-export default detailSlice.reducer;
+export default detailSlice;
