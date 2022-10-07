@@ -10,7 +10,7 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }){
     const { nickname, age, area, introduction, imageUrl } = objs[i];
      
     return (
-      <CardContainer>
+      <CardContainerDiv>
       <animated.div 
         className="Container"
         key={i}        
@@ -42,7 +42,7 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }){
           </div>
         </animated.div>
       </animated.div>
-      </CardContainer>
+      </CardContainerDiv>
     );
   
 }
@@ -50,30 +50,26 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }){
 export default Card;
 
 
-const CardContainer = styled.div`
+const CardContainerDiv = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
 
+.Container {
+  margin-top: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
   
-.Container {  
-  margin-top: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-left: 300px;
-  margin-right: 300px;
-
   position: absolute;
-  width: 300px;
-  height: 500px;
   will-change: transform;
   
   
 }
 
 .CardContainer {
+  
+  
   background-color: white;
   background-size: auto 85%;
   background-repeat: no-repeat;

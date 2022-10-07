@@ -6,6 +6,7 @@ const Card = ({item}) => {
     const navigate = useNavigate();
     return (
         <>
+
             <Item onClick={()=>{navigate(`/detail/${item?.postId}`)}}>
                 <Image src={item?.imageUrl} alt="" />
                 
@@ -17,8 +18,8 @@ const Card = ({item}) => {
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
                     </WriterLikeWrapper>
+                </Container>                
 
-                </Container>
             </Item>
         </>
     )
@@ -37,8 +38,16 @@ const Item = styled.div`
     margin-right: 18px;
     box-sizing: inherit;
 `
+const ImageDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
 const Image = styled.img` 
+    max-width: 50vh;
+    max-height: 280px;
+    height: 280px;
     width: 100%;
     height: 66%;
     border-top-left-radius: 3px;
@@ -58,8 +67,15 @@ const Content = styled.div`
 `
 
 const Container = styled.div`
+    border-top: 1px solid #9C7FCB;
+    margin-top: auto;
     display: flex;
     flex-direction: column;
+`
+const TitleContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    
 `
 
 const Writer = styled.div`

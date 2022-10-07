@@ -53,7 +53,7 @@ console.log("data is", user)
     <HeaderContainer>
       {token === null ? <LogoImg><img src={Offlogo} alt="로그인 안된상태" /></LogoImg>
         : <LogoImg><img src={Onlogo} alt="로그인 된상태" /></LogoImg>}
-      <Title>Purple</Title>
+      <Title onClick={() => {navigate('/')}}>Purple</Title>
       <UserSet >
 
 
