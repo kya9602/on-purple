@@ -8,12 +8,12 @@ import { useNavigate, useParams } from "react-router";
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    /* const [category, setCatecory] = useState("me"); */
+    /* const [category, setCatecory] = useState("meet"); */
     const { isLoading, error, post } = useSelector((state) => state?.post)
     /* console.log(post) */
    
-    const { Category } =useParams();
-    console.log(Category)
+    const { Category } = useParams();
+    /* console.log(Category) */
 
  /*    const categories = [
         {
@@ -54,7 +54,7 @@ const List = () => {
       if (error) {
         return <div>{error.message}</div>;
       }
-    
+
 //----------------------navigateButton------------------//
     const goDrive = () =>{
         navigate("/board/drive")
@@ -74,7 +74,7 @@ const List = () => {
     const goFashion = () =>{
         navigate("/board/fashion")
     }
-
+    
     /* console.log(category) */
     //-------------------- 무한 스크롤 ------------------//
    /*  const [count, setCount] = useState(5);
@@ -123,6 +123,7 @@ const Box = styled.button`
     background-color: #5B63B7;
     width: 100px;
     height: 30px;
+    color: white;
         p{
             font-weight: 600;
             margin-top: 5px;
@@ -131,7 +132,7 @@ const Box = styled.button`
         :hover{
             cursor: pointer;
             box-shadow: 2.5px 2.5px 2.5px gray;
-    }
+        }
 `
 const CategoryContaier = styled.div`
     justify-content: center;

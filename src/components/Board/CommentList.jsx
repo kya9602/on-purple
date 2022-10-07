@@ -11,7 +11,7 @@ const CommentList = () => {
     
     const {postId} = useParams();
     const {isLoading, error, comment} = useSelector((state)=> state?.comment)
-    
+    /* console.log(comment) */
     useEffect(()=>{
         dispatch(__getComments(postId));
     },[dispatch])
@@ -22,14 +22,17 @@ const CommentList = () => {
         return <>{error?.message}</>
     }
 
-    if (comment.length == 0) {
+    if (comment.comment === "") {
         return <div style={{textAlign:"center", marginTop:"10px"}}>😴댓글이 존재하지 않습니다. 댓글을 남겨주세요😴</div>
     }
 
+    if (comment.length == 0){
+        return <div style={{textAlign:"center", marginTop:"10px"}}>😴댓글이 존재하지 않습니다. 댓글을 남겨주세요😴</div>
+    }
     return (
         <>
             <Container>
-                {comment.data.map((item)=>(<Comment item={item} key={item.commentId}/>))}
+                {comment?.map((item)=>(<Comment item={item} key={item?.commentId}/>))}
             </Container>
         </>
 

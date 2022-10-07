@@ -4,16 +4,29 @@ import { __deleteComments } from "../../redux/modules/comment";
 import { useDispatch } from "react-redux";
 import delete2 from "../../assets/icons/delete2.png"
 import edit from "../../assets/icons/edit.png"
+import { __likeComment } from "../../redux/modules/comment";
+import axios from "axios";
 
 const Comments = ({item})=>{
     const dispatch = useDispatch();
     const id = item.commentId
     const getNickname = localStorage.getItem("nickname")
+    const [showReplyInput, setshowReplyInput] = useState(false);
+    console.log(showReplyInput)
+    const onLike = (event) => {
+        event.preventDefault();
+        dispatch(__likeComment(id));
+    };
     
+    const onReplyClick = () => {
+        setshowReplyInput(!showReplyInput);
+      };
+  
     return(
         <div style={{margin:"10px",borderTop:"1px solid #cc9ce7" }}>
             <NameButtonContainer>
                 <NickName>{item.nickname}</NickName>
+                <CM>{item.comment}</CM>
                 <div>
                     {getNickname === item.nickname ?
                   ( <>  
@@ -30,13 +43,12 @@ const Comments = ({item})=>{
             </NameButtonContainer>
             
             <CmLikeContainer>
-                <CM>{item.comment}</CM>
-                <span>💜 {item.likes}</span>
+                <span onClick={onLike}>💜 {item.likes}</span>
             </CmLikeContainer>
             
             <TRWrapper>
                 <Time>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Time>
-                <Recomment>답글 달기</Recomment>
+                <Recomment onClick={onReplyClick}>답글달기</Recomment>
             </TRWrapper>
         </div>
     )
@@ -51,9 +63,9 @@ const NickName = styled.p`
 
 const CmLikeContainer = styled.div`
     display: flex;
-    justify-content: space-between;
     margin-top:-5px;
     align-items: center;
+    float: right;
 `
 const CM = styled.span`
     overflow: hidden;  		
@@ -63,32 +75,31 @@ const CM = styled.span`
     width: 300px;
     height: 20px;
     text-align: left;
+    margin-left: -10px;
 `
 const Time = styled.span`
     
 `
 
-const Recomment = styled.div`
+const Recomment = styled.button`
     
 `
 
 const TRWrapper = styled.div`
     display: flex;
     gap: 10px;
-    margin-top: 5px;
 `
 
 const NameButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `
 
 const DeleteBtn = styled.button`
     width: 40px;
     height: 30px;
     border: none;
-    margin: 0 0 auto 0;
-    margin-top: 5px;
     background-color: white;
     img{
         width: 100%;
