@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const Report = () => {
-    const [fileImage, setFileImage] = useState("");
-    const [Report, setReport] = useState("");
+    const [fileImage, setFileImage] = useState('');
+    const [Report, setReport] = useState('');
+    const dispatch = useDispatch();
     console.log(Report)
     //select
     const OPTIONS = [
@@ -18,16 +21,18 @@ const Report = () => {
 		console.log(e.target.value);
 	};
     //image
+    
+    const handleFileDelete = () => {
+        URL.revokeObjectURL(fileImage);
+        setFileImage('');
+      };
     const handleFileChange = (e) => {
         setFileImage(URL.createObjectURL(e.target.files[0]))
     }
-    const handleFileDelete = () => {
-        URL.revokeObjectURL(fileImage);
-        setFileImage("");
-      };
-
+    console.log(fileImage)
     //Report
-   
+    useEffect(() => {
+      }, [])
     return (
         <ReportContainerDiv>
             
