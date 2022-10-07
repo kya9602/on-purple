@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { __getLikeprofile, __getMypage, updatePost } from "../../redux/modules/mypage";
 import EditModal from "./modal/EditModal";
 import useOnClickOutside from "./modal/useOnClickOutside";
+import LikeMeCard from "./LikeMeCard";
 
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
@@ -56,15 +57,24 @@ const Mypage = () => {
 
     }, []);
 
+
     //마이페이지 처음 기본정보 불러오기
-    const { mypage } = useSelector((state) => state?.mypage);
-    console.log("mypage is", mypage?.profileId)
+    const mypage = useSelector((state) => state.mypage);
+    const { profileId } = useParams();
 
-
+    //마이페이지 인포 정보
+    const userInfo = mypage.mypage.data
+    console.log(userInfo)
 
     useEffect(() => {
-        dispatch(__getMypage(mypage.profileId));
-    }, [dispatch])
+        dispatch(__getMypage(profileId));
+    }, [])
+
+
+
+
+    //마이페이지 나를좋아하는 사람카드정보
+    const LikeMe = mypage.mypage.data
 
 
 
@@ -116,14 +126,14 @@ const Mypage = () => {
                     {/* 내정보 박스 Myinfo */}
                     <Myinfo>
                         <div style={{ display: "flex", justifyContent: "center" }}>
-                            {/* <Profile src={mypage.imageUrl} /> */}
+                            <Profile src={userInfo?.imageUrl} />
                             <InfoBody>
-                                {/* <Age> age :{mypage.age}</Age> */}
+                                <Age> age :{userInfo?.age}</Age>
 
-                                {/* <MBTI>MBTI :{mypage.mbti} </MBTI> */}
+                                <MBTI>MBTI :{userInfo?.mbti} </MBTI>
                                 <OnlineBox>
                                     <OneLine>한 줄 소개</OneLine>
-                                    {/* <OneLine>{mypage.introduction}</OneLine> */}
+                                    <OneLine>{userInfo?.introduction}</OneLine>
                                 </OnlineBox>
                             </InfoBody>
                             {/* 같은 아이디를 가진 사람이 들어왔을때만 보여야함 */}
@@ -145,10 +155,12 @@ const Mypage = () => {
                         <div style={{ display: "flex", flexDirection: "column" }}>
                             <Listtitle>내가 받은 Perple</Listtitle>
                             <LovemeBox>
+                                <LoveCard>
+                                    {userInfo?.likeResponseDtoList?.map((likeMeCard) => {
+                                        return <LikeMeCard key={likeMeCard} post={likeMeCard} />
+                                    })}
 
-                                <LoveCard src={profile}></LoveCard>
-                                <LoveCard src={profile}></LoveCard>
-
+                                </LoveCard>
                             </LovemeBox>
                         </div>
 
