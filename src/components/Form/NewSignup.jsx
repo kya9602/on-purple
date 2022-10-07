@@ -19,6 +19,7 @@ import profileImage from "../../assets/images/profile.jpg";
 import { __checkUsername, __checkNickname } from "../../redux/modules/user";
 import { __getUser } from "../../redux/modules/signup";
 import { __logout, logout } from "../../redux/modules/user";
+import { getSelectUnstyledUtilityClass } from "@mui/base";
 
 
 
@@ -80,6 +81,13 @@ export default function VerticalLinearStepper() {
             return alert("사진을 등록해주세요! 😎")
         };
 
+        if (usernameCheck === false) {
+            return alert("아이디 중복확인을 해주세요!!!");
+        } else if (nicknameCheck === false) {
+            return alert("닉네임 중복확인을 해주세요!!!")
+        };
+
+
         let json = JSON.stringify(userinfo);
         const usernameblob = new Blob([json], { type: "application/json" });
         formData.append("info", usernameblob);
@@ -125,6 +133,9 @@ export default function VerticalLinearStepper() {
     const regexNickname = /^[가-힣0-9+]{2,8}$/;
     const regexPassword = /^[A-Za-z0-9+]{4,20}$/;
 
+    const [usernameCheck, setUsernameCheck] = useState(false);
+
+
     //아이디 중복 체크
     const usernameCheckHandler = async (e) => {
         e.preventDefault();
@@ -133,8 +144,13 @@ export default function VerticalLinearStepper() {
             username: username
         };
         dispatch(__checkUsername(member));
+        setUsernameCheck(true);
         return;
     };
+
+
+    const [nicknameCheck, setNicknameCheck] = useState(false);
+
 
     //닉네임 중복 체크
     const nicknameCheckHandler = async (e) => {
@@ -144,6 +160,7 @@ export default function VerticalLinearStepper() {
             nickname: nickname
         };
         dispatch(__checkNickname(member));
+        setNicknameCheck(true);
         return;
     };
 
@@ -180,17 +197,15 @@ export default function VerticalLinearStepper() {
 
 
 
-    const { userId } = useParams();
-    const { user, isLoding, error } = useSelector((state) => state.user);
+    // const { userId } = useParams();
+    // // const { user, isLoding, error } = useSelector((state) => state.user);
 
+    // // const userData = user.data;
+    // console.log("data is", userId)
 
-
-    const userData = user.data;
-    console.log("data is", userData)
-
-    useEffect(() => {
-        dispatch(__getUser(userId));
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(__getUser(userId));
+    // }, [dispatch])
 
 
 
@@ -198,7 +213,7 @@ export default function VerticalLinearStepper() {
     const addaddHandler = async () => {
 
         if (input.age.trim() === "" || input.mbti.trim() === "" || input.introduction.trim() === "" || input.area.trim() === "") {
-            return alert("모든 칸을 채워주세요! 👀")
+            return alert("필수 정보는 입력해주어야합니다!!! 👀")
         };
 
         const { age, mbti, introduction, area, idealType, job, hobby, drink, pet, smoke, likeMovieType } = input;
@@ -305,7 +320,6 @@ export default function VerticalLinearStepper() {
                             {/*정규표현식 충족 ? 사용가능한 아이디 : 정규표현식 알려주기 */}
 
                             {userinfo.username &&
-
                                 (regexUsername.test(userinfo.username) ?
                                     (<div style={{ textAlign: "center" }}>
                                         <div style={{ fontSize: "13px", color: "blue", fontWeight: "600" }}>올바른 아이디형식입니다!</div>
@@ -437,7 +451,7 @@ export default function VerticalLinearStepper() {
                                     <MiniHeader>🌟 필수로 입력해주어야 합니다~🌠</MiniHeader>
                                     <AgeInput
                                         placeholder="당신의 나이는 몇살인가요 ??"
-                                        type="text"
+                                        type="number"
                                         name="age"
                                         value={input.age}
                                         className="text"

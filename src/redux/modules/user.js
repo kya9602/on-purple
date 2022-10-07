@@ -8,11 +8,11 @@ export const __checkUsername = createAsyncThunk(
         try {
             console.log(payload);
             const data = await axios.post(`${process.env.REACT_APP_HOST}/user/idCheck/${payload.username}`);
-            console.log(data);
+            console.log(data.data);
             if (data.data.success === false)
                 alert(data.data.error.message);
             else alert("사용 가능한 아이디입니다.");
-            return thunkAPI.fulfillWithValue(data.data.data);
+            return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
@@ -28,7 +28,7 @@ export const __checkNickname = createAsyncThunk(
         try {
             console.log(payload);
             const data = await axios.post(`${process.env.REACT_APP_HOST}/user/nicknameCheck/${payload.nickname}`);
-            console.log(data);
+            console.log(data.data);
             if (data.data.success === false)
                 alert(data.data.error.message);
             else alert("사용 가능한 닉네임입니다.");
@@ -59,11 +59,13 @@ export const __logout = createAsyncThunk(
     }
 );
 
+
+
 export const userSlice = createSlice({
 
     name: "user",
     initialState: {
-        user: null //user has not loged in
+        user: null
     },
     reducers: {
 
@@ -73,6 +75,8 @@ export const userSlice = createSlice({
             localStorage.removeItem("nickname")
         }
     },
+
+
 });
 
 

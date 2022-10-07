@@ -129,17 +129,17 @@ export const LovemeBox = styled.div`
 
 
 //좋아요한 사람 프로필 사진 
-export const LoveCard = styled.img`
+export const LoveCard = styled.div`
     margin: auto;
     margin-left: 2vw;
-    background-color: #8adafd;
+    /* background-color: #8adafd; */
+    border: 2px solid #9C7FCB;
     border-radius: 10px;
     padding : 1%;
-    width: 150px;
-    height:150px;
+    width: 170px;
+    height:auto;
     text-align: center;
     padding-top: 10px;
-    padding-bottom: 10px;
 `
 
 //매칭된 사람 목록 박스
@@ -154,17 +154,17 @@ export const MatchingBox = styled.div`
 `
 
 //매칭된 사람 프로필 사진
-export const MatchingCard = styled.img`
-     margin: auto;
+export const MatchingCard = styled.div`
+    margin: auto;
     margin-left: 2vw;
-    background-color: #8adafd;
+    /* background-color: #8adafd; */
+    border: 2px solid #cb7fb8;
     border-radius: 10px;
     padding : 1%;
-    width: 150px;
-    height:150px;
+    width: 170px;
+    height:auto;
     text-align: center;
     padding-top: 10px;
-    padding-bottom: 10px;
 `
 
 
@@ -191,11 +191,6 @@ export const StBodyInput = styled.textarea`
       outline: none;
       border: 2px solid gray;
     }
- /* @media all and (max-width : 750px) {
-    font-size: 14px; 
-    width : 40vw;
-    height: 10vw;
-  } */
 `
 //완료버튼창 박스
 export const StBtbBox = styled.div`
@@ -208,32 +203,29 @@ export const StBtbBox = styled.div`
 
 //수정 완료버튼창
 export const StButton = styled.button`
-  height: 40px;
-  width: 150px;
-  font-size: 20px;
+  height: 30px;
+  width: 100px;
+  font-size: 14px;
+  margin-left: 15px;
   border: 2px solid purple;
   font-weight: 600;
   background-color: white;
+  cursor: pointer;
   :hover{
     color : #f56589;
     background-color: #ffffae;
     border : none;
   }
-  
-  @media all and (max-width : 750px) {
-  font-size: 12px; 
-  width : 100px;
-  height: 30px;
-  font-weight: 600;
-  }
 `
 
 //수정큰틀
 export const SecondMypageBox = styled.div`
-    width:300px;
+    width:450px;
     height: auto;
     padding-bottom: 2%;
-    margin-top: 15px;
+    margin-top: 90px;
+    margin-left: auto;
+    margin-right: auto;
     border: 3px solid #fdc2f0;
     border-radius: 15px;
     background-color: white;
@@ -244,14 +236,14 @@ export const SecondMypageBox = styled.div`
 
 //수정 마이페이지틀
 export const SecondMyinfo = styled.div`
-  /* border-bottom-style:solid; 
+    border-bottom-style:solid; 
     border-bottom-color:gray;
-    border-bottom-width:2px; */
-    width: 300px;
+    border-bottom-width:2px;
+    width: 400px;
     /* margin-left: 25vw; */
     display: flex;
     justify-content: center;
-    /* padding-bottom: 2%; */
+    padding-bottom: 2%;
 `
 
 
@@ -264,10 +256,10 @@ export const ImgBox = styled.div`
 
 //이미지 input
 export const Avatar = styled.img`
-   border: 5px solid #f8b2f8;
+    border: 2px solid #f8b2f8;
     border-radius: 100px;
-    width: 10vw;
-    height: 10vw;
+    width: 100px;
+    height: 100px;
     background-size: cover;
 `
 
@@ -275,68 +267,50 @@ export const Avatar = styled.img`
 export const AddMyinfo = styled.div`
   width: 100vw;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
 //마이페이지 추가 정보란 낱개박스
 export const MiniBox = styled.div`
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  @media all and (max-width:750px) {
-    height: 30px;
-  }
+  height : 60px;
+  margin : auto;
 `
 //마이페이지 낱개 박스 타이틀
 export const MiniTitle = styled.div`
-  margin-top: 1.3%;
-  width: 13vw;
-  height: 1.5em;
+  margin: auto;
+  width: 150px;
+  height: 20px;
   text-align: center;
   background-color: #bebaba;
   border-radius: 5px;
-  font-size: 18px;
-  @media all and (max-width : 750px) {
-    font-size: 14px; 
-    width : 24vw;
-    height: 1.5em;
-  }
+  font-size: 14px;
 `
 
 //마이페이지 낱개 박스 인풋
 export const MiniInput = styled.input`
   margin: 1%;
   text-align: center;
-  width: 40vw;
+  width: 420px;
   margin-left: 2vw;
   height: 1.5em;
   border-radius: 5px;
   border: 2px solid gray;
-  font-size: 18px;
-  @media all and (max-width : 750px) {
-    font-size: 12px; 
-    width : 60vw;
-    height: 1.5em;
-  }
+  font-size: 12px;
 `
 
 //마이페이지 추가정보란 헤더
 export const MiniHeader = styled.div`
-  /* border : 2px solid gray; */
   border-radius: 5px;
   padding: 1%;
   text-align: center;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: bolder;
   color: purple;
   width: 100vw;
   margin-top: 10px;
-  /* margin-bottom: 10px; */
-  @media all and (max-width : 800px) {
-    font-size: 16px; 
-    width : 100vw;
-    height: 30px;
-    margin-bottom: 15px;
-  }
+  margin-bottom: 15px;
 `
 //기본 인포 바디 
 export const InfoBodyBox = styled.div`
