@@ -123,6 +123,7 @@ const Box = styled.button`
     background-color: #5B63B7;
     width: 100px;
     height: 30px;
+    color: white;
         p{
             font-weight: 600;
             margin-top: 5px;
@@ -131,7 +132,7 @@ const Box = styled.button`
         :hover{
             cursor: pointer;
             box-shadow: 2.5px 2.5px 2.5px gray;
-    }
+        }
 `
 const CategoryContaier = styled.div`
     justify-content: center;

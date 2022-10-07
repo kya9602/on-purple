@@ -143,7 +143,8 @@ export const postSlice = createSlice({
       },
       
       [__deletePosts.fulfilled]: (state, action) => {
-        state.detail = action.payload;
+        state.post = action.payload;
+        /* console.log(action.payload) */
       },
       [__deletePosts.rejected]: (state, action) => {
         

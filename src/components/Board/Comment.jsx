@@ -9,7 +9,7 @@ const Comments = ({item})=>{
     const dispatch = useDispatch();
     const id = item.commentId
     const getNickname = localStorage.getItem("nickname")
-    console.log(item)
+    /* console.log(item) */
     const onLike = (event) => {
         event.preventDefault();
         dispatch(__likeComment(id));
@@ -19,6 +19,7 @@ const Comments = ({item})=>{
         <div style={{margin:"10px",borderTop:"1px solid #cc9ce7" }}>
             <NameButtonContainer>
                 <NickName>{item.nickname}</NickName>
+                <CM>{item.comment}</CM>
                 <div>
                     {getNickname === item.nickname ?
                   ( <>  
@@ -35,7 +36,6 @@ const Comments = ({item})=>{
             </NameButtonContainer>
             
             <CmLikeContainer>
-                <CM>{item.comment}</CM>
                 <span onClick={onLike}>💜 {item.likes}</span>
             </CmLikeContainer>
             
@@ -56,9 +56,9 @@ const NickName = styled.p`
 
 const CmLikeContainer = styled.div`
     display: flex;
-    justify-content: space-between;
     margin-top:-5px;
     align-items: center;
+    float: right;
 `
 const CM = styled.span`
     overflow: hidden;  		
@@ -68,6 +68,7 @@ const CM = styled.span`
     width: 300px;
     height: 20px;
     text-align: left;
+    margin-left: -10px;
 `
 const Time = styled.span`
     
@@ -80,20 +81,18 @@ const Recomment = styled.div`
 const TRWrapper = styled.div`
     display: flex;
     gap: 10px;
-    margin-top: 5px;
 `
 
 const NameButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `
 
 const DeleteBtn = styled.button`
     width: 40px;
     height: 30px;
     border: none;
-    margin: 0 0 auto 0;
-    margin-top: 5px;
     background-color: white;
     img{
         width: 100%;

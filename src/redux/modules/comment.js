@@ -44,7 +44,10 @@ export const __likeComment = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken"),
         }
       });
-      /* console.log(data.data.data) */
+      if(data.data.success === true){
+        window.location.reload()
+      }
+      console.log(data.data)
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -111,12 +114,12 @@ export const commentSlice = createSlice({
     [__likeComment.fulfilled]: (state, action) => {
       state.isLoading = false;
       /* state.comment = action.payload; */
-      /* if (action.payload === false) {
+     /*  if (action.payload == false && undefined) {
         action.payload.likes -= 1;
       } else {
         action.payload.likes += 1;
       } */
-      console.log("payload",action.payload)
+      console.log("payload",action.payload.likes)
       console.log("state",current(state.comment))
     },
     [__likeComment.rejected]: (state, action) => {
