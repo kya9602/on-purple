@@ -186,7 +186,7 @@ export default function VerticalLinearStepper() {
 
 
     const userData = user.data;
-    console.log("data is", userData)
+    /* console.log("data is", userData) */
 
     useEffect(() => {
         dispatch(__getUser(userId));

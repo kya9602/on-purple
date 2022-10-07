@@ -14,6 +14,20 @@ export const __getComments = createAsyncThunk(
   }
 );
 
+export const __getReComments = createAsyncThunk(
+  "GET_RECOMMENTS",
+  async (payload, thunkAPI) => {
+   /*  console.log(payload) */
+    try {
+      const data = await axios.get(`${process.env.REACT_APP_HOST}/reComment/${payload}`);
+      console.log(data.data.data)
+      return thunkAPI.fulfillWithValue(data?.data?.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
+
 export const __deleteComments = createAsyncThunk(
   // action 이름
   "DELETE_COMMENT",
