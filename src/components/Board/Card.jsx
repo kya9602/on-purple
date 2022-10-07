@@ -18,7 +18,6 @@ const Card = ({item}) => {
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
                     </WriterLikeWrapper>
-
                 </Container>                
 
             </Item>
