@@ -62,7 +62,7 @@ const initialState = {
     likes:0,
     modifiedAt:[],
     nickname:"",
-    reCommentResponseDtoList:null
+    reCommentResponseDtoList:[]
   },
   error: null,
   isLoading: false,
@@ -75,10 +75,9 @@ export const commentSlice = createSlice({
     createComment(state, action) {
       state.comment.push(action.payload)
     },
-    /* updataComment: (state, action) => {
-    axios.put(`${process.env.REACT_APP_HOST}/comment/${action.payload.commentId}`, action.payload)
-  }
-*/
+    createreComment(state, action) {
+      state.comment.push(action.payload)
+    },
   },
   extraReducers: {
     [__getComments.fulfilled]: (state, action) => {

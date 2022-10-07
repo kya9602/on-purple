@@ -12,7 +12,6 @@ const CommentList = () => {
     const {postId} = useParams();
     const {isLoading, error, comment} = useSelector((state)=> state?.comment)
     /* console.log(comment) */
-
     useEffect(()=>{
         dispatch(__getComments(postId));
     },[dispatch])
