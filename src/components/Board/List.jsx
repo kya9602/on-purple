@@ -5,19 +5,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../../redux/modules/board";
 import { useNavigate, useParams } from "react-router";
 import TopButton from "./ScrollTop";
+import axios from "axios";
+import Pagination from "./Pagination/Pagination";
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    /* const [category, setCatecory] = useState("meet"); */
     const { isLoading, error, post } = useSelector((state) => state?.post)
-    /* console.log(post) */
     const {Category} = useParams();
-    /* console.log(Category) */
-   
+    
+    const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1); 
+	const [postsPerPage] = useState(10); 
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = post.slice(indexOfFirstPost, indexOfLastPost);
+    
     useEffect(() => {
         dispatch(__getPosts(Category));
-        /* console.log("작동"); */
+        console.log("작동");
       }, [Category]);
+    
+  	useEffect(() => {
+    		const fetchPosts = async () => {
+      		setLoading(true);
+      		const res = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${Category}`);
+      		console.log(res.data.data)
+            setPosts(res.data.data);
+      		setLoading(false);
+    	};
+    	fetchPosts();
+  }, []);
+
+    
     
       if (isLoading) {
         return <div>로딩 중....</div>;
@@ -31,7 +53,7 @@ const List = () => {
       /* if (post.length === 0)  */
 //----------------------navigateButton------------------//
     const goDrive = () =>{
-        navigate(`/board/${Category}`)
+        navigate(`/board/drive`)
     }
     const goTaste = () =>{
         navigate(`/board/taste`)
@@ -48,7 +70,7 @@ const List = () => {
     const goFashion = () =>{
         navigate(`/board/fashion`)
     }
-     
+     // 박스 -> 라디오 버튼으로 수정예정
     return (
         <>
             <Wrapper>
@@ -60,9 +82,10 @@ const List = () => {
                     <Box onClick={goBar}>Drink</Box>
                     <Box onClick={goFashion}>패션</Box>
                 </CategoryContaier>
-               {post.map((item) => (<Card item={item} key={item?.postId} />))}
+               {currentPosts.map((item) => (<Card item={item} key={item?.postId} />))}
                <TopButton/>
-            </Wrapper>  
+            </Wrapper>
+            <Pagination postsPerPage={postsPerPage} totalPosts={post.length} paginate={paginate} />  
         </>
     )
 }
