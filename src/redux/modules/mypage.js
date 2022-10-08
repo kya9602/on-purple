@@ -19,8 +19,13 @@ export const __getMypage = createAsyncThunk(
 
             return thunkAPI.rejectWithValue(error.code);
         }
+<<<<<<< HEAD
       });
       
+=======
+    });
+
+>>>>>>> 90f3ae16ea37801312a2b1ec56e136b0c881751e
 
 const initialState = {
 
@@ -70,7 +75,7 @@ export const detailSlice = createSlice({
 
 
 
-  }
+    }
 })
 
 export const { updatePost } = detailSlice.actions;

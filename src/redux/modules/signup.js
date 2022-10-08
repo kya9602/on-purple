@@ -3,7 +3,6 @@ import axios from "axios";
 
 
 
-
 //user info 정보 불러오기
 export const __getUser = createAsyncThunk(
   "GET_USER",
@@ -24,8 +23,13 @@ export const __getUser = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken"),
         }
       });
+<<<<<<< HEAD
       //console.log('get data is', data.data.data)
       return thunkAPI.fulfillWithValue(data.data);
+=======
+      console.log('get data is', data.data.data)
+      return thunkAPI.fulfillWithValue(data.data.data);
+>>>>>>> 90f3ae16ea37801312a2b1ec56e136b0c881751e
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
     }
@@ -71,7 +75,7 @@ const initialState = {
   isLoading: false,
 }
 
-export const userSlice = createSlice({
+export const signupSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -82,7 +86,7 @@ export const userSlice = createSlice({
     [__getUser.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
-      // console.log("action is", action.payload.data)
+      console.log("action is", action.payload)
     },
     [__getUser.rejected]: (state, action) => {
       state.isLoading = false;
@@ -96,6 +100,6 @@ export const userSlice = createSlice({
   }
 })
 
-export let { UserData } = userSlice.actions;
+export let { UserData } = signupSlice.actions;
 
-export default userSlice.reducer;
+export default signupSlice.reducer;
