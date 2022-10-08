@@ -20,13 +20,7 @@ export const __getMypage = createAsyncThunk(
             return thunkAPI.rejectWithValue(error.code);
         }
       });
-      // console.log('get data is', data.data.data)
-      return thunkAPI.fulfillWithValue(data.data.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.code);
-    }
-  }
-);
+      
 
 const initialState = {
 

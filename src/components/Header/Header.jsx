@@ -35,17 +35,14 @@ const Header = () => {
   
   const userData = user.data;
 
-console.log("data is", user)
+  //console.log("data is", user)
   // console.log(userData)
 
   useEffect(() => {
     dispatch(__getUser());
   }, [__getUser])
 
-  useEffect(() => {
-    dispatch(__getUser(userId));
-  }, [__getUser])
-  
+ 
 
 
 
