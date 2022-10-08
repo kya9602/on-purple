@@ -7,9 +7,9 @@ export const __getPosts = createAsyncThunk(
     async (payload, thunkAPI) => {
       /* console.log(payload) 무한스크롤&page=0&size=10*/
         try {
-            const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}&page=0&size=10`);
-            /* console.log(data.data.data.content) */
-            return thunkAPI.fulfillWithValue(data.data.data.content);
+            const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}`);
+            /* console.log(data.data.data) */
+            return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
         }

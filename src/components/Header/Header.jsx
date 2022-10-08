@@ -10,7 +10,6 @@ import profile from "../../assets/images/profile.jpg";
 import logo from "../../assets/images/perple.jpg";
 import Onlogo from "../../assets/images/On 소문자.svg";
 import Offlogo from "../../assets/images/Off 소문자.svg";
-import { __getMypage } from "../../redux/modules/mypage";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -32,22 +31,21 @@ const Header = () => {
 
 
   const { user, isLoding, error } = useSelector((state) => state.user);
-  
-  const userData = user.data;
 
-  /* console.log("data is", user) */
+  const userData = user;
+
+
   // console.log(userData)
 
   useEffect(() => {
     dispatch(__getUser());
   }, [__getUser])
 
-  
   return (
     <HeaderContainer>
       {token === null ? <LogoImg><img src={Offlogo} alt="로그인 안된상태" /></LogoImg>
         : <LogoImg><img src={Onlogo} alt="로그인 된상태" /></LogoImg>}
-      <Title>Purple</Title>
+      <Title onClick={() => {navigate('/')}}>Purple</Title>
       <UserSet >
 
 
@@ -78,7 +76,7 @@ const Header = () => {
                 <>
                   <Li>
                     <LinkWrapper
-                      onClick={() => navigate(`/mypage/${user?.data?.userId}`)}
+                      onClick={() => navigate(`/mypage/${user?.userId}`)}
                     >마이페이지 가기</LinkWrapper>
                   </Li>
                   <Li>

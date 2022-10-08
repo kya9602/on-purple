@@ -3,10 +3,11 @@ import profile from "../../assets/images/profile.jpg";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { __getLikeprofile, __getMypage, updatePost } from "../../redux/modules/mypage";
+import { __getMypage, updatePost } from "../../redux/modules/mypage";
 import EditModal from "./modal/EditModal";
 import useOnClickOutside from "./modal/useOnClickOutside";
 import LikeMeCard from "./LikeMeCard";
+import LoveweCard from "./LoveweCard";
 
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, ImgBox, SecondMypageBox, SecondMyinfo,
@@ -73,10 +74,6 @@ const Mypage = () => {
 
 
 
-    //마이페이지 나를좋아하는 사람카드정보
-    const LikeMe = mypage.mypage.data
-
-
 
     const [post, setPost] = useState(initialState)
 
@@ -121,6 +118,7 @@ const Mypage = () => {
 
     return (
         <>
+
             {!input ?
                 <MypageBox>
                     {/* 내정보 박스 Myinfo */}
@@ -156,8 +154,9 @@ const Mypage = () => {
                             <Listtitle>내가 받은 Perple</Listtitle>
                             <LovemeBox>
                                 <LoveCard>
-                                    {userInfo?.likeResponseDtoList?.map((likeMeCard) => {
-                                        return <LikeMeCard key={likeMeCard} post={likeMeCard} />
+                                    {userInfo?.likedResponseDtoList?.map((likeMeitem) => {
+                                        console.log(likeMeitem)
+                                        return <LikeMeCard key={likeMeitem?.profileId} likeMeitem={likeMeitem} />
                                     })}
 
                                 </LoveCard>
@@ -169,10 +168,12 @@ const Mypage = () => {
                             <Listtitle>나랑 마음이 통한 사람</Listtitle>
 
                             <MatchingBox>
-
-                                <MatchingCard src={profile}></MatchingCard>
-                                <MatchingCard src={profile}></MatchingCard>
-
+                                <MatchingCard>
+                                    {userInfo?.otherLikeResponseDtoList?.map((loveMeitem) => {
+                                        console.log(loveMeitem)
+                                        return <LoveweCard key={loveMeitem?.profileId} loveMeitem={loveMeitem} />
+                                    })}
+                                </MatchingCard>
                             </MatchingBox>
                         </div>
                     </ListBox>
@@ -211,13 +212,12 @@ const Mypage = () => {
                                 className="add-input"
                                 onChange={onChangeHandler} />
                         </InfoBody>
-                        <StButton onClick={() => { onUpdatePost() }}>수정</StButton>
-                        <StButton onClick={() => { setInput(!input) }}>취소</StButton>
+
                     </SecondMyinfo>
 
                     {/* 아래 추가정보란 적는곳  */}
                     <AddMyinfo>
-                        <MiniHeader>🌟내 정보를 추가한다면, 상대방과 매칭 될 확률이 높아집니다.🌠</MiniHeader>
+                        <MiniHeader>🌟내 정보를 추가한다면, <br />상대방과 매칭 될 확률이 높아집니다.🌠</MiniHeader>
                         <MiniBox>
                             <MiniTitle>이상형 🎈</MiniTitle>
                             <MiniInput
@@ -283,6 +283,10 @@ const Mypage = () => {
                             />
                         </MiniBox>
                     </AddMyinfo>
+                    <BtnBox>
+                        <StButton onClick={() => { onUpdatePost() }}>수정</StButton>
+                        <StButton onClick={() => { setInput(!input) }}>취소</StButton>
+                    </BtnBox>
                 </SecondMypageBox>
             }
         </>

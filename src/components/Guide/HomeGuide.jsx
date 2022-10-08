@@ -54,8 +54,8 @@ function HomeGuide() {
                 className="mySwiper"
             >
                 {DB.map(data=>(
-                    <SwiperSlide key={data.pics} >
-                                    
+                    <SwiperSlide 
+                        key={data.pics} >    
                         <img src={data.pics} />
                         <div>
                             <h3>{data.H3}</h3>

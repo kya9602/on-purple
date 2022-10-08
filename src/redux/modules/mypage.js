@@ -19,7 +19,8 @@ export const __getMypage = createAsyncThunk(
 
             return thunkAPI.rejectWithValue(error.code);
         }
-      });
+    });
+
 
 const initialState = {
 
@@ -69,7 +70,7 @@ export const detailSlice = createSlice({
 
 
 
-  }
+    }
 })
 
 export const { updatePost } = detailSlice.actions;

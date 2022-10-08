@@ -2,20 +2,20 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 
-const LikeMeCard = ({ likeMeitem }) => {
+const LoveweCard = ({ loveMeitem }) => {
     const navigate = useNavigate();
     // key=1 post=json{}, props에 들어가잇음
-    console.log(likeMeitem)
+    console.log(loveMeitem)
     return (
         <>
-            <Item onClick={() => { navigate(`/profile/${likeMeitem?.profileId}`) }}>
-                <Image src={likeMeitem?.imageUrl} alt="" />
+            <Item onClick={() => { navigate(`/profile/${loveMeitem?.profileId}`) }}>
+                <Image src={loveMeitem?.imageUrl} alt="" />
             </Item>
         </>
     );
 };
 
-export default LikeMeCard;
+export default LoveweCard;
 
 const Item = styled.div`
     border: 2px solid #9C7FCB;
@@ -33,5 +33,4 @@ const Image = styled.img`
     height: 100%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    /* filter: blur(10px); */
 `

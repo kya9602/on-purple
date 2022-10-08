@@ -2,15 +2,15 @@ import { forwardRef } from "react";
 import styled from "styled-components";
 
 const Modal = forwardRef((props, ref) => {
-    return (
-        <Background>
-            <Content>
-                <ModalContainer ref={ref}>
-                    {props.children}
-                </ModalContainer>
-            </Content>
-        </Background>
-    );
+  return (
+    <Background>
+      <Content>
+        <ModalContainer ref={ref}>
+          {props.children}
+        </ModalContainer>
+      </Content>
+    </Background>
+  );
 });
 
 export default Modal;
@@ -42,7 +42,7 @@ const Content = styled.div`
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90vw;
+  width: 85vw;
   height: 45vh;
   background-color: white;
   border: 1px solid whitesmoke;
