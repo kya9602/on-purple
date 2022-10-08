@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const Card = ({item}) => {
-    /* console.log(item.category) */
+    /* console.log(item) */
     const navigate = useNavigate();
     return (
         <>
@@ -17,7 +17,6 @@ const Card = ({item}) => {
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
                     </WriterLikeWrapper>
-
                 </Container>
             </Item>
         </>

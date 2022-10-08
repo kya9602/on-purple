@@ -1,93 +1,115 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { __getPosts } from "../../redux/modules/board";
 import { useNavigate, useParams } from "react-router";
+import TopButton from "./ScrollTop"
+import { useLocation } from "react-router";
+
 
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     /* const [category, setCatecory] = useState("meet"); */
-    const { isLoading, error, post } = useSelector((state) => state?.post)
+    /* const { isLoading, error, post } = useSelector((state) => state?.post) */
     /* console.log(post) */
-   
     const { Category } = useParams();
-    /* console.log(Category) */
-
- /*    const categories = [
-        {
-            name: "맛집 추천",
-            value: "taste"
-        },
-        {
-            name: "데이트 코스 추천",
-            value: "dateCourse"
-        },
-        {
-            name: "번개 만남",
-            value: "meet"
-        },
-        {
-            name: "한잔 하실 분?",
-            value: "bar"
-        },
-        {
-            name: "드라이브 하실 분?",
-            value: "drive"
-        },
-        {
-            name: "패션",
-            value: "fashion"
-        },
-
-    ]; */
+    const [posts, setPosts] = useState([]);
+    /* console.log(posts) */
+    const [hasNextPage, setHasNextPage] = useState(true);
+    const observerTargetEl = useRef(null);
+    const page = useRef(0);
+    const { pathname } = useLocation();
 
     useEffect(() => {
         dispatch(__getPosts(Category));
-      }, [Category]);
+      }, [dispatch]);
     
-      if (isLoading) {
-        return <div>로딩 중....</div>;
-      }
+
+    const fetch = useCallback(async () => {
+        try {
+          const { data } = await axios.get(
+            `${process.env.REACT_APP_HOST}/post?category=${Category}&page=${page.current}&size=10`
+          );
+          setPosts((prevPosts) => [...prevPosts, ...data.data.content]);
+          setHasNextPage(data.data.content.length === 10);
+          /* console.log(data.data.content); */
+          if (data.data.content.length) {
+            page.current += 1;
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }, []); 
+      
+//---------------------ItersectionObserver----------------------------//
+      useEffect(() => {
+        if (!observerTargetEl.current || !hasNextPage) return;
     
-      if (error) {
-        return <div>{error.message}</div>;
-      }
+        const io = new IntersectionObserver((entries, observer) => {
+          // console.log(entries);
+          if (entries[0].isIntersecting) {
+            fetch();
+          }
+        });
+        io.observe(observerTargetEl.current);
+        // console.log(io.observe(observerTargetEl.current));
+    
+        return () => {
+          io.disconnect();
+        };
+      }, [fetch, hasNextPage]);
+       
+    
+      useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [pathname]);
 
 //----------------------navigateButton------------------//
     const goDrive = () =>{
         navigate("/board/drive")
+        /* window.location.reload() */
     }
     const goTaste = () =>{
         navigate("/board/taste")
+        /* window.location.reload() */
     }
     const goDate = () =>{
         navigate("/board/dateCourse")
+        /* window.location.reload() */
     }
     const goMeet = () =>{
         navigate("/board/meet")
+        /* window.location.reload() */
     }
     const goBar = () =>{
         navigate("/board/bar")
+       /*  window.location.reload() */
     }
     const goFashion = () =>{
         navigate("/board/fashion")
+        /* window.location.reload() */
     }
-    
-    /* console.log(category) */
-    //-------------------- 무한 스크롤 ------------------//
-   /*  const [count, setCount] = useState(5);
-    const [ref, setRef] = useInfiniteScroll((entry, observer) => {
-        loadMorePosts();
-    });
-    function loadMorePosts() {
-        setCount(v => {
-            if (v + 1 <= post?.length) return v + 1;
-            else return v;
-        });
+    const goPost = () =>{
+        navigate("/post")
+    }
+
+    /* if(posts.length === 0 ) {
+        return(
+            <div style={{textAlign:"center", marginTop:"10px"}}>
+                <p>😴 게시글이 존재하지 않습니다 😴</p>
+                <GoWrite
+                onClick={goPost}  
+                variant="outlined"
+                color="primary">
+                    글쓰러 가기 ✍</GoWrite>
+            </div>
+        )
     } */
-    
+
+
     return (
         <>
             <Wrapper>
@@ -99,7 +121,9 @@ const List = () => {
                     <Box onClick={goBar}>Drink</Box>
                     <Box onClick={goFashion}>패션</Box>
                 </CategoryContaier>
-               {post.map((item) => (<Card item={item} key={item?.postId} />))}
+                {posts.map((item)=>(<Card item={item} key={item?.postId}/>))} 
+               <div ref={observerTargetEl} />
+               <TopButton/>
             </Wrapper>
         </>
     )
@@ -120,7 +144,7 @@ const Box = styled.button`
     text-align: center;
     border: none;
     border-radius: 10px;
-    background-color: #5B63B7;
+    background-color: #6A75CA;
     width: 100px;
     height: 30px;
     color: white;
@@ -141,4 +165,17 @@ const CategoryContaier = styled.div`
     width: 400px;
     margin: auto;
     gap: 10px;
+`
+
+const GoWrite = styled.button`
+    border: 1px solid #6A75CA;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+    width: 120px;
+    height: 50px;
+    background-color: white;
+     :hover {
+        background-color: #6A75CA;
+     }
 `

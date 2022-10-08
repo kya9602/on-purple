@@ -66,7 +66,6 @@ export const userSlice = createSlice({
         user: null //user has not loged in
     },
     reducers: {
-
         logout(state) {
             localStorage.removeItem("Authorization")   //로그아웃은 token, username 제거
             localStorage.removeItem("RefreshToken")

@@ -60,6 +60,9 @@ export const __likeComment = createAsyncThunk(
       });
       if(data.data.success === true){
         window.location.reload()
+      } else if (data.data.success === false){
+        window.alert("본인 댓글은 좋아요를 할 수 없습니다")
+        window.location.reload()
       }
       console.log(data.data)
       return thunkAPI.fulfillWithValue(data.data.data);
