@@ -14,6 +14,7 @@ export const __getComments = createAsyncThunk(
   }
 );
 
+// 대댓글 사용 안하고있음
 export const __getReComments = createAsyncThunk(
   "GET_RECOMMENTS",
   async (payload, thunkAPI) => {
@@ -47,6 +48,7 @@ export const __deleteComments = createAsyncThunk(
   }
 );
 
+//댓글 좋아요
 export const __likeComment = createAsyncThunk(
   "LIKE_COMMENT",
   async (payload, thunkAPI) => {

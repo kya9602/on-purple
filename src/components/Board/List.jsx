@@ -4,19 +4,19 @@ import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../../redux/modules/board";
 import { useNavigate, useParams } from "react-router";
-
+import TopButton from "./ScrollTop";
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     /* const [category, setCatecory] = useState("meet"); */
     const { isLoading, error, post } = useSelector((state) => state?.post)
-    console.log(post)
+    /* console.log(post) */
+    const {Category} = useParams();
+    /* console.log(Category) */
    
-    const { Category } = useParams();
-    console.log(Category)
-
     useEffect(() => {
         dispatch(__getPosts(Category));
+        /* console.log("작동"); */
       }, [Category]);
     
       if (isLoading) {
@@ -26,25 +26,27 @@ const List = () => {
       if (error) {
         return <div>{error.message}</div>;
       }
-
+    
+    
+      /* if (post.length === 0)  */
 //----------------------navigateButton------------------//
     const goDrive = () =>{
-        navigate("/board/drive")
+        navigate(`/board/${Category}`)
     }
     const goTaste = () =>{
-        navigate("/board/taste")
+        navigate(`/board/taste`)
     }
     const goDate = () =>{
-        navigate("/board/dateCourse")
+        navigate(`/board/dateCourse`)    
     }
     const goMeet = () =>{
-        navigate("/board/meet")
+        navigate(`/board/meet`)
     }
     const goBar = () =>{
-        navigate("/board/bar")
+        navigate(`/board/bar`)
     }
     const goFashion = () =>{
-        navigate("/board/fashion")
+        navigate(`/board/fashion`)
     }
      
     return (
@@ -59,7 +61,8 @@ const List = () => {
                     <Box onClick={goFashion}>패션</Box>
                 </CategoryContaier>
                {post.map((item) => (<Card item={item} key={item?.postId} />))}
-            </Wrapper>
+               <TopButton/>
+            </Wrapper>  
         </>
     )
 }

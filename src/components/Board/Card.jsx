@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const Card = ({item}) => {
-    console.log(item)
+    
     const navigate = useNavigate();
     const nickname = localStorage.getItem("nickname")
-    console.log(nickname)
+// 상세보기 페이지 로그인 필요합니다 추가 예정
     return (
         <>
             <Item onClick={()=>{navigate(`/detail/${item?.postId}`)}}>
