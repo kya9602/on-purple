@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const Card = ({item}) => {
-    /* console.log(item) */
+    console.log(item)
     const navigate = useNavigate();
+    const nickname = localStorage.getItem("nickname")
+    console.log(nickname)
     return (
         <>
             <Item onClick={()=>{navigate(`/detail/${item?.postId}`)}}>

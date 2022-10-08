@@ -5,11 +5,11 @@ import { current } from "@reduxjs/toolkit";
 export const __getPosts = createAsyncThunk(
     "GET_POSTS",
     async (payload, thunkAPI) => {
-      /* console.log(payload) 무한스크롤&page=0&size=10*/
+      console.log(payload) /* 무한스크롤&page=0&size=10 */
         try {
-            const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}`);
-            /* console.log(data.data.data) */
-            return thunkAPI.fulfillWithValue(data.data.data);
+            const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}&page=0&size=10`);
+            console.log(data.data.data.content)
+            return thunkAPI.fulfillWithValue(data.data.data.content);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
         }
@@ -22,7 +22,7 @@ export const __getPostsDetail = createAsyncThunk(
     /* console.log(payload) */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/post/${payload}`);
-       /* console.log(data.data.data) */
+       console.log(data.data.data)
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);

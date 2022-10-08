@@ -10,38 +10,10 @@ const List = () => {
     const navigate = useNavigate();
     /* const [category, setCatecory] = useState("meet"); */
     const { isLoading, error, post } = useSelector((state) => state?.post)
-    /* console.log(post) */
+    console.log(post)
    
     const { Category } = useParams();
-    /* console.log(Category) */
-
- /*    const categories = [
-        {
-            name: "맛집 추천",
-            value: "taste"
-        },
-        {
-            name: "데이트 코스 추천",
-            value: "dateCourse"
-        },
-        {
-            name: "번개 만남",
-            value: "meet"
-        },
-        {
-            name: "한잔 하실 분?",
-            value: "bar"
-        },
-        {
-            name: "드라이브 하실 분?",
-            value: "drive"
-        },
-        {
-            name: "패션",
-            value: "fashion"
-        },
-
-    ]; */
+    console.log(Category)
 
     useEffect(() => {
         dispatch(__getPosts(Category));

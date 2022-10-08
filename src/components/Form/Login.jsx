@@ -39,7 +39,7 @@ const Login = () => {
       localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
       localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
       localStorage.setItem("nickname", data.data.data.nickname)
-      console.log(data);
+      /* console.log(data); */
       if (data.data.success === false) {
         alert("data.data.error.message");
         alert("아이디와 비밀번호를 다시 확인해주세요.");
@@ -53,7 +53,7 @@ const Login = () => {
       // return thunkAPI.rejectWithValue(error);
     }
 
-    console.log(inputValue);
+    /* console.log(inputValue); */
 
   };
 
