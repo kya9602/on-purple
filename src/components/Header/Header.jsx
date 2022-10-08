@@ -32,24 +32,17 @@ const Header = () => {
 
   const { user, isLoding, error } = useSelector((state) => state.user);
 
-<<<<<<< HEAD
-  //console.log("data is", user)
-=======
+
   const userData = user;
 
   console.log("data is", user)
->>>>>>> 90f3ae16ea37801312a2b1ec56e136b0c881751e
+
   // console.log(userData)
 
   useEffect(() => {
     dispatch(__getUser());
   }, [__getUser])
 
-<<<<<<< HEAD
- 
-
-=======
->>>>>>> 90f3ae16ea37801312a2b1ec56e136b0c881751e
 
 
   return (
