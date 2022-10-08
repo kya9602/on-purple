@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { __getChatrooms } from "../../redux/modules/chatRoom";
+import { useDispatch } from "react-redux";
 const Chat= () =>{      
+    const dispatch = useDispatch();
     const [data,setData] = useState([
         {
             name: "안유진",
@@ -19,7 +21,11 @@ const Chat= () =>{
             roomId: 2,
         }
     ])
-    
+    useEffect(() => {
+        dispatch(__getChatrooms());
+        /* console.log("작동"); */
+      }, []);
+
     return(
         <div>
         {data.map((userdata)=>{

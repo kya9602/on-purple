@@ -6,12 +6,13 @@ import post from "../modules/board"
 import comment from "../modules/comment";
 import main from "../modules/main";
 import user from "../modules/signup";
-
+import chatroom from "../modules/chatRoom"
 const store = configureStore({
     reducer: {
         profile,
         post,
         comment,
+        chatroom,
         mypage: detailSlice.reducer,
         logout,
         main,
