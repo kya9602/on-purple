@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumber = [];
-  
+
   // Math.ceil: 올림
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumber.push(i);
@@ -32,6 +32,8 @@ const Head = styled.ul`
   list-style: none;
   padding: 0;
   gap: 10px;
+  padding-bottom: 100px;
+
 `
 const Number = styled.li`
     display: inline-block;
