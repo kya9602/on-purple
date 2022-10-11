@@ -22,6 +22,7 @@ import { __logout, logout } from "../../redux/modules/user";
 
 
 
+
 export default function VerticalLinearStepper() {
 
     //===============================================================================================
@@ -197,8 +198,8 @@ export default function VerticalLinearStepper() {
     // const { userId } = useParams();
     // // const { user, isLoding, error } = useSelector((state) => state.user);
 
-    // // const userData = user.data;
-    // console.log("data is", userId)
+  /*   const userData = user.data;
+    console.log("data is", userData) */
 
     // useEffect(() => {
     //     dispatch(__getUser(userId));

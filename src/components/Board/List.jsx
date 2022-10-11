@@ -4,48 +4,42 @@ import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../../redux/modules/board";
 import { useNavigate, useParams } from "react-router";
-
+import TopButton from "./ScrollTop";
+import axios from "axios";
+import Pagination from "./Pagination/Pagination";
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    /* const [category, setCatecory] = useState("meet"); */
     const { isLoading, error, post } = useSelector((state) => state?.post)
-    /* console.log(post) */
-   
-    const { Category } = useParams();
-    /* console.log(Category) */
+    const {Category} = useParams();
+    
+    const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1); 
+	const [postsPerPage] = useState(10); 
 
- /*    const categories = [
-        {
-            name: "맛집 추천",
-            value: "taste"
-        },
-        {
-            name: "데이트 코스 추천",
-            value: "dateCourse"
-        },
-        {
-            name: "번개 만남",
-            value: "meet"
-        },
-        {
-            name: "한잔 하실 분?",
-            value: "bar"
-        },
-        {
-            name: "드라이브 하실 분?",
-            value: "drive"
-        },
-        {
-            name: "패션",
-            value: "fashion"
-        },
-
-    ]; */
-
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = post.slice(indexOfFirstPost, indexOfLastPost);
+    
     useEffect(() => {
         dispatch(__getPosts(Category));
+        /* console.log("작동"); */
       }, [Category]);
+    
+  	useEffect(() => {
+    		const fetchPosts = async () => {
+      		setLoading(true);
+      		const res = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${Category}`);
+      		console.log(res.data.data)
+            setPosts(res.data.data);
+      		setLoading(false);
+    	};
+    	fetchPosts();
+  }, []);
+
+    
     
       if (isLoading) {
         return <div>로딩 중....</div>;
@@ -54,40 +48,29 @@ const List = () => {
       if (error) {
         return <div>{error.message}</div>;
       }
-
+    
+    
+      /* if (post.length === 0)  */
 //----------------------navigateButton------------------//
     const goDrive = () =>{
-        navigate("/board/drive")
+        navigate(`/board/drive`)
     }
     const goTaste = () =>{
-        navigate("/board/taste")
+        navigate(`/board/taste`)
     }
     const goDate = () =>{
-        navigate("/board/dateCourse")
+        navigate(`/board/dateCourse`)    
     }
     const goMeet = () =>{
-        navigate("/board/meet")
+        navigate(`/board/meet`)
     }
     const goBar = () =>{
-        navigate("/board/bar")
+        navigate(`/board/bar`)
     }
     const goFashion = () =>{
-        navigate("/board/fashion")
+        navigate(`/board/fashion`)
     }
-    
-    /* console.log(category) */
-    //-------------------- 무한 스크롤 ------------------//
-   /*  const [count, setCount] = useState(5);
-    const [ref, setRef] = useInfiniteScroll((entry, observer) => {
-        loadMorePosts();
-    });
-    function loadMorePosts() {
-        setCount(v => {
-            if (v + 1 <= post?.length) return v + 1;
-            else return v;
-        });
-    } */
-    
+     // 박스 -> 라디오 버튼으로 수정예정
     return (
         <>
             <Wrapper>
@@ -99,8 +82,10 @@ const List = () => {
                     <Box onClick={goBar}>Drink</Box>
                     <Box onClick={goFashion}>패션</Box>
                 </CategoryContaier>
-               {post.map((item) => (<Card item={item} key={item?.postId} />))}
+               {currentPosts.map((item) => (<Card item={item} key={item?.postId} />))}
+               <TopButton/>
             </Wrapper>
+            <Pagination postsPerPage={postsPerPage} totalPosts={post.length} paginate={paginate} />  
         </>
     )
 }

@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { current } from "@reduxjs/toolkit";
 
 export const __getPosts = createAsyncThunk(
     "GET_POSTS",
     async (payload, thunkAPI) => {
-      /* console.log(payload) 무한스크롤&page=0&size=10*/
+      /* console.log(payload) */ /* 무한스크롤&page=0&size=10 */
         try {
             const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}`);
-            /* console.log(data) */
+            console.log(data.data.data)
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);
@@ -60,9 +59,10 @@ export const __likePost = createAsyncThunk(
                 "RefreshToken": localStorage.getItem("RefreshToken"),
               }
             });
-            /* if(data.data.success === false){
-              window.alert("본인에게 좋아요를 할 수 없습니다")
-            } */
+            if(data.data.success === false){
+              window.alert("본인 게시글엔 좋아요를 할 수 없습니다")
+              window.location.reload()
+            }
             /* console.log(data.data) */
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
