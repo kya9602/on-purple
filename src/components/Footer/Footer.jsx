@@ -2,28 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ForumIcon from '@mui/icons-material/Forum';
-import backBtn from "../../assets/icons/backBtn.png"
+import Chating from "../../assets/icons/chating.png"
+import Dashboard from "../../assets/icons/dashboard.png"
+import Home from "../../assets/icons/home.png"
+import Return from "../../assets/icons/return.png"
 const Footer = () =>{
     const navigate = useNavigate();
     return(
         <FooterContainer>
-            <BackBtn onClick={() => {navigate(-1)}}><img src={backBtn} alt=""/></BackBtn>
+            <div onClick={()=>{navigate(-1)}}>
+                <MainContainer>
+                    <img src={Return} alt=""/>
+                </MainContainer>
+            </div>
             <Link to="/" >
                 <MainContainer>
-                    <HomeIcon fontSize="large" />
+                    <img src={Home} alt=""/>
                 </MainContainer>
             </Link>
             <Link to="/board/taste">
                 <MainContainer>
-                    <DashboardIcon fontSize="large" />
+                    <img src={Dashboard} alt=""/>
                 </MainContainer>
-            </Link>
+        </Link>
             <Link to="/chat" >
                 <MainContainer>
-                    <ForumIcon fontSize="large" />
+                    <img src={Chating} alt=""/>
                 </MainContainer>
             </Link>
         </FooterContainer>
@@ -44,7 +48,7 @@ const FooterContainer = styled.div`
     align-items:center;
   
   a:hover, a:active { text-decoration: none; }
-  a { text-decoration: none; color: black; }
+  a { text-decoration: none; color: wheat; }
   a:visited { text-decoration: none; }
 `
 
@@ -52,16 +56,7 @@ const MainContainer = styled.div `
     display: flex;
     width: 80px;
     justify-content: center;
-`
-
-const BackBtn = styled.div`
-    text-align: center;
-    margin-top: 10px;
-    width: 12vw;
-    height: 5vh;
-    img {
-        width: 80%;
-        height: 80%;
-        object-fit: cover;
+    img{
+        width: 50px;
     }
 `
