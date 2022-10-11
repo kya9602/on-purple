@@ -31,6 +31,7 @@ export const __getUser = createAsyncThunk(
   }
 );
 
+
 const initialState = {
   user: {
     userId: 0,

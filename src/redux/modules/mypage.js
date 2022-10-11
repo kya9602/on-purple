@@ -19,6 +19,7 @@ export const __getMypage = createAsyncThunk(
 
             return thunkAPI.rejectWithValue(error.code);
         }
+
     });
 
 

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useSprings } from 'react-spring'
 import { useGesture } from "react-use-gesture";
-import { __getMain } from "../../redux/modules/main";
+import { __getMain, __postLike, __postUnLike } from "../../redux/modules/main";
+import { __getUser } from "../../redux/modules/signup";
 import Card from "./Card";
 
 
@@ -12,16 +14,27 @@ function Deck() {
 
 
 
-  /* DB */
+  /* 모든DB */
   const { data, isLoading, error } = useSelector((state) => state.main)
-  //console.log(data)
+  /* console.log('모든 DB',data) */
+
+  /* 내 요소 */
+  const Nickname = localStorage.getItem("nickname")
+  /* console.log('mynickname', Nickname) */
+
+  /* 모든 DB에서 내 요소 제거 */
+  let filterMyData = data.filter(function(data) {
+    return data.nickname !== Nickname;
+  });
+  /* console.log('나를 제외한 DB',filterMyData) */
+
 
   /* 보여줄 카드 갯수. */
   const cards = [];
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < filterMyData.length; i++) {
     cards.push(i);
   }
-
+//console.log('data',filterMyData)
   /* 
   -to와 from
   just helper, 보간(날라오고 회전하는)되는 값의 데이터
@@ -92,15 +105,21 @@ function Deck() {
 
 
         /* 스와이프 한 카드의 닉네임 확인( 나중에 매칭을 위한 기능 ) */
+        
+        /* like rigth swipe */
         if (x > 600) {
-          console.log(data[i].nickname)
-          console.log('좋아요')
+          console.log('profileId',filterMyData[i].profileId,'좋아요')
+          dispatch(__postLike(filterMyData[i].profileId));
+
+        /* unlike left swipe */
         } if (x < -600) {
-          console.log(data[i].nickname)
-          console.log('싫어요')
+          console.log('profileId',filterMyData[i].profileId,'싫어요')
+          dispatch(__postUnLike(filterMyData[i].profileId));
+          
         } /* if(x===0){
           console.log(objs[i].name)
         } */
+
 
         return {
           x,
@@ -124,6 +143,10 @@ function Deck() {
     return <>{error.message}</>
   }
 
+  if (Nickname === null) {
+    return <div>로그인이 필요합니다</div>
+  }
+
 
 
 
@@ -144,7 +167,7 @@ function Deck() {
       scale={scale}
       trans={trans}
       cards={cards}
-      objs={data}
+      objs={filterMyData}
       bind={bind}
     /* imageUrlArry={imageUrlArry} */
     />

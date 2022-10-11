@@ -32,7 +32,9 @@ const Header = () => {
 
   const { user, isLoding, error } = useSelector((state) => state.user);
 
+
   const userData = user;
+
 
 
   // console.log(userData)
