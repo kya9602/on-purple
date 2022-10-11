@@ -16,6 +16,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination } from "swiper";
+import Swal from "sweetalert2";
 
 
 const Detail = () => {
@@ -44,9 +45,16 @@ const Detail = () => {
         event.preventDefault();
         dispatch(__likePost(postId));
     };
-    const getNickname = localStorage.getItem("nickname")
-    /* console.log(detail.nickname) */
     
+    // 혹시모를 URL 입력해서 들어오는 경우 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
+    const getNickname = localStorage.getItem("nickname")
+    if (getNickname === null) {
+            Swal.fire({title: '로그인이 필요합니다.😢'
+                        , icon: 'error'})
+            setTimeout(() => {
+                (navigate('/login'))
+            }, 2000);   
+    }
     return (
         <>
             <Title>{detail?.title}</Title>

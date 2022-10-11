@@ -1,20 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import moment from "moment/moment";
+import 'moment/locale/ko';
+import { useState } from "react";
+import Swal from "sweetalert2";
+
+
 const Card = ({item}) => {
-    
     const navigate = useNavigate();
     const nickname = localStorage.getItem("nickname")
-// 상세보기 페이지 로그인 필요합니다 추가 예정
+    
+    // 게시글 상세보기 클릭시 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
+    const validation = ()=>{
+        if(nickname == null){
+            Swal.fire({title: '로그인이 필요합니다.😢'
+                        , icon: 'error'})
+            setTimeout(() => {
+                (navigate('/login'))
+            }, 2000);
+        } else {
+            navigate(`/detail/${item?.postId}`)
+        }
+    }
     return (
         <>
-            <Item onClick={()=>{navigate(`/detail/${item?.postId}`)}}>
+            <Item onClick={validation}>
                 <Image src={item?.imageUrl} alt="" />
                 
                 <Container>
                     <Title>{item?.title}</Title>
                     <Content>{item?.content}</Content>                   
-                    <Date>{item?.createdAt[0]}.{item?.createdAt[1]}.{item?.createdAt[2]}</Date>
+                    <Time></Time>
                     <WriterLikeWrapper>
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
@@ -71,7 +88,7 @@ const Like = styled.div`
     margin-right: 10px;
 `
 
-const Date = styled.div`
+const Time = styled.div`
     margin: auto;
     margin-top: 30px;
     margin-left: 10px;
@@ -87,4 +104,11 @@ const WriterLikeWrapper = styled.div`
     -webkit-box-pack: justify;
     font-size: 0.8rem;
     padding-bottom: 10px;
+`
+
+const Modal = styled.div`
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #61dafb;
+  text-align: left;
 `
