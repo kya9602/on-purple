@@ -95,7 +95,7 @@ const Login = () => {
           </StBtnBox>
         </form>
 
-        <StBtnBox>
+        {/* <StBtnBox>
           <StBtnKaka onClick={() => { window.location.href = KAKAO_AUTH_URL }}>
             <img src={kakao} alt="카카오로긘" />
           </StBtnKaka>
@@ -103,7 +103,7 @@ const Login = () => {
 
         <StBtnBox>
           <StBtnNaver><img src={naver} alt="네이버로그인" /></StBtnNaver>
-        </StBtnBox>
+        </StBtnBox> */}
         <StJoinBtnBox>
           <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
         </StJoinBtnBox>
@@ -194,7 +194,7 @@ const StLoginContainer = styled.div`
   background-color: white;
   width: 800px;
   height: auto;
-  padding-bottom: 2%;
+  padding-bottom: 5%;
   border: 3px solid #adaaad;
   /* background-color: red; */
   @media all and (max-width: 880px) {
@@ -281,7 +281,7 @@ const StBtnBox = styled.div`
   }
 `;
 
-//버튼 디자인
+//로그인버튼 디자인
 const StBtn = styled.button`
   margin-top: 10px;
   background-color: white;
@@ -307,35 +307,36 @@ const StBtn = styled.button`
   }
 `;
 
-const StBtnKaka = styled.button`
-  margin-top: 10px;
-  background-color: white;
-  border:none;
-  cursor: pointer;
-  @media all and (max-width: 750px) {
-    img{
-  width: 140px;
-      }
-  }
- 
-`;
+// const StBtnKaka = styled.button`
+//   margin-top: 10px;
+//   background-color: white;
+//   border:none;
+//   cursor: pointer;
+//   @media all and (max-width: 750px) {
+//     img{
+//   width: 140px;
+//       }
+//   }
 
-const StBtnNaver = styled.button`
-  background-color: white;
-  border:none;
-  margin-bottom: 10px;
-  cursor: pointer;
-  @media all and (max-width: 750px) {
-    img{
-  width: 140px;
-      }
-  }
-`;
+// `;
+
+// const StBtnNaver = styled.button`
+//   background-color: white;
+//   border:none;
+//   margin-bottom: 10px;
+//   cursor: pointer;
+//   @media all and (max-width: 750px) {
+//     img{
+//   width: 140px;
+//       }
+//   }
+// `;
 
 //회원가입 버튼 박스
 const StJoinBtnBox = styled.div`
   margin-bottom  :10px ;
   margin-right: 10px;
+  margin-top: 30px;
 `
 
 //회원가입 버튼
