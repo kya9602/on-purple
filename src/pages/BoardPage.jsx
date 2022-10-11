@@ -6,10 +6,11 @@ const Board = () => {
 
     return (
         <>
-            <Header/>
-            <div style={{marginTop:"80px"}}>
-            <List/>
+            <Header />
+            <div style={{ marginTop: "80px" }}>
+                <List />
             </div>
+            <Footer />
         </>
     )
 }
