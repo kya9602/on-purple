@@ -11,15 +11,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/images/perple.jpg";
 import { makeStyles } from '@mui/styles';
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
-import React, { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import profileImage from "../../assets/images/profile.jpg";
 import { __checkUsername, __checkNickname } from "../../redux/modules/user";
-import { __getUser } from "../../redux/modules/signup";
 import { __logout, logout } from "../../redux/modules/user";
-import { getSelectUnstyledUtilityClass } from "@mui/base";
+
 
 
 
@@ -200,8 +198,8 @@ export default function VerticalLinearStepper() {
     // const { userId } = useParams();
     // // const { user, isLoding, error } = useSelector((state) => state.user);
 
-    // // const userData = user.data;
-    // console.log("data is", userId)
+  /*   const userData = user.data;
+    console.log("data is", userData) */
 
     // useEffect(() => {
     //     dispatch(__getUser(userId));

@@ -14,6 +14,21 @@ export const __getComments = createAsyncThunk(
   }
 );
 
+// 대댓글 사용 안하고있음
+export const __getReComments = createAsyncThunk(
+  "GET_RECOMMENTS",
+  async (payload, thunkAPI) => {
+   /*  console.log(payload) */
+    try {
+      const data = await axios.get(`${process.env.REACT_APP_HOST}/reComment/${payload}`);
+      console.log(data.data.data)
+      return thunkAPI.fulfillWithValue(data?.data?.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
+
 export const __deleteComments = createAsyncThunk(
   // action 이름
   "DELETE_COMMENT",
@@ -33,6 +48,7 @@ export const __deleteComments = createAsyncThunk(
   }
 );
 
+//댓글 좋아요
 export const __likeComment = createAsyncThunk(
   "LIKE_COMMENT",
   async (payload, thunkAPI) => {
@@ -45,7 +61,10 @@ export const __likeComment = createAsyncThunk(
         }
       });
       if(data.data.success === true){
-        window.location.reload()
+        window.location = document.URL;
+      } else if (data.data.success === false){
+        window.alert("본인 댓글은 좋아요를 할 수 없습니다")
+        window.location = document.URL;
       }
       console.log(data.data)
       return thunkAPI.fulfillWithValue(data.data.data);

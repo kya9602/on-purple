@@ -34,12 +34,16 @@ export const Myinfo = styled.div`
 //마이페이지 프로필 사진
 export const Profile = styled.img`
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    width: 100px;
-    height: 100px; 
+    width: 130px;
+    height: 130px; 
     border-radius: 70%;
     overflow: hidden;
     margin: 2.5vw;
+    margin-top: 50px;
     justify-content: start;
+    :hover{
+      
+    }
 `
 
 //내정보 박스 
@@ -49,33 +53,63 @@ export const InfoBody = styled.div`
     margin-left: 1vw;
     text-align: center;
     width: 50vw;
+    height: 230px;
 `
 
 //나이 박스
 export const Age = styled.div`
     text-align: center;
-    padding: 3%;
-    font-size: 14px;
+    font-size: 16px;
+    padding: 4%;
+    /* margin-bottom: 10px; */
+    width: 200px;
+    margin-left: 12px;
 `
 
 //MBTI 박스
 export const MBTI = styled.div`
     text-align: center;
-    padding: 3%;
-    font-size:14px;
+    padding: 4%;
+    font-size: 16px;
+    width: 200px;
+    margin-left: 12px;
     
 `
-//한줄평 안은 박스
-export const OnlineBox = styled.div`
-  
+
+//지역박스
+export const Area = styled.div`
+    text-align: center;
+    padding: 4%;
+    font-size: 16px;
+    width: 200px;
+    margin-left: 12px;
 `
 
-//한줄평 박스
-export const OneLine = styled.div` 
-    text-align: center;
+//한줄평 안은 박스
+export const OnlineBox = styled.div`
+  margin: 3%;
+  padding-bottom: 2%;
+  border: 2px solid purple;
+`
+
+//한줄평 제목
+export const OneLineTitle = styled.div`
     padding: 3%;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    
+`
+
+//한줄평 바디
+export const OneLine = styled.div` 
     font-size:14px;
-    width: 50vw;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    word-break: keep-all;
 `
 //버튼 박스
 export const BtnBox = styled.div`
@@ -87,7 +121,8 @@ export const BtnBox = styled.div`
 //수정버튼
 export const ModifyBtn = styled.button`
     cursor: pointer;
-    height: 25px;
+    height: 38px;
+    padding: 2%;
     margin-left: 2vw;
     background-color: white;
     border: 2px solid #d87dd8;
@@ -181,7 +216,7 @@ export const StBodyInput = styled.textarea`
   /* border-radius: 5px; */
   font-size: 12px; 
   padding:1%;
-  width: 180px;
+  width: 200px;
   height: 60px;
   word-break: keep-all;
   :hover{
@@ -192,6 +227,24 @@ export const StBodyInput = styled.textarea`
       border: 2px solid gray;
     }
 `
+
+export const AreaInput = styled.input`
+  margin-top: 1%;
+  border: 2px solid #f797f7;
+  /* border-radius: 5px; */
+  font-size: 12px; 
+  padding:1%;
+  width: 200px;
+  :hover{
+    border: 2px solid #f797f7;
+  }
+  &:focus {
+      outline: none;
+      border: 2px solid gray;
+    }
+`
+
+
 //완료버튼창 박스
 export const StBtbBox = styled.div`
   height: 50px;
@@ -263,6 +316,8 @@ export const Avatar = styled.img`
     background-size: cover;
 `
 
+
+
 //마이페이지 추가 정보란 제일큰박스
 export const AddMyinfo = styled.div`
   width: 100vw;
@@ -299,6 +354,8 @@ export const MiniInput = styled.input`
   border: 2px solid gray;
   font-size: 12px;
 `
+
+
 
 //마이페이지 추가정보란 헤더
 export const MiniHeader = styled.div`

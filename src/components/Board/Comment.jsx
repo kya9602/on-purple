@@ -5,22 +5,21 @@ import { useDispatch } from "react-redux";
 import delete2 from "../../assets/icons/delete2.png"
 import edit from "../../assets/icons/edit.png"
 import { __likeComment } from "../../redux/modules/comment";
-import axios from "axios";
-
+/* import Recomment from "./Recomment"; */
 const Comments = ({item})=>{
     const dispatch = useDispatch();
     const id = item.commentId
     const getNickname = localStorage.getItem("nickname")
-    const [showReplyInput, setshowReplyInput] = useState(false);
-    console.log(showReplyInput)
+    /* const [showReplyInput, setshowReplyInput] = useState(false); */
+    /* console.log(showReplyInput) */
     const onLike = (event) => {
         event.preventDefault();
         dispatch(__likeComment(id));
     };
     
-    const onReplyClick = () => {
+   /*  const onReplyClick = () => {
         setshowReplyInput(!showReplyInput);
-      };
+      }; */
   
     return(
         <div style={{margin:"10px",borderTop:"1px solid #cc9ce7" }}>
@@ -48,8 +47,8 @@ const Comments = ({item})=>{
             
             <TRWrapper>
                 <Time>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Time>
-                <Recomment onClick={onReplyClick}>답글달기</Recomment>
             </TRWrapper>
+                {/* <Recomment item={item}/> */}
         </div>
     )
 }
@@ -78,10 +77,6 @@ const CM = styled.span`
     margin-left: -10px;
 `
 const Time = styled.span`
-    
-`
-
-const Recomment = styled.button`
     
 `
 

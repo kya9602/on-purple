@@ -35,15 +35,13 @@ const Header = () => {
 
   const userData = user;
 
-  //console.log("data is", user)
+
 
   // console.log(userData)
 
   useEffect(() => {
     dispatch(__getUser());
   }, [__getUser])
-
-
 
   return (
     <HeaderContainer>
