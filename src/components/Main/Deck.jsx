@@ -19,13 +19,12 @@ function Deck() {
   /* console.log('모든 DB',data) */
 
   /* 내 요소 */
-  const { userId } = useParams();
-  const { user } = useSelector((state) => state.user);
-  /* console.log('mynickname', user.data?.nickname) */
+  const Nickname = localStorage.getItem("nickname")
+  /* console.log('mynickname', Nickname) */
 
   /* 모든 DB에서 내 요소 제거 */
   let filterMyData = data.filter(function(data) {
-    return data.nickname != `${user.data?.nickname}`;
+    return data.nickname !== Nickname;
   });
   /* console.log('나를 제외한 DB',filterMyData) */
 
@@ -138,11 +137,14 @@ function Deck() {
 
   useEffect(() => {
     dispatch(__getMain());
-    dispatch(__getUser(userId));
   }, [dispatch])
   if (isLoading) return "😴로딩중이에요..😴"
   if (error) {
     return <>{error.message}</>
+  }
+
+  if (Nickname === null) {
+    return <div>로그인이 필요합니다</div>
   }
 
 

@@ -43,7 +43,7 @@ export const __postUnLike = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken"),
         }
       });
-      //console.log(data.data);
+      console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
