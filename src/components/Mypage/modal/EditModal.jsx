@@ -4,74 +4,40 @@ import axios from "axios";
 import Modal from "./Modal";
 
 
-const isEmpty = (string) => {
-    return (typeof string === 'undefined') || (string === null) || (string === '');
-};
 
 const EditModal = (props) => {
-    const [password, setPassword] = useState(props.post.password);
-    const [newPassword, setNewPassword] = useState(props.post.newPassword);
-    const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
-    const [errorMessages, setErrorMessages] = useState({});
-    const errors = {
-        password: '비밀번호가 일치하지않습니다.',
-        newPassword: '그 전 비밀번호와 다르게 입력해주세요',
-        newPasswordConfirm: '새로운 비밀번호와 일치하게 입력해주세요',
-    };
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+
 
     const handleChangeInput = (e, setState) => {
         setState(e.target.value);
     };
 
     const handleClickUpdatePost = async () => {
-        const isPasswordMatched = password === props.post.password;
-        const isEmptyPassword = isEmpty(password);
-        const isEmptynewPassword = isEmpty(newPassword);
-        const isEmptynewPasswordConfirm = isEmpty(newPasswordConfirm);
-        const editable = isPasswordMatched && !isEmptyPassword && !isEmptynewPassword;
 
-        if (editable) {
-            const data = {
-                password: password,
-                newPassword: newPassword,
-                newPasswordConfirm: newPasswordConfirm,
-                timestamp: new Date().getTime(),
-            };
-            const URL = `${props.post.id}`
-            const response = await axios.patch(URL, data);
 
+
+        const data = {
+            password: password,
+            passwordConfirm: passwordConfirm,
+        };
+
+        let a = await axios.put(`${process.env.REACT_APP_HOST}/mypage/password`, data,
+            {
+                headers: {
+                    "Authorization": localStorage.getItem("Authorization"),   //accesstoken
+                    "RefreshToken": localStorage.getItem("RefreshToken"),
+                }
+            });
+        console.log(a.data);
+        if (a.data.success) {
+            alert('정보가 수정되었습니다.');
             window.location.reload();
-        } else {
-            if (!isPasswordMatched) {
-                setErrorMessages({
-                    errorType: "password",
-                    message: errors.password,
-                });
-            } else if (isEmptynewPassword) {
-                setErrorMessages({
-                    errorType: "newPassword",
-                    message: errors.newPassword,
-                });
-            } else if (isEmptynewPasswordConfirm) {
-                setErrorMessages({
-                    errorType: "newPasswordConfirm",
-                    message: errors.newPasswordConfirm,
-                });
-            }
         }
-    };
 
-    const renderErrorMessage = (errorType) => {
-        return (errorType === errorMessages.errorType && (
-            <strong style={{ color: "red" }}>
-                {errorMessages.message}
-            </strong>
-        ));
-    };
 
-    // useEffect(() => {
-    //     passwordRef.current.focus();
-    // }, []);
+    };
 
     return (
         <Modal ref={props.modalRef}>
@@ -80,33 +46,27 @@ const EditModal = (props) => {
             <TitleWrapper backgroundColor={{ color: "ivory" }}>
                 <StyledTextarea
                     value={password}
-                    onChange={(e) => handleChangeInput(e, setPassword)}
-                    type="password"
-                    placeholder="비밀번호"
-                    backgroundColor={{ color: "ivory" }} />
-            </TitleWrapper>
-            {renderErrorMessage("password")}
-
-
-            <TitleWrapper backgroundColor={{ color: "ivory" }}>
-                <StyledTextarea
-                    value={newPassword}
                     type="password"
                     placeholder="새 비밀번호"
                     backgroundColor={{ color: "ivory" }}
-                    onChange={(e) => handleChangeInput(e, setNewPassword)} />
+                    onChange={(e) => handleChangeInput(e, setPassword)} />
             </TitleWrapper>
-            {renderErrorMessage("newPassword")}
 
 
             <TitleWrapper backgroundColor={{ color: "ivory" }}>
                 <StyledTextarea
-                    value={newPassword}
+                    value={passwordConfirm}
                     type="password"
                     placeholder="새 비밀번호를 재입력해주세요."
-                    onChange={(e) => handleChangeInput(e, setNewPasswordConfirm)} />
+                    onChange={(e) => handleChangeInput(e, setPasswordConfirm)} />
             </TitleWrapper>
-            {renderErrorMessage("newPasswordConfirm")}
+            {passwordConfirm &&
+                (password !== passwordConfirm ?
+                    (<div style={{ marginTop: "20px", fontSize: "13px", color: "red", fontWeight: "600" }}>비밀번호를 동일하게 입력해주세요</div>)
+                    :
+                    (<div style={{ marginTop: "20px", fontSize: "13px", color: "blue", fontWeight: "600" }}>비밀번호가 일치하였습니다 </div>)
+
+                )}
 
 
             <ButtonWrapper>

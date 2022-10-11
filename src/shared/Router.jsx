@@ -14,7 +14,7 @@ import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
 import GuidePage from "../pages/GuidePage";
 import EditPage from "../pages/EditPage";
-import Oauth2Handler from "../components/Form/kakao/Oauth2Handeler";
+// import Oauth2Handler from "../components/Form/kakao/Oauth2Handeler";
 import KakaoAddPage from "../pages/KakaoAddPage";
 import NewSignup from "../pages/NewSignuploadPage";
 
@@ -38,8 +38,7 @@ const Router = () => {
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
                 <Route path="/guide" exact element={<GuidePage />} />
-                <Route path="kakao" exact element={<Oauth2Handler />} />
-                <Route path="/kakao" exact element={<Oauth2Handler />} />
+                {/* <Route path="/kakao" exact element={<Oauth2Handler />} /> */}
             </Routes>
         </BrowserRouter>
     );
