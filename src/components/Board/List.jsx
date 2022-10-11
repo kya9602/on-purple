@@ -13,10 +13,13 @@ const List = () => {
     const { isLoading, error, post } = useSelector((state) => state?.post)
     const {Category} = useParams();
     
+    // 페이지 네이션
     const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const [currentPage, setCurrentPage] = useState(1); 
-	const [postsPerPage] = useState(10); 
+    // 현재 페이지
+	const [currentPage, setCurrentPage] = useState(1);
+    // 페이지당 아이템 개수 
+	const [postsPerPage] = useState(3); 
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;
@@ -32,7 +35,7 @@ const List = () => {
     		const fetchPosts = async () => {
       		setLoading(true);
       		const res = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${Category}`);
-      		console.log(res.data.data)
+      		/* console.log(res.data.data) */
             setPosts(res.data.data);
       		setLoading(false);
     	};

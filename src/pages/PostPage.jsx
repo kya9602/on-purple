@@ -7,7 +7,7 @@ import axios from "axios";
 import default_Img from "../assets/images/default-image.jpg";
 import Delete from "../assets/icons/delete.png"
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import Swal from "sweetalert2";
 // Swiper
 import "swiper/css";
 import "swiper/css/pagination";
@@ -92,8 +92,16 @@ const PostPage = () => {
     }
 
   }, [canSubmit]);
-
-
+  
+  // 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
+  const getNickname = localStorage.getItem("nickname")
+    if (getNickname === null) {
+            Swal.fire({title: '로그인이 필요합니다.😢'
+                        , icon: 'error'})
+            setTimeout(() => {
+                (navigate('/login'))
+            }, 2000);   
+    }
   return (
     <div>
       <AddHeader>

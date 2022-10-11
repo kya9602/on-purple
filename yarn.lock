@@ -9632,6 +9632,11 @@ svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
+sweetalert2@^11.5.0:
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.5.0.tgz#6dee8dea9903cb5306b859614a0d757d489da46a"
+  integrity sha512-Ret0s0E8HMvGDkcHXnDVd8j7gijpGpuBhasiVzy+QAv+w0uEdFnjLMCfEOrIzbmVgeqxdzc6weBD0nucRGgKuA==
+
 swiper@^8.4.2:
   version "8.4.2"
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-8.4.2.tgz#a52e091a92a52b230bd076fb3ef19ae73baed2a2"

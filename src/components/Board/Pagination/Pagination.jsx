@@ -31,14 +31,23 @@ const Head = styled.ul`
   margin-top: 15px;
   list-style: none;
   padding: 0;
+  gap: 10px;
 `
 const Number = styled.li`
     display: inline-block;
+    border-radius: 100%;
     width: 30px;
     height: 30px;
-    border: 1px solid #e2e2e2;
+    border: 1px solid #9C7FCB;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
+    :active{
+    }
+    :hover{
+        color: black;
+        font-weight: bold;
+        text-decoration: underline;
+      }
 `

@@ -33,7 +33,7 @@ const TextAreaWrapper = styled.div`
         margin-bottom: 0.7rem;
     }
     .text {
-        width: 500px;
+        width: 400px;
         height: 400px;
     }
 
