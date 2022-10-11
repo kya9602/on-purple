@@ -6,7 +6,7 @@ import ChatHeader from './ChatHeader';
 function ChatScreen() {
     const {id} = useParams();
     console.log(id)
-    
+ 
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([
         {
@@ -29,7 +29,6 @@ function ChatScreen() {
         setMessages([...messages, { message : input }]);
         setInput('');
     }
-
 
   return (
     <div>

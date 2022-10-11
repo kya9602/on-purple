@@ -1,17 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
+//채팅방 목록 조회
 export const __getChatrooms = createAsyncThunk(
     "GET_CHATROOMS",
     async (_, thunkAPI) => {
       try {
-        const data = await axios.get(`${process.env.REACT_APP_HOST}/chat`,{
-            headers: {
-                "Authorization": localStorage.getItem("Authorization"),
-                "RefreshToken": localStorage.getItem("RefreshToken")
-              }
-        });
-        return data.data.data;
+        const data = await axios.get(`http://3.34.127.194/chat/room`);
+        console.log(data)
+        return thunkAPI.fulfillWithValue(data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
       }
@@ -19,6 +17,7 @@ export const __getChatrooms = createAsyncThunk(
   );
 
 
+  
 const initialState = {
     roomlist:[],
     };

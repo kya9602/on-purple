@@ -25,7 +25,7 @@ const List = () => {
     
     useEffect(() => {
         dispatch(__getPosts(Category));
-        console.log("작동");
+        /* console.log("작동"); */
       }, [Category]);
     
   	useEffect(() => {
