@@ -14,9 +14,6 @@ const Card = ({item}) => {
     const moment = require('moment');
     const today = moment();
     /* console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
-    
-    const writeTime = item.createdAt
-    console.log(writeTime)
 
   /*   function timeForToday(Day) {
         const today = new Date();
@@ -60,7 +57,7 @@ const Card = ({item}) => {
                 <Container>
                     <Title>{item?.title}</Title>
                     <Content>{item?.content}</Content>                   
-                    <Time></Time>
+                    <Time>모먼트 적용예정</Time>
                     <WriterLikeWrapper>
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>

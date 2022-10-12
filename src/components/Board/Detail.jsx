@@ -58,7 +58,7 @@ const Detail = () => {
     return (
         <>
             <Title>{detail?.title}</Title>
-
+            
             <DateButtonWrapper>
                 {getNickname === detail?.nickname ?
                     (
@@ -68,12 +68,9 @@ const Detail = () => {
                      </div>
                     ) :
                     null}
-            </DateButtonWrapper>
+            </DateButtonWrapper>         
             <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
             
-            <View>
-                <div>View : {detail?.view}</div>
-            </View>
             
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
                 {detail?.imgList?.map((image, id) => (
@@ -88,6 +85,7 @@ const Detail = () => {
             <NameLikeWrap>
                 <div style={{fontSize:"1.2rem", marginLeft:"22px", fontWeight:"bold"}}>{detail?.nickname}</div>
                 <div style={{fontSize:"1rem", display:"flex"}}><span onClick={onLike}>💜</span> {detail?.likes}개</div>
+                <View>View : {detail?.view}</View>   
             </NameLikeWrap>
             
             <Content><p>{detail?.content}</p></Content>
@@ -174,9 +172,9 @@ const View = styled.div`
     display: flex; 
     align-items: center;
     justify-content: space-between;
-    margin-top:20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 230px;
+    margin: auto;
+    float:right;
 `
 
 const NameLikeWrap = styled.div`
@@ -200,7 +198,7 @@ const EditButton = styled.button`
 `
 
 const DeleteButton = styled.button`
-width: 40px;
+    width: 40px;
     height: 30px;
     border: none;
     margin: 0 0 auto 0;

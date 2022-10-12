@@ -12,7 +12,8 @@ const List = () => {
     const navigate = useNavigate();
     const { isLoading, error, post } = useSelector((state) => state?.post)
     const {Category} = useParams();
-    console.log(post)
+    /* console.log(post) */
+    
     // 페이지 네이션
     const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(false);
