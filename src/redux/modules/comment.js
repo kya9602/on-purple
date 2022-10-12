@@ -74,15 +74,7 @@ export const __likeComment = createAsyncThunk(
   }
 );
 const initialState = {
-  comment: {
-    comment:"",
-    commentId:"",
-    createdAt:[],
-    likes:0,
-    modifiedAt:[],
-    nickname:"",
-    reCommentResponseDtoList:[]
-  },
+  comment: [],
   error: null,
   isLoading: false,
 }

@@ -23,7 +23,7 @@ const Chat= () =>{
     ])
     useEffect(() => {
         dispatch(__getChatrooms());
-        console.log("작동");
+        /* console.log("작동"); */
       }, []);
 
     return(
