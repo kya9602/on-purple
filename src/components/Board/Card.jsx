@@ -14,7 +14,7 @@ const Card = ({item}) => {
     // 게시글 상세보기 클릭시 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
     const validation = ()=>{
         if(nickname == null){
-            Swal.fire({title: '로그인이 필요합니다.😢'
+            Swal.fire({title: '로그인이 필요합니다 😢'
                         , icon: 'error'})
             setTimeout(() => {
                 (navigate('/login'))
@@ -31,7 +31,7 @@ const Card = ({item}) => {
                 <Container>
                     <Title>{item?.title}</Title>
                     <Content>{item?.content}</Content>                   
-                    <Time></Time>
+                    <Time>{item?.createdAt[0]}-{item?.createdAt[1]}-{item?.createdAt[2]}</Time>
                     <WriterLikeWrapper>
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
