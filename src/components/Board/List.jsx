@@ -109,9 +109,9 @@ const Box = styled.div`
     display:inline-block; 
     background-color: white;
     width:100px; 
-    height:50px; 
+    height:33px; 
     font-size:16px; 
-    line-height:50px; 
+    line-height:33px; 
     text-align:center;
     margin-right:15px;
     border: 1px solid #9C7FCB;
