@@ -8,7 +8,7 @@ export const MypageBox = styled.div`
     padding-bottom: 10%;
     margin: auto;
     margin-top: 90px;
-    border: 1px solid #fdc2f0;
+    border: 1px solid #9C7FCB;
     border-radius: 15px;
     background-color: white;
     display: flex;
