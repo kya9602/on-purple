@@ -12,7 +12,7 @@ const CommentList = () => {
     
     const {postId} = useParams();
     const {isLoading, error, comment} = useSelector((state)=> state?.comment)
-    console.log(comment)
+    /* console.log(comment) */
     
     useEffect(()=>{
         dispatch(__getComments(postId));
@@ -34,7 +34,7 @@ const CommentList = () => {
     // 현재 페이지
 	const [currentPage, setCurrentPage] = useState(1);
     // 페이지당 아이템 개수 
-	const [postsPerPage] = useState(3); 
+	const [postsPerPage] = useState(4); 
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;

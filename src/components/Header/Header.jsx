@@ -123,7 +123,7 @@ const HeaderContainer = styled.div`
     top: 0;
     left: 0;
     z-index: -1;
-    /* opacity: 0.8; */
+    /* opacity: 0.8; */ 
     /* filter: invert(10%); */
     /* filter: brightness(120%); */
     background-size: cover;}

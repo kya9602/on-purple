@@ -57,8 +57,11 @@ const Detail = () => {
     }
     return (
         <>
-            <Title>{detail?.title}</Title>
-            
+            <Title>
+                {detail?.title}
+            </Title>
+
+            <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
             <DateButtonWrapper>
                 {getNickname === detail?.nickname ?
                     (
@@ -69,8 +72,6 @@ const Detail = () => {
                     ) :
                     null}
             </DateButtonWrapper>         
-            <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
-            
             
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
                 {detail?.imgList?.map((image, id) => (
@@ -145,12 +146,17 @@ const Title = styled.h1`
 const Date = styled.div`
     font-size: 1rem;
     margin-left: 12px;
+    float: right;
+    text-align: center;
+    margin-right: 20px;
+    margin-top: 10px;
 `
 const DateButtonWrapper = styled.div`
     align-items: center;
     display: flex;
-    float: right;
+    float: left;
     gap: 10px;
+    margin-left: 15px;
 `
 
 const Content = styled.div`
