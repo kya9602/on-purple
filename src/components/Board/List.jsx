@@ -12,6 +12,7 @@ const List = () => {
     const navigate = useNavigate();
     const { isLoading, error, post } = useSelector((state) => state?.post)
     const {Category} = useParams();
+    /* console.log(post) */
     
     // 페이지 네이션
     const [posts, setPosts] = useState([]);
@@ -19,7 +20,7 @@ const List = () => {
     // 현재 페이지
 	const [currentPage, setCurrentPage] = useState(1);
     // 페이지당 아이템 개수 
-	const [postsPerPage] = useState(3); 
+	const [postsPerPage] = useState(5); 
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;
