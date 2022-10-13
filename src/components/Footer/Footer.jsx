@@ -6,6 +6,7 @@ import Chating from "../../assets/icons/chating.png"
 import Dashboard from "../../assets/icons/dashboard.png"
 import Home from "../../assets/icons/home.png"
 import Return from "../../assets/icons/return.png"
+
 const Footer = () =>{
     const navigate = useNavigate();
     return(
@@ -13,21 +14,25 @@ const Footer = () =>{
             <div onClick={()=>{navigate(-1)}}>
                 <MainContainer>
                     <img src={Return} alt=""/>
+                    <span>뒤로가기</span>
                 </MainContainer>
             </div>
             <Link to="/" >
                 <MainContainer>
                     <img src={Home} alt=""/>
+                    <span>홈으로</span>
                 </MainContainer>
             </Link>
             <Link to="/board/taste">
                 <MainContainer>
                     <img src={Dashboard} alt=""/>
+                    <span>게시판</span>
                 </MainContainer>
         </Link>
             <Link to="/chat" >
                 <MainContainer>
                     <img src={Chating} alt=""/>
+                    <span>채팅</span>
                 </MainContainer>
             </Link>
         </FooterContainer>
@@ -48,15 +53,20 @@ const FooterContainer = styled.div`
     align-items:center;
   
   a:hover, a:active { text-decoration: none; }
-  a { text-decoration: none; color: wheat; }
+  a { text-decoration: none;}
   a:visited { text-decoration: none; }
 `
 
 const MainContainer = styled.div `
     display: flex;
+    flex-direction: column;
     width: 80px;
     justify-content: center;
     img{
-        width: 50px;
+        width: 40px;
+        margin: auto;
+    }
+    span{
+        margin: auto;
     }
 `
