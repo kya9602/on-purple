@@ -19,7 +19,7 @@ const List = () => {
     // 현재 페이지
     const [currentPage, setCurrentPage] = useState(1);
     // 페이지당 아이템 개수 
-    const [postsPerPage] = useState(8);
+	const [postsPerPage] = useState(5); 
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;
