@@ -11,7 +11,9 @@ const Board = () => {
             <div style={{marginTop:"80px"}}>
             <List/>
             </div>
+            <Footer />
         </Wrapper>
+
     )
 }
 
