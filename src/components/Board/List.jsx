@@ -101,7 +101,8 @@ const Wrapper = styled.div`
     margin: 0 auto;
     margin-left: 1vw;
     height: 100%;
-    max-width:500px; 
+    max-width:428px;
+    width : 100%;
     margin:50px auto; 
 `
 
@@ -114,10 +115,9 @@ const Box = styled.div`
     line-height:33px; 
     text-align:center;
     margin-right:15px;
-    border: 1px solid #9C7FCB;
     border-radius: 10px;
     margin-bottom: 10px;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 500;
     background-color: #9C7FCB;
     color: white;

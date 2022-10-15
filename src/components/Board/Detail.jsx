@@ -56,7 +56,7 @@ const Detail = () => {
             }, 2000);   
     }
     return (
-        <>
+        <Container>
             <Title>
                 {detail?.title}
             </Title>
@@ -132,13 +132,19 @@ const Detail = () => {
                     </div>
                 </DialogContent>
             </Dialog>
-        </>
+        </Container>
 
     )
 }
 
 export default Detail;
 
+const Container = styled.div`
+    max-width: 428px;
+    width : 100%;
+    margin:0 auto;
+    padding-top: 80px;
+`
 const Title = styled.h1`
     text-align: center;
 `
@@ -172,6 +178,7 @@ const ImgBox = styled.div`
     width: 100%;
     height: 100%;
     margin-top: 3vw;
+    z-index: -99;
 `
 
 const View = styled.div`
@@ -181,13 +188,13 @@ const View = styled.div`
     padding-left: 230px;
     margin: auto;
     float:right;
-`
+`;
 
 const NameLikeWrap = styled.div`
     display: flex;
     align-items: center;
     gap:10px;
-    margin-top:10px
+    margin-top:10px;
 `
 const EditButton = styled.button`
     width: 40px;
@@ -201,7 +208,7 @@ const EditButton = styled.button`
         height: 100%;
         object-fit: cover;
     }
-`
+`;
 
 const DeleteButton = styled.button`
     width: 40px;

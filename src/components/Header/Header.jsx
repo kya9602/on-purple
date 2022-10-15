@@ -45,13 +45,11 @@ const Header = () => {
 
   return (
     <HeaderContainer>
+      <div style={{width:"100%" ,display:"flex", justifyContent:"space-between", zIndex:"2"}}>
       {token === null ? <LogoImg><img src={Offlogo} alt="로그인 안된상태" /></LogoImg>
         : <LogoImg><img src={Onlogo} alt="로그인 된상태" /></LogoImg>}
       <Title onClick={() => {navigate('/')}}>Purple</Title>
       <UserSet >
-
-
-
         <DropDownContainer>
           <DropdownBtn onClick={myPageHandler} ref={myPageRef}>
             {token === null ? <img src={profile} alt="프로필" />
@@ -96,10 +94,8 @@ const Header = () => {
             </Ul>
           </Menu>
         </DropDownContainer>
-
-
       </UserSet>
-
+    </div>          
 
     </HeaderContainer>
   )
@@ -110,19 +106,21 @@ export default Header;
 const HeaderContainer = styled.div`
   display: flex;
   position: fixed;
+  z-index: 3;
   top: 0px;
   /* background-color: gray; */
+  max-width: 428px;
   width: 100%;
   height: 70px;
+  justify-content: space-between;
   ::after { 
-    width: 100vw;
+    width: 100%;
     height: 70px;
     content: "";
     background: url(${logo});
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
     /* opacity: 0.8; */
     /* filter: invert(10%); */
     /* filter: brightness(120%); */
@@ -138,9 +136,10 @@ const LogoImg = styled.div`
 
 const Title = styled.div`
   flex:1;
-  font-size: 25px;
+  font-size: 33px;
   font-weight: 600;
   margin-top: 20px;
+  margin-left: 30px;
   background: #f7e9f5;
   background: -webkit-linear-gradient(left, #420255, #f7e9f5);
   background:    -moz-linear-gradient(right, #420255, #f7e9f5);

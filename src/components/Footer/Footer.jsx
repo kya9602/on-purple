@@ -11,12 +11,12 @@ const Footer = () =>{
     const navigate = useNavigate();
     return(
         <FooterContainer>
-            <div onClick={()=>{navigate(-1)}}>
+            {/* <div onClick={()=>{navigate(-1)}}>
                 <MainContainer>
                     <img src={Return} alt=""/>
                     <span>뒤로가기</span>
                 </MainContainer>
-            </div>
+            </div> */}
             <Link to="/" >
                 <MainContainer>
                     <img src={Home} alt=""/>
@@ -47,8 +47,10 @@ const FooterContainer = styled.div`
   bottom: 0px;
   background-color: white;
   border-top: 1px solid rgb(165, 165, 165);
+  max-width: 428px;
   width: 100%;
   height: 60px;
+  margin: auto;
   justify-content: space-evenly;
     align-items:center;
   

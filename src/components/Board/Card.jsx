@@ -44,14 +44,14 @@ const Card = ({item}) => {
                         , icon: 'error'})
             setTimeout(() => {
                 (navigate('/login'))
-            }, 2000);
+            }, 1500);
         } else {
             navigate(`/detail/${item?.postId}`)
         }
     }
     return (
         <>
-            <Item onClick={validation}>
+            <Item onClick={()=>validation()}>
                 <Image src={item?.imageUrl} alt="" />
                 
                 <Container>
@@ -130,11 +130,4 @@ const WriterLikeWrapper = styled.div`
     -webkit-box-pack: justify;
     font-size: 0.8rem;
     padding-bottom: 10px;
-`
-
-const Modal = styled.div`
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #61dafb;
-  text-align: left;
 `

@@ -68,7 +68,7 @@ const CommentList = () => {
 export default CommentList;
 
 const Container = styled.div`
-    width: 100vw;
-    height: 50vh;
-    margin: 0 auto;
+    max-width: 428px;
+    width : 100%;
+    margin:0 auto;
 `

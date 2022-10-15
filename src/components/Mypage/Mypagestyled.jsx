@@ -420,3 +420,8 @@ export const StSelect = styled.select`
     height: 30px;
   } */
 `
+export const Container = styled.div`
+  max-width: 428px;
+  width : 100%;
+  margin:0 auto;
+`

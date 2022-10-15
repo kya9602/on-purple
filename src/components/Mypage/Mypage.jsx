@@ -13,7 +13,7 @@ import useProfileOnClickOutside from "./profileModal/ProfileUseOnClickOutSide"
 import {
     MypageBox, Myinfo, Profile, InfoBody, Age, MBTI, OneLine, ModifyBtn, SecondMypageBox, SecondMyinfo,
     ListBox, Listtitle, LovemeBox, LoveCard, MatchingBox, MatchingCard, StBodyInput, StButton, AddMyinfo,
-    MiniBox, MiniTitle, MiniInput, MiniHeader, BtnBox, OnlineBox, OneLineTitle, AreaInput, Area
+    MiniBox, MiniTitle, MiniInput, MiniHeader, BtnBox, OnlineBox, OneLineTitle, AreaInput, Area, Container
 } from "./Mypagestyled";
 
 
@@ -38,13 +38,6 @@ const Mypage = () => {
     const dispatch = useDispatch();
     const [input, setInput] = useState(false);
 
-
-
-
-
-
-
-
     const [area, setArea] = useState("");
     const [introduction, setIntroduction] = useState("");
     const [idealType, setIdealType] = useState("");
@@ -54,7 +47,6 @@ const Mypage = () => {
     const [pet, setPet] = useState("");
     const [smoke, setSmoke] = useState("");
     const [likeMovieType, setLikeMovieType] = useState("");
-
 
 
 
@@ -111,7 +103,7 @@ const Mypage = () => {
 
 
     return (
-        <>
+        <Container>
             {!input ?
                 <MypageBox>
                     {/* 내정보 박스 Myinfo */}
@@ -288,7 +280,7 @@ const Mypage = () => {
                     </BtnBox>
                 </SecondMypageBox>
             }
-        </>
+        </Container>
     );
 }
 

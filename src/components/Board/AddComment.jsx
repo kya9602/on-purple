@@ -47,7 +47,7 @@ const AddComment = (detail) => {
     <>
       <Container style={{ zIndex:"1" ,height: modalOpen ? "500px" : "50px" }}>
       <More onClick={openModal}><img src={writecomment} alt=""/></More>
-        <div style={{ display: "flex", gap:"10px", marginLeft:"30px" }}>
+        <div style={{ display: "flex", gap:"15px", width:"94%", margin:"0 auto" }}>
           <Text
             type="text"
             name="comment"
@@ -67,14 +67,16 @@ export default AddComment;
 
 const Container = styled.div`
     max-height: 100vh;
-    max-width: 100vw;
     position: fixed;
     transition: all 1000ms;
     bottom: 0;
     background-color: white;
+    max-width: 428px;
+    width : 100%;
+    margin:0 auto;
 `
 const AddButton = styled.button`
-    width: 15vw;
+    width: 20%;
     height: 4.5vh;
     border: none;
     background-color: #DEBAF3;
@@ -84,10 +86,10 @@ const AddButton = styled.button`
 `
 
 const Text = styled.input`
-    width: 350px;
+    width: 80%;
     height: 4.5vh;
     font-size: 15px;
-    margin-left: 20px;
+    margin-left: 10px;
     border: none;
     border-bottom:1px solid grey ;
     &:focus{
