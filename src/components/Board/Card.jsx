@@ -116,7 +116,7 @@ const Like = styled.div`
 
 const Time = styled.div`
     margin: auto;
-    margin-top: 10px;
+    margin-top: 30px;
     margin-left: 10px;
     margin-bottom: 10px;
 `
