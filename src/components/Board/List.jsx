@@ -11,14 +11,13 @@ const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isLoading, error, post } = useSelector((state) => state?.post)
-    const {Category} = useParams();
-    /* console.log(post) */
-    
+    const { Category } = useParams();
+
     // 페이지 네이션
     const [posts, setPosts] = useState([]);
-	const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     // 현재 페이지
-	const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     // 페이지당 아이템 개수 
 	const [postsPerPage] = useState(5); 
 
@@ -26,70 +25,70 @@ const List = () => {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = post.slice(indexOfFirstPost, indexOfLastPost);
-    
+
     useEffect(() => {
         dispatch(__getPosts(Category));
-        /* console.log("작동"); */
-      }, [Category]);
-    
-  	useEffect(() => {
-    		const fetchPosts = async () => {
-      		setLoading(true);
-      		const res = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${Category}`);
-      		/* console.log(res.data.data) */
-            setPosts(res.data.data);
-      		setLoading(false);
-    	};
-    	fetchPosts();
-  }, []);
+       
+    }, [Category]);
 
-    
-    
-      if (isLoading) {
+    useEffect(() => {
+        const fetchPosts = async () => {
+            setLoading(true);
+            const res = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${Category}`);
+            /* console.log(res.data.data) */
+            setPosts(res.data.data);
+            setLoading(false);
+        };
+        fetchPosts();
+    }, []);
+
+
+
+    if (isLoading) {
         return <div>로딩 중....</div>;
-      }
-    
-      if (error) {
-        return <div>{error.message}</div>;
-      }
-    
-    
-      /* if (post.length === 0)  */
-//----------------------navigateButton------------------//
-    const goDrive = () =>{
-        navigate(`/board/drive`)
     }
-    const goTaste = () =>{
+
+    if (error) {
+        return <div>{error.message}</div>;
+    }
+
+
+    /* if (post.length === 0)  */
+    //----------------------navigateButton------------------//
+    const goDrive = () => {   
+        navigate(`/board/drive`)
+  }
+    const goTaste = () => {      
         navigate(`/board/taste`)
     }
-    const goDate = () =>{
-        navigate(`/board/dateCourse`)    
+    const goDate = () => {  
+        navigate(`/board/dateCourse`)
     }
-    const goMeet = () =>{
+    const goMeet = () => {       
         navigate(`/board/meet`)
     }
-    const goBar = () =>{
+    const goBar = () => {     
         navigate(`/board/bar`)
     }
-    const goFashion = () =>{
+    const goFashion = () => { 
         navigate(`/board/fashion`)
     }
-     // 박스 -> 라디오 버튼으로 수정예정
+
     return (
         <>
             <Wrapper>
                 <CategoryContaier>
-                    <Box onClick={goDrive}>Drive</Box>
+                    <Box onClick={goDrive}>드라이브 가실 분?</Box>
                     <Box onClick={goTaste}>맛집 추천</Box>
-                    <Box onClick={goDate}>데이트 추천</Box>
-                    <Box onClick={goMeet}>번개만남</Box>
-                    <Box onClick={goBar}>Drink</Box>
-                    <Box onClick={goFashion}>패션</Box>
+                    <Box onClick={goDate}>데이트 코스 추천</Box>
+                    <Box onClick={goMeet}>번개 만남</Box>
+                    <Box onClick={goBar}>술 한잔 하실 분?</Box>
+                    <Box onClick={goFashion}>패션 질문</Box>
                 </CategoryContaier>
-               {currentPosts.map((item) => (<Card item={item} key={item?.postId} />))}
-               <TopButton/>
+                {currentPosts.map((item) => (<Card item={item} key={item?.postId} />))}
+                <TopButton />
             </Wrapper>
-            <Pagination postsPerPage={postsPerPage} totalPosts={post.length} paginate={paginate} />  
+            <Pagination postsPerPage={postsPerPage} totalPosts={post.length} paginate={paginate} />
         </>
     )
 }
@@ -101,33 +100,30 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     margin: 0 auto;
     margin-left: 1vw;
-    margin-top: 10px;
     height: 100%;
+    max-width:428px;
+    width : 100%;
+    margin:50px auto; 
 `
 
-const Box = styled.button`
-    text-align: center;
-    border: none;
+const Box = styled.div`
+    display:inline-block; 
+    background-color: white;
+    width:100px; 
+    height:33px; 
+    font-size:16px; 
+    line-height:33px; 
+    text-align:center;
+    margin-right:15px;
     border-radius: 10px;
-    background-color: #5B63B7;
-    width: 100px;
-    height: 30px;
+    margin-bottom: 10px;
+    font-size: 11.5px;
+    font-weight: 500;
+    background-color: #9C7FCB;
     color: white;
-        p{
-            font-weight: 600;
-            margin-top: 5px;
-            color: whitesmoke;
-        }
-        :hover{
-            cursor: pointer;
-            box-shadow: 2.5px 2.5px 2.5px gray;
-        }
 `
 const CategoryContaier = styled.div`
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    width: 400px;
-    margin: auto;
-    gap: 10px;
+    overflow-x:auto; 
+    white-space:nowrap; 
+    font-size:0;
 `

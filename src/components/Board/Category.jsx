@@ -41,7 +41,7 @@ const Category = ({setCategory, category}) => {
                 checked={ category === "dateCourse" }
             />
             
-        <StLabel  htmlFor="date"> 
+        <StLabel htmlFor="date"> 
             <StImg src={recommend} alt="" id="date"/> 
             데이트 코스 추천 
         </StLabel>

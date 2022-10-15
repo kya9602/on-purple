@@ -6,28 +6,33 @@ import Chating from "../../assets/icons/chating.png"
 import Dashboard from "../../assets/icons/dashboard.png"
 import Home from "../../assets/icons/home.png"
 import Return from "../../assets/icons/return.png"
+
 const Footer = () =>{
     const navigate = useNavigate();
     return(
         <FooterContainer>
-            <div onClick={()=>{navigate(-1)}}>
+            {/* <div onClick={()=>{navigate(-1)}}>
                 <MainContainer>
                     <img src={Return} alt=""/>
+                    <span>뒤로가기</span>
                 </MainContainer>
-            </div>
+            </div> */}
             <Link to="/" >
                 <MainContainer>
                     <img src={Home} alt=""/>
+                    <span>홈으로</span>
                 </MainContainer>
             </Link>
             <Link to="/board/taste">
                 <MainContainer>
                     <img src={Dashboard} alt=""/>
+                    <span>게시판</span>
                 </MainContainer>
         </Link>
             <Link to="/chat" >
                 <MainContainer>
                     <img src={Chating} alt=""/>
+                    <span>채팅</span>
                 </MainContainer>
             </Link>
         </FooterContainer>
@@ -42,21 +47,28 @@ const FooterContainer = styled.div`
   bottom: 0px;
   background-color: white;
   border-top: 1px solid rgb(165, 165, 165);
+  max-width: 428px;
   width: 100%;
   height: 60px;
+  margin: auto;
   justify-content: space-evenly;
     align-items:center;
   
   a:hover, a:active { text-decoration: none; }
-  a { text-decoration: none; color: wheat; }
+  a { text-decoration: none;}
   a:visited { text-decoration: none; }
 `
 
 const MainContainer = styled.div `
     display: flex;
+    flex-direction: column;
     width: 80px;
     justify-content: center;
     img{
-        width: 50px;
+        width: 40px;
+        margin: auto;
+    }
+    span{
+        margin: auto;
     }
 `

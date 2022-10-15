@@ -19,10 +19,12 @@ const MainPage = () => {
 export default MainPage;
 
 const MainPageContainer = styled.div`
-    overscroll-behavior-y: contain;
-    height: 100%;
+    /* overscroll-behavior-y: contain; */
+    max-width: 428px;
+   /*  height: 100%; */
     width: 100%;
-    user-select: none;
+    /* user-select: none;
     position: fixed;
-    overflow: hidden;
+    overflow: hidden; */
+    margin: 0 auto;
 `

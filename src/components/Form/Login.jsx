@@ -60,12 +60,14 @@ const Login = () => {
 
 
   return (
-    <div >
+    <Container >
       <StHeader>
+        <BackImg/>
         <StHeaderTitle> On Purple </StHeaderTitle>
         <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
-        <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
+        <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader> 
       </StHeader>
+
       <StLoginContainer>
         <form onSubmit={onSubmitHandler}>
           <StUserBox>
@@ -109,7 +111,7 @@ const Login = () => {
         </StJoinBtnBox>
       </StLoginContainer>
 
-    </div>
+    </Container>
   )
 
 };
@@ -118,26 +120,16 @@ export default Login;
 
 //헤더박스
 const StHeader = styled.div`
+  max-width: 428px;
   width: 100%;
   height: auto;
   text-align: center;
-  ::after { 
-    width: 100vw;
-    height: 35%;
-    content: "";
-    background: url(${newlogo});
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 0.5;
-    background-size: cover;
-    /* background-repeat: no-repeat; */
-}
 `
 
 //헤더 타이틀
 const StHeaderTitle = styled.div`
+  max-width: 428px;
+  width: 100%;
   font-size: 80px;
   font-weight: 600;
   background: #f7e9f5;
@@ -154,6 +146,8 @@ const StHeaderTitle = styled.div`
 
 //헤더 바디
 const StHeaderBody = styled.div`
+  max-width: 428px;
+  width: 100%;
   font-size: 17px;
   margin-top: 1%;
   background: #09ffff;
@@ -169,20 +163,13 @@ const StHeaderBody = styled.div`
 
 //헤더 메인가는 버튼
 const StBtnHeader = styled.button`
-  margin-top: 20px;
+  padding-top: 30px;
   margin-bottom: 2%;
   color: #f87288;
   font-size: 25px;
   font-weight: 600;
   border: none;
   background-color: transparent;
-  :hover{
-    font-size: 30px;
-    font-weight: 400;
-    color:whitesmoke;
-    background-color: #f87288;
-    border-radius: 5px;
-}
 `;
 
 
@@ -190,10 +177,12 @@ const StBtnHeader = styled.button`
 //로그인 전체적인 큰 박스
 const StLoginContainer = styled.div`
   margin: auto;
-  margin-top: 90px;
+  margin-top: 120px;
   background-color: white;
-  width: 800px;
+  max-width: 428px;
+  width: 98.5%;
   height: auto;
+  padding-top: 10px;
   padding-bottom: 5%;
   border: 3px solid #adaaad;
   /* background-color: red; */
@@ -237,22 +226,7 @@ const StLoginInput = styled.input`
   border-radius: 5px;
   font-size: 18px; 
   padding:1%;
-  :hover{
-    border: 3px solid #f530f5;
-  }
-  @media all and (max-width: 750px) {
-    font-size : 14px;
-    :hover{
-      border:2px solid #f530f5;
-    }
-  }
-  @media all and (max-width : 400px) {
-    font-size : 12px;
-    :hover{
-      border:1px solid #f530f5;
-    }
-  }
-`;
+`
 
 //작은 박스안에 "아이디 비밀번호"
 const StLaber = styled.label`
@@ -292,20 +266,11 @@ const StBtn = styled.button`
   border-bottom-style:solid; 
   border-bottom-color:#80036f;
   border-bottom-width:2px;
-  :hover{
-    border: none;
-    background-color: #80036f;
-    color:white;
-    font-weight: 800;
-    padding: 1%;
-    border-radius: 5px;
   cursor: pointer;
-
-}
 @media all and (max-width: 750px) {
     font-size : 14px;
   }
-`;
+`
 
 // const StBtnKaka = styled.button`
 //   margin-top: 10px;
@@ -347,14 +312,25 @@ const StSignBtn = styled.button`
   font-size: 15px;
   font-weight: 600;
   float: right;
-  :hover{
-    background-color: #110eb9;
-    color: white;
-    border-radius: 5px;
   cursor: pointer;
-
-  }
-  @media all and (max-width: 750px) {
-    font-size : 14px;
-  }
 `;
+
+//
+const Container = styled.div`
+  max-width: 428px;
+  margin: auto;
+  width: 100%;
+
+`
+
+const BackImg = styled.div`
+  height: 350px;
+  background: url(${newlogo});
+  margin: 0 auto;
+  background-size: cover;
+  opacity: 0.5;
+  width: 100%;
+  position: fixed;
+  max-width: 428px;
+  z-index: -1;
+`

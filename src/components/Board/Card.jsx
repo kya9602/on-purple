@@ -40,18 +40,18 @@ const Card = ({item}) => {
     // 게시글 상세보기 클릭시 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
     const validation = ()=>{
         if(nickname == null){
-            Swal.fire({title: '로그인이 필요합니다.😢'
+            Swal.fire({title: '로그인이 필요합니다 😢'
                         , icon: 'error'})
             setTimeout(() => {
                 (navigate('/login'))
-            }, 2000);
+            }, 1500);
         } else {
             navigate(`/detail/${item?.postId}`)
         }
     }
     return (
         <>
-            <Item onClick={validation}>
+            <Item onClick={()=>validation()}>
                 <Image src={item?.imageUrl} alt="" />
                 
                 <Container>
@@ -116,7 +116,7 @@ const Like = styled.div`
 
 const Time = styled.div`
     margin: auto;
-    margin-top: 10px;
+    margin-top: 30px;
     margin-left: 10px;
     margin-bottom: 10px;
 `
@@ -130,11 +130,4 @@ const WriterLikeWrapper = styled.div`
     -webkit-box-pack: justify;
     font-size: 0.8rem;
     padding-bottom: 10px;
-`
-
-const Modal = styled.div`
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #61dafb;
-  text-align: left;
 `

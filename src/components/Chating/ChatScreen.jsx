@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 
+
 function ChatScreen() {
     const {id} = useParams();
     console.log(id)
@@ -31,7 +32,7 @@ function ChatScreen() {
     }
 
   return (
-    <div>
+    <Container>
         <ChatHeader />
         <TimeStamp>... 분 전에 매치 되었습니다.</TimeStamp>
         {messages.map((message,idx)=>(
@@ -54,7 +55,7 @@ function ChatScreen() {
             <InputButton onClick={handleSend}>전송</InputButton>
       </ChatContainer>
       
-    </div>
+    </Container>
   )
 }
 
@@ -94,16 +95,14 @@ const YouMessage = styled.p`
 `
 
 const Input = styled.input`
-    width: 100%;
+    width: 80%;
     padding: 10px;
     border: none;
 `
 
 const InputButton = styled.button`    
-    width: 60px;
+    width: 20%;
     border: none;
-    margin-right: 32px;
-    background-color: white;
     font-weight: bolder;
     color: #fe3d71;
 `
@@ -114,6 +113,14 @@ const ChatContainer = styled.div`
     padding: 10px;
     position: fixed;
     bottom: 0;
+    max-width: 428px;
     width: 100%;
     border-top: 1px solid lightgray;
+    margin: 0 auto;
+    gap:20px;
+`
+const Container = styled.div`
+    max-width: 428px;
+    width: 100%;
+    margin: 0 auto;
 `

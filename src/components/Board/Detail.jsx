@@ -56,9 +56,12 @@ const Detail = () => {
             }, 2000);   
     }
     return (
-        <>
-            <Title>{detail?.title}</Title>
-            
+        <Container>
+            <Title>
+                {detail?.title}
+            </Title>
+
+            <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
             <DateButtonWrapper>
                 {getNickname === detail?.nickname ?
                     (
@@ -69,8 +72,6 @@ const Detail = () => {
                     ) :
                     null}
             </DateButtonWrapper>         
-            <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
-            
             
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
                 {detail?.imgList?.map((image, id) => (
@@ -131,13 +132,19 @@ const Detail = () => {
                     </div>
                 </DialogContent>
             </Dialog>
-        </>
+        </Container>
 
     )
 }
 
 export default Detail;
 
+const Container = styled.div`
+    max-width: 428px;
+    width : 100%;
+    margin:0 auto;
+    padding-top: 80px;
+`
 const Title = styled.h1`
     text-align: center;
 `
@@ -145,12 +152,17 @@ const Title = styled.h1`
 const Date = styled.div`
     font-size: 1rem;
     margin-left: 12px;
+    float: right;
+    text-align: center;
+    margin-right: 20px;
+    margin-top: 10px;
 `
 const DateButtonWrapper = styled.div`
     align-items: center;
     display: flex;
-    float: right;
+    float: left;
     gap: 10px;
+    margin-left: 15px;
 `
 
 const Content = styled.div`
@@ -166,6 +178,7 @@ const ImgBox = styled.div`
     width: 100%;
     height: 100%;
     margin-top: 3vw;
+    z-index: -99;
 `
 
 const View = styled.div`
@@ -175,13 +188,13 @@ const View = styled.div`
     padding-left: 230px;
     margin: auto;
     float:right;
-`
+`;
 
 const NameLikeWrap = styled.div`
     display: flex;
     align-items: center;
     gap:10px;
-    margin-top:10px
+    margin-top:10px;
 `
 const EditButton = styled.button`
     width: 40px;
@@ -195,7 +208,7 @@ const EditButton = styled.button`
         height: 100%;
         object-fit: cover;
     }
-`
+`;
 
 const DeleteButton = styled.button`
     width: 40px;

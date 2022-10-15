@@ -14,6 +14,7 @@ import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination } from "swiper";
 import Category from "../components/Board/Category";
+import Header from "../components/Header/Header";
 
 const PostPage = () => {
   let inputRef;
@@ -104,6 +105,7 @@ const PostPage = () => {
     }
   return (
     <div>
+      <Header/>
       <AddHeader>
         💖여러분의 후기를 남겨주세요💖
       </AddHeader>
