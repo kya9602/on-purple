@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -11,7 +13,9 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination } from "swiper";
 
+
 function HomeGuide() {
+    const navigate = useNavigate();
 
     const DB = [
     {   
@@ -64,6 +68,10 @@ function HomeGuide() {
                     </SwiperSlide>
                 ))}
             </Swiper>
+            <ButtonSet>
+            <SignupButton onClick={()=>{navigate('/signup');}}>회원가입하기</SignupButton>
+            <LoginButton onClick={()=>{navigate('/login');}}>로그인</LoginButton>
+            </ButtonSet>
         </SwiperContainer>
       
       </>
@@ -71,12 +79,48 @@ function HomeGuide() {
   }
 
 export default HomeGuide;
+const ButtonSet = styled.div`
+
+`
+
+const SignupButton = styled.button`
+    margin-top: 2vh;
+    border: 2px solid #6e96ee;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    height: 30px;
+    :hover{
+    border: none;
+    background-color: #4097df;
+    color:white;
+  }
+`
+
+const LoginButton = styled.button`
+    margin-top: 2vh;
+    margin-left: 1vh;
+    border: 2px solid #6e96ee;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    height: 30px;
+    :hover{
+    border: none;
+    background-color: #4097df;
+    color:white;
+  }
+`
+
+
 
 const SwiperContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
+    flex-direction: column;
 .swiper {
 }
 
