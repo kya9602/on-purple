@@ -1,0 +1,11 @@
+video {
+    width: 370px;
+    height: 50%;
+    float: left;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.streamcomponent{
+    display: flex;
+    justify-content: center;
+}
