@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSprings } from 'react-spring'
 import { useGesture } from "react-use-gesture";
 import { __getMain, __postLike, __postUnLike } from "../../redux/modules/main";
@@ -10,7 +10,7 @@ import Card from "./Card";
 
 function Deck() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
 
 
 
@@ -144,7 +144,7 @@ function Deck() {
   }
 
   if (Nickname === null) {
-    return <div>로그인이 필요합니다</div>
+    navigate('/guide')
   }
 
 
