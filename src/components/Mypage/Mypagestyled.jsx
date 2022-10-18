@@ -3,7 +3,7 @@ import styled from "styled-components";
 //마이페이지 큰박스
 export const MypageBox = styled.div`
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    width: 95vw;
+    width: 400px;
     height: auto;
     padding-bottom: 10%;
     margin: auto;
@@ -22,7 +22,7 @@ export const Myinfo = styled.div`
     border-bottom-style:solid; 
     border-bottom-color:gray;
     border-bottom-width:2px;
-    width: 85vw;
+    width: 350px;
     /* margin-left: 25vw; */
     margin-top: 1vw;
     display: flex;
@@ -38,30 +38,24 @@ export const Profile = styled.img`
     height: 130px; 
     border-radius: 70%;
     overflow: hidden;
-    margin: 2.5vw;
-    margin-top: 50px;
+    margin-top: 20px;
     justify-content: start;
-    :hover{
-      
-    }
 `
 
 //내정보 박스 
 export const InfoBody = styled.div`
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 1vw;
+    margin-left: 10px;
     text-align: center;
-    width: 50vw;
-    height: 230px;
+    height: 180px;
 `
 
 //나이 박스
 export const Age = styled.div`
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     padding: 4%;
-    /* margin-bottom: 10px; */
     width: 200px;
     margin-left: 12px;
 `
@@ -70,7 +64,7 @@ export const Age = styled.div`
 export const MBTI = styled.div`
     text-align: center;
     padding: 4%;
-    font-size: 16px;
+    font-size: 14px;
     width: 200px;
     margin-left: 12px;
     
@@ -80,7 +74,7 @@ export const MBTI = styled.div`
 export const Area = styled.div`
     text-align: center;
     padding: 4%;
-    font-size: 16px;
+    font-size: 14px;
     width: 200px;
     margin-left: 12px;
 `
@@ -96,7 +90,7 @@ export const OnlineBox = styled.div`
 export const OneLineTitle = styled.div`
     padding: 3%;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     justify-content: center;
     
@@ -120,9 +114,11 @@ export const BtnBox = styled.div`
 
 //수정버튼
 export const ModifyBtn = styled.button`
+    font-size: 12px;
+    word-break: keep-all;
     cursor: pointer;
-    height: 38px;
-    padding: 2%;
+    height: 44px;
+    padding: 1%;
     margin-left: 2vw;
     background-color: white;
     border: 2px solid #d87dd8;
@@ -137,17 +133,18 @@ export const ListBox = styled.div`
   display: flex;
   margin-top: 2vw;
   height: auto;
+  width: 400px;
 `
 
 //리스트 박스 타이틀
 export const Listtitle = styled.div`
     display: flex;
-    width: 40vw;
+    width: 150px;
     justify-content: center;
     margin-bottom: 1.5vw;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
-    margin-left: 3vw;
+    margin-left: 45px;
 `
 
 //나를 좋아요한 사람 목록박스

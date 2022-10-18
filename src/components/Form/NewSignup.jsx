@@ -17,6 +17,7 @@ import axios from "axios";
 import profileImage from "../../assets/images/profile.jpg";
 import { __checkUsername, __checkNickname } from "../../redux/modules/user";
 import { __logout, logout } from "../../redux/modules/user";
+import Gender from "./Gender";
 
 
 
@@ -30,13 +31,15 @@ export default function VerticalLinearStepper() {
     //===============================================================================================
 
     const dispatch = useDispatch();
+    const [gender, setGender] = useState("");
 
     const initialState = {
         username: '',
         nickname: '',
         password: '',
         passwordConfirm: '',
-        imageUrl: ''
+        imageUrl: '',
+        gender: ''
     }
 
     const [userinfo, setUserinfo] = useState(initialState);
@@ -70,61 +73,69 @@ export default function VerticalLinearStepper() {
 
     };
 
+
+
     // 기본회원정보 axios
-    const addHandler = async () => {
+    // const addHandler = async () => {
 
-        if (userinfo.username.trim() === "" || userinfo.nickname.trim() === "" || userinfo.password.trim() === "" || userinfo.passwordConfirm.trim() === "") {
-            return alert("모든 칸을 채워주세요! 👀")
-        } else if (userinfo.imageUrl.trim === "") {
-            return alert("사진을 등록해주세요! 😎")
-        };
+    //     if (userinfo.username.trim() === "" || userinfo.nickname.trim() === "" || userinfo.password.trim() === "" || userinfo.passwordConfirm.trim() === "") {
+    //         return alert("모든 칸을 채워주세요! 👀 ")
+    //     } else if (userinfo.imageUrl.trim === "") {
+    //         return alert("사진을 등록해주세요! 😎")
+    //     } else if (gender === "") {
+    //         return alert("성별을 선택해주세요! 👀 ")
+    //     }
 
-        if (usernameCheck === false) {
-            return alert("아이디 중복확인을 해주세요!!!");
-        } else if (nicknameCheck === false) {
-            return alert("닉네임 중복확인을 해주세요!!!")
-        };
+    //     ;
 
-
-        let json = JSON.stringify(userinfo);
-        const usernameblob = new Blob([json], { type: "application/json" });
-        formData.append("info", usernameblob);
-
-        const nicknameblob = new Blob([json], { type: "application/json" });
-        formData.append("info", nicknameblob);
-
-        const passwordblob = new Blob([json], { type: "application/json" });
-        formData.append("info", passwordblob);
-
-        const passwordConfirmblob = new Blob([json], { type: "application/json" });
-        formData.append("info", passwordConfirmblob);
-
-        console.log("user is ", userinfo)
+    //     if (usernameCheck === false) {
+    //         return alert("아이디 중복확인을 해주세요!!!");
+    //     } else if (nicknameCheck === false) {
+    //         return alert("닉네임 중복확인을 해주세요!!!")
+    //     };
 
 
-        const data = await axios.post(`${process.env.REACT_APP_HOST}/user/signup`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
+    //     let json = JSON.stringify(userinfo);
+    //     const usernameblob = new Blob([json], { type: "application/json" });
+    //     formData.append("info", usernameblob);
 
-        localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
-        localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
-        localStorage.setItem("nickname", data.data.data.nickname)
+    //     const nicknameblob = new Blob([json], { type: "application/json" });
+    //     formData.append("info", nicknameblob);
 
-        console.log(data.data);
+    //     const passwordblob = new Blob([json], { type: "application/json" });
+    //     formData.append("info", passwordblob);
 
-        if (data.data.success) {
-            alert('다음 step으로 넘어가주세요~');
-            handleNext();
-        }
-        else {
-            alert("중복확인 및 형식을 다시 확인하여 입력해주세요");
-        }
+    //     const passwordConfirmblob = new Blob([json], { type: "application/json" });
+    //     formData.append("info", passwordConfirmblob);
 
-        setUserinfo(initialState);
 
-    };
+    //     let genderJson = JSON.stringify(gender);
+    //     const genderblob = new Blob([genderJson], { type: "application/json" });
+    //     formData.append("info", genderblob);
+
+    //     console.log("user is ", userinfo)
+    //     console.log("gender is ", gender)
+
+
+    //     const data = await axios.post(`${process.env.REACT_APP_HOST}/user/signup`, formData, {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data'
+    //         }
+    //     });
+
+    //     console.log(data.data);
+
+    //     if (data.data.success) {
+    //         alert('다음 step으로 넘어가주세요~');
+    //         // handleNext();
+    //     }
+    //     else {
+    //         alert("중복확인 및 형식을 다시 확인하여 입력해주세요");
+    //     }
+
+    //     setUserinfo(initialState);
+
+    // };
 
     //유효성검사 
     const regexUsername = /^[A-Za-z0-9+]{4,12}$/;
@@ -172,6 +183,7 @@ export default function VerticalLinearStepper() {
         age: "",
         mbti: "",
         introduction: "",
+        area: "",
 
         idealType: "",
         job: "",
@@ -180,7 +192,6 @@ export default function VerticalLinearStepper() {
         pet: "",
         smoke: "",
         likeMovieType: "",
-        area: "",
     });
 
     const addonChangeHandler = (e) => {
@@ -188,58 +199,100 @@ export default function VerticalLinearStepper() {
         setInput({ ...input, [name]: value, });
     };
 
-
-
-    const accessToken = localStorage.getItem("Authorization"); //accesstoken 
-    const refreshToken = localStorage.getItem("RefreshToken") //refreshToken
-
-
-
-    // const { userId } = useParams();
-    // // const { user, isLoding, error } = useSelector((state) => state.user);
-
-  /*   const userData = user.data;
-    console.log("data is", userData) */
-
-    // useEffect(() => {
-    //     dispatch(__getUser(userId));
-    // }, [dispatch])
-
+    console.log("input is ", input.age)
 
 
     // axios
     const addaddHandler = async () => {
+        if (userinfo.username.trim() === "" || userinfo.nickname.trim() === "" || userinfo.password.trim() === "" || userinfo.passwordConfirm.trim() === "") {
+            return alert("모든 칸을 채워주세요! 👀 ")
+        } else if (userinfo.imageUrl.trim === "") {
+            return alert("사진을 등록해주세요! 😎")
+        } else if (gender === "") {
+            return alert("성별을 선택해주세요! 👀 ")
+        }
+
+        ;
+
+        if (usernameCheck === false) {
+            return alert("아이디 중복확인을 해주세요!!!");
+        } else if (nicknameCheck === false) {
+            return alert("닉네임 중복확인을 해주세요!!!")
+        };
+
+
+        let json = JSON.stringify(userinfo);
+        const usernameblob = new Blob([json], { type: "application/json" });
+        formData.append("info", usernameblob);
+
+        const nicknameblob = new Blob([json], { type: "application/json" });
+        formData.append("info", nicknameblob);
+
+        const passwordblob = new Blob([json], { type: "application/json" });
+        formData.append("info", passwordblob);
+
+        const passwordConfirmblob = new Blob([json], { type: "application/json" });
+        formData.append("info", passwordConfirmblob);
+
+
+        let genderJson = JSON.stringify(gender);
+        const genderblob = new Blob([genderJson], { type: "application/json" });
+        formData.append("info", genderblob);
+
+
+
 
         if (input.age.trim() === "" || input.mbti.trim() === "" || input.introduction.trim() === "" || input.area.trim() === "") {
             return alert("필수 정보는 입력해주어야합니다!!! 👀")
         };
 
-        const { age, mbti, introduction, area, idealType, job, hobby, drink, pet, smoke, likeMovieType } = input;
-        const user = {
-            age: age,
-            mbti: mbti,
-            introduction: introduction,
-            area: area,
-
-            idealType: idealType,
-            job: job,
-            hobby: hobby,
-            drink: drink,
-            pet: pet,
-            smoke: smoke,
-            likeMovieType: likeMovieType,
-        };
 
 
+        let addjson = JSON.stringify(input);
+        const ageblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", ageblob);
 
-        const data = await axios.post(`${process.env.REACT_APP_HOST}/profile`, user, {
+        const mbtiblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", mbtiblob);
+
+        const introductionblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", introductionblob);
+
+        const areablob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", areablob);
+
+        const idealTypeblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", idealTypeblob);
+
+        const jobblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", jobblob);
+
+        const hobbyblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", hobbyblob);
+
+        const drinkblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", drinkblob);
+
+        const petblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", petblob);
+
+        const smokeblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", smokeblob);
+
+        const likeMovieTypeblob = new Blob([addjson], { type: "application/json" });
+        formData.append("userInfo", likeMovieTypeblob);
+
+
+        const data = await axios.post(`${process.env.REACT_APP_HOST}/user/signup`, formData, {
             headers: {
-                Authorization: `${accessToken}`,
-                RefreshToken: `${refreshToken}`,
+                'Content-Type': 'multipart/form-data'
             }
         });
+        localStorage.setItem("Authorization", data.headers.authorization)    //accesstoken
+        localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
+        localStorage.setItem("nickname", data.data.data.nickname)
 
-        console.log(data.data);
+        console.log(data);
 
         if (data.data.success) {
             alert('회원가입이 완료되었습니다.');
@@ -268,18 +321,19 @@ export default function VerticalLinearStepper() {
                     <StRegisterBox>
                         <form style={{ marginTop: "10px" }} >
 
-                            <ImgBox >
+                            <ImgBox>
 
                                 {imageUrl !== "" ?
                                     <Avatar
                                         src={imageUrl}
-                                        style={{ margin: '20px' }}
+                                        style={{ margin: '7px' }}
                                         size={200}
-                                        onClick={() => { inputRef.current.click() }} /> :
+                                        onClick={() => { inputRef.current.click() }} />
+                                    :
                                     <Avatar
                                         src={profileImage}
                                         alt="기본이미지"
-                                        style={{ margin: '20px' }}
+                                        style={{ margin: '7px' }}
                                         size={200}
                                         onClick={() => { inputRef.current.click() }}
                                     />
@@ -295,6 +349,10 @@ export default function VerticalLinearStepper() {
                                     onChange={(e) => { onUploadImg(e.target.files[0]) }}
                                     ref={inputRef} />
                             </ImgBox>
+
+                            <GenderBox>
+                                <Gender setGender={setGender} gender={gender} />
+                            </GenderBox>
 
 
 
@@ -679,7 +737,7 @@ export default function VerticalLinearStepper() {
                                             <Button
                                                 className={classes.root}
                                                 variant="contained"
-                                                onClick={() => { addHandler(); }}
+                                                onClick={() => { handleNext(); }}
                                                 sx={{ mt: 1, mr: 1 }}
                                             >
                                                 "Continue"
@@ -1114,4 +1172,10 @@ const MiniHeader = styled.div`
   width: 400px;
   margin-top: 10px;
 
+`
+
+//성별 버튼 박스
+const GenderBox = styled.div`
+  display: flex;
+  justify-content: center;
 `
