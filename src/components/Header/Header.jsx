@@ -112,6 +112,7 @@ const HeaderContainer = styled.div`
   max-width: 428px;
   width: 100%;
   height: 70px;
+  margin: 0 auto;
   justify-content: space-between;
   ::after { 
     width: 100%;

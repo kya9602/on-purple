@@ -104,7 +104,7 @@ const PostPage = () => {
             }, 2000);   
     }
   return (
-    <div>
+    <Container>
       <Header/>
       <AddHeader>
         💖여러분의 후기를 남겨주세요💖
@@ -168,20 +168,22 @@ const PostPage = () => {
           </Button>
         )}
       </SubmitBtn>
-    </div>
+    </Container>
   );
 }
 
 export default PostPage;
 
-
-
+const Container = styled.div`
+    max-width: 428px;
+    width: 100%;
+    margin: 0 auto;
+`
 const AddHeader = styled.div`
     text-align: center;
     font-size: 22px;
     margin: 20px 0;
 `
-
 const SubmitBtn = styled.div`
     padding: 20px 0;
     display: flex;
