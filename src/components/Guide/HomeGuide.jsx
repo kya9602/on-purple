@@ -79,6 +79,7 @@ function HomeGuide() {
   }
 
 export default HomeGuide;
+
 const ButtonSet = styled.div`
 
 `
