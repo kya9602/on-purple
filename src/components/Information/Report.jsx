@@ -4,15 +4,17 @@ import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import defaultImage from "../../assets/images/default-image.jpg"
+import defaultImage from "../../assets/images/default-image.jpg";
+import Delete from "../../assets/icons/delete.png"
+
 const Report = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [imageUrl, setImageUrl] = useState([]);
+    const [imageUrl, setImageUrl] = useState("");
     const [preview, setPreview] = useState("");
     const [category, setCategory] = useState("");
-    const [targetId, setTargetId] = useState("");
-    console.log(targetId)
+    const [reportNickname, setReportNickname] = useState("");
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [formData] = useState(new FormData())
@@ -43,7 +45,7 @@ const Report = () => {
       };
     //Report
     const canSubmit = () => {
-        return imageUrl.length !== 0 && content !== "" && title !== "" && category !=="" && targetId !=="";
+        return imageUrl?.length !== 0 && content !== "" && title !== "" && category !=="" && reportNickname !=="";
       }
     
     const handleSubmit = useCallback(async (e) => {
@@ -52,7 +54,8 @@ const Report = () => {
         let req = {
           title: title,
           content: content,
-          category: category
+          category: category,
+          reportNickname: reportNickname,
         };
     
         let json = JSON.stringify(req);
@@ -67,7 +70,7 @@ const Report = () => {
           const category = new Blob([json], { type: "application/json" });
           formData.append("data", category)
           formData.append("imageUrl",imageUrl) 
-          await axios.post(`${process.env.REACT_APP_HOST}/report/${targetId}`, formData, {
+          await axios.post(`${process.env.REACT_APP_HOST}/report`, formData, {
             headers: {
               "content-type": "multipart/form-data",
               "Authorization": localStorage.getItem("Authorization"), //accesstoken 
@@ -96,13 +99,14 @@ const Report = () => {
                     ))}
                 </Reportselect>
             </ReportSelectDiv>
-                <ImageWrapper>    
+                <ImageWrapper>
+                    {preview =="" ? null : <DeleteBtn onClick={()=>handelDeleteImage()}><img src={Delete} alt=""/></DeleteBtn>}    
                     <img
                     alt="이미지를 업로드 해주세요."
                     src={preview ? preview : defaultImage}
                     onClick={() => { inputRef.current.click() }}
                     />
-                    
+                    <span>❗️ 증거사진을 올려주세요</span>
                     <input
                         type="file"
                         accept="image/jpg,image/png,image/jpeg,image/gif"
@@ -110,14 +114,13 @@ const Report = () => {
                         onChange={handleAddImage}
                         ref={inputRef}
                     />
-                   <button onClick={()=>handelDeleteImage()}>삭제</button>
                 </ImageWrapper>
             <ReportInputDiv>
                 <ReportTarget
                     placeholder="신고 대상 닉네임을 적어주세요"
                     type={"text"}
-                    value={targetId}
-                    onChange={(e) => setTargetId(e.target.value)}
+                    value={reportNickname}
+                    onChange={(e) => setReportNickname(e.target.value)}
                     row="10">
                 </ReportTarget>
 
@@ -130,12 +133,13 @@ const Report = () => {
                 </ReportTitle>
                     
                 <ReportContent 
-                    placeholder="내용을 입력해 주세요."
+                    placeholder="내용을 입력해 주세요 (500자 이내)."
                     type={"text"}
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    row="10">
+                    maxLength={500}>
                 </ReportContent>
+                <span style={{float:"right"}}>{content.length}/500 자</span>
                 <SubmitBtn>
                     {canSubmit() ? (
                         <Button
@@ -143,7 +147,7 @@ const Report = () => {
                             className="success-button"
                             variant="outlined"
                         >
-                            등록하기😃
+                            신고하기🚨
                         </Button>
                     ) : (
                         <Button
@@ -184,18 +188,16 @@ const ImageWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     img{
-        width: 300px;
-        height: 300px;
+        width: 200px;
+        height: 200px;
         margin-top: 15px;
-    }
-    button{
-        width: 50px;
+    };
+    span{
         margin-top: 10px;
     }
 `
 const ReportInputDiv = styled.div`
     width: 300px;
-    margin-top: 30px;
     justify-content: center;
     align-items:center;
 `
@@ -214,12 +216,13 @@ const ReportTitle = styled.input`
 
 const ReportContent = styled.textarea`
     width: 100%;
-    height : 180px;
+    height : 250px;
     resize: none;
     margin-top: 15px;
 `
 
 const SubmitBtn = styled.div`
+    margin-top: 20px;
     padding: 20px 0;
     display: flex;
     align-items: center;
@@ -232,4 +235,14 @@ const SubmitBtn = styled.div`
     .success-button{
       font-size: 1.1rem;
     }
+`
+const DeleteBtn = styled.div`
+   margin-bottom: 10px;
+   margin-left: 95%;
+   width: 20px;
+   height: 20px;
+     img{
+        width:100%;
+        height: 100%;
+     }
 `

@@ -1,37 +1,45 @@
 import React from "react";
 import styled from "styled-components";
-const ReportCard = () => {
+import { useNavigate } from "react-router";
+const ReportCard = ({item}) => {
+    console.log(item)
+    const navigate = useNavigate();
+    const goDetail = () =>{
+        navigate(`/reportDetail/${item.reportId}`)
+    }
     return(
-        <Container>
-            <Image src="" alt=""/>
-            <Title>제목입니당</Title>
-            <Category>카테고리입니당</Category>
-        </Container>
+    <>
+        <TableWrapper onClick={()=>goDetail()}>
+            <TableNumber>{item.reportId}</TableNumber>
+            <TableTitle>{item.title}</TableTitle>
+            <TableDate>
+                {item.createdAt[0]}-{item.createdAt[1]}-{item.createdAt[2]}
+            </TableDate>
+        </TableWrapper> 
+    </>
     )
 }
 
 export default ReportCard;
 
-const Container = styled.div`
+const TableWrapper = styled.div`
     display: flex;
-    border: 1px solid gray;
-
-`
-
-const Image = styled.img`
-    width: 100px;
-    height: 100px;
-    border: 1px solid gray;
-    border-radius: 10px;
-    margin: 5px auto;
-`
-
-const Title = styled.div`
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 40px;
     border-bottom: 1px solid gray;
-    width: 150px;
 `
 
-const Category = styled.div`
-    border-bottom: 1px solid gray;
-    width: 150px;
+const TableTitle = styled.div`
+    width: 65%;
+`
+
+const TableDate = styled.div`
+    width: 25%;
+`
+const TableNumber = styled.span`
+    text-align: center;
+    width: 10%;
 `

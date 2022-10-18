@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import ReportInfo from "../components/Information/ReportInfo";
 import Header from "../components/Header/Header";
-
+import Footer from "../components/Footer/Footer"
 const ReportInfoPage = () =>{
     return(
         <Container>
             <Header/>
             <ReportInfo/>
+            <Footer/>
         </Container>
     )
 }

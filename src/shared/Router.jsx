@@ -19,7 +19,7 @@ import KakaoAddPage from "../pages/KakaoAddPage";
 import NewSignup from "../pages/NewSignuploadPage";
 import VChatPage from "../pages/VChatPage";
 import ReportInfoPage from "../pages/ReportInfoPage";
-
+import ReportDetailPage from "../pages/ReportDetailPage";
 const Router = () => {
     return (
         <BrowserRouter>
@@ -41,6 +41,7 @@ const Router = () => {
                 <Route path="/guide" exact element={<GuidePage />} />
                 <Route path="/vchat" exact element={<VChatPage />} />
                 <Route path="/reportInfo" exact element={<ReportInfoPage />} />
+                <Route path="/reportDetail/:reportId" exact element={<ReportDetailPage />} />
                 {/* <Route path="/kakao" exact element={<Oauth2Handler />} /> */}
             </Routes>
         </BrowserRouter>
