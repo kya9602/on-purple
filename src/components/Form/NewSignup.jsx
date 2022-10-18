@@ -210,9 +210,7 @@ export default function VerticalLinearStepper() {
             return alert("사진을 등록해주세요! 😎")
         } else if (gender === "") {
             return alert("성별을 선택해주세요! 👀 ")
-        }
-
-        ;
+        };
 
         if (usernameCheck === false) {
             return alert("아이디 중복확인을 해주세요!!!");
@@ -663,6 +661,21 @@ export default function VerticalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleNext = () => {
+        if (userinfo.username.trim() === "" || userinfo.nickname.trim() === "" || userinfo.password.trim() === "" || userinfo.passwordConfirm.trim() === "") {
+            return alert("모든 칸을 채워주세요! 👀 ")
+        } else if (userinfo.imageUrl.trim === "") {
+            return alert("사진을 등록해주세요! 😎")
+        } else if (gender === "") {
+            return alert("성별을 선택해주세요! 👀 ")
+        };
+
+        if (usernameCheck === false) {
+            return alert("아이디 중복확인을 해주세요!!!");
+        } else if (nicknameCheck === false) {
+            return alert("닉네임 중복확인을 해주세요!!!")
+        };
+
+
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
