@@ -147,7 +147,7 @@ const Report = () => {
                             className="success-button"
                             variant="outlined"
                         >
-                            신고하기🚨
+                            신고하기 🚨
                         </Button>
                     ) : (
                         <Button
@@ -178,6 +178,7 @@ const ReportContainerDiv = styled.div`
     justify-content: center;
     align-items:center;
     background-color: white;
+    padding-bottom: 100px;
 `
 
 const ReportSelectDiv = styled.div`
