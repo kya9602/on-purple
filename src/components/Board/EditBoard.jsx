@@ -100,7 +100,7 @@ const EditBoard = () => {
       }, [canSubmit]);
 
     return (
-        <>
+        <div style={{backgroundColor:"white", paddingTop:"90px"}}>
         <UploaderWrapper>
           <input
             type="file"
@@ -150,7 +150,7 @@ const EditBoard = () => {
                 }}
             />
             <textarea
-                style={{height:"40vh"}}
+                style={{height:"30vh"}}
                 defaultValue={detail.content}
                 onChange={(e) => {
                     setContent(e.target.value);
@@ -176,7 +176,7 @@ const EditBoard = () => {
           </Button>
         )}  
         </EditBtn>
-        </>
+        </div>
     )
 }
 
@@ -218,7 +218,7 @@ const TextAreaWrapper = styled.div`
 `
 
 const EditBtn = styled.div`
-    padding: 20px 0;
+    padding: 15px 0 80px 0 ;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,7 +260,7 @@ const ImgBox = styled.div`
   height: 100%;
 `
 const Btn = styled.div`
-    margin-top: 30px;
+    margin: 10px;
     button {
         margin: 10px 5px;
         font-size: 1.1rem;

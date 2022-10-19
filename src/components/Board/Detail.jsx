@@ -174,7 +174,7 @@ const Content = styled.div`
     margin: 0 auto;
     margin-top: 12px;
     width: 90%;
-    height: 30vh;
+    height: 35vh;
     border-top: 1px solid #9E87BA;
     font-size: 20px;
 `
