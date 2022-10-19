@@ -18,10 +18,9 @@ export const __getReports = createAsyncThunk(
 export const __getReportsDetail = createAsyncThunk(
     "GET_REPORTS_DETAIL",
     async (payload, thunkAPI) => {
-      /* console.log(payload) */
       try {
         const data = await axios.get(`${process.env.REACT_APP_HOST}/report/${payload}`);
-         console.log(data)
+        
         return thunkAPI.fulfillWithValue(data.data.data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error.code);

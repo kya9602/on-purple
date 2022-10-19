@@ -16,6 +16,7 @@ const ReportInfo = () =>{
                 <TableNumber>No.</TableNumber>
                 <TableTitle>문의내용</TableTitle>
                 <TableDate>등록일시</TableDate>
+                {/* <TableState>진행상태</TableState> */}
             </TableWrapper> 
             {report.map((item)=>(<ReportCard item={item} key={item.reportId}/>))}
         </Container>
@@ -48,3 +49,6 @@ const TableTitle = styled.div`
 const TableDate = styled.div`
     width: 25%;
 `
+/* const TableState = styled.div`
+    width: 20%;
+` */

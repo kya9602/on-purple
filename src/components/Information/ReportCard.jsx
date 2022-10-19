@@ -34,6 +34,10 @@ const TableWrapper = styled.div`
 
 const TableTitle = styled.div`
     width: 65%;
+    overflow: hidden;  		
+    text-overflow: ellipsis;  
+    white-space: nowrap; 		
+    word-break:break-all;
 `
 
 const TableDate = styled.div`

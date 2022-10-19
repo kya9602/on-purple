@@ -125,11 +125,11 @@ const Report = () => {
                 </ReportTarget>
 
                 <ReportTitle
-                    placeholder="제목을 입력해 주세요."
+                    placeholder="제목을 입력해 주세요 (30자 이내)."
                     type={"text"}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    row="10">
+                    maxLength={30}>
                 </ReportTitle>
                     
                 <ReportContent 
