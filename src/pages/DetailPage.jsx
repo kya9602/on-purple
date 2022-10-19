@@ -2,13 +2,18 @@ import React from "react";
 import Detail from "../components/Board/Detail";
 import Header from "../components/Header/Header";
 import styled from "styled-components";
+import image from "../assets/images/moon.jpg"
+
+
 const DetailPage = () => {
-    
+
     return (
-        <Container>  
-            <Header/>
-            <Detail />
-        </Container>
+        <BackImage>
+            <Container>
+                <Header />
+                <Detail />
+            </Container>
+        </BackImage>
     )
 }
 
@@ -18,4 +23,10 @@ const Container = styled.div`
     max-width: 428px;
     width : 100%;
     margin:0 auto;
+`
+
+const BackImage = styled.div`
+  background: url(${image});
+  background-size: cover;
+  height: 100vh;
 `
