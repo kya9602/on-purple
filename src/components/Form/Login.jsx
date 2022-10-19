@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import newlogo from "../../assets/images/perple.jpg"
 import axios from "axios";
-import { KAKAO_AUTH_URL } from "../Form/kakao/Auth";
-import kakao from "../../assets/images/kakao.png";
-import naver from "../../assets/images/naver.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -60,44 +57,46 @@ const Login = () => {
 
 
   return (
-    <Container >
-      <StHeader>
-        <BackImg />
-        <StHeaderTitle> On Purple </StHeaderTitle>
-        <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
-        <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
-      </StHeader>
 
-      <StLoginContainer>
-        <form onSubmit={onSubmitHandler}>
-          <StUserBox>
-            <StLaber style={{ marginRight: "15px" }}>아이디</StLaber>
-            <StLoginInput
-              type="text"
-              name="username"
-              placeholder="아이디를 입력해주세요"
-              value={inputValue.username}
-              onChange={onChangeHandler}
-            />
-          </StUserBox>
+    <><BackImg />
+      <Container >
 
-          <StPwBox>
-            <StLaber style={{ marginRight: "5px" }}>비밀번호</StLaber>
-            <StLoginInput
-              type="password"
-              name="password"
-              placeholder="비밀번호를 입력해주세요"
-              value={inputValue.password}
-              onChange={onChangeHandler}
-            />
+        <StHeader>
+          <StHeaderTitle> On Purple </StHeaderTitle>
+          <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
+          <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
+        </StHeader>
 
-          </StPwBox>
-          <StBtnBox>
-            <StBtn>로그인</StBtn>
-          </StBtnBox>
-        </form>
+        <StLoginContainer>
+          <form onSubmit={onSubmitHandler}>
+            <StUserBox>
+              <StLaber style={{ marginRight: "15px" }}>아이디</StLaber>
+              <StLoginInput
+                type="text"
+                name="username"
+                placeholder="아이디를 입력해주세요"
+                value={inputValue.username}
+                onChange={onChangeHandler}
+              />
+            </StUserBox>
 
-        {/* <StBtnBox>
+            <StPwBox>
+              <StLaber style={{ marginRight: "5px" }}>비밀번호</StLaber>
+              <StLoginInput
+                type="password"
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+                value={inputValue.password}
+                onChange={onChangeHandler}
+              />
+
+            </StPwBox>
+            <StBtnBox>
+              <StBtn>로그인</StBtn>
+            </StBtnBox>
+          </form>
+
+          {/* <StBtnBox>
           <StBtnKaka onClick={() => { window.location.href = KAKAO_AUTH_URL }}>
             <img src={kakao} alt="카카오로긘" />
           </StBtnKaka>
@@ -106,12 +105,13 @@ const Login = () => {
         <StBtnBox>
           <StBtnNaver><img src={naver} alt="네이버로그인" /></StBtnNaver>
         </StBtnBox> */}
-        <StJoinBtnBox>
-          <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
-        </StJoinBtnBox>
-      </StLoginContainer>
+          <StJoinBtnBox>
+            <StSignBtn onClick={() => navigate('/signup')}>회원이 아니신가요 ?</StSignBtn>
+          </StJoinBtnBox>
+        </StLoginContainer>
 
-    </Container>
+      </Container>
+    </>
   )
 
 };
@@ -324,13 +324,13 @@ const Container = styled.div`
 `
 
 const BackImg = styled.div`
-  height: 350px;
+  height: 100vh;
   background: url(${newlogo});
   margin: 0 auto;
   background-size: cover;
   opacity: 0.5;
   width: 100%;
   position: fixed;
-  max-width: 428px;
+  /* max-width: 428px; */
   z-index: -1;
 `
