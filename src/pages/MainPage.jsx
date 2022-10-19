@@ -3,16 +3,21 @@ import React from "react";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Deck from "../components/Main/Deck";
-//import Test from "../components/Main/test";
+import image from "../assets/images/moon.jpg"
 
+//import Test from "../components/Main/test";
 
 const MainPage = () => {
     return (
-        <MainPageContainer>
-            <Header />
+        <BackImage>
+
+            <MainPageContainer>
+                <Header />
                 <Deck />
-            <Footer />
-        </MainPageContainer>
+                <Footer />
+            </MainPageContainer>
+        </BackImage>
+
     )
 }
 
@@ -27,4 +32,13 @@ const MainPageContainer = styled.div`
     position: fixed;
     overflow: hidden; */
     margin: 0 auto;
+    height: 100%;
+    background-color: white;
+`
+
+const BackImage = styled.div`
+    background: url(${image});
+    background-size: cover;
+    height: 100vh;
+
 `
