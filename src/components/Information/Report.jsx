@@ -20,7 +20,7 @@ const Report = () => {
     const [formData] = useState(new FormData())
     //select
     const OPTIONS = [
-        { value: "카테고리 선택", name: "카테고리 선택"},
+        { value: "카테고리 선택", name: "카테고리 선택" },
         { value: "fake", name: "가짜 프로필, 성별" },
         { value: "minor", name: "미성년자" },
         { value: "sexual", name: "성적인 콘텐츠" },
@@ -28,9 +28,9 @@ const Report = () => {
         { value: "violence", name: "폭력, 위협" },
     ];
     const handleSelectChange = (e) => {
-		console.log(e.target.value);
+        console.log(e.target.value);
         setCategory(e.target.value);
-	};
+    };
 
     //image
     const inputRef = useRef(null);
@@ -38,56 +38,56 @@ const Report = () => {
         // console.log(e.target.files);
         setImageUrl(e.target.files[0]);
         setPreview(URL.createObjectURL(e.target.files[0]));
-      };
-      const handelDeleteImage = () => {
+    };
+    const handelDeleteImage = () => {
         URL.revokeObjectURL(imageUrl);
         setPreview("");
-      };
+    };
     //Report
     const canSubmit = () => {
-        return imageUrl?.length !== 0 && content !== "" && title !== "" && category !=="" && reportNickname !=="";
-      }
-    
+        return imageUrl?.length !== 0 && content !== "" && title !== "" && category !== "" && reportNickname !== "";
+    }
+
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
-    
+
         let req = {
-          title: title,
-          content: content,
-          category: category,
-          reportNickname: reportNickname,
+            title: title,
+            content: content,
+            category: category,
+            reportNickname: reportNickname,
         };
-    
+
         let json = JSON.stringify(req);
-    
+
         try {
-          const title = new Blob([json], { type: "application/json" });
-          formData.append("data", title);
-    
-          const content = new Blob([json], { type: "application/json" });
-          formData.append("data", content);
-    
-          const category = new Blob([json], { type: "application/json" });
-          formData.append("data", category)
-          formData.append("imageUrl",imageUrl) 
-          await axios.post(`${process.env.REACT_APP_HOST}/report`, formData, {
-            headers: {
-              "content-type": "multipart/form-data",
-              "Authorization": localStorage.getItem("Authorization"), //accesstoken 
-              "RefreshToken": localStorage.getItem("RefreshToken"),
-            },
-          });
-          window.alert("🚨신고가 완료되었습니다🚨");
-          navigate("/");
+            const title = new Blob([json], { type: "application/json" });
+            formData.append("data", title);
+
+            const content = new Blob([json], { type: "application/json" });
+            formData.append("data", content);
+
+            const category = new Blob([json], { type: "application/json" });
+            formData.append("data", category)
+            formData.append("imageUrl", imageUrl)
+            await axios.post(`${process.env.REACT_APP_HOST}/report`, formData, {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    "Authorization": localStorage.getItem("Authorization"), //accesstoken 
+                    "RefreshToken": localStorage.getItem("RefreshToken"),
+                },
+            });
+            window.alert("🚨신고가 완료되었습니다🚨");
+            navigate("/");
         } catch (e) {
-          // 서버에서 받은 에러 메시지 출력
-          window.alert("오류발생!" + "😭");
+            // 서버에서 받은 에러 메시지 출력
+            window.alert("오류발생!" + "😭");
         }
-    
-      }, [canSubmit]);
+
+    }, [canSubmit]);
     return (
         <ReportContainerDiv>
-            
+
             <ReportSelectDiv>
                 <Reportselect onChange={handleSelectChange}>
                     {OPTIONS.map((option) => (
@@ -99,22 +99,22 @@ const Report = () => {
                     ))}
                 </Reportselect>
             </ReportSelectDiv>
-                <ImageWrapper>
-                    {preview =="" ? null : <DeleteBtn onClick={()=>handelDeleteImage()}><img src={Delete} alt=""/></DeleteBtn>}    
-                    <img
+            <ImageWrapper>
+                {preview == "" ? null : <DeleteBtn onClick={() => handelDeleteImage()}><img src={Delete} alt="" /></DeleteBtn>}
+                <img
                     alt="이미지를 업로드 해주세요."
                     src={preview ? preview : defaultImage}
                     onClick={() => { inputRef.current.click() }}
-                    />
-                    <span>❗️ 증거사진을 올려주세요</span>
-                    <input
-                        type="file"
-                        accept="image/jpg,image/png,image/jpeg,image/gif"
-                        style={{display:'none'}}
-                        onChange={handleAddImage}
-                        ref={inputRef}
-                    />
-                </ImageWrapper>
+                />
+                <span>❗️ 증거사진을 올려주세요</span>
+                <input
+                    type="file"
+                    accept="image/jpg,image/png,image/jpeg,image/gif"
+                    style={{ display: 'none' }}
+                    onChange={handleAddImage}
+                    ref={inputRef}
+                />
+            </ImageWrapper>
             <ReportInputDiv>
                 <ReportTarget
                     placeholder="신고 대상 닉네임을 적어주세요"
@@ -131,15 +131,15 @@ const Report = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     maxLength={30}>
                 </ReportTitle>
-                    
-                <ReportContent 
+
+                <ReportContent
                     placeholder="내용을 입력해 주세요 (500자 이내)."
                     type={"text"}
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     maxLength={500}>
                 </ReportContent>
-                <span style={{float:"right"}}>{content.length}/500 자</span>
+                <span style={{ float: "right" }}>{content.length}/500 자</span>
                 <SubmitBtn>
                     {canSubmit() ? (
                         <Button
@@ -177,6 +177,7 @@ const ReportContainerDiv = styled.div`
     flex-direction: column; /*수직 정렬*/
     justify-content: center;
     align-items:center;
+    background-color: white;
 `
 
 const ReportSelectDiv = styled.div`
@@ -187,6 +188,7 @@ const ImageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
     img{
         width: 200px;
         height: 200px;
