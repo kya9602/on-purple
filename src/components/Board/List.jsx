@@ -19,7 +19,7 @@ const List = () => {
     // 현재 페이지
     const [currentPage, setCurrentPage] = useState(1);
     // 페이지당 아이템 개수 
-	const [postsPerPage] = useState(5); 
+    const [postsPerPage] = useState(5);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;
@@ -54,22 +54,22 @@ const List = () => {
 
     /* if (post.length === 0)  */
     //----------------------navigateButton------------------//
-    const goDrive = () => {   
+    const goDrive = () => {
         navigate(`/board/drive`)
-  }
-    const goTaste = () => {      
+    }
+    const goTaste = () => {
         navigate(`/board/taste`)
     }
-    const goDate = () => {  
+    const goDate = () => {
         navigate(`/board/dateCourse`)
     }
-    const goMeet = () => {       
+    const goMeet = () => {
         navigate(`/board/meet`)
     }
-    const goBar = () => {     
+    const goBar = () => {
         navigate(`/board/bar`)
     }
-    const goFashion = () => { 
+    const goFashion = () => {
         navigate(`/board/fashion`)
     }
 
@@ -103,6 +103,7 @@ const Wrapper = styled.div`
     max-width:428px;
     width : 100%;
     margin:50px auto; 
+    background-color: white;
 `
 
 const Box = styled.div`

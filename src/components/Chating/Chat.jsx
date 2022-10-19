@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { __getChatrooms } from "../../redux/modules/chatRoom";
 import { useDispatch } from "react-redux";
-const Chat= () =>{      
+const Chat = () => {
     const dispatch = useDispatch();
-    const [data,setData] = useState([
+    const [data, setData] = useState([
         {
             name: "안유진",
             message: "안녕~! ",
@@ -24,29 +24,31 @@ const Chat= () =>{
     useEffect(() => {
         dispatch(__getChatrooms());
         /* console.log("작동"); */
-      }, []);
+    }, []);
 
-    return(
-        <div>
-        {data.map((userdata)=>{
-            return (
-            <ChatLink key={userdata.roomId} to ={`/chat/${userdata.roomId}`} vlink="gray">
-                <ChatBox>
-                    <ChatImg src={userdata.profilePic}/>
-                    <ChatDetails>
-                        <ChatName>{userdata.name}</ChatName>
-                        <ChatDetails_P>{userdata.message}</ChatDetails_P>
-                    </ChatDetails>
-                    <ChatTimeStamp>{userdata.timestamp}</ChatTimeStamp>
-                </ChatBox>
-            </ChatLink>  
-            )
-        })}
+    return (
+        <div style={{ backgroundColor: "white", height: "100vh" }}>
+            {data.map((userdata) => {
+                return (
+                    <ChatLink key={userdata.roomId} to={`/chat/${userdata.roomId}`} vlink="gray">
+                        <ChatBox>
+                            <ChatImg src={userdata.profilePic} />
+                            <ChatDetails>
+                                <ChatName>{userdata.name}</ChatName>
+                                <ChatDetailsP>{userdata.message}</ChatDetailsP>
+                            </ChatDetails>
+                            <ChatTimeStamp>{userdata.timestamp}</ChatTimeStamp>
+                        </ChatBox>
+                    </ChatLink>
+                )
+            })}
         </div>
     )
 }
 
 export default Chat;
+
+
 
 const ChatBox = styled.div`
     display: flex;
@@ -64,7 +66,7 @@ const ChatName = styled.h3`
   color:black;
 `
 
-const ChatDetails_P = styled.p`
+const ChatDetailsP = styled.p`
    color: gray;
 `
 
