@@ -7,7 +7,7 @@ export const __getChatrooms = createAsyncThunk(
     "GET_CHATROOMS",
     async (_, thunkAPI) => {
       try {
-        const data = await axios.get(`http://3.34.127.194/chat/room`);
+        const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/room`);
         console.log(data)
         return thunkAPI.fulfillWithValue(data);
       } catch (error) {
