@@ -15,6 +15,8 @@ import "./styles.css";
 import { Pagination } from "swiper";
 import Category from "../components/Board/Category";
 import Header from "../components/Header/Header";
+import image from "../assets/images/moon.jpg"
+
 
 const PostPage = () => {
   let inputRef;
@@ -26,7 +28,7 @@ const PostPage = () => {
   const [content, setContent] = useState("");
   const [imageUrl, setImage] = useState([]);
   const [category, setCategory] = useState("")
-  
+
   //이미지 업로드 핸들
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
@@ -54,7 +56,7 @@ const PostPage = () => {
 
   // 이미지, 제목, 내용 모두 작성해야 등록 가능
   const canSubmit = () => {
-    return imageUrl.length !== 0 && content !== "" && title !== "" && category !=="";
+    return imageUrl.length !== 0 && content !== "" && title !== "" && category !== "";
   }
 
   const handleSubmit = useCallback(async (e) => {
@@ -93,96 +95,109 @@ const PostPage = () => {
     }
 
   }, [canSubmit]);
-  
+
   // 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
   const getNickname = localStorage.getItem("nickname")
-    if (getNickname === null) {
-            Swal.fire({title: '로그인이 필요합니다.😢'
-                        , icon: 'error'})
-            setTimeout(() => {
-                (navigate('/login'))
-            }, 2000);   
-    }
+  if (getNickname === null) {
+    Swal.fire({
+      title: '로그인이 필요합니다.😢'
+      , icon: 'error'
+    })
+    setTimeout(() => {
+      (navigate('/login'))
+    }, 2000);
+  }
   return (
-    <Container>
-      <Header/>
-      <AddHeader>
-        💖여러분의 후기를 남겨주세요💖
-      </AddHeader>
-      <AddBody>
-        <UploaderWrapper>
-          <input
-            type="file"
-            accept="image/jpg,image/png,image/jpeg,image/gif"
-            multiple
-            onChange={handleAddImages}
-            ref={(refParam) => (inputRef = refParam)}
-            style={{ display: "none" }}
-          />
-          {/* 미리보기 조건부 렌더링 */}
-          {imageUrl.length == 0 ?
-            /* 이미지가 없으면 default 이미지 출력 */
-            <DefaultImage />
-            :
-            /* 있으면 슬라이드 출력 */
-            <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-              {imageUrl.map((image, id) => (
-                <SwiperSlide key={id}>
-                  <ImgBox>
-                    <DeleteBtn onClick={() => handleDeleteImage(id)}><img src={Delete} alt="X" /></DeleteBtn>
-                    <img src={image} alt="" />
-                  </ImgBox>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          }
-          <Btn>
+    <BackImage>
+      <Container>
+        <Header />
+        <AddHeader>
+          💖여러분의 후기를 남겨주세요💖
+        </AddHeader>
+        <AddBody>
+          <UploaderWrapper>
+            <input
+              type="file"
+              accept="image/jpg,image/png,image/jpeg,image/gif"
+              multiple
+              onChange={handleAddImages}
+              ref={(refParam) => (inputRef = refParam)}
+              style={{ display: "none" }}
+            />
+            {/* 미리보기 조건부 렌더링 */}
+            {imageUrl.length == 0 ?
+              /* 이미지가 없으면 default 이미지 출력 */
+              <DefaultImage />
+              :
+              /* 있으면 슬라이드 출력 */
+              <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+                {imageUrl.map((image, id) => (
+                  <SwiperSlide key={id}>
+                    <ImgBox>
+                      <DeleteBtn onClick={() => handleDeleteImage(id)}><img src={Delete} alt="X" /></DeleteBtn>
+                      <img src={image} alt="" />
+                    </ImgBox>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            }
+            <Btn>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => inputRef.click()}
+              >
+                😎사진 고르기😎
+              </Button>
+            </Btn>
+            <Category setCategory={setCategory} category={category} />
+          </UploaderWrapper>
+          <TextArea setTitle={setTitle} setContent={setContent} title={title} content={content} />
+        </AddBody>
+        <SubmitBtn>
+          {canSubmit() ? (
             <Button
+              onClick={handleSubmit}
+              className="success-button"
               variant="outlined"
-              color="primary"
-              onClick={() => inputRef.click()}
             >
-              😎사진 고르기😎
+              등록하기😃
             </Button>
-          </Btn>          
-          <Category setCategory={setCategory} category={category}/>
-        </UploaderWrapper>
-        <TextArea setTitle={setTitle} setContent={setContent} title={title} content={content} />
-      </AddBody>
-      <SubmitBtn>
-        {canSubmit() ? (
-          <Button
-            onClick={handleSubmit}
-            className="success-button"
-            variant="outlined"
-          >
-            등록하기😃
-          </Button>
-        ) : (
-          <Button
-            className="disable-button"
-            variant="outlined"
-            size="large"
-          >
-            사진과 내용을 모두 입력하세요😭
-          </Button>
-        )}
-      </SubmitBtn>
-    </Container>
+          ) : (
+            <Button
+              className="disable-button"
+              variant="outlined"
+              size="large"
+            >
+              사진과 내용을 모두 입력하세요😭
+            </Button>
+          )}
+        </SubmitBtn>
+      </Container>
+    </BackImage>
   );
 }
 
 export default PostPage;
 
+const BackImage = styled.div`
+  background: url(${image});
+  background-size: cover;
+  height: 100%;
+`
+
 const Container = styled.div`
     max-width: 428px;
     width: 100%;
     margin: 0 auto;
+    
+    background-color: white;
 `
 const AddHeader = styled.div`
     text-align: center;
     font-size: 22px;
-    margin: 20px 0;
+    /* margin: 20px 0; */
+    padding-top: 30px;
 `
 const SubmitBtn = styled.div`
     padding: 20px 0;

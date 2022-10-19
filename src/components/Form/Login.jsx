@@ -62,10 +62,10 @@ const Login = () => {
   return (
     <Container >
       <StHeader>
-        <BackImg/>
+        <BackImg />
         <StHeaderTitle> On Purple </StHeaderTitle>
         <StHeaderBody>나만의 특별한 보랏빛 라이트를 켜줘</StHeaderBody>
-        <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader> 
+        <StBtnHeader onClick={() => navigate('/')}>구경 가기</StBtnHeader>
       </StHeader>
 
       <StLoginContainer>

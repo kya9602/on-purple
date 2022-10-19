@@ -7,7 +7,6 @@ export const MypageBox = styled.div`
     height: auto;
     padding-bottom: 10%;
     margin: auto;
-    margin-top: 90px;
     border: 1px solid #9C7FCB;
     border-radius: 15px;
     background-color: white;
@@ -44,7 +43,6 @@ export const Profile = styled.img`
 
 //내정보 박스 
 export const InfoBody = styled.div`
-    margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
     text-align: center;
@@ -55,17 +53,17 @@ export const InfoBody = styled.div`
 export const Age = styled.div`
     text-align: center;
     font-size: 14px;
-    padding: 4%;
-    width: 200px;
+    padding: 2%;
+    /* width: 180px; */
     margin-left: 12px;
 `
 
 //MBTI 박스
 export const MBTI = styled.div`
     text-align: center;
-    padding: 4%;
+    padding: 2%;
     font-size: 14px;
-    width: 200px;
+    /* width: 180px; */
     margin-left: 12px;
     
 `
@@ -84,6 +82,7 @@ export const OnlineBox = styled.div`
   margin: 3%;
   padding-bottom: 2%;
   border: 2px solid purple;
+  width: 200px;
 `
 
 //한줄평 제목
@@ -100,16 +99,25 @@ export const OneLineTitle = styled.div`
 export const OneLine = styled.div` 
     font-size:14px;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin: auto;
+    padding-bottom: 10px;
     display: flex;
     justify-content: center;
     word-break: keep-all;
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    /* white-space: nowrap; */
+    white-space: pre-wrap;
+    word-break:break-all;
+
+    
 `
 //버튼 박스
 export const BtnBox = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 20px;
 `
 
 //수정버튼
@@ -245,7 +253,6 @@ export const AreaInput = styled.input`
 //완료버튼창 박스
 export const StBtbBox = styled.div`
   height: 50px;
-  margin-top: 15px;
   display: flex;
   justify-content:center;
   width : 200px;
@@ -270,10 +277,9 @@ export const StButton = styled.button`
 
 //수정큰틀
 export const SecondMypageBox = styled.div`
-    width:450px;
+    width:400px;
     height: auto;
-    padding-bottom: 2%;
-    margin-top: 90px;
+    padding-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     border: 3px solid #fdc2f0;
@@ -289,11 +295,12 @@ export const SecondMyinfo = styled.div`
     border-bottom-style:solid; 
     border-bottom-color:gray;
     border-bottom-width:2px;
-    width: 400px;
-    /* margin-left: 25vw; */
+    width: 380px;
+    height: 190px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding-bottom: 2%;
+    /* padding-bottom: 4%; */
 `
 
 
@@ -344,7 +351,7 @@ export const MiniTitle = styled.div`
 export const MiniInput = styled.input`
   margin: 1%;
   text-align: center;
-  width: 420px;
+  width: 350px;
   margin-left: 2vw;
   height: 1.5em;
   border-radius: 5px;
@@ -421,4 +428,7 @@ export const Container = styled.div`
   max-width: 428px;
   width : 100%;
   margin:0 auto;
+  height: 90vh;
+  background-color: white;
+  padding-top: 80px;
 `
