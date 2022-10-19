@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { __getPostsDetail } from "../../redux/modules/board";
 import AddComment from "./AddComment"
-import { __deletePosts,__likePost } from "../../redux/modules/board";
+import { __deletePosts, __likePost } from "../../redux/modules/board";
 import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
 import delete2 from "../../assets/icons/delete2.png"
@@ -40,22 +40,24 @@ const Detail = () => {
     const goEdit = () => {
         navigate(`/edit/${postId}`)
     }
-    const goReport = () =>{
+    const goReport = () => {
         navigate(`/report`)
     }
     const onLike = (event) => {
         event.preventDefault();
         dispatch(__likePost(postId));
     };
-    
+
     // URL 입력해서 들어오는 경우 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
     const getNickname = localStorage.getItem("nickname")
     if (getNickname === null) {
-            Swal.fire({title: '로그인이 필요합니다.😢'
-                        , icon: 'error'})
-            setTimeout(() => {
-                (navigate('/login'))
-            }, 2000);   
+        Swal.fire({
+            title: '로그인이 필요합니다.😢'
+            , icon: 'error'
+        })
+        setTimeout(() => {
+            (navigate('/login'))
+        }, 2000);
     }
     return (
         <Container>
@@ -67,14 +69,14 @@ const Detail = () => {
             <DateButtonWrapper>
                 {getNickname === detail?.nickname ?
                     (
-                     <div style={{gap:"10px", marginRight:"10px"}}>
-                        <EditButton onClick={goEdit}><img src={edit} alt=""/></EditButton>
-                        <DeleteButton onClick={() => { setShow(true) }}><img src={delete2} alt=""/></DeleteButton>
-                     </div>
+                        <div style={{ gap: "10px", marginRight: "10px" }}>
+                            <EditButton onClick={goEdit}><img src={edit} alt="" /></EditButton>
+                            <DeleteButton onClick={() => { setShow(true) }}><img src={delete2} alt="" /></DeleteButton>
+                        </div>
                     ) :
-                    <ReportButton onClick={goReport}><img src={report} alt=""/></ReportButton>}
-            </DateButtonWrapper>         
-            
+                    <ReportButton onClick={goReport}><img src={report} alt="" /></ReportButton>}
+            </DateButtonWrapper>
+
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
                 {detail?.imgList?.map((image, id) => (
                     <SwiperSlide key={id}>
@@ -86,11 +88,11 @@ const Detail = () => {
             </Swiper>
 
             <NameLikeWrap>
-                <div style={{fontSize:"1.2rem", marginLeft:"22px", fontWeight:"bold"}}>{detail?.nickname}</div>
-                <div style={{fontSize:"1rem", display:"flex"}}><span onClick={onLike}>💜</span> {detail?.likes}개</div>
-                <View>View : {detail?.view}</View>   
+                <div style={{ fontSize: "1.2rem", marginLeft: "22px", fontWeight: "bold" }}>{detail?.nickname}</div>
+                <div style={{ fontSize: "1rem", display: "flex" }}><span onClick={onLike}>💜</span> {detail?.likes}개</div>
+                <View>View : {detail?.view}</View>
             </NameLikeWrap>
-            
+
             <Content><p>{detail?.content}</p></Content>
             <div style={{ marginTop: "10px" }}>
                 <AddComment detail={detail} />
@@ -146,6 +148,7 @@ const Container = styled.div`
     width : 100%;
     margin:0 auto;
     padding-top: 80px;
+    background-color: white;
 `
 const Title = styled.h1`
     text-align: center;
@@ -171,7 +174,7 @@ const Content = styled.div`
     margin: 0 auto;
     margin-top: 12px;
     width: 90%;
-    height: 45vh;
+    height: 30vh;
     border-top: 1px solid #9E87BA;
     font-size: 20px;
 `
