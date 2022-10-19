@@ -9,7 +9,7 @@ import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
 import delete2 from "../../assets/icons/delete2.png"
 import edit from "../../assets/icons/edit.png"
-
+import report from "../../assets/icons/report.png"
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -40,13 +40,15 @@ const Detail = () => {
     const goEdit = () => {
         navigate(`/edit/${postId}`)
     }
-    
+    const goReport = () =>{
+        navigate(`/report`)
+    }
     const onLike = (event) => {
         event.preventDefault();
         dispatch(__likePost(postId));
     };
     
-    // 혹시모를 URL 입력해서 들어오는 경우 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
+    // URL 입력해서 들어오는 경우 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
     const getNickname = localStorage.getItem("nickname")
     if (getNickname === null) {
             Swal.fire({title: '로그인이 필요합니다.😢'
@@ -70,7 +72,7 @@ const Detail = () => {
                         <DeleteButton onClick={() => { setShow(true) }}><img src={delete2} alt=""/></DeleteButton>
                      </div>
                     ) :
-                    null}
+                    <ReportButton onClick={goReport}><img src={report} alt=""/></ReportButton>}
             </DateButtonWrapper>         
             
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
@@ -211,6 +213,20 @@ const EditButton = styled.button`
 `;
 
 const DeleteButton = styled.button`
+    width: 40px;
+    height: 30px;
+    border: none;
+    margin: 0 0 auto 0;
+    margin-top: 5px;
+    background-color: white;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+`
+
+const ReportButton = styled.button`
     width: 40px;
     height: 30px;
     border: none;
