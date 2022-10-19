@@ -45,57 +45,57 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <div style={{width:"100%" ,display:"flex", justifyContent:"space-between", zIndex:"2"}}>
-      {token === null ? <LogoImg><img src={Offlogo} alt="로그인 안된상태" /></LogoImg>
-        : <LogoImg><img src={Onlogo} alt="로그인 된상태" /></LogoImg>}
-      <Title onClick={() => {navigate('/')}}>Purple</Title>
-      <UserSet >
-        <DropDownContainer>
-          <DropdownBtn onClick={myPageHandler} ref={myPageRef}>
-            {token === null ? <img src={profile} alt="프로필" />
-              : <img src={userData?.imageUrl} alt="프로필" />}
+      <div style={{ width: "100%", display: "flex", justifyContent: "space-between", zIndex: "2" }}>
+        {token === null ? <LogoImg><img src={Offlogo} alt="로그인 안된상태" /></LogoImg>
+          : <LogoImg><img src={Onlogo} alt="로그인 된상태" /></LogoImg>}
+        <Title onClick={() => { navigate('/') }}>Purple</Title>
+        <UserSet >
+          <DropDownContainer>
+            <DropdownBtn onClick={myPageHandler} ref={myPageRef}>
+              {token === null ? <img src={profile} alt="프로필" />
+                : <img src={userData?.imageUrl} alt="프로필" />}
 
-          </DropdownBtn>
-          <Menu isDropped={myPageIsOpen}>
-            <Ul>
-              {token === null ?
-                <>
-                  <Li>
-                    <LinkWrapper onClick={() => navigate('/login')}>
-                      로그인
-                    </LinkWrapper>
-                  </Li>
-                  <Li>
-                    <LinkWrapper onClick={() => navigate('/signup')}>
-                      회원가입
-                    </LinkWrapper>
-                  </Li>
-                </>
+            </DropdownBtn>
+            <Menu isDropped={myPageIsOpen}>
+              <Ul>
+                {token === null ?
+                  <>
+                    <Li>
+                      <LinkWrapper onClick={() => navigate('/login')}>
+                        로그인
+                      </LinkWrapper>
+                    </Li>
+                    <Li>
+                      <LinkWrapper onClick={() => navigate('/signup')}>
+                        회원가입
+                      </LinkWrapper>
+                    </Li>
+                  </>
 
-                :
-                <>
-                  <Li>
-                    <LinkWrapper
-                      onClick={() => navigate(`/mypage/${user?.userId}`)}
-                    >마이페이지 가기</LinkWrapper>
-                  </Li>
-                  <Li>
-                    <LinkWrapper onClick={() => navigate('/post')}>
-                      글쓰기
-                    </LinkWrapper>
-                  </Li>
-                  <Li>
-                    <LinkWrapper onClick={onClickHandler}>
-                      로그아웃
-                    </LinkWrapper>
-                  </Li>
-                </>
-              }
-            </Ul>
-          </Menu>
-        </DropDownContainer>
-      </UserSet>
-    </div>          
+                  :
+                  <>
+                    <Li>
+                      <LinkWrapper
+                        onClick={() => navigate(`/mypage/${user?.userId}`)}
+                      >마이페이지 가기</LinkWrapper>
+                    </Li>
+                    <Li>
+                      <LinkWrapper onClick={() => navigate('/post')}>
+                        글쓰기
+                      </LinkWrapper>
+                    </Li>
+                    <Li>
+                      <LinkWrapper onClick={onClickHandler}>
+                        로그아웃
+                      </LinkWrapper>
+                    </Li>
+                  </>
+                }
+              </Ul>
+            </Menu>
+          </DropDownContainer>
+        </UserSet>
+      </div>
 
     </HeaderContainer>
   )

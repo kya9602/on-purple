@@ -18,65 +18,65 @@ function HomeGuide() {
     const navigate = useNavigate();
 
     const DB = [
-    {   
-        pics:'https://cdn.magloft.com/github/swiper/images/page-001.jpg',
-        H3:'Slide 1',
-        H4:'회원가입 하기'
-    },
-    {
-        pics:'https://cdn.magloft.com/github/swiper/images/page-002.jpg',
-        H3:'Slide 2',
-        H4:'내 정보 수정하기'
-    },
-    {
-        pics:'https://cdn.magloft.com/github/swiper/images/page-003.jpg',
-        H3:'Slide 3',
-        H4:'보드 이용하기'
-    },
-    {
-        pics:'https://cdn.magloft.com/github/swiper/images/page-004.jpg',
-        H3:'Slide 4',
-        H4:'채팅 하기'
-    },
-    {
-        pics:'https://cdn.magloft.com/github/swiper/images/page-005.jpg',
-        H3:'Slide 5',
-        H4:'시작 하기'
-    },
-]
+        {
+            pics: 'https://cdn.magloft.com/github/swiper/images/page-001.jpg',
+            H3: 'Slide 1',
+            H4: '회원가입 하기'
+        },
+        {
+            pics: 'https://cdn.magloft.com/github/swiper/images/page-002.jpg',
+            H3: 'Slide 2',
+            H4: '내 정보 수정하기'
+        },
+        {
+            pics: 'https://cdn.magloft.com/github/swiper/images/page-003.jpg',
+            H3: 'Slide 3',
+            H4: '보드 이용하기'
+        },
+        {
+            pics: 'https://cdn.magloft.com/github/swiper/images/page-004.jpg',
+            H3: 'Slide 4',
+            H4: '채팅 하기'
+        },
+        {
+            pics: 'https://cdn.magloft.com/github/swiper/images/page-005.jpg',
+            H3: 'Slide 5',
+            H4: '시작 하기'
+        },
+    ]
 
     return (
-      <>
-        <SwiperContainer>
-            <Swiper
-                slidesPerView={2}
-                centeredSlides={true}
-                spaceBetween={10}
-                pagination={true}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-            >
-                {DB.map(data=>(
-                    <SwiperSlide 
-                        key={data.pics} >    
-                        <img src={data.pics} />
-                        <div>
-                            <h3>{data.H3}</h3>
-                            <h4>{data.H4}</h4>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-            <ButtonSet>
-            <SignupButton onClick={()=>{navigate('/signup');}}>회원가입하기</SignupButton>
-            <LoginButton onClick={()=>{navigate('/login');}}>로그인</LoginButton>
-            </ButtonSet>
-        </SwiperContainer>
-      
-      </>
+        <>
+            <SwiperContainer>
+                <Swiper
+                    slidesPerView={2}
+                    centeredSlides={true}
+                    spaceBetween={10}
+                    pagination={true}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper"
+                >
+                    {DB.map(data => (
+                        <SwiperSlide
+                            key={data.pics} >
+                            <img src={data.pics} />
+                            <div>
+                                <h3>{data.H3}</h3>
+                                <h4>{data.H4}</h4>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+                <ButtonSet>
+                    <SignupButton onClick={() => { navigate('/signup'); }}>회원가입하기</SignupButton>
+                    <LoginButton onClick={() => { navigate('/login'); }}>로그인</LoginButton>
+                </ButtonSet>
+            </SwiperContainer>
+
+        </>
     );
-  }
+}
 
 export default HomeGuide;
 
@@ -122,6 +122,9 @@ const SwiperContainer = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height : 100vh;
+    background-color: white;
+
 .swiper {
 }
 
@@ -140,7 +143,7 @@ const SwiperContainer = styled.div`
   background: lightgray;
   border-radius: 15px;
 
-  /* filter: brightness( ${(props)=> props.per || '30%' } ); */
+  /* filter: brightness( ${(props) => props.per || '30%'} ); */
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -179,6 +182,7 @@ const SwiperContainer = styled.div`
     width: 100%;
     height: 70vh;
     margin-top:15vh;
+    /* max-height: 70vh; */
   }
 
 

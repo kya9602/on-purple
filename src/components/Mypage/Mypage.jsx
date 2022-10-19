@@ -125,7 +125,9 @@ const Mypage = () => {
                                 <Area>사는 지역 : {userInfo?.area}</Area>
                                 <OnlineBox>
                                     <OneLineTitle>한 줄 소개</OneLineTitle>
-                                    <OneLine>{userInfo?.introduction}</OneLine>
+                                    <OneLine>
+                                        {userInfo?.introduction}
+                                    </OneLine>
                                 </OnlineBox>
                             </InfoBody>
                             {isClickEdit &&
