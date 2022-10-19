@@ -7,6 +7,7 @@ import comment from "../modules/comment";
 import main from "../modules/main";
 import user from "../modules/signup";
 import chatroom from "../modules/chatRoom"
+import report from "../modules/report";
 const store = configureStore({
     reducer: {
         profile,
@@ -16,7 +17,8 @@ const store = configureStore({
         mypage: detailSlice.reducer,
         logout,
         main,
-        user
+        user,
+        report,
     }
 })
 

@@ -71,14 +71,13 @@ const Card = ({item}) => {
 export default Card;
 
 const Item = styled.div`
-    max-width: 760px;
+    max-width: 428px;
     border: 2px solid #9C7FCB;
     border-radius: 5px;
     width: 100%;
-    height: 53vh;
+    height: 470px;
     box-shadow:5px 5px 5px grey;
-    margin : 0.7rem;
-    margin-right: 18px;
+    margin: 15px 15px 15px 15px;
     box-sizing: inherit;
 `
 
@@ -108,10 +107,12 @@ const Container = styled.div`
 
 const Writer = styled.div`
     margin-left: 10px;
+    margin-bottom: 10px;
 `
 
 const Like = styled.div`
     margin-right: 10px;
+    margin-bottom: 10px;
 `
 
 const Time = styled.div`
@@ -129,5 +130,4 @@ const WriterLikeWrapper = styled.div`
     height: 48px;
     -webkit-box-pack: justify;
     font-size: 0.8rem;
-    padding-bottom: 10px;
 `

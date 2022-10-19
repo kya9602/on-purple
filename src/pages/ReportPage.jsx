@@ -2,10 +2,11 @@ import React from "react";
 import ChatHeader from "../components/Chating/ChatHeader";
 import Report from "../components/Information/Report";
 import styled from "styled-components";
+import Header from "../components/Header/Header"
 const ReportPage = () => {
     return (
         <Container>
-            <ChatHeader />
+            <Header/>
             <Report />
         </Container>
     )

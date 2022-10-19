@@ -28,7 +28,6 @@ const List = () => {
 
     useEffect(() => {
         dispatch(__getPosts(Category));
-       
     }, [Category]);
 
     useEffect(() => {
