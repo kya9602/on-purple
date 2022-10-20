@@ -142,6 +142,7 @@ export const ListBox = styled.div`
   margin-top: 2vw;
   height: auto;
   width: 400px;
+  justify-content: center;
 `
 
 //리스트 박스 타이틀
@@ -152,7 +153,7 @@ export const Listtitle = styled.div`
     margin-bottom: 1.5vw;
     font-size: 15px;
     font-weight: 600;
-    margin-left: 45px;
+    margin-left: 25px;
 `
 
 //나를 좋아요한 사람 목록박스
