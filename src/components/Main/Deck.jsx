@@ -7,6 +7,7 @@ import { __getMain, __postLike, __postUnLike } from "../../redux/modules/main";
 import { __getUser } from "../../redux/modules/signup";
 import Card from "./Card";
 
+import styled from "styled-components";
 
 function Deck() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function Deck() {
   let filterMyData = data.filter(function(data) {
     return data.nickname !== Nickname;
   });
-  /* console.log('나를 제외한 DB',filterMyData) */
+  /* console.log('나를 제외한 DB',filterMyData); */
 
 
   /* 보여줄 카드 갯수. */
@@ -106,15 +107,15 @@ function Deck() {
 
         /* 스와이프 한 카드의 닉네임 확인( 나중에 매칭을 위한 기능 ) */
         
-        /* like rigth swipe */
+        /* like rigth swipe(회원 좋아요) */
         if (x > 600) {
-          console.log('profileId',filterMyData[i].profileId,'좋아요')
-          dispatch(__postLike(filterMyData[i].profileId));
+          console.log('profileId',filterMyData[i].userId,'좋아요')
+          dispatch(__postLike(filterMyData[i].userId));
 
-        /* unlike left swipe */
+        /* unlike left swipe(회원 싫어요) */
         } if (x < -600) {
-          console.log('profileId',filterMyData[i].profileId,'싫어요')
-          dispatch(__postUnLike(filterMyData[i].profileId));
+          console.log('profileId',filterMyData[i].userId,'싫어요')
+          dispatch(__postUnLike(filterMyData[i].userId));
           
         } /* if(x===0){
           console.log(objs[i].name)
@@ -138,7 +139,7 @@ function Deck() {
   useEffect(() => {
     dispatch(__getMain());
   }, [dispatch])
-  if (isLoading) return "😴로딩중이에요..😴"
+  if (isLoading) return <IsLoading>😴로딩중이에요..😴</IsLoading>
   if (error) {
     return <>{error.message}</>
   }
@@ -177,3 +178,7 @@ function Deck() {
 
 export default Deck;
 
+const IsLoading = styled.div`
+    display: flex;
+    justify-content: center;
+`

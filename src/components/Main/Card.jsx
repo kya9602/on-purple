@@ -1,11 +1,12 @@
 
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 import { animated, interpolate } from "react-spring";
 
 
 
 function Card({ i, x, y, rot, scale, trans, bind, objs, }){
-  
+    const navigate = useNavigate();
   
     const { nickname, age, area, introduction, imageUrl } = objs[i];
      
@@ -37,6 +38,7 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }){
 
             <h2>{nickname},</h2>
             <h2>{age}</h2>
+            <button onClick={()=>{navigate('/profile');}}>info</button>
             <h4>{area}</h4>
             <h4>{introduction}</h4>
           </div>
@@ -81,7 +83,7 @@ justify-content: center;
   will-change: transform;
   border-radius: 10px;
   box-shadow: 0 1px 21px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
-  
+
 }
 
 .card {

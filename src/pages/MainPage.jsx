@@ -28,9 +28,13 @@ const MainPageContainer = styled.div`
     max-width: 428px;
    /*  height: 100%; */
     width: 100%;
-    /* user-select: none;
+    user-select: none;
+    
+
+    /* 
+    overflow-x: hidden;
     position: fixed;
-    overflow: hidden; */
+     */
     margin: 0 auto;
     height: 100%;
     background-color: white;
