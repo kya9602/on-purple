@@ -136,6 +136,7 @@ const LogoImg = styled.div`
 `
 
 const Title = styled.div`
+  cursor: pointer;
   flex:1;
   font-size: 33px;
   font-weight: 600;

@@ -1,35 +1,61 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-/* import { useDispatch, useSelector } from 'react-redux/';
-import { __getProfileDetail } from "../../redux/modules/profile"; */
-const ProfileDetail = () => {
-    /* const dispatch = useDispatch();
-    const profileDetail = useSelector((state)=> state.profile)
-    console.log(profileDetail)
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux/';
+import { __getProfileDetail } from "../../redux/modules/profile";
+import { __getChatrooms } from "../../redux/modules/chatRoom";
 
-    useEffect(()=>{
-        dispatch(__getProfileDetail());
-    },[dispatch]) */
+
+
+const ProfileDetail = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    //유저의 기본정보 조회
+    const profileDetail = useSelector((state) => state.profile)
+    const { userId } = useParams();
+
+    const userProfile = profileDetail?.posts?.data
+    // console.log(profileDetail)
+
+    useEffect(() => {
+        dispatch(__getProfileDetail(userId));
+    }, [dispatch])
+
+
+    // 채팅 방 들어가는 룸 
+    const roomkey = useSelector((state) => state.roomlist)
+    console.log("채팅방", roomkey)
+    useEffect(() => {
+        dispatch(__getChatrooms());
+        /* console.log("작동"); */
+    }, []);
+
+
+
 
     return (
         <Container>
             <div>
-                <ImageCard></ImageCard>
+                <ImageCard
+                    src={userProfile?.imageUrl}
+                    alt="프로필사진"
+                />
             </div>
 
             <IntroduceCard>
                 <div>
-                    <h3>Nickname 나이</h3>
+                    <h3>{userProfile?.nickname} {userProfile?.age}</h3>
                 </div>
 
                 <div>
-                    안녕하세요~
-                    친구 같은 연애를 하고 싶습니다!
-                    술을 즐기는 사이가 되고싶어요~
+                    {userProfile?.introduction}
                 </div>
 
                 <ButtonContainer>
-                    <MatchingButton> 대화하기 💬 </MatchingButton>
+                    <MatchingButton
+                    // onClick={() => navigate(`/chat/${roomId}`)}
+                    > 대화하기 💬 </MatchingButton>
                 </ButtonContainer>
 
             </IntroduceCard>
@@ -49,8 +75,7 @@ const Container = styled.div`
     width: 430px;
 `
 
-const ImageCard = styled.div`
-    background-image: url(http://www.joseilbo.com/gisa_img_origin/16546678821654667882_joseedu_origin.jpg);
+const ImageCard = styled.img`
     width: 200px;
     height: 200px;
     border-radius:20px;
