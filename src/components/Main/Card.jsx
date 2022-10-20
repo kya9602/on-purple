@@ -64,7 +64,7 @@ justify-content: center;
   font-size: 12px;
   background-color: #BAA2D6;
   border : 1px solid #BAA2D6;
-  margin-left: 110px;
+  border-radius: 5px;
 }
 
 
