@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import { __getPostsDetail } from "../../redux/modules/board";
 import AddComment from "./AddComment"
 import { __deletePosts, __likePost } from "../../redux/modules/board";
-import { Button, Dialog, DialogContent, IconButton } from "@mui/material";
+import { Dialog, DialogContent, IconButton } from "@mui/material";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
 import delete2 from "../../assets/icons/delete2.png"
 import edit from "../../assets/icons/edit.png"
@@ -100,7 +100,7 @@ const Detail = () => {
 
             {/* Modal */}
             <Dialog open={show}>
-                <DialogContent style={{ position: "relative" }}>
+                <DialogContent style={{ position: "relative", width:"200px", textAlign:"center", height:"100px" }}>
                     <IconButton
                         style={{ position: "absolute", top: "0", right: "0" }}
                         onClick={() => setShow(false)}
@@ -109,8 +109,8 @@ const Detail = () => {
                     </IconButton>
                     <div className="modal">
                         <div className="modal-title"> 정말 삭제하시겠습니까 ?</div>
-                        <div className="modal-button">
-                            <Button
+                        <div className="modal-button" style={{paddingTop:"30px"}}>
+                            <ModalYesButton
                                 variant="outlined"
                                 color="error"
                                 onClick={async () => {
@@ -122,8 +122,8 @@ const Detail = () => {
                                 }}
                             >
                                 예
-                            </Button>
-                            <Button
+                            </ModalYesButton>
+                            <ModalCancleButton
                                 variant="outlined"
                                 color="primary"
                                 onClick={() => {
@@ -131,7 +131,7 @@ const Detail = () => {
                                 }}
                             >
                                 아니오
-                            </Button>
+                            </ModalCancleButton>
                         </div>
                     </div>
                 </DialogContent>
@@ -241,4 +241,25 @@ const ReportButton = styled.button`
         height: 100%;
         object-fit: cover;
     }
+`
+
+const ModalYesButton = styled.button`
+    width: 80px;
+    height: 40px;
+    margin-right: 20px;
+    border: none;
+    background-color: skyblue;
+    border : 2px solid skyblue;
+    border-radius: 5px;
+    cursor: pointer;
+`
+
+const ModalCancleButton = styled.button`
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: #db6a6a;
+    border : 2px solid #db6a6a;
+    border-radius: 5px;
+    cursor: pointer;
 `
