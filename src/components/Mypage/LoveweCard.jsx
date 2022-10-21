@@ -8,7 +8,7 @@ const LoveweCard = ({ loveMeitem }) => {
     console.log(loveMeitem)
     return (
         <>
-            <Item onClick={() => { navigate(`/profile/${loveMeitem?.profileId}`) }}>
+            <Item onClick={() => { navigate(`/profile/${loveMeitem?.userId}`) }}>
                 <Image src={loveMeitem?.imageUrl} alt="" />
             </Item>
         </>
