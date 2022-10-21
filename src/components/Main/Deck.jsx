@@ -109,12 +109,12 @@ function Deck() {
         
         /* like rigth swipe(회원 좋아요) */
         if (x > 600) {
-          console.log('profileId',filterMyData[i].userId,'좋아요')
+          console.log('userId',filterMyData[i].userId,'좋아요')
           dispatch(__postLike(filterMyData[i].userId));
 
         /* unlike left swipe(회원 싫어요) */
         } if (x < -600) {
-          console.log('profileId',filterMyData[i].userId,'싫어요')
+          console.log('userId',filterMyData[i].userId,'싫어요')
           dispatch(__postUnLike(filterMyData[i].userId));
           
         } /* if(x===0){
