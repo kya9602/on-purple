@@ -34,11 +34,12 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
 
             <div
               className="Cardimage"
-              style={{ backgroundImage: `url(${imageUrl})` }}></div>
-
-            <h2>{nickname},</h2>
+              style={{ backgroundImage: `url(${imageUrl})`}}></div>
+            <h2 style={{marginLeft:"10px"}}>{nickname},</h2>
             <h2>{age}</h2>
-            <button className="Btn" onClick={() => { navigate(`/profile/${userId}`); }}>info</button>
+
+            <button className="Btn" onClick={() => { navigate(`/profile/${userId}`); }}>더 </button>
+
             <h4>{area}</h4>
             <h4>{introduction}</h4>
           </div>
@@ -59,6 +60,13 @@ justify-content: center;
 
 .Btn{
   cursor: pointer;
+  border: none;
+  height: 30px;
+  color: white;
+  font-size: 12px;
+  background-color: #BAA2D6;
+  border : 1px solid #BAA2D6;
+  border-radius: 5px;
 }
 
 
@@ -98,7 +106,7 @@ justify-content: center;
 
 .Cardimage {
   background-position: center center;
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   max-height: 570px;
   height: 330px;
@@ -120,7 +128,7 @@ h2:nth-of-type(2) {
 
 h4 {
   margin-top: -15px;
-  margin-left: 2px;
+  margin-left: 10px;
   color: gray;
 }
 h4:last-of-type {
