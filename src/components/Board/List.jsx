@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import TopButton from "./ScrollTop";
 import axios from "axios";
 import Pagination from "./Pagination/Pagination";
+
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -73,6 +74,8 @@ const List = () => {
         navigate(`/board/fashion`)
     }
 
+
+
     return (
         <>
             <Wrapper>
@@ -121,6 +124,15 @@ const Box = styled.div`
     font-weight: 500;
     background-color: #9C7FCB;
     color: white;
+    cursor: pointer;
+    :hover {
+        background-color: #570657;
+    }
+    
+    a:visited {
+        background-color: #570657;
+    }
+
 `
 const CategoryContaier = styled.div`
     overflow-x:auto; 

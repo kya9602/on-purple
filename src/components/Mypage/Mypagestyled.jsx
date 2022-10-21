@@ -280,7 +280,7 @@ export const StButton = styled.button`
 export const SecondMypageBox = styled.div`
     width:400px;
     height: auto;
-    padding-bottom: 20px;
+    padding-bottom: 10vh;
     margin-left: auto;
     margin-right: auto;
     border: 3px solid #fdc2f0;
