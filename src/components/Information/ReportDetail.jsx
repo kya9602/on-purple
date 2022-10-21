@@ -2,33 +2,39 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { __getReportsDetail } from "../../redux/modules/report";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
-const ReportDetail = () =>{
+import { useParams, useNavigate } from "react-router";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+const ReportDetail = () => {
     const dispatch = useDispatch();
-    const {reportId} = useParams();
+    const navigate = useNavigate();
+    const { reportId } = useParams();
     const { isLoading, error, detail } = useSelector((state) => state?.report);
     console.log(detail)
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(__getReportsDetail(reportId))
-    },[])
-    
+    }, [])
+
     if (isLoading) return "😴로딩중이에요..😴"
 
     if (error) {
         return <>{error.message}</>
     }
 
-    return(
+    return (
         <Container>
+            <Btnbox>
+                <ArrowBackIosIcon className="BackBtn" fontSize="large" onClick={() => { navigate(-1); }}></ArrowBackIosIcon>
+            </Btnbox>
             <Title>{detail.title}</Title>
             <NicknameCategoryWrap>
                 <TargetNickname>신고 대상 닉네임: <span>{detail.reportNickname}</span></TargetNickname>
                 <Category>분류: <span>{detail.category}</span></Category>
             </NicknameCategoryWrap>
-           
-            <Img><img src={detail.imageUrl} alt=""/></Img>
-    
+
+            <Img><img src={detail.imageUrl} alt="" /></Img>
+
             <Content>{detail.content}</Content>
         </Container>
     )
@@ -37,8 +43,17 @@ const ReportDetail = () =>{
 export default ReportDetail;
 
 const Container = styled.div`
-    margin-top: 100px;
+    padding-top: 100px;
     width: 100%;
+    height: 87vh;
+    background-color:white;
+    .BackBtn{
+     cursor: pointer;   
+    }
+`
+const Btnbox = styled.div`
+    width: 400px;
+    padding-bottom: 20px;
 `
 
 const Title = styled.div`
@@ -50,7 +65,7 @@ const NicknameCategoryWrap = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-top: 20px;
+    padding-top: 20px;
     gap: 10px;
 `
 const TargetNickname = styled.div`
@@ -67,12 +82,13 @@ const Category = styled.div`
 `
 
 const Content = styled.div`
-    margin:20px 10px auto 10px;
+    /* padding:20px 10px auto 10px; */
     font-size: 18px;
+    padding-left: 20px;
 `
 
 const Img = styled.div`
-   margin-top: 30px;
+   padding-top: 30px;
    img{
     width: 100%;
     height: 400px;

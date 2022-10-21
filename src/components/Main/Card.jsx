@@ -8,7 +8,7 @@ import { animated, interpolate } from "react-spring";
 function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
   const navigate = useNavigate();
 
-  const { nickname, age, area, introduction, imageUrl } = objs[i];
+  const { nickname, age, area, introduction, imageUrl, userId } = objs[i];
 
   return (
     <CardContainerDiv>
@@ -37,7 +37,9 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
               style={{ backgroundImage: `url(${imageUrl})`}}></div>
             <h2 style={{marginLeft:"10px"}}>{nickname},</h2>
             <h2>{age}</h2>
-            <button className="Btn" onClick={() => { navigate('/profile'); }}>더 알아보기</button>
+
+            <button className="Btn" onClick={() => { navigate(`/profile/${userId}`); }}>더 </button>
+
             <h4>{area}</h4>
             <h4>{introduction}</h4>
           </div>
