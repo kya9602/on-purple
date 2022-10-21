@@ -83,7 +83,7 @@ const EditBoard = () => {
           const category = new Blob([json], { type: "application/json" });
           formData.append("data", category)
 
-          await axios.put(`http://3.34.139.137:8080/post/${postId}`, formData, {
+          await axios.patch(`http://3.34.139.137:8080/post/${postId}`, formData, {
             headers: {
               "content-type": "multipart/form-data",
               "Authorization": localStorage.getItem("Authorization"), //accesstoken 
