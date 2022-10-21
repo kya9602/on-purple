@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux/';
 import { __getProfileDetail } from "../../redux/modules/profile";
 import { __getChatrooms } from "../../redux/modules/chatRoom";
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
 const ProfileDetail = () => {
@@ -35,7 +35,11 @@ const ProfileDetail = () => {
 
 
     return (
+
         <Container>
+            <Btnbox>
+                <ArrowBackIosIcon className="BackBtn" fontSize="large" onClick={() => { navigate(-1); }}></ArrowBackIosIcon>
+            </Btnbox>
             <div>
                 <ImageCard
                     src={userProfile?.imageUrl}
@@ -66,13 +70,23 @@ const ProfileDetail = () => {
 export default ProfileDetail;
 
 const Container = styled.div`
-    margin-top: 150px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
     align-items:center;
-    height: auto;
-    width: 430px;
+    height: 100%;
+    width: 428px;
+    padding-top: 130px;
+    padding-bottom: 45vh;
+    background-color: white;
+    .BackBtn{
+     cursor: pointer;   
+    }
+`
+
+const Btnbox = styled.div`
+    width: 400px;
+    padding-bottom: 20px;
 `
 
 const ImageCard = styled.img`
