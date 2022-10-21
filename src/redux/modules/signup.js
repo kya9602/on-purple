@@ -23,7 +23,7 @@ export const __getUser = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken"),
         }
       });
-      /* console.log('get data is', data.data.data) */
+      console.log('get data is', data.data.data)
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
