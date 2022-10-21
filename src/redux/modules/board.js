@@ -76,7 +76,7 @@ export const __searchPosts = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload)
     try {
-      const data = await axios.get(`${process.env.REACT_APP_HOST}/post/search?category=taste&keyword=${payload}`);
+      const data = await axios.get(`${process.env.REACT_APP_HOST}/post/search?keyword=${payload}`);
       /*  console.log(data.data.data) */
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {

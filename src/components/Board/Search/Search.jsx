@@ -12,7 +12,7 @@ const Search = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
     const { isLoading, error, post } = useSelector((state) => state?.post)
-    
+
     const searchEnter = (e) => {
         //이벤트의 키 값이 엔터키와 일치할 때 다음을 실행한다
         if (searchTerm && e.key === "Enter") {
@@ -54,8 +54,7 @@ const Search = () => {
       }
       if (error) {
         return <div>{error.message}</div>;
-      }
-    console.log(post) 
+      } 
     return (
         <div style={{paddingTop:"90px", backgroundColor:"white", height:"100vh", width:"100%"}}>
             <InputBtnWrap>
@@ -72,7 +71,7 @@ const Search = () => {
            {post === null ?      
              (<None>
                 <img src={Notfound} alt=""/>
-                <span>게시물이 없어요 ☹️</span>
+                <span>검색 결과가 없습니다 ☹️</span>
             </None>)
                 : (post.map((item)=>(<SearchCard item={item} key={item?.postId}/>)))}
         </div>
