@@ -5,11 +5,16 @@ import axios from "axios";
 //채팅방 목록 조회
 export const __getChatrooms = createAsyncThunk(
   "GET_CHATROOMS",
-  async (_, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/rooms`);
-      console.log(data)
-      return thunkAPI.fulfillWithValue(data);
+      const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/rooms/${payload}`,{
+        headers: {
+          "Authorization": localStorage.getItem("Authorization"),
+          "RefreshToken": localStorage.getItem("RefreshToken") 
+        },
+      });
+      console.log(data.data)
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -34,7 +39,6 @@ export const chatroom = createSlice({
     [__getChatrooms.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.roomlist = action.payload;
-      console.log(action)
     },
     [__getChatrooms.rejected]: (state, action) => {
       state.isLoading = false;
