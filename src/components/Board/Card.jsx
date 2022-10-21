@@ -13,9 +13,10 @@ const Card = ({item}) => {
     
     const moment = require('moment');
     const today = moment();
-    /* console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
+   /*  console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
 
-  /*   function timeForToday(Day) {
+    function timeForToday(Day) {
+        console.log(Day)
         const today = new Date();
         const timeValue = new Date(Day);
         console.log(timeValue)
@@ -35,7 +36,7 @@ const Card = ({item}) => {
         }
 
         return `${Math.floor(betweenTimeDay / 365)}년전`;
-    } */  
+    }  
     
     // 게시글 상세보기 클릭시 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
     const validation = ()=>{
@@ -57,7 +58,7 @@ const Card = ({item}) => {
                 <Container>
                     <Title>{item?.title}</Title>
                     <Content>{item?.content}</Content>                   
-                    <Time>모먼트 적용예정</Time>
+                    <Time>{item?.createdAt}</Time>
                     <WriterLikeWrapper>
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
