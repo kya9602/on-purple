@@ -14,6 +14,7 @@ export const __getMypage = createAsyncThunk(
                         "RefreshToken": localStorage.getItem("RefreshToken"),
                     }
                 });
+                console.log(data)
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
 

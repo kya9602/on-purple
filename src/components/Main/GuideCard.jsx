@@ -1,3 +1,4 @@
+import React from "react";
 
 import styled from "@emotion/styled";
 import { useEffect } from "react";
@@ -8,12 +9,9 @@ import { __getMypage } from "../../redux/modules/mypage";
 import { __getUser } from "../../redux/modules/signup";
 
 
-
-function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
+function GuideCard({ i, x, y, rot, scale, trans, bind, objs}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-
 
   const { nickname, age, area, introduction, imageUrl, userId } = objs[i];
 
@@ -45,7 +43,7 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
             <h2 style={{marginLeft:"10px"}}>{nickname},</h2>
             <h2>{age}</h2>
 
-            <button className="Btn" onClick={() => { navigate(`/profile/${userId}`); }}>더 알아보기</button>
+            <button className="Btn" >더 알아보기</button>
 
             <h4>{area}</h4>
             <h4>{introduction}</h4>
@@ -57,7 +55,7 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
 
 }
 
-export default Card;
+export default GuideCard;
 
 
 const CardContainerDiv = styled.div`
@@ -103,6 +101,7 @@ justify-content: center;
   will-change: transform;
   border-radius: 10px;
   box-shadow: 0 1px 21px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
+  filter:blur(7px);
 
 }
 
@@ -119,7 +118,7 @@ justify-content: center;
   height: 330px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  
+ 
 }
 
 

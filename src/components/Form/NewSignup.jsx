@@ -234,6 +234,7 @@ export default function VerticalLinearStepper() {
 
 
         let genderJson = JSON.stringify(gender);
+        console.log(gender);
         const genderblob = new Blob([genderJson], { type: "application/json" });
         formData.append("info", genderblob);
 
