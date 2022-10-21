@@ -6,7 +6,7 @@ import { __searchPosts } from "../../../redux/modules/board";
 import Swal from "sweetalert2";
 import searchIcon from "../../../assets/icons/search.png"
 import SearchCard from "./SearchCard";
-
+import Notfound from "../../../assets/images/notfound.png"
 const Search = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -70,7 +70,10 @@ const Search = () => {
             <GoSearch onClick={getSearchTerm}><img src={searchIcon} alt=""/></GoSearch>
             </InputBtnWrap>
            {post === null ?      
-             (<></>)
+             (<None>
+                <img src={Notfound} alt=""/>
+                <span>게시물이 없어요 ☹️</span>
+            </None>)
                 : (post.map((item)=>(<SearchCard item={item} key={item?.postId}/>)))}
         </div>
     )
@@ -115,4 +118,20 @@ const InputBtnWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+`
+
+const None = styled.div`
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    span{
+        margin-top: 30px;
+        font-size: 18px;
+    };
+    img{
+        margin-top: 100px;
+        width: 300px;
+        height: 300px;
+    }
 `
