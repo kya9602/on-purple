@@ -66,6 +66,10 @@ const Mypage = () => {
 
 
     const onUpdatePost = async () => {
+        if (introduction === "" || area === "") {
+            return alert("작성했던 부분은 다시 재작성해야합니다! 👀 ")
+        };
+
 
         const useraddInfo = {
             introduction: introduction,
@@ -80,7 +84,7 @@ const Mypage = () => {
             likeMovieType: likeMovieType,
         };
 
-        let a = await axios.put(`${process.env.REACT_APP_HOST}/mypage/userInfo/${profileId}`, useraddInfo,
+        let a = await axios.put(`${process.env.REACT_APP_HOST}/mypage/userInfo`, useraddInfo,
             {
                 headers: {
                     "Authorization": localStorage.getItem("Authorization"),   //accesstoken

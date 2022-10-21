@@ -42,7 +42,7 @@ export const __deleteComments = createAsyncThunk(
       }
     });
     if (res.data.success === true) {
-      window.alert("댓글이 삭제되었습니다")
+      window.confirm("삭제하시겠습니까?")
     }
     return res.data;
   }
