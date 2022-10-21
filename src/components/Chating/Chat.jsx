@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { __getChatrooms } from "../../redux/modules/chatRoom";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 const Chat = () => {
     const dispatch = useDispatch();
     const [data, setData] = useState([
@@ -22,9 +23,26 @@ const Chat = () => {
         }
     ])
     useEffect(() => {
-        dispatch(__getChatrooms());
-        /* console.log("작동"); */
+        dispatch(__getChatrooms("1"));
+        console.log("작동");
     }, []);
+    
+    
+    /* const handleSubmit = useCallback(async (e) => {
+        e.preventDefault();
+        try {
+          await axios.post(`${process.env.REACT_APP_HOST}/chat/rooms`,{}, {
+            headers: {
+              "Authorization": localStorage.getItem("Authorization"),
+              "RefreshToken": localStorage.getItem("RefreshToken") 
+            },
+          });
+          window.alert("😎생성😎");
+        } catch (e) {
+          // 서버에서 받은 에러 메시지 출력
+          window.alert("오류발생!" + "😭");
+        }
+      }, []); */
 
     return (
         <div style={{ backgroundColor: "white", height: "100vh" }}>
@@ -42,6 +60,7 @@ const Chat = () => {
                     </ChatLink>
                 )
             })}
+            {/* <button onClick={handleSubmit}>생성</button> */}
         </div>
     )
 }
