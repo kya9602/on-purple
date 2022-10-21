@@ -126,6 +126,15 @@ const Box = styled.div`
     font-weight: 500;
     background-color: #9C7FCB;
     color: white;
+    cursor: pointer;
+    :hover {
+        background-color: #570657;
+    }
+    
+    a:visited {
+        background-color: #570657;
+    }
+
 `
 const CategoryContaier = styled.div`
     overflow-x:auto; 
