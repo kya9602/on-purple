@@ -8,7 +8,7 @@ const LikeMeCard = ({ likeMeitem }) => {
     console.log(likeMeitem)
     return (
         <>
-            <Item onClick={() => { navigate(`/profile/${likeMeitem?.profileId}`) }}>
+            <Item onClick={() => { navigate(`/profile/${likeMeitem?.userId}`) }}>
                 <Image src={likeMeitem?.imageUrl} alt="" />
             </Item>
         </>
