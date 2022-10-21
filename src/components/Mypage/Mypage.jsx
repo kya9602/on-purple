@@ -101,11 +101,6 @@ const Mypage = () => {
     }
 
 
-
-
-
-
-
     return (
         <Container>
             {!input ?
