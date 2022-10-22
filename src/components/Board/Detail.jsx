@@ -65,7 +65,7 @@ const Detail = () => {
                 {detail?.title}
             </Title>
 
-            <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
+            <Date>{detail?.createdAt}</Date>
             <DateButtonWrapper>
                 {getNickname === detail?.nickname ?
                     (

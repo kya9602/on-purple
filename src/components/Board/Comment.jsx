@@ -46,7 +46,7 @@ const Comments = ({item})=>{
             </CmLikeContainer>
             
             <TRWrapper>
-                <Time>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Time>
+                <Time>{item.createdAt}</Time>
             </TRWrapper>
                 {/* <Recomment item={item}/> */}
         </div>

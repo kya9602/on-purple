@@ -28,5 +28,8 @@ const Container = styled.div`
 const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
-  height:100vh;
+  height:120vh;
+      @media all and (min-height : 927px) {
+        height:100vh;
+  }
 `

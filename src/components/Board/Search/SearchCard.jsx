@@ -7,16 +7,15 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 
-const Card = ({item}) => {
+const SearchCard = ({item}) => {
     const navigate = useNavigate();
     const nickname = localStorage.getItem("nickname")
     
     const moment = require('moment');
     const today = moment();
-   /*  console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
+    /* console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
 
-    function timeForToday(Day) {
-        console.log(Day)
+  /*   function timeForToday(Day) {
         const today = new Date();
         const timeValue = new Date(Day);
         console.log(timeValue)
@@ -36,7 +35,7 @@ const Card = ({item}) => {
         }
 
         return `${Math.floor(betweenTimeDay / 365)}년전`;
-    }  
+    } */  
     
     // 게시글 상세보기 클릭시 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
     const validation = ()=>{
@@ -58,7 +57,7 @@ const Card = ({item}) => {
                 <Container>
                     <Title>{item?.title}</Title>
                     <Content>{item?.content}</Content>                   
-                    <Time>{item?.createdAt}</Time>
+                    <Time>모먼트 적용예정</Time>
                     <WriterLikeWrapper>
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
@@ -69,16 +68,16 @@ const Card = ({item}) => {
     )
 }
 
-export default Card;
+export default SearchCard;
 
 const Item = styled.div`
     max-width: 428px;
     border: 2px solid #9C7FCB;
     border-radius: 5px;
-    width: 100%;
+    width: 90%;
     height: 470px;
     box-shadow:5px 5px 5px grey;
-    margin: 15px 15px 15px 15px;
+    margin: 15px auto;
     box-sizing: inherit;
 `
 

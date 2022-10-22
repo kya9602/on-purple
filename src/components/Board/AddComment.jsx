@@ -55,7 +55,7 @@ const AddComment = (detail) => {
             onChange={inputHandler}
             value={comment.comment || ""}
           />
-          <AddButton onClick={() => { addHandler(comment.comment) }}>게시</AddButton>
+          <AddButton onClick={() => { addHandler(comment.comment) }}>쓰기</AddButton>
         </div>
         <CommentList />
       </Container>

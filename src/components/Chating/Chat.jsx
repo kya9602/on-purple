@@ -1,40 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { __getChatrooms } from "../../redux/modules/chatRoom";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { __getChatrooms, __enterChatroom } from "../../redux/modules/chatRoom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 const Chat = () => {
     const dispatch = useDispatch();
-    const [data, setData] = useState([
-        {
-            name: "안유진",
-            message: "안녕~! ",
-            timestamp: "35 분 전",
-            profilePic: "https://post-phinf.pstatic.net/MjAyMDAzMDFfMTIx/MDAxNTgzMDQ5ODEzODc5.eLwaHPGkxYlj-RGPp5zE7Ghs__H9tYjvXaxdZehOo_cg.yopbH7--a4HJPuHxo_6-gx-gojvo0V0dqSgaem-d1mwg.JPEG/%EC%95%88%EC%9C%A0%EC%A7%842.JPG?type=w1200",
-            roomId: 1,
-        },
-        {
-            name: "이영지",
-            message: "안녕하세요 ",
-            timestamp: "55 분 전",
-            profilePic: "https://cdn.huffingtonpost.kr/news/photo/202206/119191_233848.png",
-            roomId: 2,
-        }
-    ])
+    const navigate = useNavigate();
+    const data = useSelector((state) => state?.chatroom?.chatroom)
+    /* console.log(data) */
+    
     useEffect(() => {
-        dispatch(__getChatrooms());
+        dispatch(__getChatrooms("1"));
         /* console.log("작동"); */
     }, []);
-
+    
     return (
         <div style={{ backgroundColor: "white", height: "100vh" }}>
             {data.map((userdata) => {
                 return (
-                    <ChatLink key={userdata.roomId} to={`/chat/${userdata.roomId}`} vlink="gray">
+                    <ChatLink 
+                              key={userdata.roomId} 
+                              onClick={()=>{dispatch(__enterChatroom(userdata.roomId))
+                              navigate(`/chat/${userdata.roomId}`)}} 
+                              >
                         <ChatBox>
-                            <ChatImg src={userdata.profilePic} />
+                            <ChatImg src={userdata.otherImageUrl} />
                             <ChatDetails>
-                                <ChatName>{userdata.name}</ChatName>
+                                <ChatName>{userdata.otherNickname}</ChatName>
                                 <ChatDetailsP>{userdata.message}</ChatDetailsP>
                             </ChatDetails>
                             <ChatTimeStamp>{userdata.timestamp}</ChatTimeStamp>
@@ -82,6 +76,6 @@ const ChatImg = styled.img`
     margin-right: 23px;
 `
 
-const ChatLink = styled(Link)`
+const ChatLink = styled.div`
   text-decoration-line : none;
 `

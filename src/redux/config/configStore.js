@@ -19,7 +19,8 @@ const store = configureStore({
         main,
         user,
         report,
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false, }),
 })
 
 export default store;

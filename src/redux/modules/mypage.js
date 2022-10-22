@@ -42,8 +42,10 @@ const initialState = {
         smoke: "",
         likeMovieType: "",
         area: "",
-        likeResponseDtoList: [],
-        likedResponeDtoList: []
+        //나를 좋아요한사람 목록
+        likedResponseDtoList: [],
+        //매칭된사람 목록
+        otherLikeResponseDtoList: []
     },
     error: null,
     isLoading: false,
