@@ -13,7 +13,7 @@ export const __getChatrooms = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken") 
         },
       });
-      console.log(data.data)
+      /* console.log(data.data) */
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -24,9 +24,28 @@ export const __getChatrooms = createAsyncThunk(
 export const __enterChatroom = createAsyncThunk(
   "ENTER_CHATROOMS",
   async (payload, thunkAPI) =>{
+    /* console.log(payload) */
+    try {
+      const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/rooms/enter/${payload}`,{
+        headers: {
+          "Authorization": localStorage.getItem("Authorization"),
+          "RefreshToken": localStorage.getItem("RefreshToken") 
+        },
+      })
+      console.log(data.data)
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getlastMessage = createAsyncThunk(
+  "GET_LAST_MESSAGE",
+  async (payload, thunkAPI) =>{
     console.log(payload)
     try {
-      const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/rooms/otherUserInfo/${payload}`,{
+      const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/rooms/${payload}/messages`,{
         headers: {
           "Authorization": localStorage.getItem("Authorization"),
           "RefreshToken": localStorage.getItem("RefreshToken") 
@@ -51,7 +70,16 @@ const initialState = {
   createdAt : "",
   userId : "",
   count : "",
-}
+  },
+  lastmessage:{
+    userId:"",
+    nickname:"",
+    otherUserId:"",
+    otherNickname:"",
+    otherImageUrl:"",
+    message:"",
+    createdAt:"",
+  }
 };
 
 export const chatroom = createSlice({
@@ -79,6 +107,18 @@ export const chatroom = createSlice({
       state.enter = action.payload;
     },
     [__enterChatroom.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__getlastMessage.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getlastMessage.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.lastmessage = action.payload;
+      /* console.log(action.payload) */
+    },
+    [__getlastMessage.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
