@@ -7,7 +7,7 @@ import { __getChatrooms } from "../../redux/modules/chatRoom";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
-const ProfileDetail = () => {
+const ProfileInfo = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const ProfileDetail = () => {
     const { userId } = useParams();
 
     const userProfile = profileDetail?.posts?.data
-    console.log(profileDetail)
+    console.log(profileDetail?.posts?.data)
 
     useEffect(() => {
         dispatch(__getProfileDetail(userId));
@@ -24,12 +24,12 @@ const ProfileDetail = () => {
 
 
     // 채팅 방 들어가는 룸 
-    const roomkey = useSelector((state) => state.roomlist)
-    console.log("채팅방", roomkey)
-    useEffect(() => {
-        dispatch(__getChatrooms());
-        /* console.log("작동"); */
-    }, []);
+    // const roomkey = useSelector((state) => state.roomlist)
+    // console.log("채팅방", roomkey)
+    // useEffect(() => {
+    //     dispatch(__getChatrooms());
+    //     /* console.log("작동"); */
+    // }, []);
 
 
 
@@ -49,11 +49,14 @@ const ProfileDetail = () => {
 
             <IntroduceCard>
                 <div>
-                    <h3>{userProfile?.nickname} {userProfile?.age}</h3>
+                    <h3> {userProfile?.nickname} {userProfile?.age}</h3>
                 </div>
 
                 <div>
                     {userProfile?.introduction}
+                </div>
+                <div>
+                    {userProfile?.mbti}
                 </div>
 
                 <br />
@@ -105,28 +108,24 @@ const ProfileDetail = () => {
                         반려동물 : {userProfile?.pet}
                     </div>
                 }
-            </IntroduceCard>
 
-            <ButtonContainer>
-                <MatchingButton
-                // onClick={() => navigate(`/chat/${roomId}`)}
-                > 대화하기 💬 </MatchingButton>
-            </ButtonContainer>
+
+            </IntroduceCard>
         </Container>
     )
 }
 
-export default ProfileDetail;
+export default ProfileInfo;
 
 const Container = styled.div`
     display: flex;
     /* justify-content: center; */
     flex-direction: column;
     align-items:center;
-    height: 100%;
+    height: 100vh;
     width: 428px;
     padding-top: 130px;
-    padding-bottom: 45vh;
+    /* padding-bottom: 45vh; */
     background-color: white;
     .BackBtn{
      cursor: pointer;   
@@ -135,7 +134,7 @@ const Container = styled.div`
 
 const Btnbox = styled.div`
     width: 400px;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
 `
 
 const ImageCard = styled.img`
@@ -145,32 +144,6 @@ const ImageCard = styled.img`
     background-size: cover;
     background-position: center;
     box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);
-`
-
-
-const ButtonContainer = styled.div` 
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    margin-top: 100px;
-`
-
-const MatchingButton = styled.button`
-    border: 1px solid skyblue;
-    padding: 4%;
-    cursor: pointer;
-    font-weight: 600;
-    font-size:16px;
-    background-color: white;
-
-    :hover{
-        border: 1px solid skyblue;
-        background-color: skyblue;
-        font-weight: 600;
-        font-size:16px;
-        padding: 4%;
-
-    }
 `
 
 const IntroduceCard = styled.div`

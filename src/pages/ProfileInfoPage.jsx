@@ -1,16 +1,16 @@
 import React from "react";
 import Footer from "../components/Footer/Footer"
 import Header from "../components/Header/Header";
-import ProfileDetail from "../components/Profile/ProfileDetail";
+import ProfileInfo from "../components/Profile/ProfileInfo";
 import image from "../assets/images/moon.jpg"
 import styled from "styled-components";
 
-const ProfilePage = () => {
+const ProfileInfoPage = () => {
     return (
         <BackImage>
             <Container>
                 <Header />
-                <ProfileDetail />
+                <ProfileInfo />
                 <Footer />
             </Container>
         </BackImage>
@@ -19,13 +19,14 @@ const ProfilePage = () => {
     )
 }
 
-export default ProfilePage;
+export default ProfileInfoPage;
 
 const Container = styled.div`
     max-width: 428px;
     width : 100%;
     margin:0 auto;
     height: 100%;
+
 `
 const BackImage = styled.div`
 background: url(${image});
