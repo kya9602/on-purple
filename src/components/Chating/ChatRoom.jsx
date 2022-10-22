@@ -1,24 +1,70 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import image from "../../assets/images/moon.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { __getlastMessage } from '../../redux/modules/chatRoom';
 import SockJS from "sockjs-client";
-import Stomp from "stompjs";
-
+import Stomp from "stompjs"
+import { subMessage } from '../../redux/modules/chatRoom';
 function ChatRoom() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {roomId} = useParams();
-    console.log(typeof roomId)
+    /* console.log(typeof roomId) */
     /* const data = useSelector((state) => state) */
-    
-    // 지난 메세지 가져오기
+    const token = localStorage.getItem("Authorization")
+    const ws = useRef();
+    /* console.log(ws) */
+
     useEffect(() => {
+        let sock = new SockJS(`${process.env.REACT_APP_HOST}/stomp/chat`);
+        let client = Stomp.over(sock);
+        ws.current = client;
         dispatch(__getlastMessage(roomId));
-        /* console.log("작동"); */
-    }, [dispatch]);
+    }, []);
+    
+    useEffect(() => {
+        wsConnect();
+        return () => {
+            wsDisConnect();
+        }
+    }, []);
+
+    function wsConnect() {
+        try {
+            ws.current.debug = function (str) {console.log(str)};
+            ws.current.debug();
+            // type: "CHAT"을 보내는 용도는 채팅방에 들어갈 때를 알기 위해서
+            ws.current.connect({ token: token, type: "CHAT" }, () => {
+                // connect 이후 subscribe
+                ws.current.subscribe(`/sub/chat/message`, (response) => {
+                    const newMessage = JSON.parse(response.body);
+                    dispatch(subMessage(newMessage));
+                });
+
+                // 입장 시 enter 메시지 발신
+                // 이 메시지를 기준으로 서버에서 unReadCount 판별
+                const message = {
+                    roomId: roomId,
+                };
+                ws.current.send(`/pub/chat/enter`, { token: token }, JSON.stringify(message));
+            });
+        } catch (error) {
+        }
+    }
+
+    // 소켓 연결 해제
+
+    function wsDisConnect() {
+        try {
+            ws.current.disconnect(() => {
+                ws.current.unsubscribe("sub-0");
+            });
+        } catch (error) {
+        }
+    }
 
     return (
         <BackImage>
@@ -46,11 +92,7 @@ const BackImage = styled.div`
   height: 100vh;
 `
 
-const TimeStamp = styled.p`
-    text-align:center;
-    padding: 20px;
-    color: gray;
-`
+
 const Screenbox = styled.div`
     display: flex;
     align-items: center;
