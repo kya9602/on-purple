@@ -3,6 +3,8 @@ import HomeGuide from "../components/Guide/HomeGuide";
 import styled from "styled-components";
 import Header from "../components/Header/Header"
 import image from "../assets/images/moon.jpg"
+import GuideDeck from "../components/Main/GuideDeck";
+import GuideModal from "../components/Main/GuideModal";
 
 function GuidePage() {
   return (
@@ -10,7 +12,9 @@ function GuidePage() {
     <BackImage>
       <Container>
         <Header />
-        <HomeGuide />
+        {/* <HomeGuide /> */}
+        <GuideDeck />
+        <GuideModal />
       </Container>
     </BackImage>
 
@@ -25,6 +29,7 @@ const Container = styled.div`
     width : 100%;
     margin:0 auto;
     height: 100%;
+    background-color: white;
 `
 
 const BackImage = styled.div`

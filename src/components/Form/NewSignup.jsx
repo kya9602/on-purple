@@ -232,7 +232,9 @@ export default function VerticalLinearStepper() {
         const passwordConfirmblob = new Blob([json], { type: "application/json" });
         formData.append("info", passwordConfirmblob);
 
+
         const genderblob = new Blob([json], { type: "application/json" });
+
         formData.append("info", genderblob);
 
 
