@@ -17,18 +17,18 @@ const Footer = () =>{
                     <span>뒤로가기</span>
                 </MainContainer>
             </div> */}
+            <Link to="/board/taste">
+                <MainContainer>
+                    <img src={Dashboard} alt=""/>
+                    <span>게시판</span>
+                </MainContainer>
+            </Link>
             <Link to="/" >
                 <MainContainer>
                     <img src={Home} alt=""/>
                     <span>홈으로</span>
                 </MainContainer>
             </Link>
-            <Link to="/board/taste">
-                <MainContainer>
-                    <img src={Dashboard} alt=""/>
-                    <span>게시판</span>
-                </MainContainer>
-        </Link>
             <Link to="/chat" >
                 <MainContainer>
                     <img src={Chating} alt=""/>

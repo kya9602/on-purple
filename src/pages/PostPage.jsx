@@ -88,7 +88,7 @@ const PostPage = () => {
         },
       });
       window.alert("😎등록이 완료되었습니다😎");
-      navigate("/board/taste");
+      navigate(`/board/taste`);
     } catch (e) {
       // 서버에서 받은 에러 메시지 출력
       window.alert("오류발생!" + "😭");

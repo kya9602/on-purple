@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux/';
 import { __getProfileDetail } from "../../redux/modules/profile";
-import { __getChatrooms } from "../../redux/modules/chatRoom";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
+import axios from "axios"
 
 const ProfileDetail = () => {
     const dispatch = useDispatch();
@@ -24,14 +23,22 @@ const ProfileDetail = () => {
 
 
     // 채팅 방 들어가는 룸 
-    const roomkey = useSelector((state) => state.roomlist)
-    console.log("채팅방", roomkey)
-    useEffect(() => {
-        dispatch(__getChatrooms());
-        /* console.log("작동"); */
-    }, []);
-
-
+   const handleSubmit = useCallback(async (e) => {
+        e.preventDefault();
+        try {
+          await axios.post(`${process.env.REACT_APP_HOST}/chat/rooms`,{userId}, {
+            headers: {
+              "Authorization": localStorage.getItem("Authorization"),
+              "RefreshToken": localStorage.getItem("RefreshToken") 
+            },
+          });
+          window.alert("😎생성😎");
+          navigate(`/chat`);
+        } catch (e) {
+          // 서버에서 받은 에러 메시지 출력
+          window.alert("오류발생!" + "😭");
+        }
+      }, []); 
 
 
     return (
