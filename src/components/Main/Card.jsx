@@ -34,11 +34,11 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
 
             <div
               className="Cardimage"
-              style={{ backgroundImage: `url(${imageUrl})`}}></div>
-            <h2 style={{marginLeft:"10px"}}>{nickname},</h2>
+              style={{ backgroundImage: `url(${imageUrl})` }}></div>
+            <h2 style={{ marginLeft: "10px" }}>{nickname},</h2>
             <h2>{age}</h2>
 
-            <button className="Btn" onClick={() => { navigate(`/profile/${userId}`); }}>더 </button>
+            <button className="Btn" onClick={() => { navigate(`/profileInfo/${userId}`); }}>더 알아보기 </button>
 
             <h4>{area}</h4>
             <h4>{introduction}</h4>

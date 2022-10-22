@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const LoveweCard = ({ loveMeitem }) => {
     const navigate = useNavigate();
     // key=1 post=json{}, props에 들어가잇음
-    console.log(loveMeitem)
+    // console.log(loveMeitem)
     return (
         <>
             <Item onClick={() => { navigate(`/profile/${loveMeitem?.userId}`) }}>

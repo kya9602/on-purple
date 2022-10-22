@@ -32,6 +32,7 @@ export default function VerticalLinearStepper() {
 
     const dispatch = useDispatch();
     const [gender, setGender] = useState("");
+    console.log("gender is", gender)
 
     const initialState = {
         username: '',
@@ -199,7 +200,7 @@ export default function VerticalLinearStepper() {
         setInput({ ...input, [name]: value, });
     };
 
-    console.log("input is ", input.age)
+    // console.log("input is ", input.age)
 
 
     // axios
@@ -234,6 +235,7 @@ export default function VerticalLinearStepper() {
 
 
         let genderJson = JSON.stringify(gender);
+        console.log(genderJson)
         const genderblob = new Blob([genderJson], { type: "application/json" });
         formData.append("info", genderblob);
 

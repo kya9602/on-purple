@@ -21,6 +21,8 @@ import ReportInfoPage from "../pages/ReportInfoPage";
 import ReportDetailPage from "../pages/ReportDetailPage";
 import SearchPage from "../pages/SearchPage";
 import ChatRoom from "../components/Chating/ChatRoom";
+import ProfileInfoPage from "../pages/ProfileInfoPage";
+
 const Router = () => {
     return (
         <BrowserRouter>
@@ -33,6 +35,7 @@ const Router = () => {
                 <Route path="/chat" exact element={<ChatPage />} />
                 <Route path="/chat/:roomId" exact element={<ChatRoom />} />
                 <Route path="/profile/:userId" exact element={<ProfilePage />} />
+                <Route path="/profileInfo/:userId" exact element={<ProfileInfoPage />} />
                 <Route path="/board/:Category" exact element={<BoardPage />} />
                 <Route path="/detail/:postId" exact element={<DetailPage />} />
                 <Route path="/edit/:postId" exact element={<EditPage />} />
