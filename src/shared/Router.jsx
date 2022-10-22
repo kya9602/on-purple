@@ -8,7 +8,6 @@ import ChatPage from "../pages/ChatPage";
 import ProfilePage from "../pages/ProfilePage";
 import BoardPage from "../pages/BoardPage";
 import DetailPage from "../pages/DetailPage";
-import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
@@ -21,6 +20,7 @@ import VChatPage from "../pages/VChatPage";
 import ReportInfoPage from "../pages/ReportInfoPage";
 import ReportDetailPage from "../pages/ReportDetailPage";
 import SearchPage from "../pages/SearchPage";
+import ChatRoom from "../components/Chating/ChatRoom";
 const Router = () => {
     return (
         <BrowserRouter>
@@ -31,7 +31,7 @@ const Router = () => {
                 <Route path="/kakaoAddSignup" exact element={<KakaoAddPage />} />
                 <Route path="/myPage/:profileId" exact element={<MypagePage />} />
                 <Route path="/chat" exact element={<ChatPage />} />
-                <Route path="/chat/:roomId" exact element={<ChatScreen />} />
+                <Route path="/chat/:roomId" exact element={<ChatRoom />} />
                 <Route path="/profile/:userId" exact element={<ProfilePage />} />
                 <Route path="/board/:Category" exact element={<BoardPage />} />
                 <Route path="/detail/:postId" exact element={<DetailPage />} />
