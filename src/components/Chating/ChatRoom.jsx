@@ -3,28 +3,27 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import image from "../../assets/images/moon.jpg"
+import { useDispatch, useSelector } from "react-redux";
+import { __getlastMessage } from '../../redux/modules/chatRoom';
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 
-
-function ChatScreen() {
-    const roomId = useParams();
-    console.log(roomId)
+function ChatRoom() {
+    const dispatch = useDispatch();
+    const {roomId} = useParams();
+    console.log(typeof roomId)
+    /* const data = useSelector((state) => state) */
+    
+    // 지난 메세지 가져오기
+    useEffect(() => {
+        dispatch(__getlastMessage(roomId));
+        /* console.log("작동"); */
+    }, [dispatch]);
 
     return (
         <BackImage>
             <Container>
                 <ChatHeader />
-                <TimeStamp>... 분 전에 매치 되었습니다.</TimeStamp>
-                {/* {messages.map((message, idx) => (
-                    message.name ? (
-                        <Screenbox>
-                            <YouMessage>{message.message}</YouMessage>
-                        </Screenbox>
-                    ) : (
-                        <Screenbox>
-                            <MyMessage>{message.message}</MyMessage>
-                        </Screenbox>
-                    )
-                ))} */}
                 <ChatContainer>
                     <Input /* value={input}
                         onChange={(e) => setInput(e.target.value)} */
@@ -39,7 +38,7 @@ function ChatScreen() {
     )
 }
 
-export default ChatScreen
+export default ChatRoom
 
 const BackImage = styled.div`
   background: url(${image});
