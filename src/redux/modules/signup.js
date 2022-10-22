@@ -23,7 +23,7 @@ export const __getUser = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken"),
         }
       });
-      console.log('get data is', data.data.data)
+      // console.log('get data is', data.data.data)
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -54,7 +54,7 @@ export const signupSlice = createSlice({
     [__getUser.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
-     /*  console.log("action is", action.payload) */
+      /*  console.log("action is", action.payload) */
     },
     [__getUser.rejected]: (state, action) => {
       state.isLoading = false;
