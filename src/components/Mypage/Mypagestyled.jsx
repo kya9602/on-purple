@@ -141,7 +141,7 @@ export const ListBox = styled.div`
   display: flex;
   margin-top: 2vw;
   height: auto;
-  width: 400px;
+  width: 420px;
   justify-content: center;
 `
 
@@ -153,7 +153,7 @@ export const Listtitle = styled.div`
     margin-bottom: 1.5vw;
     font-size: 15px;
     font-weight: 600;
-    margin-left: 25px;
+    margin-left: 13px;
 `
 
 //나를 좋아요한 사람 목록박스
@@ -172,7 +172,8 @@ export const LovemeBox = styled.div`
 //좋아요한 사람 프로필 사진 
 export const LoveCard = styled.div`
     margin: auto;
-    margin-left: 2vw;
+    margin-right: 30px;
+    /* margin-left: 2vw; */
     /* background-color: #8adafd; */
     border: 2px solid #9C7FCB;
     border-radius: 10px;
@@ -197,7 +198,7 @@ export const MatchingBox = styled.div`
 //매칭된 사람 프로필 사진
 export const MatchingCard = styled.div`
     margin: auto;
-    margin-left: 2vw;
+    /* margin-left: 10px; */
     /* background-color: #8adafd; */
     border: 2px solid #cb7fb8;
     border-radius: 10px;
@@ -429,7 +430,11 @@ export const Container = styled.div`
   max-width: 428px;
   width : 100%;
   margin:0 auto;
-  height: 90vh;
+  height: 100vh;
   background-color: white;
   padding-top: 80px;
+  @media all and (min-height : 927px) {
+    height: 90vh;
+
+  }
 `
