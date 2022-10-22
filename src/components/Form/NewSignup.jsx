@@ -17,7 +17,6 @@ import axios from "axios";
 import profileImage from "../../assets/images/profile.jpg";
 import { __checkUsername, __checkNickname } from "../../redux/modules/user";
 import { __logout, logout } from "../../redux/modules/user";
-import Gender from "./Gender";
 
 
 
@@ -31,8 +30,7 @@ export default function VerticalLinearStepper() {
     //===============================================================================================
 
     const dispatch = useDispatch();
-    const [gender, setGender] = useState("");
-    console.log("gender is", gender)
+
 
     const initialState = {
         username: '',
@@ -209,9 +207,10 @@ export default function VerticalLinearStepper() {
             return alert("모든 칸을 채워주세요! 👀 ")
         } else if (userinfo.imageUrl.trim === "") {
             return alert("사진을 등록해주세요! 😎")
-        } else if (gender === "") {
-            return alert("성별을 선택해주세요! 👀 ")
-        };
+        } else if (userinfo.gender.trim === "") {
+            return alert("성별을 등록해주세요 ")
+        }
+        ;
 
         if (usernameCheck === false) {
             return alert("아이디 중복확인을 해주세요!!!");
@@ -233,11 +232,9 @@ export default function VerticalLinearStepper() {
         const passwordConfirmblob = new Blob([json], { type: "application/json" });
         formData.append("info", passwordConfirmblob);
 
-
-        let genderJson = JSON.stringify(gender);
-        console.log(genderJson)
-        const genderblob = new Blob([genderJson], { type: "application/json" });
+        const genderblob = new Blob([json], { type: "application/json" });
         formData.append("info", genderblob);
+
 
 
 
@@ -351,7 +348,16 @@ export default function VerticalLinearStepper() {
                             </ImgBox>
 
                             <GenderBox>
-                                <Gender setGender={setGender} gender={gender} />
+                                <StSelect
+                                    name='gender'
+                                    type="text"
+                                    defaultValue="default"
+                                    onChange={onChangeHandler}
+                                    required>
+                                    <MBTIInput value="default" disabled> 성별을 골라주세요</MBTIInput>
+                                    <option value="female">여성</option>
+                                    <option value="male">남성</option>
+                                </StSelect>
                             </GenderBox>
 
 
@@ -667,8 +673,6 @@ export default function VerticalLinearStepper() {
             return alert("모든 칸을 채워주세요! 👀 ")
         } else if (userinfo.imageUrl.trim === "") {
             return alert("사진을 등록해주세요! 😎")
-        } else if (gender === "") {
-            return alert("성별을 선택해주세요! 👀 ")
         };
 
         if (usernameCheck === false) {
