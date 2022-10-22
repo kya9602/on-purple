@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { __getChatrooms, __enterChatroom } from "../../redux/modules/chatRoom";
@@ -9,21 +9,22 @@ const Chat = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const data = useSelector((state) => state?.chatroom?.chatroom)
-    console.log(data)
+    /* console.log(data) */
     
     useEffect(() => {
         dispatch(__getChatrooms("1"));
         /* console.log("작동"); */
     }, []);
-
+    
     return (
         <div style={{ backgroundColor: "white", height: "100vh" }}>
             {data.map((userdata) => {
                 return (
-                    <ChatLink key={userdata.chatRoomUuid} 
-                              onClick={()=>{dispatch(__enterChatroom(userdata.chatRoomUuid))
-                              navigate(`/chat/${userdata.chatRoomUuid}`)}} 
-                              vlink="gray">
+                    <ChatLink 
+                              key={userdata.roomId} 
+                              onClick={()=>{dispatch(__enterChatroom(userdata.roomId))
+                              navigate(`/chat/${userdata.roomId}`)}} 
+                              >
                         <ChatBox>
                             <ChatImg src={userdata.otherImageUrl} />
                             <ChatDetails>
