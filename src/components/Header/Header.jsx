@@ -10,6 +10,7 @@ import profile from "../../assets/images/profile.jpg";
 import logo from "../../assets/images/perple.jpg";
 import Onlogo from "../../assets/images/On 소문자.svg";
 import Offlogo from "../../assets/images/Off 소문자.svg";
+import purple from "../../assets/images/제목으로.png"
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,9 @@ const Header = () => {
       <div style={{ width: "100%", display: "flex", justifyContent: "space-between", zIndex: "2" }}>
         {token === null ? <LogoImg><img src={Offlogo} alt="로그인 안된상태" /></LogoImg>
           : <LogoImg><img src={Onlogo} alt="로그인 된상태" /></LogoImg>}
-        <Title onClick={() => { navigate('/') }}>Purple</Title>
+        <Title onClick={() => { navigate('/') }}>
+          <img src={purple} alt="로고" />
+        </Title>
         <UserSet >
           <DropDownContainer>
             <DropdownBtn onClick={myPageHandler} ref={myPageRef}>
@@ -136,32 +139,20 @@ const LogoImg = styled.div`
 `
 
 const Title = styled.div`
-  cursor: pointer;
-  flex:1;
-  font-size: 33px;
-  font-weight: 600;
-  margin-top: 20px;
-  margin-left: 30px;
-  background: #f7e9f5;
-  background: -webkit-linear-gradient(left, #420255, #f7e9f5);
-  background:    -moz-linear-gradient(right, #420255, #f7e9f5);
-  background:      -o-linear-gradient(right, #420255, #f7e9f5);
-  background:         linear-gradient(to right, #420255, #f7e9f5);
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
+  cursor: pointer; 
   text-align: center;
+  flex:1; 
+  margin:3px auto 3px auto ; 
+  img{ 
+    width: 120px;
+    height: 100%; }
 `
 const UserSet = styled.div`
     display: flex;
     margin-top: 8px;
 `
 
-const UserInfo = styled.div`
-  /* margin-left: auto; */
-  margin-top: 15px;
-  text-align: center;
-`
+
 
 //-----------------------드롭다운------------------------------
 

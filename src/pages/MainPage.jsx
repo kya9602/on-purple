@@ -3,7 +3,7 @@ import React from "react";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Deck from "../components/Main/Deck";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 
 //import Test from "../components/Main/test";
 
