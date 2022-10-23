@@ -350,16 +350,16 @@ export default function VerticalLinearStepper() {
                             </ImgBox>
 
                             <GenderBox>
-                                <StSelect
+                                <GenderSelect
                                     name='gender'
                                     type="text"
                                     defaultValue="default"
                                     onChange={onChangeHandler}
                                     required>
                                     <MBTIInput value="default" disabled> 성별을 골라주세요</MBTIInput>
-                                    <option value="female">여성</option>
-                                    <option value="male">남성</option>
-                                </StSelect>
+                                    <option value="female">여성 👧</option>
+                                    <option value="male">남성 👦</option>
+                                </GenderSelect>
                             </GenderBox>
 
 
@@ -515,6 +515,7 @@ export default function VerticalLinearStepper() {
                                     <MiniHeader>🌟 필수로 입력해주어야 합니다~🌠</MiniHeader>
                                     <AgeInput
                                         placeholder="당신의 나이는 몇살인가요 ??"
+                                        maxLength={2}
                                         type="number"
                                         name="age"
                                         value={input.age}
@@ -548,19 +549,20 @@ export default function VerticalLinearStepper() {
                                     </StSelect>
 
                                     <Location
-                                        placeholder="당신이 사는 지역은 어디인가요 ??"
+                                        placeholder="당신이 사는 지역은 어디인가요 ??(8자이내)"
                                         type="text"
                                         name="area"
                                         value={input.area}
+                                        maxLength={8}
                                         className="text"
                                         onChange={addonChangeHandler}
                                     />
 
                                     <StBodyInput
-                                        placeholder="한줄로 10자 이상 나를 소개해주세요~"
+                                        placeholder="한줄로 나를 소개해주세요~(20자이내)"
                                         type="text"
                                         name="introduction"
-                                        minLength={10}
+                                        maxLength={20}
                                         value={input.introduction}
                                         onChange={addonChangeHandler} />
                                 </InfoBodyBox>
@@ -571,6 +573,7 @@ export default function VerticalLinearStepper() {
                                 <MiniBox>
                                     <MiniTitle>이상형 🎈</MiniTitle>
                                     <MiniInput
+                                        maxLength={15}
                                         placeholder="이상형을 적어주세요"
                                         type="text"
                                         name="idealType"
@@ -581,6 +584,7 @@ export default function VerticalLinearStepper() {
                                 <MiniBox>
                                     <MiniTitle>직업 👄</MiniTitle>
                                     <MiniInput
+                                        maxLength={15}
                                         placeholder="직업 또는 업종을 적어주세요"
                                         type="text"
                                         name="job"
@@ -591,6 +595,7 @@ export default function VerticalLinearStepper() {
                                 <MiniBox>
                                     <MiniTitle>취미 👓</MiniTitle>
                                     <MiniInput
+                                        maxLength={15}
                                         placeholder="좋아하는, 함께 했으면 좋겠는 취미를 적어주세요"
                                         type="text"
                                         name="hobby"
@@ -601,6 +606,7 @@ export default function VerticalLinearStepper() {
                                 <MiniBox>
                                     <MiniTitle>반려동물 유무 🐶</MiniTitle>
                                     <MiniInput
+                                        maxLength={15}
                                         placeholder="사랑하는 반려동물이 있다면 자랑해주세요!"
                                         type="text"
                                         name="pet"
@@ -611,6 +617,7 @@ export default function VerticalLinearStepper() {
                                 <MiniBox>
                                     <MiniTitle>흡연 유무 🚬</MiniTitle>
                                     <MiniInput
+                                        maxLength={15}
                                         placeholder="Yes or No 본인 또는 원하는 상대방의 흡연유무"
                                         type="text"
                                         name="smoke"
@@ -621,6 +628,7 @@ export default function VerticalLinearStepper() {
                                 <MiniBox>
                                     <MiniTitle>음주습관 🍻</MiniTitle>
                                     <MiniInput
+                                        maxLength={15}
                                         placeholder="술을 즐기는 편인지 적어주세요"
                                         type="text"
                                         name="drink"
@@ -631,6 +639,7 @@ export default function VerticalLinearStepper() {
                                 <MiniBox>
                                     <MiniTitle>좋아하는 영화 🎬</MiniTitle>
                                     <MiniInput
+                                        maxLength={15}
                                         placeholder="좋아하는 영화종류를 적어주세요."
                                         type="text"
                                         name="likeMovieType"
@@ -1111,31 +1120,6 @@ const StBodyInput = styled.textarea`
     }
 `
 
-//완료버튼창 박스
-const StBtbBox = styled.div`
-  height: 50px;
-  margin-top: 15px;
-  display: flex;
-  justify-content:center;
-  width : 300px;
-  margin-left: 10px;
-`
-
-//수정 완료버튼창
-const StButton = styled.button`
-  cursor: pointer;
-  height: 40px;
-  width: 300px;
-  font-size: 16px;
-  border: 2px solid purple;
-  font-weight: 600;
-  background-color: white;
-  :hover{
-    color : #f56589;
-    background-color: #ffffae;
-    border : none;
-  }
-`
 
 //------------------------------------------------------------------------------------------------------------------------
 //두번째 추가정보 입력란=====================================================================================================
@@ -1199,4 +1183,26 @@ const MiniHeader = styled.div`
 const GenderBox = styled.div`
   display: flex;
   justify-content: center;
+`
+
+const GenderSelect = styled.select`
+  color: #2b2a2a;
+  width:170px;
+  height: 30px;
+  border: none;
+  border-bottom:2px solid red;
+  padding-left: 5px;
+  display: flex;
+  margin  : auto ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  &:focus {
+      outline: none;
+      border-bottom: 2px solid #80036f;
+      width: 100px;
+    }
+  
 `
