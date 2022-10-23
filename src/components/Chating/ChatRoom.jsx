@@ -20,7 +20,7 @@ function ChatRoom() {
     const token = localStorage.getItem("Authorization")
     /* console.log(token) */
     
-/*     const ws = useRef();
+    const ws = useRef();
     
     useEffect(() => {
         let sock = new SockJS(`http://3.34.139.137:8080/stomp/chat`);
@@ -71,7 +71,7 @@ function ChatRoom() {
         } catch (error) {
         }
     }
-; */
+;
 
     return (
         <BackImage>
