@@ -17,13 +17,14 @@ import { subMessage } from '../../redux/modules/chatRoom';
 function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {roomId} = useParams();
+    const { roomId } = useParams();
     /* console.log(typeof roomId) */
     /* const data = useSelector((state) => state) */
 
 // 일단 죽여  
 /*     const ws = useRef();
     
+
     useEffect(() => {
         let sock = new SockJS(`http://3.34.196.38:8080/stomp/chat`);
         let client = Stomp.over(sock);
@@ -31,7 +32,7 @@ function ChatRoom() {
         console.log(client)
         dispatch(__getlastMessage(roomId));
     }, []);
-    
+
     useEffect(() => {
         connect();
         return () => {
@@ -76,68 +77,8 @@ function ChatRoom() {
         } catch (error) {
         }
     }
-;
- */
 
-// 다시 처음부터 시작
-const client = useRef({});
-const [chatMessages, setChatMessages] = useState([]);
-const [message, setMessage] = useState("");
-
-useEffect(() => {
-  connect();
-
-  return () => disconnect();
-}, []);
-let token = localStorage.getItem("Authorization")
-
-const connect = () => {
-  client.current = new StompJs.Client({
-    // brokerURL: "ws://3.34.196.38:8080/stomp/chat", // 웹소켓 서버로 직접 접속
-    webSocketFactory: () => new SockJS("http://3.34.196.38:8080/stomp/chat"), // proxy를 통한 접속
-    connectHeaders: {
-      user : 'login'
-      
-    },
-    debug: function (str) {
-      console.log(str);
-    },
-    reconnectDelay: 5000,
-    heartbeatIncoming: 4000,
-    heartbeatOutgoing: 4000,
-    onConnect: () => {
-      subscribe();
-    },
-    onStompError: (frame) => {
-      console.error(frame);
-    },
-  });
-
-  client.current.activate();
-};
-
-const disconnect = () => {
-  client.current.deactivate();
-};
-
-const subscribe = () => {
-  client.current.subscribe(`/sub/chat/message`, ({ body }) => {
-    setChatMessages((_chatMessages) => [..._chatMessages, JSON.parse(body)]);
-  });
-};
-
-const publish = (message) => {
-  if (!client.current.connected) {
-    return;
-  }
-
-  client.current.publish({
-    destination: "/pub/chat/enter",
-    body: JSON.stringify({ message }),
-  });
-
-  setMessage("");
-};
+;*/
 
     return (
         <BackImage>

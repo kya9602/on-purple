@@ -1,16 +1,16 @@
 import React from "react";
 import EditBoard from "../components/Board/EditBoard";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 import styled from "styled-components";
 import Header from "../components/Header/Header"
 import Footer from "../components/Footer/Footer";
 
 const EditPage = () => {
-    return(
+    return (
         <BackImage>
             <Container>
                 <Header />
-                <EditBoard/>
+                <EditBoard />
                 <Footer />
             </Container>
         </BackImage>

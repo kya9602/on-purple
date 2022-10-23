@@ -1,6 +1,7 @@
 import React from "react";
 import NewSignup from "../components/Form/NewSignup";
 import styled from "styled-components";
+
 const NewSignUpPage = () => {
     return (
         <Container>

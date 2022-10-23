@@ -15,7 +15,8 @@ import "./styles.css";
 import { Pagination } from "swiper";
 import Category from "../components/Board/Category";
 import Header from "../components/Header/Header";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
 const PostPage = () => {
@@ -112,7 +113,9 @@ const PostPage = () => {
       <Container>
         <Header />
         <AddHeader>
-          💖여러분의 후기를 남겨주세요💖
+          <Btnbox>
+            <ArrowBackIosIcon className="BackBtn" fontSize="large" onClick={() => { navigate(-1); }}></ArrowBackIosIcon>
+          </Btnbox>
         </AddHeader>
         <AddBody>
           <UploaderWrapper>
@@ -193,11 +196,20 @@ const Container = styled.div`
     background-color: white;
 `
 const AddHeader = styled.div`
+    display: flex;
     text-align: center;
     font-size: 22px;
-    /* margin: 20px 0; */
-    padding-top: 30px;
+    padding-top: 90px;
+    .BackBtn {
+      cursor: pointer;
+      /* margin-top: 10px; */
+    }
 `
+
+const Btnbox = styled.div`
+    padding-left: 10px;
+`
+
 const SubmitBtn = styled.div`
     padding: 20px 0;
     display: flex;

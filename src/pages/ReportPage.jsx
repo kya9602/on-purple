@@ -2,7 +2,7 @@ import React from "react";
 import Report from "../components/Information/Report";
 import styled from "styled-components";
 import Header from "../components/Header/Header"
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 import Footer from "../components/Footer/Footer";
 
 const ReportPage = () => {
