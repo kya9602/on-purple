@@ -199,7 +199,7 @@ export default function VerticalLinearStepper() {
         setInput({ ...input, [name]: value, });
     };
 
-    console.log("input is ", input.age)
+    //console.log("input is ", input.age)
 
 
     // axios
@@ -233,9 +233,8 @@ export default function VerticalLinearStepper() {
         formData.append("info", passwordConfirmblob);
 
 
-        let genderJson = JSON.stringify(gender);
-        console.log(gender);
-        const genderblob = new Blob([genderJson], { type: "application/json" });
+        let genderjson = JSON.stringify(gender);
+        const genderblob = new Blob([genderjson], { type: "application/json" });        
         formData.append("info", genderblob);
 
 
