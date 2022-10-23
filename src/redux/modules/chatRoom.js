@@ -87,7 +87,7 @@ export const chatroom = createSlice({
   initialState,
   reducers: {
     subMessage(state, action) {
-    state.messages.push(action.payload);
+    state.lastmessage.push(action.payload);
   },
   },
 
