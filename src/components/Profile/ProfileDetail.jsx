@@ -116,7 +116,7 @@ const ProfileDetail = () => {
 
             <ButtonContainer>
                 <MatchingButton
-                // onClick={() => navigate(`/chat/${roomId}`)}
+                onClick={handleSubmit}
                 > 대화하기 💬 </MatchingButton>
             </ButtonContainer>
         </Container>
