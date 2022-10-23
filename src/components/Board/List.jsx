@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import TopButton from "./ScrollTop";
 import axios from "axios";
 import Pagination from "./Pagination/Pagination";
-
+import searchIcon from "../../assets/icons/search.png"
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const List = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = post.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost);
 
     useEffect(() => {
         dispatch(__getPosts(Category));
@@ -42,8 +42,6 @@ const List = () => {
         fetchPosts();
     }, []);
 
-
-
     if (isLoading) {
         return <div>로딩 중....</div>;
     }
@@ -51,7 +49,6 @@ const List = () => {
     if (error) {
         return <div>{error.message}</div>;
     }
-
 
     /* if (post.length === 0)  */
     //----------------------navigateButton------------------//
@@ -73,11 +70,12 @@ const List = () => {
     const goFashion = () => {
         navigate(`/board/fashion`)
     }
-
-
-
+    const goSearch = () =>{
+        navigate(`/search`)
+    }
+    // 게시판 이용 주의 사항 모달 만들 예정.
     return (
-        <>
+        <div style={{height:"100vh"}}>
             <Wrapper>
                 <CategoryContaier>
                     <Box onClick={goDrive}>드라이브 가실 분?</Box>
@@ -87,11 +85,16 @@ const List = () => {
                     <Box onClick={goBar}>술 한잔 하실 분?</Box>
                     <Box onClick={goFashion}>패션 질문</Box>
                 </CategoryContaier>
-                {currentPosts.map((item) => (<Card item={item} key={item?.postId} />))}
+                <SearchCautionWrap>
+                <span>게시판 이용 주의사항 📄</span>
+                <GoSearch onClick={goSearch}><img src={searchIcon} alt=""/></GoSearch>
+                </SearchCautionWrap>
+
+                {currentPosts?.map((item) => (<Card item={item} key={item?.postId} />))}
                 <TopButton />
             </Wrapper>
-            <Pagination postsPerPage={postsPerPage} totalPosts={post.length} paginate={paginate} />
-        </>
+            <Pagination postsPerPage={postsPerPage} totalPosts={post?.length} paginate={paginate} />
+        </div>
     )
 }
 
@@ -102,7 +105,6 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     margin: 0 auto;
     margin-left: 1vw;
-    height: 100%;
     max-width:428px;
     width : 100%;
     margin:50px auto; 
@@ -138,4 +140,35 @@ const CategoryContaier = styled.div`
     overflow-x:auto; 
     white-space:nowrap; 
     font-size:0;
+`
+const GoSearch = styled.div`
+    width: 40px;
+    height: 40px;
+    border: 1px solid #9C7FCB;
+    /* background-color: #FAEAFF; */
+    border-radius: 100%;
+    box-shadow: 1px 1px 1px 1px #D4B4FF;
+    margin-top: 5px;
+    /* margin-left: 82%; */
+    cursor: pointer;
+    margin-right: 15px;
+    img {
+        width: 90%;
+        height: 100%;
+        object-fit: contain;
+    }
+`
+
+const SearchCautionWrap = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span{
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0 auto;
+        padding-left: 55px;
+        cursor: pointer;
+    }
 `

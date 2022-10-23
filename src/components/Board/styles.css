@@ -50,7 +50,7 @@ body {
 .scroll__container{
   position: fixed;
   right: 5%;
-  bottom: 5%;
+  bottom: 10%;
   z-index: 1;
 }
 #top{

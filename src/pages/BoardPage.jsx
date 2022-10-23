@@ -24,6 +24,7 @@ const Board = () => {
 
 export default Board;
 
+// 포스트 있을때 없을때 다름 .. (수정 요망)
 const Wrapper = styled.div`
     background-color: white;
     max-width: 428px;
@@ -36,5 +37,5 @@ const Wrapper = styled.div`
 const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
-  height: 100vh;
+  height: 100%;
 `

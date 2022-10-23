@@ -8,7 +8,6 @@ import ChatPage from "../pages/ChatPage";
 import ProfilePage from "../pages/ProfilePage";
 import BoardPage from "../pages/BoardPage";
 import DetailPage from "../pages/DetailPage";
-import ChatScreen from "../components/Chating/ChatScreen";
 import PostPage from "../pages/PostPage";
 import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
@@ -20,6 +19,10 @@ import NewSignup from "../pages/NewSignuploadPage";
 import VChatPage from "../pages/VChatPage";
 import ReportInfoPage from "../pages/ReportInfoPage";
 import ReportDetailPage from "../pages/ReportDetailPage";
+import SearchPage from "../pages/SearchPage";
+import ChatRoom from "../components/Chating/ChatRoom";
+import ProfileInfoPage from "../pages/ProfileInfoPage";
+
 const Router = () => {
     return (
         <BrowserRouter>
@@ -30,8 +33,9 @@ const Router = () => {
                 <Route path="/kakaoAddSignup" exact element={<KakaoAddPage />} />
                 <Route path="/myPage/:profileId" exact element={<MypagePage />} />
                 <Route path="/chat" exact element={<ChatPage />} />
-                <Route path="/chat/:roomId" exact element={<ChatScreen />} />
+                <Route path="/chat/:roomId" exact element={<ChatRoom />} />
                 <Route path="/profile/:userId" exact element={<ProfilePage />} />
+                <Route path="/profileInfo/:userId" exact element={<ProfileInfoPage />} />
                 <Route path="/board/:Category" exact element={<BoardPage />} />
                 <Route path="/detail/:postId" exact element={<DetailPage />} />
                 <Route path="/edit/:postId" exact element={<EditPage />} />
@@ -42,6 +46,8 @@ const Router = () => {
                 <Route path="/vchat" exact element={<VChatPage />} />
                 <Route path="/reportInfo" exact element={<ReportInfoPage />} />
                 <Route path="/reportDetail/:reportId" exact element={<ReportDetailPage />} />
+                <Route path="/search" exact element={<SearchPage />} />
+                <Route path="/search/:searchTerm" element={<SearchPage />} exact />
                 {/* <Route path="/kakao" exact element={<Oauth2Handler />} /> */}
             </Routes>
         </BrowserRouter>

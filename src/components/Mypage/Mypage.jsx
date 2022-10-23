@@ -84,7 +84,7 @@ const Mypage = () => {
             likeMovieType: likeMovieType,
         };
 
-        let a = await axios.put(`${process.env.REACT_APP_HOST}/mypage/userInfo`, useraddInfo,
+        let a = await axios.patch(`${process.env.REACT_APP_HOST}/mypage/userInfo`, useraddInfo,
             {
                 headers: {
                     "Authorization": localStorage.getItem("Authorization"),   //accesstoken
@@ -99,11 +99,6 @@ const Mypage = () => {
 
         setInput(!input)
     }
-
-
-
-
-
 
 
     return (
@@ -197,13 +192,15 @@ const Mypage = () => {
                             <Age> age : 27 </Age>
                             <MBTI>MBTI : ENFP</MBTI>
                             <AreaInput
-                                defaultValue={userInfo.area}
+                                maxLength={8}
+                                placeholder={userInfo.area}
                                 onChange={(e) => {
                                     setArea(e.target.value);
                                 }}
                             />
                             <StBodyInput
-                                defaultValue={userInfo.introduction}
+                                maxLength={20}
+                                placeholder={userInfo.introduction}
                                 onChange={(e) => {
                                     setIntroduction(e.target.value);
                                 }}
@@ -218,7 +215,8 @@ const Mypage = () => {
                         <MiniBox>
                             <MiniTitle>이상형 🎈</MiniTitle>
                             <MiniInput
-                                defaultValue={userInfo.idealType}
+
+                                placeholder={userInfo.idealType}
                                 onChange={(e) => {
                                     setIdealType(e.target.value);
                                 }}
@@ -227,7 +225,7 @@ const Mypage = () => {
                         <MiniBox>
                             <MiniTitle>직업 👄</MiniTitle>
                             <MiniInput
-                                defaultValue={userInfo.job}
+                                placeholder={userInfo.job}
                                 onChange={(e) => {
                                     setJob(e.target.value);
                                 }}
@@ -236,7 +234,7 @@ const Mypage = () => {
                         <MiniBox>
                             <MiniTitle>취미 👓</MiniTitle>
                             <MiniInput
-                                defaultValue={userInfo.hobby}
+                                placeholder={userInfo.hobby}
                                 onChange={(e) => {
                                     setHobby(e.target.value);
                                 }}
@@ -245,7 +243,7 @@ const Mypage = () => {
                         <MiniBox>
                             <MiniTitle>반려동물 유무 🐶</MiniTitle>
                             <MiniInput
-                                defaultValue={userInfo.pet}
+                                placeholder={userInfo.pet}
                                 onChange={(e) => {
                                     setPet(e.target.value);
                                 }}
@@ -254,7 +252,7 @@ const Mypage = () => {
                         <MiniBox>
                             <MiniTitle>흡연 유무 🚬</MiniTitle>
                             <MiniInput
-                                defaultValue={userInfo.smoke}
+                                placeholder={userInfo.smoke}
                                 onChange={(e) => {
                                     setSmoke(e.target.value);
                                 }}
@@ -263,7 +261,7 @@ const Mypage = () => {
                         <MiniBox>
                             <MiniTitle>음주습관 🍻</MiniTitle>
                             <MiniInput
-                                defaultValue={userInfo.drink}
+                                placeholder={userInfo.drink}
                                 onChange={(e) => {
                                     setDrink(e.target.value);
                                 }}
@@ -272,7 +270,7 @@ const Mypage = () => {
                         <MiniBox>
                             <MiniTitle>좋아하는 영화 🎬</MiniTitle>
                             <MiniInput
-                                defaultValue={userInfo.likeMovieType}
+                                placeholder={userInfo.likeMovieType}
                                 onChange={(e) => {
                                     setLikeMovieType(e.target.value);
                                 }}

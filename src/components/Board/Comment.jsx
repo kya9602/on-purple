@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { __deleteComments } from "../../redux/modules/comment";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,7 @@ import delete2 from "../../assets/icons/delete2.png"
 import edit from "../../assets/icons/edit.png"
 import { __likeComment } from "../../redux/modules/comment";
 /* import Recomment from "./Recomment"; */
-const Comments = ({item})=>{
+const Comments = ({ item }) => {
     const dispatch = useDispatch();
     const id = item.commentId
     const getNickname = localStorage.getItem("nickname")
@@ -16,39 +16,62 @@ const Comments = ({item})=>{
         event.preventDefault();
         dispatch(__likeComment(id));
     };
-    
-   /*  const onReplyClick = () => {
-        setshowReplyInput(!showReplyInput);
-      }; */
-  
-    return(
-        <div style={{margin:"10px",borderTop:"1px solid #cc9ce7" }}>
+
+    //댓글 작성시간 표시
+    function timeForToday(Day) {
+        console.log(Day)
+        const today = new Date();
+        const timeValue = new Date(Day);
+        console.log(timeValue)
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        if (betweenTime < 60) {
+            return `${betweenTime}분전`;
+        }
+        const betweenTimeHour = Math.floor(betweenTime / 60);
+        if (betweenTimeHour < 24) {
+            return `${betweenTimeHour}시간전`;
+        }
+
+        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+        if (betweenTimeDay < 365) {
+            return `${betweenTimeDay}일전`;
+        }
+
+        return `${Math.floor(betweenTimeDay / 365)}년전`;
+    }
+    /*  const onReplyClick = () => {
+         setshowReplyInput(!showReplyInput);
+       }; */
+
+    return (
+        <div style={{ margin: "10px", borderTop: "1px solid #cc9ce7" }}>
             <NameButtonContainer>
                 <NickName>{item.nickname}</NickName>
                 <CM>{item.comment}</CM>
                 <div>
                     {getNickname === item.nickname ?
-                  ( <>  
-                        <DeleteBtn onClick={()=>{
-                            dispatch(__deleteComments(id))
-                        }}><img src={delete2} alt=""/>
-                        </DeleteBtn>
-                    
-                        {/* <EditBtn><img src={edit} alt=""/></EditBtn> */}
-                    </> )
-                    : null
-                }
+                        (<>
+                            <DeleteBtn onClick={() => {
+                                dispatch(__deleteComments(id))
+                            }}><img src={delete2} alt="" />
+                            </DeleteBtn>
+
+                            {/* <EditBtn><img src={edit} alt=""/></EditBtn> */}
+                        </>)
+                        : null
+                    }
                 </div>
             </NameButtonContainer>
-            
+
             <CmLikeContainer>
                 <span onClick={onLike}>💜 {item.likes}</span>
             </CmLikeContainer>
-            
+
             <TRWrapper>
-                <Time>{item.createdAt[0]}.{item.createdAt[1]}.{item.createdAt[2]}</Time>
+                <Time>{timeForToday(item.createdAt)}</Time>
             </TRWrapper>
-                {/* <Recomment item={item}/> */}
+            {/* <Recomment item={item}/> */}
         </div>
     )
 }

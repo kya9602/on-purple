@@ -18,6 +18,8 @@ import "./styles.css";
 import { Pagination } from "swiper";
 import Swal from "sweetalert2";
 
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
 
 const Detail = () => {
     const dispatch = useDispatch();
@@ -61,11 +63,14 @@ const Detail = () => {
     }
     return (
         <Container>
+            <Btnbox>
+                <ArrowBackIosIcon className="BackBtn" fontSize="large" onClick={() => { navigate(-1); }}></ArrowBackIosIcon>
+            </Btnbox>
             <Title>
                 {detail?.title}
             </Title>
 
-            <Date>{detail?.createdAt[0]}-{detail?.createdAt[1]}-{detail?.createdAt[2]}</Date>
+            <Date>{detail?.createdAt}</Date>
             <DateButtonWrapper>
                 {getNickname === detail?.nickname ?
                     (
@@ -100,7 +105,7 @@ const Detail = () => {
 
             {/* Modal */}
             <Dialog open={show}>
-                <DialogContent style={{ position: "relative", width:"200px", textAlign:"center", height:"100px" }}>
+                <DialogContent style={{ position: "relative", width: "200px", textAlign: "center", height: "100px" }}>
                     <IconButton
                         style={{ position: "absolute", top: "0", right: "0" }}
                         onClick={() => setShow(false)}
@@ -109,7 +114,7 @@ const Detail = () => {
                     </IconButton>
                     <div className="modal">
                         <div className="modal-title"> 정말 삭제하시겠습니까 ?</div>
-                        <div className="modal-button" style={{paddingTop:"30px"}}>
+                        <div className="modal-button" style={{ paddingTop: "30px" }}>
                             <ModalYesButton
                                 variant="outlined"
                                 color="error"
@@ -143,13 +148,24 @@ const Detail = () => {
 
 export default Detail;
 
+
 const Container = styled.div`
     max-width: 428px;
     width : 100%;
     margin:0 auto;
     padding-top: 80px;
     background-color: white;
+    .BackBtn{
+     cursor: pointer;   
+    }
 `
+
+const Btnbox = styled.div`
+    width: 300px;
+    padding-left: 10px;
+`
+
+
 const Title = styled.h1`
     text-align: center;
 `

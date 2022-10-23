@@ -7,16 +7,13 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 
-const Card = ({ item }) => {
+const SearchCard = ({ item }) => {
     const navigate = useNavigate();
     const nickname = localStorage.getItem("nickname")
 
-    const moment = require('moment');
-    const today = moment();
-    /*  console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
 
+    //시간표시함수
     function timeForToday(Day) {
-        console.log(Day)
         const today = new Date();
         const timeValue = new Date(Day);
         console.log(timeValue)
@@ -71,16 +68,16 @@ const Card = ({ item }) => {
     )
 }
 
-export default Card;
+export default SearchCard;
 
 const Item = styled.div`
     max-width: 428px;
     border: 2px solid #9C7FCB;
     border-radius: 5px;
-    width: 100%;
+    width: 90%;
     height: 470px;
     box-shadow:5px 5px 5px grey;
-    margin: 15px 15px 15px 15px;
+    margin: 15px auto;
     box-sizing: inherit;
 `
 

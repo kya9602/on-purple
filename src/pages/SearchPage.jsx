@@ -1,32 +1,30 @@
 import React from "react";
-import Footer from "../components/Footer/Footer"
-import Header from "../components/Header/Header";
-import ProfileDetail from "../components/Profile/ProfileDetail";
-import image from "../assets/images/moon.jpg"
 import styled from "styled-components";
+import Header from "../components/Header/Header"
+import image from "../assets/images/moon.jpg"
+import Footer from "../components/Footer/Footer";
+import Search from "../components/Board/Search/Search";
 
-const ProfilePage = () => {
+const SearchPage = () =>{
     return (
         <BackImage>
             <Container>
                 <Header />
-                <ProfileDetail />
+                <Search/>
                 <Footer />
             </Container>
         </BackImage>
-
-
     )
 }
 
-export default ProfilePage;
+export default SearchPage;
 
 const Container = styled.div`
     max-width: 428px;
     width : 100%;
     margin:0 auto;
-    height: 100%;
 `
+
 const BackImage = styled.div`
 background: url(${image});
 background-size: cover;
