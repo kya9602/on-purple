@@ -6,8 +6,11 @@ import image from "../../assets/images/moon.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { __getlastMessage } from '../../redux/modules/chatRoom';
 import SockJS from "sockjs-client";
-import Stomp from "stompjs"
+import Stomp from "stompjs";
+/* import * as StompJs from "@stomp/stompjs";
+import * as SockJS from "sockjs-client"; */
 import { subMessage } from '../../redux/modules/chatRoom';
+
 function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -15,13 +18,15 @@ function ChatRoom() {
     /* console.log(typeof roomId) */
     /* const data = useSelector((state) => state) */
     const token = localStorage.getItem("Authorization")
-    const ws = useRef();
-    /* console.log(ws) */
-
+    /* console.log(token) */
+    
+/*     const ws = useRef();
+    
     useEffect(() => {
-        let sock = new SockJS(`${process.env.REACT_APP_HOST}/stomp/chat`);
+        let sock = new SockJS(`http://3.34.139.137:8080/stomp/chat`);
         let client = Stomp.over(sock);
         ws.current = client;
+        console.log(client)
         dispatch(__getlastMessage(roomId));
     }, []);
     
@@ -37,9 +42,10 @@ function ChatRoom() {
             ws.current.debug = function (str) {console.log(str)};
             ws.current.debug();
             // type: "CHAT"을 보내는 용도는 채팅방에 들어갈 때를 알기 위해서
-            ws.current.connect({ token: token, type: "CHAT" }, () => {
+            ws.current.connect({ Authorization: token, type: "TALK" }, () => {
                 // connect 이후 subscribe
-                ws.current.subscribe(`/sub/chat/message`, (response) => {
+                console.log("동작하고있어요")
+                ws.current.subscribe(`/sub/chat/message${roomId}`, (response) => {
                     const newMessage = JSON.parse(response.body);
                     dispatch(subMessage(newMessage));
                 });
@@ -49,7 +55,7 @@ function ChatRoom() {
                 const message = {
                     roomId: roomId,
                 };
-                ws.current.send(`/pub/chat/enter`, { token: token }, JSON.stringify(message));
+                ws.current.send(`/pub/chat/enter`, { Authorization: token }, JSON.stringify(message));
             });
         } catch (error) {
         }
@@ -60,11 +66,12 @@ function ChatRoom() {
     function wsDisConnect() {
         try {
             ws.current.disconnect(() => {
-                ws.current.unsubscribe("sub-0");
+                ws.current.unsubscribe(roomId);
             });
         } catch (error) {
         }
     }
+; */
 
     return (
         <BackImage>
