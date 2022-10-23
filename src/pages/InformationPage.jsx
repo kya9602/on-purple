@@ -2,7 +2,7 @@ import React from "react";
 import ChatHeader from "../components/Chating/ChatHeader";
 import Information from "../components/Information/Information";
 import styled from "styled-components";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 
 
 const InformationPage = () => {

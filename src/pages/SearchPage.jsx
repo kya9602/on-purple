@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header/Header"
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 import Footer from "../components/Footer/Footer";
 import Search from "../components/Board/Search/Search";
 
-const SearchPage = () =>{
+const SearchPage = () => {
     return (
         <BackImage>
             <Container>
                 <Header />
-                <Search/>
+                <Search />
                 <Footer />
             </Container>
         </BackImage>

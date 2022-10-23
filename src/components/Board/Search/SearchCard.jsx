@@ -7,15 +7,13 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 
-const SearchCard = ({item}) => {
+const SearchCard = ({ item }) => {
     const navigate = useNavigate();
     const nickname = localStorage.getItem("nickname")
-    
-    const moment = require('moment');
-    const today = moment();
-    /* console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
 
-  /*   function timeForToday(Day) {
+
+    //시간표시함수
+    function timeForToday(Day) {
         const today = new Date();
         const timeValue = new Date(Day);
         console.log(timeValue)
@@ -35,13 +33,15 @@ const SearchCard = ({item}) => {
         }
 
         return `${Math.floor(betweenTimeDay / 365)}년전`;
-    } */  
-    
+    }
+
     // 게시글 상세보기 클릭시 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
-    const validation = ()=>{
-        if(nickname == null){
-            Swal.fire({title: '로그인이 필요합니다 😢'
-                        , icon: 'error'})
+    const validation = () => {
+        if (nickname == null) {
+            Swal.fire({
+                title: '로그인이 필요합니다 😢'
+                , icon: 'error'
+            })
             setTimeout(() => {
                 (navigate('/login'))
             }, 1500);
@@ -51,13 +51,13 @@ const SearchCard = ({item}) => {
     }
     return (
         <>
-            <Item onClick={()=>validation()}>
+            <Item onClick={() => validation()}>
                 <Image src={item?.imageUrl} alt="" />
-                
+
                 <Container>
                     <Title>{item?.title}</Title>
-                    <Content>{item?.content}</Content>                   
-                    <Time>모먼트 적용예정</Time>
+                    <Content>{item?.content}</Content>
+                    <Time>{timeForToday(item?.createdAt)}</Time>
                     <WriterLikeWrapper>
                         <Writer>by <b>{item?.nickname}</b></Writer>
                         <Like>💜 {item?.likes}</Like>
