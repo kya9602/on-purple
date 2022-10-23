@@ -2,7 +2,7 @@ import React from "react";
 import Chat from "../components/Chating/Chat";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 
 const ChatPage = () => {
     return (

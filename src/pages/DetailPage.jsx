@@ -2,7 +2,7 @@ import React from "react";
 import Detail from "../components/Board/Detail";
 import Header from "../components/Header/Header";
 import styled from "styled-components";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 
 
 const DetailPage = () => {

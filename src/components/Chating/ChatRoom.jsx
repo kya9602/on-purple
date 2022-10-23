@@ -14,14 +14,14 @@ import { subMessage } from '../../redux/modules/chatRoom';
 function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {roomId} = useParams();
+    const { roomId } = useParams();
     /* console.log(typeof roomId) */
     /* const data = useSelector((state) => state) */
     const token = localStorage.getItem("Authorization")
     /* console.log(token) */
-    
-/*     const ws = useRef();
-    
+
+    const ws = useRef();
+
     useEffect(() => {
         let sock = new SockJS(`http://3.34.139.137:8080/stomp/chat`);
         let client = Stomp.over(sock);
@@ -29,7 +29,7 @@ function ChatRoom() {
         console.log(client)
         dispatch(__getlastMessage(roomId));
     }, []);
-    
+
     useEffect(() => {
         wsConnect();
         return () => {
@@ -39,7 +39,7 @@ function ChatRoom() {
 
     function wsConnect() {
         try {
-            ws.current.debug = function (str) {console.log(str)};
+            ws.current.debug = function (str) { console.log(str) };
             ws.current.debug();
             // type: "CHAT"을 보내는 용도는 채팅방에 들어갈 때를 알기 위해서
             ws.current.connect({ Authorization: token, type: "TALK" }, () => {
@@ -71,7 +71,7 @@ function ChatRoom() {
         } catch (error) {
         }
     }
-; */
+    ;
 
     return (
         <BackImage>

@@ -15,7 +15,7 @@ import "./styles.css";
 import { Pagination } from "swiper";
 import Category from "../components/Board/Category";
 import Header from "../components/Header/Header";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
