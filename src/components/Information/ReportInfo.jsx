@@ -26,10 +26,9 @@ const ReportInfo = () => {
 export default ReportInfo;
 
 const Container = styled.div`
-    border-top: 3px solid black;
     margin: 0 auto;
-    padding-top: 80px;
-    height: 88vh;
+    height: 100vh;
+    overflow-y: scroll;
     background-color: white;
 `
 const TableWrapper = styled.div`
@@ -38,6 +37,7 @@ const TableWrapper = styled.div`
     text-align: center;
     align-items: center;
     margin: 0 auto;
+    padding-top: 70px;
     height: 40px;
     border-bottom: 1px solid gray;
 `

@@ -186,14 +186,16 @@ export default PostPage;
 const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
-  height: 100%;
+  height: 100vh;
 `
 
 const Container = styled.div`
     max-width: 428px;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
     background-color: white;
+    overflow-y: scroll;
 `
 const AddHeader = styled.div`
     display: flex;

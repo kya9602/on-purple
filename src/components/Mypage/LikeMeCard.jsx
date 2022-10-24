@@ -21,7 +21,7 @@ const Item = styled.div`
     border: 2px solid #9C7FCB;
     border-radius: 5px;
     width: 140px;
-    height: 160px;
+    height: 140px;
     box-shadow:5px 5px 5px grey;
     box-sizing: inherit;
     margin: auto;

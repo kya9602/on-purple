@@ -55,62 +55,79 @@ const ProfileDetail = () => {
             </div>
 
             <IntroduceCard>
-                <div>
-                    <h3>{userProfile?.nickname} {userProfile?.age}</h3>
-                </div>
+                <NicknameBox>
+                    <Nickname> {userProfile?.nickname} {userProfile?.age}</Nickname>
+                </NicknameBox>
 
-                <div>
+                <Introduce>
+                    <DDa>"</DDa>
                     {userProfile?.introduction}
-                </div>
+                    <DDa>"</DDa>
+
+                </Introduce>
+                <Mbti>
+                    {userProfile?.mbti}
+                </Mbti>
 
                 <br />
+                {userProfile?.drink !== "" || userProfile?.smoke !== "" || userProfile?.hobby !== "" || userProfile?.idealType !== "" ||
+                    userProfile?.job !== "" || userProfile?.likeMovieType !== "" || userProfile?.pet !== "" ?
+                    <Title>🎈 추가적인 정보입니다 🎈</Title> : null
+                }
                 {userProfile?.drink === "" ?
                     null :
-                    <div>
-                        음주량 : {userProfile?.drink}
-                    </div>
+                    <MiniContainer>
+                        <MiniTitle> 음주량 🍻 🍸 </MiniTitle>
+                        <MiniBody> {userProfile?.drink}</MiniBody>
+                    </MiniContainer>
                 }
 
                 {userProfile?.smoke === "" ?
                     null :
-                    <div>
-                        흡연유무 : {userProfile?.smoke}
-                    </div>
+                    <MiniContainer>
+                        <MiniTitle>  흡연유무 🚬 🚭 </MiniTitle>
+                        <MiniBody>{userProfile?.smoke}</MiniBody>
+                    </MiniContainer>
                 }
 
                 {userProfile?.hobby === "" ?
                     null :
-                    <div>
-                        취미 : {userProfile?.hobby}
-                    </div>
+                    <MiniContainer>
+                        <MiniTitle>  취미 🤔 </MiniTitle>
+                        <MiniBody>{userProfile?.hobby}</MiniBody>
+                    </MiniContainer>
                 }
 
                 {userProfile?.idealType === "" ?
                     null :
-                    <div>
-                        이상형 : {userProfile?.idealType}
-                    </div>
+                    <MiniContainer>
+                        <MiniTitle>   이상형 😘 💘 </MiniTitle>
+                        <MiniBody>{userProfile?.idealType}</MiniBody>
+                    </MiniContainer>
                 }
 
                 {userProfile?.job === "" ?
                     null :
-                    <div>
-                        직업 : {userProfile?.job}
-                    </div>
+                    <MiniContainer>
+                        <MiniTitle>   직업 👔 👜 </MiniTitle>
+                        <MiniBody>{userProfile?.job}</MiniBody>
+                    </MiniContainer>
                 }
 
                 {userProfile?.likeMovieType === "" ?
                     null :
-                    <div>
-                        영화취향 : {userProfile?.likeMovieType}
-                    </div>
+                    <MiniContainer>
+                        <MiniTitle>     영화취향 🎬 👀 </MiniTitle>
+                        <MiniBody>{userProfile?.likeMovieType}</MiniBody>
+                    </MiniContainer>
                 }
 
                 {userProfile?.pet === "" ?
                     null :
-                    <div>
-                        반려동물 : {userProfile?.pet}
-                    </div>
+                    <MiniContainer>
+                        <MiniTitle>  반려동물 😻 🐶 </MiniTitle>
+                        <MiniBody> {userProfile?.pet}</MiniBody>
+                    </MiniContainer>
                 }
             </IntroduceCard>
 
@@ -132,7 +149,6 @@ const Container = styled.div`
     align-items:center;
     height: 100vh;
     width: 100%;
-    padding-top: 130px;
     /* padding-bottom: 45vh; */
     background-color: white;
     .BackBtn{
@@ -143,6 +159,7 @@ const Container = styled.div`
 const Btnbox = styled.div`
     width: 380px;
     padding-bottom: 20px;
+    padding-top : 120px;
 `
 
 const ImageCard = styled.img`
@@ -192,3 +209,68 @@ const IntroduceCard = styled.div`
     box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3)
 `
 
+const NicknameBox = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top : 20px;
+    margin-bottom: 20px;
+`
+const Nickname = styled.div`
+    font-size: 18px;
+    font-weight: bold;
+`
+
+const Introduce = styled.div`
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    font-size: 14px;
+`
+
+const DDa = styled.div`
+    font-size: 18px;
+    font-weight: bold;
+    color : #f08899;
+    margin-right: 15px;
+    margin-left: 15px;
+`
+
+const Mbti = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+`
+
+const Title = styled.div`
+    background-color : pink ;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    padding: 2%;
+    width: 250px;
+    font-size: 16px;
+    margin-bottom: 20px;
+`
+
+const MiniContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    margin-top:10px ;
+`
+
+const MiniTitle = styled.div`
+    background-color: #e9d8e9;
+    border-radius: 10px;
+    width: 140px;
+    text-align: center;
+`
+
+const MiniBody = styled.div`
+    border-bottom:2px solid #f797f7; 
+    width: 220px;
+    text-align: center;
+    margin-top: 5px;
+`

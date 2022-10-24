@@ -157,8 +157,10 @@ const Container = styled.div`
     max-width: 428px;
     width : 100%;
     margin:0 auto;
-    padding-top: 80px;
+    height: 100vh;
     background-color: white;
+    overflow-y: scroll;
+
     .BackBtn{
      cursor: pointer;   
     }
@@ -167,6 +169,7 @@ const Container = styled.div`
 const Btnbox = styled.div`
     width: 300px;
     padding-left: 10px;
+    padding-top: 120px;
 `
 
 

@@ -175,14 +175,12 @@ const Reportselect = styled.select`
 `
 
 const ReportContainerDiv = styled.div`
-    display: flex; 
-    flex-wrap: wrap;
-    flex-direction: column; /*수직 정렬*/
-    justify-content: center;
-    align-items:center;
+    max-width: 428px;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
     background-color: white;
-    padding-bottom: 100px;
-    padding-top:100px;
+    overflow-y: scroll;
     .BackBtn{
      cursor: pointer;   
     }
@@ -190,12 +188,14 @@ const ReportContainerDiv = styled.div`
 
 const Btnbox = styled.div`
     width: 380px;
-    /* padding-bottom: 20px; */
+    padding-top: 90px;
+    
 `
 
 const ReportSelectDiv = styled.div`
-    flex:1;
+    display: flex;
     margin-top: 2vh;
+    justify-content: center;
     
 `
 const ImageWrapper = styled.div`
@@ -213,11 +213,16 @@ const ImageWrapper = styled.div`
     }
 `
 const ReportInputDiv = styled.div`
-    width: 300px;
-    justify-content: center;
-    align-items:center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+
 `
 const ReportTarget = styled.input`
+    display: flex;
+    align-items: center;
     width:300px;
     height : 30px;
     border: none;
@@ -225,13 +230,17 @@ const ReportTarget = styled.input`
     margin-top:15px;
 `
 const ReportTitle = styled.input`
-    width:100%;
+    display: flex;
+    align-items: center;
+    width:300px;
     height : 30px;
     margin-top:15px;
 `
 
 const ReportContent = styled.textarea`
-    width: 100%;
+    display: flex;
+    align-items: center;
+    width: 300px;
     height : 250px;
     resize: none;
     margin-top: 15px;
@@ -253,7 +262,7 @@ const SubmitBtn = styled.div`
     }
 `
 const DeleteBtn = styled.div`
-   margin-bottom: 10px;
+   /* margin-bottom: 10px; */
    margin-left: 95%;
    width: 20px;
    height: 20px;
