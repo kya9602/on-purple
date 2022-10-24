@@ -13,7 +13,7 @@ const List = () => {
     const navigate = useNavigate();
     const { isLoading, error, post } = useSelector((state) => state?.post)
     const { Category } = useParams();
-
+    console.log(post)
     // 페이지 네이션
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ const List = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
 
     useEffect(() => {
         dispatch(__getPosts(Category));
@@ -36,7 +36,7 @@ const List = () => {
             setLoading(true);
             const res = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${Category}`);
             /* console.log(res.data.data) */
-            setPosts(res.data.data);
+            setPosts(res?.data?.data);
             setLoading(false);
         };
         fetchPosts();
@@ -49,7 +49,7 @@ const List = () => {
     if (error) {
         return <div>{error.message}</div>;
     }
-
+    
     /* if (post.length === 0)  */
     //----------------------navigateButton------------------//
     const goDrive = () => {
@@ -76,6 +76,7 @@ const List = () => {
     // 게시판 이용 주의 사항 모달 만들 예정.
     return (
         <div style={{height:"100vh"}}>
+
             <Wrapper>
                 <CategoryContaier>
                     <Box onClick={goDrive}>드라이브 가실 분?</Box>
@@ -93,7 +94,8 @@ const List = () => {
                 {currentPosts?.map((item) => (<Card item={item} key={item?.postId} />))}
                 <TopButton />
             </Wrapper>
-            <Pagination postsPerPage={postsPerPage} totalPosts={post?.length} paginate={paginate} />
+            <Pagination postsPerPage={postsPerPage} totalPosts={post?.length} paginate={paginate} /> 
+         
         </div>
     )
 }

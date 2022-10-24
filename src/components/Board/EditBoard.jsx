@@ -83,7 +83,7 @@ const EditBoard = () => {
           const category = new Blob([json], { type: "application/json" });
           formData.append("data", category)
 
-          await axios.patch(`http://3.34.139.137:8080/post/${postId}`, formData, {
+          await axios.patch(`${process.env.REACT_APP_HOST}/post/${postId}`, formData, {
             headers: {
               "content-type": "multipart/form-data",
               "Authorization": localStorage.getItem("Authorization"), //accesstoken 
@@ -96,7 +96,6 @@ const EditBoard = () => {
           // 서버에서 받은 에러 메시지 출력
           window.alert("오류발생!" + "😭");
         }
-    
       }, [canSubmit]);
 
     return (

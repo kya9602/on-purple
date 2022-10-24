@@ -16,10 +16,10 @@ const Card = ({ item }) => {
     /*  console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
 
     function timeForToday(Day) {
-        console.log(Day)
+        /* console.log(Day) */
         const today = new Date();
         const timeValue = new Date(Day);
-        console.log(timeValue)
+        /* console.log(timeValue) */
         const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
         if (betweenTime < 1) return '방금전';
         if (betweenTime < 60) {

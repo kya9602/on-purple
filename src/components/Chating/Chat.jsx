@@ -9,7 +9,7 @@ const Chat = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const data = useSelector((state) => state?.chatroom?.chatroom)
-    /* console.log(data) */
+    console.log(data)
     
     useEffect(() => {
         dispatch(__getChatrooms("1"));
@@ -29,7 +29,7 @@ const Chat = () => {
                             <ChatImg src={userdata.otherImageUrl} />
                             <ChatDetails>
                                 <ChatName>{userdata.otherNickname}</ChatName>
-                                <ChatDetailsP>{userdata.message}</ChatDetailsP>
+                                <ChatDetailsP>{userdata.lastMessage}</ChatDetailsP>
                             </ChatDetails>
                             <ChatTimeStamp>{userdata.timestamp}</ChatTimeStamp>
                         </ChatBox>
