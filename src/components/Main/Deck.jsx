@@ -44,7 +44,7 @@ function Deck() {
   //모든 DB에서 내가 좋아요한 사람 제거
   let finalMyData = filterMyData.filter(person => {
     let flag = true;
-    likemeList.forEach(i => {
+    likemeList?.forEach(i => {
       if (i.userId === person.userId) {
         flag = false;
       }
