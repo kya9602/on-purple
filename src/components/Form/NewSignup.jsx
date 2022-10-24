@@ -684,9 +684,7 @@ export default function VerticalLinearStepper() {
             return alert("모든 칸을 채워주세요! 👀 ")
         } else if (userinfo.imageUrl.trim === "") {
             return alert("사진을 등록해주세요! 😎")
-        };
-
-        if (usernameCheck === false) {
+        } else if (usernameCheck === false) {
             return alert("아이디 중복확인을 해주세요!!!");
         } else if (nicknameCheck === false) {
             return alert("닉네임 중복확인을 해주세요!!!")
