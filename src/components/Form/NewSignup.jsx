@@ -961,7 +961,7 @@ const InfoBodyBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 400px;
+  width: 330px;
 `
 
 //큰틀
@@ -1081,11 +1081,15 @@ const AddMyinfo = styled.div`
 
 //마이페이지 추가 정보란 낱개박스
 const MiniBox = styled.div`
-  height: 30px;
+  height: 50px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-
+  width:320px;
+  margin-bottom: 5px;
+  align-items: center ;
 `
+
 //마이페이지 낱개 박스 타이틀
 const MiniTitle = styled.div`
   margin-top: 1.3%;
@@ -1121,7 +1125,7 @@ const MiniHeader = styled.div`
   margin-bottom: 10px;
     font-weight: bolder;
   color: purple;
-  width: 400px;
+  width: 320px;
   margin-top: 10px;
 
 `

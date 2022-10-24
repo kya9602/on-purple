@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import defaultImage from "../../assets/images/default-image.jpg";
 import Delete from "../../assets/icons/delete.png"
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const Report = () => {
     const [title, setTitle] = useState("");
@@ -87,7 +88,9 @@ const Report = () => {
     }, [canSubmit]);
     return (
         <ReportContainerDiv>
-
+            <Btnbox>
+                <ArrowBackIosIcon className="BackBtn" fontSize="large" onClick={() => { navigate(-1); }}></ArrowBackIosIcon>
+            </Btnbox>
             <ReportSelectDiv>
                 <Reportselect onChange={handleSelectChange}>
                     {OPTIONS.map((option) => (
@@ -179,11 +182,21 @@ const ReportContainerDiv = styled.div`
     align-items:center;
     background-color: white;
     padding-bottom: 100px;
+    padding-top:100px;
+    .BackBtn{
+     cursor: pointer;   
+    }
+`
+
+const Btnbox = styled.div`
+    width: 380px;
+    /* padding-bottom: 20px; */
 `
 
 const ReportSelectDiv = styled.div`
     flex:1;
-    margin-top: 14vh;
+    margin-top: 2vh;
+    
 `
 const ImageWrapper = styled.div`
     display: flex;
