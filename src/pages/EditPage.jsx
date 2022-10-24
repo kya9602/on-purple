@@ -27,4 +27,5 @@ const Container = styled.div`
 const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
+  height: 100vh;
 `

@@ -8,7 +8,6 @@ import image from "../assets/images/배경화면으로.jpg"
 const ReportInfoPage = () => {
     return (
         <BackImage>
-
             <Container>
                 <Header />
                 <ReportInfo />
