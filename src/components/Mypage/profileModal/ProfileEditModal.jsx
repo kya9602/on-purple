@@ -122,7 +122,7 @@ const ProfileEditModal = (props) => {
 export default ProfileEditModal;
 
 const Header = styled.div`
-    margin-top: 65px;
+    margin-top: 50px;
     margin-bottom: 10px;
     font-size : 25px;
     font-weight: 600;
@@ -130,7 +130,7 @@ const Header = styled.div`
 
 
 const ButtonWrapper = styled.div`
-  margin-top  : 40px ;
+  margin-top  : 20px ;
 `
 
 const Btn = styled.button`

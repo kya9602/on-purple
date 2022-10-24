@@ -23,22 +23,22 @@ const ProfileDetail = () => {
 
 
     // 채팅 방 들어가는 룸 
-   const handleSubmit = useCallback(async (e) => {
+    const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         try {
-          await axios.post(`${process.env.REACT_APP_HOST}/chat/rooms`,{userId}, {
-            headers: {
-              "Authorization": localStorage.getItem("Authorization"),
-              "RefreshToken": localStorage.getItem("RefreshToken") 
-            },
-          });
-          window.alert("😎생성😎");
-          navigate(`/chat`);
+            await axios.post(`${process.env.REACT_APP_HOST}/chat/rooms`, { userId }, {
+                headers: {
+                    "Authorization": localStorage.getItem("Authorization"),
+                    "RefreshToken": localStorage.getItem("RefreshToken")
+                },
+            });
+            window.alert("😎생성😎");
+            navigate(`/chat`);
         } catch (e) {
-          // 서버에서 받은 에러 메시지 출력
-          window.alert("오류발생!" + "😭");
+            // 서버에서 받은 에러 메시지 출력
+            window.alert("오류발생!" + "😭");
         }
-      }, []); 
+    }, []);
 
 
     return (
@@ -116,7 +116,7 @@ const ProfileDetail = () => {
 
             <ButtonContainer>
                 <MatchingButton
-                onClick={handleSubmit}
+                    onClick={handleSubmit}
                 > 대화하기 💬 </MatchingButton>
             </ButtonContainer>
         </Container>
@@ -130,10 +130,10 @@ const Container = styled.div`
     /* justify-content: center; */
     flex-direction: column;
     align-items:center;
-    height: 100%;
-    width: 428px;
+    height: 100vh;
+    width: 100%;
     padding-top: 130px;
-    padding-bottom: 45vh;
+    /* padding-bottom: 45vh; */
     background-color: white;
     .BackBtn{
      cursor: pointer;   
@@ -141,7 +141,7 @@ const Container = styled.div`
 `
 
 const Btnbox = styled.div`
-    width: 400px;
+    width: 380px;
     padding-bottom: 20px;
 `
 

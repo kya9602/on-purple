@@ -93,9 +93,13 @@ const Detail = () => {
             </Swiper>
 
             <NameLikeWrap>
-                <div style={{ fontSize: "1.2rem", marginLeft: "22px", fontWeight: "bold" }}>{detail?.nickname}</div>
-                <div style={{ fontSize: "1rem", display: "flex" }}><span onClick={onLike}>💜</span> {detail?.likes}개</div>
-                <View>View : {detail?.view}</View>
+                <div style={{ display: "flex" }}>
+                    <div style={{ fontSize: "1.2rem", marginLeft: "10px", fontWeight: "bold", width: "70px" }}>{detail?.nickname}</div>
+                    <View>View : {detail?.view}</View>
+                </div>
+                <div style={{ fontSize: "1rem", display: "flex", width: "380px", justifyContent: "right", paddingRight: "10px" }}>
+                    <span onClick={onLike}>💜</span> {detail?.likes}개
+                </div>
             </NameLikeWrap>
 
             <Content><p>{detail?.content}</p></Content>
@@ -216,6 +220,9 @@ const NameLikeWrap = styled.div`
     align-items: center;
     gap:10px;
     margin-top:10px;
+    width: 380px;
+    height: 50px;
+    flex-direction: column;
 `
 const EditButton = styled.button`
     width: 40px;
