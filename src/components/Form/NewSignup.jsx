@@ -73,69 +73,6 @@ export default function VerticalLinearStepper() {
     };
 
 
-
-    // 기본회원정보 axios
-    // const addHandler = async () => {
-
-    //     if (userinfo.username.trim() === "" || userinfo.nickname.trim() === "" || userinfo.password.trim() === "" || userinfo.passwordConfirm.trim() === "") {
-    //         return alert("모든 칸을 채워주세요! 👀 ")
-    //     } else if (userinfo.imageUrl.trim === "") {
-    //         return alert("사진을 등록해주세요! 😎")
-    //     } else if (gender === "") {
-    //         return alert("성별을 선택해주세요! 👀 ")
-    //     }
-
-    //     ;
-
-    //     if (usernameCheck === false) {
-    //         return alert("아이디 중복확인을 해주세요!!!");
-    //     } else if (nicknameCheck === false) {
-    //         return alert("닉네임 중복확인을 해주세요!!!")
-    //     };
-
-
-    //     let json = JSON.stringify(userinfo);
-    //     const usernameblob = new Blob([json], { type: "application/json" });
-    //     formData.append("info", usernameblob);
-
-    //     const nicknameblob = new Blob([json], { type: "application/json" });
-    //     formData.append("info", nicknameblob);
-
-    //     const passwordblob = new Blob([json], { type: "application/json" });
-    //     formData.append("info", passwordblob);
-
-    //     const passwordConfirmblob = new Blob([json], { type: "application/json" });
-    //     formData.append("info", passwordConfirmblob);
-
-
-    //     let genderJson = JSON.stringify(gender);
-    //     const genderblob = new Blob([genderJson], { type: "application/json" });
-    //     formData.append("info", genderblob);
-
-    //     console.log("user is ", userinfo)
-    //     console.log("gender is ", gender)
-
-
-    //     const data = await axios.post(`${process.env.REACT_APP_HOST}/user/signup`, formData, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data'
-    //         }
-    //     });
-
-    //     console.log(data.data);
-
-    //     if (data.data.success) {
-    //         alert('다음 step으로 넘어가주세요~');
-    //         // handleNext();
-    //     }
-    //     else {
-    //         alert("중복확인 및 형식을 다시 확인하여 입력해주세요");
-    //     }
-
-    //     setUserinfo(initialState);
-
-    // };
-
     //유효성검사 
     const regexUsername = /^[A-Za-z0-9+]{4,12}$/;
     const regexNickname = /^[가-힣0-9+]{2,8}$/;
@@ -688,7 +625,16 @@ export default function VerticalLinearStepper() {
             return alert("아이디 중복확인을 해주세요!!!");
         } else if (nicknameCheck === false) {
             return alert("닉네임 중복확인을 해주세요!!!")
-        };
+        } else if (regexUsername.test(userinfo.username) === false) {
+            return alert("아이디를 형식에 맞춰서 작성해주세요")
+        } else if (regexNickname.test(userinfo.nickname) === false) {
+            return alert("닉네임을 형식에 맞춰서 작성해주세요 ")
+        } else if (regexPassword.test(userinfo.password) === false) {
+            return alert("비밀번호를 형식에 맞춰서 작성해주세요 ")
+        } else if (userinfo.password !== userinfo.passwordConfirm) {
+            return alert("비밀번호가 서로 일치하지않습니다")
+        }
+        ;
 
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
