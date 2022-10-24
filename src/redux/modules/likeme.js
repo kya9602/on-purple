@@ -14,7 +14,7 @@ export const __getLikeme = createAsyncThunk(
                         "RefreshToken": localStorage.getItem("RefreshToken"),
                     }
                 });
-            console.log(data.data.data)
+            // console.log(data.data.data)
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
 
