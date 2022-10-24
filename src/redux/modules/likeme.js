@@ -14,11 +14,11 @@ export const __getLikeme = createAsyncThunk(
                         "RefreshToken": localStorage.getItem("RefreshToken"),
                     }
                 });
-            console.log(data)
-            return thunkAPI.fulfillWithValue(data.data);
+            console.log(data.data.data)
+            return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
 
-            return thunkAPI.rejectWithValue(error.code);
+            return thunkAPI.rejectWithValue(error.code.data);
         }
 
     });
@@ -42,7 +42,7 @@ export const likemeSlice = createSlice({
         [__getLikeme.fulfilled]: (state, action) => {
             state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
             state.likeme = action.payload;
-            console.log("action is ", action.payload)
+            // console.log("action is ", action.payload)
         },
         [__getLikeme.pending]: (state) => {
             state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.

@@ -26,23 +26,27 @@ function Deck() {
   let filterMyData = data.filter(function (data) {
     return data.nickname !== Nickname;
   });
-  console.log('나를 제외한 DB', filterMyData);
+  // console.log('나를 제외한 DB', filterMyData);
 
 
-  //나를좋아요한 사람 가져오기
+  //내가 좋아요한 사람 가져오기
   const likeme = useSelector((state) => state.likeme)
   // console.log(likeme.likeme.data)
-  const likemeList = likeme?.likeme?.data
-  console.log(likemeList)
+
+  const likemeList = likeme?.likeme
+
+
+
+  console.log('제외되야하는', likemeList)
   useEffect(() => {
     dispatch(__getLikeme());
   }, [])
 
 
-  //모든 DB에서 나를 좋아요한 사람 제거
-  let finalMyData = filterMyData.filter((filterMyData) => {
-    return filterMyData.userId !== likemeList?.userId;
-  })
+  //모든 DB에서 내가 좋아요한 사람 제거
+  let finalMyData = filterMyData.filter((person) => {
+    // return person.userId !== likemeList.userId;
+  });
   console.log('제외할 거 다한', finalMyData)
 
   /* 보여줄 카드 갯수. */

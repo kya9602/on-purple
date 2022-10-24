@@ -82,7 +82,7 @@ export default EditModal;
 const Header = styled.div`
     margin-top: 65px;
     margin-bottom: 50px;
-    font-size : 25px;
+    font-size : 22px;
     font-weight: 600;
 `
 
@@ -121,7 +121,7 @@ const ButtonWrapper = styled.div`
 const Btn = styled.button`
   border : none;
   background-color : white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   padding: 3%;
   cursor: pointer;

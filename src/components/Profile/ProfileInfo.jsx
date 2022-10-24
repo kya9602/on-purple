@@ -123,7 +123,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items:center;
     height: 100vh;
-    width: 428px;
+    width: 100%;
     padding-top: 130px;
     /* padding-bottom: 45vh; */
     background-color: white;
@@ -133,7 +133,7 @@ const Container = styled.div`
 `
 
 const Btnbox = styled.div`
-    width: 400px;
+    width: 380px;
     /* padding-bottom: 20px; */
 `
 
@@ -148,7 +148,7 @@ const ImageCard = styled.img`
 
 const IntroduceCard = styled.div`
     margin-top: 20px;
-    width: 350px;
+    width: 320px;
     height: auto;
     padding-left: 10px;
     padding-bottom: 20px;

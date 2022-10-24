@@ -3,7 +3,7 @@ import styled from "styled-components";
 //마이페이지 큰박스
 export const MypageBox = styled.div`
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    width: 400px;
+    width: 380px;
     height: auto;
     padding-bottom: 10%;
     margin: auto;
@@ -141,7 +141,7 @@ export const ListBox = styled.div`
   display: flex;
   margin-top: 2vw;
   height: auto;
-  width: 420px;
+  width: 380px;
   justify-content: center;
 `
 
@@ -153,7 +153,7 @@ export const Listtitle = styled.div`
     margin-bottom: 1.5vw;
     font-size: 15px;
     font-weight: 600;
-    margin-left: 13px;
+    margin-left: 10px;
 `
 
 //나를 좋아요한 사람 목록박스
@@ -178,7 +178,7 @@ export const LoveCard = styled.div`
     border: 2px solid #9C7FCB;
     border-radius: 10px;
     padding : 1%;
-    width: 170px;
+    width: 160px;
     height:auto;
     text-align: center;
     padding-top: 10px;
@@ -203,7 +203,7 @@ export const MatchingCard = styled.div`
     border: 2px solid #cb7fb8;
     border-radius: 10px;
     padding : 1%;
-    width: 170px;
+    width: 160px;
     height:auto;
     text-align: center;
     padding-top: 10px;
@@ -279,7 +279,7 @@ export const StButton = styled.button`
 
 //수정큰틀
 export const SecondMypageBox = styled.div`
-    width:400px;
+    width:380px;
     height: auto;
     padding-bottom: 10vh;
     margin-left: auto;
@@ -297,7 +297,7 @@ export const SecondMyinfo = styled.div`
     border-bottom-style:solid; 
     border-bottom-color:gray;
     border-bottom-width:2px;
-    width: 380px;
+    width: 350px;
     height: 190px;
     display: flex;
     flex-direction: column;

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
-import image from "../../assets/images/moon.jpg"
+import image from "../../assets/images/배경화면으로.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { __getlastMessage } from '../../redux/modules/chatRoom';
 
@@ -20,7 +20,7 @@ function ChatRoom() {
     const [text, setText] = useState("")
     /* console.log(typeof roomId) */
     const messages = useSelector((state) => state.chatroom.lastmessage)
-    
+
     console.log(messages)
     useEffect(() => {
         let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
@@ -35,18 +35,18 @@ function ChatRoom() {
             wsDisConnect();
         }
     }, []);
-    
+
     const ws = useRef();
-    
+
     const token = localStorage.getItem("Authorization")
     const writer = localStorage.getItem("nickname")
     function wsConnect() {
         try {
             console.log(`소켓 연결을 시도합니다.`);
-            ws.current.debug = function (str) {console.log(str)};
+            ws.current.debug = function (str) { console.log(str) };
             ws.current.debug();
-          
-            ws.current.connect({ Authorizaion : token , type:"TALK" }, () => {
+
+            ws.current.connect({ Authorizaion: token, type: "TALK" }, () => {
                 // connect 이후 subscribe
                 console.log('연결 성공')
                 ws.current.subscribe(`/sub/chat/message`, (response) => {
@@ -58,7 +58,7 @@ function ChatRoom() {
                 const message = {
                     roomId: roomId,
                 };
-                ws.current.send(`/pub/chat/enter`, { Authorizaion : token } , JSON.stringify(message));
+                ws.current.send(`/pub/chat/enter`, { Authorizaion: token }, JSON.stringify(message));
             });
         } catch (error) {
             console.log('ERROR')
@@ -66,7 +66,7 @@ function ChatRoom() {
     }
 
     // 소켓 연결 해제
-    
+
     function wsDisConnect() {
         try {
             ws.current.disconnect(() => {
@@ -75,7 +75,7 @@ function ChatRoom() {
         } catch (error) {
         }
     };
-    
+
     const onSend = async () => {
         try {
             //send할 데이터
@@ -89,12 +89,12 @@ function ChatRoom() {
                 return;
             }
             // send message
-            ws.current.send("/pub/chat/enter", { Authorizaion : token } , JSON.stringify(message));
+            ws.current.send("/pub/chat/enter", { Authorizaion: token }, JSON.stringify(message));
             setText("");
         } catch (error) {
         }
     };
-    
+
     const onChangeChatHandler = useCallback((e) => {
         setText(e.target.value);
     }, []);
