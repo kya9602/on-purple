@@ -13,23 +13,13 @@ function Card({ i, x, y, rot, scale, trans, bind, objs }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-<<<<<<< HEAD
     /* 내 성별 */
     const { user } = useSelector((state) => state.user);
     const myGender = user?.gender;
     useEffect(() => {
       dispatch(__getUser());
     }, [__getUser])
-=======
-  /* 내 성별 */
-  const { user } = useSelector((state) => state.user);
-  const myGender = user?.gender;
-  /* console.log('myGender :' +myGender) */
-  useEffect(() => {
-    dispatch(__getUser());
-  }, [__getUser])
->>>>>>> ef7e5366b471e541c7569549e8efeb4400e8c8c8
-
+    
   const { nickname, age, area, introduction, imageUrl, userId, gender } = objs[i];
 
   return (
