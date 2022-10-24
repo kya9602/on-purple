@@ -175,11 +175,14 @@ export default function VerticalLinearStepper() {
         formData.append("info", genderblob);
 
 
-
-
-
-        if (input.age.trim() === "" || input.mbti.trim() === "" || input.introduction.trim() === "" || input.area.trim() === "") {
-            return alert("필수 정보는 입력해주어야합니다!!! 👀")
+        if (input.age.trim() === "") {
+            return alert("나이는 필수 정보입니다!! 👀")
+        } else if (input.mbti.trim() === "") {
+            return alert("MBTI는 필수로 입력해주어야합니다!!")
+        } else if (input.introduction.trim() === "") {
+            return alert("한줄소개는 필수로 입력해주어야합니다!!")
+        } else if (input.area.trim() === "") {
+            return alert("사는지역은 필수로 입력해주어야합니다!!")
         };
 
 
