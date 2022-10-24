@@ -23,7 +23,7 @@ function ChatRoom() {
     
     console.log(messages)
     useEffect(() => {
-        let sock = new SockJS(`http://3.34.196.38/stomp/chat`);
+        let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
         let client = Stomp.over(sock);
         ws.current = client;
         dispatch(__getlastMessage(roomId))
