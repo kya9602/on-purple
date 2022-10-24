@@ -5,7 +5,7 @@ import ChatHeader from './ChatHeader';
 import image from "../../assets/images/배경화면으로.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { __getlastMessage } from '../../redux/modules/chatRoom';
-
+import { subMessage } from '../../redux/modules/chatRoom';
 /* import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client"; */
 
@@ -20,7 +20,6 @@ function ChatRoom() {
     const [text, setText] = useState("")
     /* console.log(typeof roomId) */
     const messages = useSelector((state) => state.chatroom.lastmessage)
-
     console.log(messages)
     useEffect(() => {
         let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
@@ -52,12 +51,14 @@ function ChatRoom() {
                 // connect 이후 subscribe
                 console.log('연결 성공')
                 //4. subscribe(path, callback)으로 메세지를 받을 수 있음
-                ws.current.subscribe(`/sub/chat/message`, (response) => {
+                ws.current.subscribe(`/sub/chat/room/${roomId}`, (response) => {
                     const newMessage = JSON.parse(response.body);
-                    console.log(newMessage)
+                    /* console.log(newMessage) */
+                    dispatch(subMessage(newMessage));
                 });
                 // 입장 시 enter 메시지 발신
                 const message = {
+                    type:"TALK",
                     roomId: roomId,
                 };
                 //3. send(path, header, message)로 메세지를 보낼 수 있음
@@ -83,6 +84,7 @@ function ChatRoom() {
         try {
             //send할 데이터
             const message = {
+                type:"TALK",
                 roomId: roomId,
                 message: text,
             };
@@ -102,99 +104,6 @@ function ChatRoom() {
         setText(e.target.value);
     }, []);
 
- /*    useEffect(() => {
-        connect();
-    
-        return () => disconnect();
-      }, []);
-      const token = localStorage.getItem("Authorization")
-      const client = useRef({});
-      const connect = () => {
-        client.current = new StompJs.Client({
-          //websocket 주소만 입력 가능 * ws://, wss:// 로 시작
-          // brokerURL: "ws://54.180.142.30/ws-stomp/websocket",
-          brokerURL: "wss://sparta521.shop/stomp/chat/websocket",
-          connectHeaders: {
-            Authorization: token,
-          },
-          debug: function (str) {
-            console.log(str);
-          },
-          reconnectDelay: 5000,
-          heartbeatIncoming: 4000,
-          heartbeatOutgoing: 4000,
-          onConnect: () => {
-            //구독요청
-            subscribe();
-            //입장 메시징(type0)
-            client.current.publish({
-              destination: "/pub/chat/enter",
-              headers: { Authorization: token },
-              //전송할 데이터를 입력
-              body: JSON.stringify({
-                type:"TALK",
-                message: "1",
-                roomId: roomId,
-              }),
-            });
-            var heartbeat_msg = '--heartbeat--', heartbeat_interval = null;
-            // missed_heartbeats = 0;
-            if (heartbeat_interval === null) {
-              // missed_heartbeats = 0;
-              heartbeat_interval = setInterval(function() {
-                  try {
-                      // missed_heartbeats++;
-                      // if (missed_heartbeats >= 6)
-                          // throw new Error("Too many missed heartbeats.");
-                      client.current.publish({                                     
-                        destination: "/pub/chat/enter", 
-                        headers: { Authorization: token },
-                        //전송할 데이터를 입력
-                        body: JSON.stringify({
-                          type:"TALK",                        
-                          message: heartbeat_msg,
-                          roomId: roomId.id,
-                          // userId:userId,
-                        }),
-                      });
-                  } catch(e) {
-                      clearInterval(heartbeat_interval);
-                      // const heartbeat_interval = null;
-                      // console.warn("Closing connection. Reason: " + e.message);
-                      // console.log("짱많이 보냄")
-                      // disconnect();
-                  }
-              }, 3000);
-          }
-          },
-        });
-        client.current.activate();
-      };
-      const subscribe = () => {
-        client.current.subscribe(`/sub/chat/message`, function (chat) {
-          const content = JSON.parse(chat.body);
-           console.log(chat)
-        });
-      };
-      const disconnect = () => {
-        //퇴장메시징(type1)
-        client.current.publish({
-          destination: "/pub/chat/enter",
-          headers: { Authorization: token },
-          //전송할 데이터를 입력
-          body: JSON.stringify({
-            type: "TALK",
-            message: "1",
-            roomId: roomId,
-          }),
-        });
-        //구독해제
-        client.current.unsubscribe();
-        //웹소켓 비활성화
-        client.current.deactivate();
-    
-        navigate("/chat");
-      }; */
     return (
         <BackImage>
             <Container>
@@ -204,12 +113,12 @@ function ChatRoom() {
                 <YouMessage>안녕</YouMessage>
                 </Screenbox> */}
                 <ChatContainer>
-                    <Input /* value={text}
-                        onChange={onChangeChatHandler} */
+                    <Input value={text}
+                        onChange={onChangeChatHandler}
                         placeholder="메세지를 입력하세요..."
                         type="text"
                     />
-                    <InputButton /* onClick={onSend} */>전송</InputButton>
+                    <InputButton onClick={onSend}>전송</InputButton>
                 </ChatContainer>
 
             </Container>
