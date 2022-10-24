@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ReportInfo from "../components/Information/ReportInfo";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer"
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 
 const ReportInfoPage = () => {
     return (

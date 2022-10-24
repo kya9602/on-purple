@@ -3,7 +3,7 @@ import Mypage from "../components/Mypage/Mypage";
 import Footer from "../components/Footer/Footer"
 import styled from "styled-components";
 import Header from "../components/Header/Header";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 
 const MypagePage = () => {
   return (

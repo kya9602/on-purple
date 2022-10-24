@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/Footer/Footer"
 import Header from "../components/Header/Header";
 import ProfileInfo from "../components/Profile/ProfileInfo";
-import image from "../assets/images/moon.jpg"
+import image from "../assets/images/배경화면으로.jpg"
 import styled from "styled-components";
 
 const ProfileInfoPage = () => {

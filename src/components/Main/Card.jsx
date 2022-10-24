@@ -13,106 +13,116 @@ function Card({ i, x, y, rot, scale, trans, bind, objs }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
     /* 내 성별 */
     const { user } = useSelector((state) => state.user);
     const myGender = user?.gender;
     useEffect(() => {
       dispatch(__getUser());
     }, [__getUser])
+=======
+  /* 내 성별 */
+  const { user } = useSelector((state) => state.user);
+  const myGender = user?.gender;
+  /* console.log('myGender :' +myGender) */
+  useEffect(() => {
+    dispatch(__getUser());
+  }, [__getUser])
+>>>>>>> ef7e5366b471e541c7569549e8efeb4400e8c8c8
 
   const { nickname, age, area, introduction, imageUrl, userId, gender } = objs[i];
 
   return (
-    
+
     <CardContainerDiv>
       {
         objs.map((person) => {
           /* 내가 남자일때 */
-          if(myGender==='male')
-          if(gender==='female'){
-            return(
-              <animated.div
-        key = {person.nickname}
-        className="Container"
-        style={{
-          transform: interpolate(
-            [x, y],
-            (x, y) => `translate3d(${x}px,${y}px,0)`
-          )
-        }}
+          if (myGender === 'male')
+            if (gender === 'female') {
+              return (
+                <animated.div
+                  key={person.nickname}
+                  className="Container"
+                  style={{
+                    transform: interpolate(
+                      [x, y],
+                      (x, y) => `translate3d(${x}px,${y}px,0)`
+                    )
+                  }}
 
-      >
-        <animated.div
-          className="Container"
-          {...bind(i)}
-          style={{
-            transform: interpolate([rot, scale], trans)
-          }}
-        >
-          <div className="CardContainer">
+                >
+                  <animated.div
+                    className="Container"
+                    {...bind(i)}
+                    style={{
+                      transform: interpolate([rot, scale], trans)
+                    }}
+                  >
+                    <div className="CardContainer">
 
-            <div
-              className="Cardimage"
-              style={{ backgroundImage: `url(${imageUrl})` }}></div>
-            <h2 style={{ marginLeft: "10px" }}>{nickname},</h2>
-            <h2>{age}</h2>
-
-
-            <button className="Btn" onClick={() => { navigate(`/profileInfo/${userId}`); }}>더 알아보기 </button>
+                      <div
+                        className="Cardimage"
+                        style={{ backgroundImage: `url(${imageUrl})` }}></div>
+                      <h2 style={{ marginLeft: "10px" }}>{nickname},</h2>
+                      <h2>{age}</h2>
 
 
-            <h4>{area}</h4>
-            <h4>{introduction}</h4>
-          </div>
-        </animated.div>
-      </animated.div>
-            )
-          }
+                      <button className="Btn" onClick={() => { navigate(`/profileInfo/${userId}`); }}>더 알아보기 </button>
+
+
+                      <h4>{area}</h4>
+                      <h4>{introduction}</h4>
+                    </div>
+                  </animated.div>
+                </animated.div>
+              )
+            }
 
           /* 내가 여자일때 */
-        if(myGender==='female'){
-          if(gender==='male'){
-            return(
-              <animated.div
-                key = {person.nickname}
-                className="Container"
-                style={{
-                  transform: interpolate(
-                    [x, y],
-                    (x, y) => `translate3d(${x}px,${y}px,0)`
-                  )
-                }}
+          if (myGender === 'female') {
+            if (gender === 'male') {
+              return (
+                <animated.div
+                  key={person.nickname}
+                  className="Container"
+                  style={{
+                    transform: interpolate(
+                      [x, y],
+                      (x, y) => `translate3d(${x}px,${y}px,0)`
+                    )
+                  }}
 
-            >
-            <animated.div
-              className="Container"
-              {...bind(i)}
-              style={{
-                transform: interpolate([rot, scale], trans)
-              }}
-            >
-          <div className="CardContainer">
+                >
+                  <animated.div
+                    className="Container"
+                    {...bind(i)}
+                    style={{
+                      transform: interpolate([rot, scale], trans)
+                    }}
+                  >
+                    <div className="CardContainer">
 
-            <div
-              className="Cardimage"
-              style={{ backgroundImage: `url(${imageUrl})` }}></div>
-            <h2 style={{ marginLeft: "10px" }}>{nickname},</h2>
-            <h2>{age}</h2>
-
-
-            <button className="Btn" onClick={() => { navigate(`/profileInfo/${userId}`); }}>더 알아보기 </button>
+                      <div
+                        className="Cardimage"
+                        style={{ backgroundImage: `url(${imageUrl})` }}></div>
+                      <h2 style={{ marginLeft: "10px" }}>{nickname},</h2>
+                      <h2>{age}</h2>
 
 
-            <h4>{area}</h4>
-            <h4>{introduction}</h4>
-          </div>
-        </animated.div>
-      </animated.div>
-            )
+                      <button className="Btn" onClick={() => { navigate(`/profileInfo/${userId}`); }}>더 알아보기 </button>
+
+
+                      <h4>{area}</h4>
+                      <h4>{introduction}</h4>
+                    </div>
+                  </animated.div>
+                </animated.div>
+              )
+            }
           }
-        }
 
-        
+
         })
       }
       {/* <animated.div

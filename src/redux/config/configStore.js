@@ -8,6 +8,8 @@ import main from "../modules/main";
 import user from "../modules/signup";
 import chatroom from "../modules/chatRoom"
 import report from "../modules/report";
+import likemeSlice from "../modules/likeme";
+
 const store = configureStore({
     reducer: {
         profile,
@@ -19,6 +21,7 @@ const store = configureStore({
         main,
         user,
         report,
+        likeme: likemeSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false, }),
 })
