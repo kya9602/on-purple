@@ -32,7 +32,7 @@ export const __enterChatroom = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken") 
         },
       })
-      /* console.log(data.data) */
+      console.log("채팅방입장" , data.data)
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -85,11 +85,7 @@ const initialState = {
 export const chatroom = createSlice({
   name: "chatroom",
   initialState,
-  reducers: {
-    subMessage(state, action) {
-    state.lastmessage.push(action.payload);
-  },
-  },
+  reducers: {},
 
   extraReducers: {
     [__getChatrooms.pending]: (state) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
@@ -6,69 +6,67 @@ import image from "../../assets/images/moon.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { __getlastMessage } from '../../redux/modules/chatRoom';
 
-import * as StompJs from "@stomp/stompjs";
+/* import * as StompJs from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
+ */
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 
-/* import SockJS from "sockjs-client";
-import Stomp from "stompjs"; */
-
-import { subMessage } from '../../redux/modules/chatRoom';
 
 function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { roomId } = useParams();
+    const [text, setText] = useState("")
     /* console.log(typeof roomId) */
-    /* const data = useSelector((state) => state) */
-
-// 일단 죽여  
-/*     const ws = useRef();
+    const messages = useSelector((state) => state.chatroom.lastmessage)
     
-
+    console.log(messages)
     useEffect(() => {
-        let sock = new SockJS(`http://3.34.196.38:8080/stomp/chat`);
+        let sock = new SockJS(`http://3.34.196.38/stomp/chat`);
         let client = Stomp.over(sock);
         ws.current = client;
-        console.log(client)
-        dispatch(__getlastMessage(roomId));
+        dispatch(__getlastMessage(roomId))
     }, []);
 
     useEffect(() => {
-        connect();
+        wsConnect();
         return () => {
             wsDisConnect();
         }
     }, []);
-
+    
+    const ws = useRef();
+    
+    const token = localStorage.getItem("Authorization")
+    const writer = localStorage.getItem("nickname")
     function wsConnect() {
         try {
             console.log(`소켓 연결을 시도합니다.`);
             ws.current.debug = function (str) {console.log(str)};
             ws.current.debug();
-            let token = localStorage.getItem("Authorization")
-
-            // type: "CHAT"을 보내는 용도는 채팅방에 들어갈 때를 알기 위해서
-            ws.current.connect({ Authorization : token, type: "TALK" }, () => {
+          
+            ws.current.connect({ Authorizaion : token , type:"TALK" }, () => {
                 // connect 이후 subscribe
-                console.log("연결 성공")
+                console.log('연결 성공')
                 ws.current.subscribe(`/sub/chat/message`, (response) => {
+                    console.log(response)
                     const newMessage = JSON.parse(response.body);
-                    console.log(newMessage);
                 });
-
                 // 입장 시 enter 메시지 발신
                 // 이 메시지를 기준으로 서버에서 unReadCount 판별
                 const message = {
                     roomId: roomId,
                 };
-                ws.current.send(`/pub/chat/enter`, { Authorization: token }, JSON.stringify(message));
+                ws.current.send(`/pub/chat/enter`, { Authorizaion : token } , JSON.stringify(message));
             });
         } catch (error) {
+            console.log('ERROR')
         }
     }
 
     // 소켓 연결 해제
-    //, credentials: 'include'
+    
     function wsDisConnect() {
         try {
             ws.current.disconnect(() => {
@@ -76,21 +74,43 @@ function ChatRoom() {
             });
         } catch (error) {
         }
-    }
+    };
+    
+    const onSend = async () => {
+        try {
+            //send할 데이터
+            const message = {
+                roomId: roomId,
+                message: text,
+            };
 
-;*/
+            if (text.trim() === "") {
+                window.alert("메시지를 입력해주세요")
+                return;
+            }
+            // send message
+            ws.current.send("/pub/chat/enter", { Authorizaion : token } , JSON.stringify(message));
+            setText("");
+        } catch (error) {
+        }
+    };
+    
+    const onChangeChatHandler = useCallback((e) => {
+        setText(e.target.value);
+    }, []);
+
 
     return (
         <BackImage>
             <Container>
                 {/* <ChatHeader /> */}
                 <ChatContainer>
-                    <Input /* value={input}
-                        onChange={(e) => setInput(e.target.value)} */
+                    <Input value={text}
+                        onChange={onChangeChatHandler}
                         placeholder="메세지를 입력하세요..."
                         type="text"
                     />
-                    <InputButton /* onClick={handleSend} */>전송</InputButton>
+                    <InputButton onClick={onSend}>전송</InputButton>
                 </ChatContainer>
 
             </Container>
