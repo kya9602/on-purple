@@ -9,17 +9,115 @@ import { __getUser } from "../../redux/modules/signup";
 
 
 
-function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
+function Card({ i, x, y, rot, scale, trans, bind, objs }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+    /* 내 성별 */
+    const { user } = useSelector((state) => state.user);
+    const myGender = user.gender;
+    /* console.log('myGender :' +myGender) */
+    useEffect(() => {
+      dispatch(__getUser());
+    }, [__getUser])
 
 
-  const { nickname, age, area, introduction, imageUrl, userId } = objs[i];
+  const { nickname, age, area, introduction, imageUrl, userId, gender } = objs[i];
 
   return (
+    
     <CardContainerDiv>
-      <animated.div
+      {
+        objs.map((person) => {
+          /* 내가 남자일때 */
+          if(myGender==='male')
+          if(gender==='female'){
+            return(
+              <animated.div
+        key = {person.nickname}
+        className="Container"
+        style={{
+          transform: interpolate(
+            [x, y],
+            (x, y) => `translate3d(${x}px,${y}px,0)`
+          )
+        }}
+
+      >
+        <animated.div
+          className="Container"
+          {...bind(i)}
+          style={{
+            transform: interpolate([rot, scale], trans)
+          }}
+        >
+          <div className="CardContainer">
+
+            <div
+              className="Cardimage"
+              style={{ backgroundImage: `url(${imageUrl})` }}></div>
+            <h2 style={{ marginLeft: "10px" }}>{nickname},</h2>
+            <h2>{age}</h2>
+
+
+            <button className="Btn" onClick={() => { navigate(`/profileInfo/${userId}`); }}>더 알아보기 </button>
+
+
+            <h4>{area}</h4>
+            <h4>{introduction}</h4>
+          </div>
+        </animated.div>
+      </animated.div>
+            )
+          }
+
+          /* 내가 여자일때 */
+        if(myGender==='female'){
+          if(gender==='male'){
+            return(
+              <animated.div
+                key = {person.nickname}
+                className="Container"
+                style={{
+                  transform: interpolate(
+                    [x, y],
+                    (x, y) => `translate3d(${x}px,${y}px,0)`
+                  )
+                }}
+
+            >
+            <animated.div
+              className="Container"
+              {...bind(i)}
+              style={{
+                transform: interpolate([rot, scale], trans)
+              }}
+            >
+          <div className="CardContainer">
+
+            <div
+              className="Cardimage"
+              style={{ backgroundImage: `url(${imageUrl})` }}></div>
+            <h2 style={{ marginLeft: "10px" }}>{nickname},</h2>
+            <h2>{age}</h2>
+
+
+            <button className="Btn" onClick={() => { navigate(`/profileInfo/${userId}`); }}>더 알아보기 </button>
+
+
+            <h4>{area}</h4>
+            <h4>{introduction}</h4>
+          </div>
+        </animated.div>
+      </animated.div>
+            )
+          }
+        }
+
+        
+        })
+      }
+      {/* <animated.div
         className="Container"
         key={i}
         style={{
@@ -53,7 +151,7 @@ function Card({ i, x, y, rot, scale, trans, bind, objs, }) {
             <h4>{introduction}</h4>
           </div>
         </animated.div>
-      </animated.div>
+      </animated.div> */}
     </CardContainerDiv>
   );
 

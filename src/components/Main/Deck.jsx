@@ -19,7 +19,7 @@ function Deck() {
   const { data, isLoading, error } = useSelector((state) => state.main)
   /* console.log('모든 DB',data) */
 
-  /* 내 요소 */
+  /* 내 닉네임 */
   const Nickname = localStorage.getItem("nickname")
   /* console.log('mynickname', Nickname) */
 

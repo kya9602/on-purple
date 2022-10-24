@@ -198,7 +198,7 @@ export default function VerticalLinearStepper() {
         setInput({ ...input, [name]: value, });
     };
 
-    // console.log("input is ", input.age)
+    console.log("input is ", input.age)
 
 
     // axios
