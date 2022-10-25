@@ -151,7 +151,7 @@ const Mypage = () => {
                     <ListBox>
                         {/* 나를 좋아요한 목록 박스 */}
                         <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Listtitle>내가 받은 Perple</Listtitle>
+                            <Listtitle>내가 받은 Purple💜</Listtitle>
                             <LovemeBox>
                                 <LoveCard>
                                     {userInfo?.likedResponseDtoList?.map((likeMeitem) => {
@@ -165,7 +165,7 @@ const Mypage = () => {
 
                         {/* 나와 매칭된 사람 목록 박스 */}
                         <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Listtitle>나랑 마음이 통한 사람</Listtitle>
+                            <Listtitle>마음이 통한 사람 💜</Listtitle>
 
                             <MatchingBox>
                                 <MatchingCard>

@@ -1,14 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import Chating from "../../assets/icons/chating.png"
 import Dashboard from "../../assets/icons/dashboard.png"
 import Home from "../../assets/icons/home.png"
-import Return from "../../assets/icons/return.png"
+
 
 const Footer = () =>{
-    const navigate = useNavigate();
     return(
         <FooterContainer>
             {/* <div onClick={()=>{navigate(-1)}}>
@@ -20,19 +18,19 @@ const Footer = () =>{
             <Link to="/board/taste">
                 <MainContainer>
                     <img src={Dashboard} alt=""/>
-                    <span>게시판</span>
+                    <span>Board</span>
                 </MainContainer>
             </Link>
             <Link to="/" >
                 <MainContainer>
                     <img src={Home} alt=""/>
-                    <span>홈으로</span>
+                    <span>Home</span>
                 </MainContainer>
             </Link>
             <Link to="/chat" >
                 <MainContainer>
                     <img src={Chating} alt=""/>
-                    <span>채팅</span>
+                    <span>Chat</span>
                 </MainContainer>
             </Link>
         </FooterContainer>
@@ -71,6 +69,6 @@ const MainContainer = styled.div `
     }
     span{
         margin: 0 auto;
-        
+        color:#8077C6;
     }
 `
