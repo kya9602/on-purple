@@ -22,10 +22,10 @@ const Report = () => {
     //select
     const OPTIONS = [
         { value: "카테고리 선택", name: "카테고리 선택" },
-        { value: "fake", name: "가짜 프로필, 성별" },
+        { value: "fake", name: "사칭, 가짜, 성별" },
         { value: "minor", name: "미성년자" },
         { value: "sexual", name: "성적인 콘텐츠" },
-        { value: "fraud", name: "사기, 영업활동" },
+        { value: "fraud", name: "사기, 광고, 불법" },
         { value: "violence", name: "폭력, 위협" },
     ];
     const handleSelectChange = (e) => {
