@@ -17,7 +17,6 @@ import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination } from "swiper";
 import Swal from "sweetalert2";
-
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
@@ -27,7 +26,6 @@ const Detail = () => {
     const [show, setShow] = useState(false);
     const { isLoading, error, detail } = useSelector((state) => state?.post);
     const { postId } = useParams();
-    /* console.log(detail) */
 
     useEffect(() => {
         dispatch(__getPostsDetail(postId));
@@ -47,7 +45,7 @@ const Detail = () => {
     }
     const onLike = (event) => {
         event.preventDefault();
-        dispatch(__likePost(postId));
+        dispatch(__likePost(postId))
     };
 
     // URL 입력해서 들어오는 경우 로그인 유무 판단 후 2초뒤 로그인 페이지로 보냄
@@ -216,7 +214,6 @@ const Content = styled.div`
 const ImgBox = styled.div`
     width: 100%;
     height: 100%;
-    margin-top: 3vw;
     z-index: -99;
 `
 
