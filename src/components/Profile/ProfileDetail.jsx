@@ -206,7 +206,7 @@ const IntroduceCard = styled.div`
     word-break: keep-all;
     border-radius:20px;
     border: 1px solid gray;
-    box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3)
+    box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);
 `
 
 const NicknameBox = styled.div`
