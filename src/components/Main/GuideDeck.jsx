@@ -9,19 +9,40 @@ import GuideCard from "./GuideCard";
 
 import styled from "styled-components";
 
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '1px solid #ABA1B0',
+  boxShadow: 24,
+  p: 4,
+};
 
 function GuideDeck() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+
   /* 모든DB */
   const { data, isLoading, error } = useSelector((state) => state.main)
   /* console.log('모든 DB',data) */
+  const filterData = data.slice(0,5)
 
   /* 보여줄 카드 갯수. */
   const cards = [];
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < filterData.length; i++) {
     cards.push(i);
   }
 //console.log('data',filterMyData)
@@ -94,12 +115,12 @@ function GuideDeck() {
         
         /* like rigth swipe(회원 좋아요) */
         if (x > 600) {
-          console.log('userId',data[i].userId,'좋아요(실행안됨)')
-          
+          console.log('userId',filterData[i].userId,'좋아요(실행안됨)')
+          handleOpen()
         /* unlike left swipe(회원 싫어요) */
         } if (x < -600) {
-          console.log('userId',data[i].userId,'싫어요(실행안됨)')
-
+          console.log('userId',filterData[i].userId,'싫어요(실행안됨)')
+          handleOpen()
         } /* if(x===0){
           console.log(objs[i].name)
         } */
@@ -127,7 +148,32 @@ function GuideDeck() {
     return <>{error.message}</>
   }
 
-
+  if(open){
+    return (
+      <div>
+        <Button onClick={handleOpen}>Open modal</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          
+          <Box sx={style}>
+            <BoxContainer>
+              <h2>새로운 사람을 만나러 가 볼까요?</h2>
+              <div>
+                <ModalButton1 onClick={() => {navigate(`/signup`);}}>회원 가입 하러 가기</ModalButton1>
+                <ModalButton2 onClick={() => {setOpen(false)}}>닫기</ModalButton2>
+              </div>
+            </BoxContainer>
+          </Box>
+          
+          
+        </Modal>
+      </div>
+    );
+  }
 
   return props.map(({ x, y, rot, scale, props }, i) => (
     <GuideCard
@@ -140,7 +186,7 @@ function GuideDeck() {
       scale={scale}
       trans={trans}
       cards={cards}
-      objs={data}
+      objs={filterData}
       bind={bind}
     /* imageUrlArry={imageUrlArry} */
     />
@@ -155,4 +201,34 @@ export default GuideDeck;
 const IsLoading = styled.div`
     display: flex;
     justify-content: center;
+`
+const BoxContainer = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`
+const ModalButton1 = styled.button`
+    margin-right: 10px;
+    border: 2px solid #9966CC;
+    color:white;
+    background-color: #9966CC;
+    font-weight: 600;
+    font-size: 15px;
+    height: 40px;
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+`
+
+const ModalButton2 = styled.button`
+    margin-left: 10px;
+    border: 2px solid #9966CC;
+    color:white;
+    background-color: #9966CC;
+    font-weight: 600;
+    font-size: 15px;
+    height: 40px;
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
 `

@@ -15,13 +15,13 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '1px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
 const GuideModal = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -62,9 +62,9 @@ const BoxImg = styled.img`
 `
 
 const SignupButton = styled.button`
-    border: 2px solid #6e96ee;
+    border: 2px solid #9966CC;
     color:white;
-    background-color: #4097df;
+    background-color: #9966CC;
     font-weight: 600;
     font-size: 15px;
     height: 40px;
