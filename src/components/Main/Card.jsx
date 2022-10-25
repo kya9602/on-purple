@@ -13,13 +13,14 @@ function Card({ i, x, y, rot, scale, trans, bind, objs }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
     /* 내 성별 */
     const { user } = useSelector((state) => state.user);
     const myGender = user?.gender;
     useEffect(() => {
       dispatch(__getUser());
     }, [__getUser])
-    
+
   const { nickname, age, area, introduction, imageUrl, userId, gender } = objs[i];
 
   return (
@@ -190,7 +191,7 @@ justify-content: center;
 .CardContainer {
   
   
-  background-color: white;
+  background-color: #ebebeb;
   background-size: auto 85%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -200,7 +201,7 @@ justify-content: center;
   max-height: 450px;
   will-change: transform;
   border-radius: 10px;
-  box-shadow: 0 1px 21px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
+  /* box-shadow: 0 1px 21px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3); */
 
 }
 
