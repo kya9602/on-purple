@@ -69,7 +69,9 @@ const Search = () => {
               <img src={searchIcon} alt="" />
         </GoSearch>
       </InputBtnWrap>
-      {post === null ?
+
+      <PostBox>
+        {post === null ?
         (<None>
           <img src={Notfound} alt="" />
           <span>검색 결과가 없습니다 ☹️</span>
@@ -82,6 +84,7 @@ const Search = () => {
             {post.map((item) => (<SearchCard item={item} key={item?.postId} />))}
           </>
         )}
+      </PostBox>
     </Container>
   )
 };
@@ -90,9 +93,19 @@ export default Search;
 
 const Container = styled.div`
     background-color: white;
+    max-width: 428px;
+    overflow-y: auto;
     height: 100vh;
-    width: 100%;
-    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(250, 213, 213, 0.4);
+     }
+     &::-webkit-scrollbar-thumb {
+    background: rgba(252, 112, 112, 0.3);
+    border-radius: 6px;
+    }
 `
 
 const SearchInput = styled.input`
@@ -132,6 +145,10 @@ const InputBtnWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+`
+
+const PostBox = styled.div`
+    margin-bottom: 80px;
 `
 
 const None = styled.div`
