@@ -19,12 +19,7 @@ const Search = () => {
       const value = e.target.value;
       dispatch(__searchPosts(searchTerm));
       navigate("/search/" + value);
-    } else {
-      new Swal({
-        title: "키워드를 입력해주세요!",
-        icon: "warning",
-      });
-    }
+    } 
   };
 
   const getSearchTerm = () => {
@@ -57,6 +52,7 @@ const Search = () => {
   }
   return (
     <Container>
+      <Head>게시글의 제목을 기준으로 검색합니다.</Head>
       <InputBtnWrap>
         <SearchInput
           type="search"
@@ -65,16 +61,29 @@ const Search = () => {
           onChange={(e) => {
             setSearchTerm(e.target.value)
           }}
+          onKeyDown={searchEnter}
           placeholder=" 검색어를 입력해주세요.." />
-        <GoSearch onClick={getSearchTerm}><img src={searchIcon} alt="" /></GoSearch>
+        <GoSearch 
+            onClick={getSearchTerm}
+            >
+              <img src={searchIcon} alt="" />
+        </GoSearch>
       </InputBtnWrap>
+
       <PostBox>
         {post === null ?
-          (<None>
-            <img src={Notfound} alt="" />
-            <span>검색 결과가 없습니다 ☹️</span>
-          </None>)
-          : (post.map((item) => (<SearchCard item={item} key={item?.postId} />)))}
+        (<None>
+          <img src={Notfound} alt="" />
+          <span>검색 결과가 없습니다 ☹️</span>
+        </None>)
+        : (
+          <>
+            <SearchResultHead>
+              <span>" {searchTerm} "</span>을 검색한 결과 입니다.
+            </SearchResultHead>  
+            {post.map((item) => (<SearchCard item={item} key={item?.postId} />))}
+          </>
+        )}
       </PostBox>
     </Container>
   )
@@ -136,7 +145,6 @@ const InputBtnWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
-    padding-top: 90px;
 `
 
 const PostBox = styled.div`
@@ -156,5 +164,20 @@ const None = styled.div`
         margin-top: 100px;
         width: 300px;
         height: 300px;
+    }
+`
+
+const Head = styled.div`
+    text-align: center;
+    width: 100%;
+    height: 20px;
+    margin: 0 auto;
+    padding-top: 90px;
+`
+const SearchResultHead = styled.div`
+    text-align: center;
+    font-size: 15px;
+    span{
+      font-weight: bold;
     }
 `
