@@ -8,12 +8,31 @@ import TopButton from "./ScrollTop";
 import axios from "axios";
 import Pagination from "./Pagination/Pagination";
 import searchIcon from "../../assets/icons/search.png"
+import Modal from "@mui/material/Modal"
+import Box from '@mui/material/Box';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '1px solid #ABA1B0',
+    boxShadow: 24,
+    p: 4,
+};
+
 const List = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isLoading, error, post } = useSelector((state) => state?.post)
     const { Category } = useParams();
-    console.log(post)
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     // 페이지 네이션
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -78,15 +97,32 @@ const List = () => {
         <>
             <Wrapper>
                 <CategoryContaier>
-                    <Box onClick={goDrive}>드라이브 가실 분?</Box>
-                    <Box onClick={goTaste}>맛집 추천</Box>
-                    <Box onClick={goDate}>데이트 코스 추천</Box>
-                    <Box onClick={goMeet}>번개 만남</Box>
-                    <Box onClick={goBar}>술 한잔 하실 분?</Box>
-                    <Box onClick={goFashion}>패션 질문</Box>
+                    <CategoryBox onClick={goDrive}>드라이브 가실 분?</CategoryBox>
+                    <CategoryBox onClick={goTaste}>맛집 추천</CategoryBox>
+                    <CategoryBox onClick={goDate}>데이트 코스 추천</CategoryBox>
+                    <CategoryBox onClick={goMeet}>번개 만남</CategoryBox>
+                    <CategoryBox onClick={goBar}>술 한잔 하실 분?</CategoryBox>
+                    <CategoryBox onClick={goFashion}>패션 질문</CategoryBox>
                 </CategoryContaier>
                 <SearchCautionWrap>
-                    <span>게시판 이용 주의사항 📄</span>
+                    <ModalSpan>
+                        <span onClick={handleOpen}>게시판 이용 주의사항 📄</span>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style}>
+                                <BoxContainer>
+                                    <h2>새로운 사람을 만나러 가 볼까요?</h2>
+                                    <div>
+
+                                    </div>
+                                </BoxContainer>
+                            </Box>
+                        </Modal>
+                    </ModalSpan>
                     <GoSearch onClick={goSearch}><img src={searchIcon} alt="" /></GoSearch>
                 </SearchCautionWrap>
 
@@ -111,7 +147,7 @@ const Wrapper = styled.div`
     background-color: white;
 `
 
-const Box = styled.div`
+const CategoryBox = styled.div`
     display:inline-block; 
     background-color: white;
     width:100px; 
@@ -164,11 +200,19 @@ const SearchCautionWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
+`
+const BoxContainer = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`
+const ModalSpan = styled.div`
     span{
         font-size: 15px;
         font-weight: 600;
         margin: 0 auto;
         padding-left: 55px;
         cursor: pointer;
-    }
+    }  
 `
