@@ -93,17 +93,17 @@ const List = () => {
     const goSearch = () => {
         navigate(`/search`)
     }
-    // 게시판 이용 주의 사항 모달 만들 예정.
+    
     return (
     <>
         <Wrapper>
             <CategoryContaier>
-                <CategoryBox onClick={goDrive}>드라이브 가실 분?</CategoryBox>
-                <CategoryBox onClick={goTaste}>맛집 추천</CategoryBox>
-                <CategoryBox onClick={goDate}>데이트 코스 추천</CategoryBox>
+                <CategoryBox onClick={goDrive}>드라이브</CategoryBox>
+                <CategoryBox onClick={goTaste}>맛집</CategoryBox>
+                <CategoryBox onClick={goDate}>데이트 코스</CategoryBox>
                 <CategoryBox onClick={goMeet}>번개 만남</CategoryBox>
-                <CategoryBox onClick={goBar}>술 한잔 하실 분?</CategoryBox>
-                <CategoryBox onClick={goFashion}>패션 질문</CategoryBox>
+                <CategoryBox onClick={goBar}>술 한잔?</CategoryBox>
+                <CategoryBox onClick={goFashion}>패션</CategoryBox>
             </CategoryContaier>
             <SearchCautionWrap>
                 <ModalSpan>
@@ -147,7 +147,17 @@ const List = () => {
                 </ModalSpan>
                 <GoSearch onClick={goSearch}><img src={searchIcon} alt="" /></GoSearch>
             </SearchCautionWrap>
-
+            <CategoetTitle>
+            {
+            Category === "taste" ? (<span>맛집 추천 !😋</span>)
+            : Category === "drive" ? (<span> 드라이브 가실 분? 🚗</span>) 
+            : Category === "dateCourse" ? (<span>데이트 코스 추천! 💑</span>)
+            : Category === "meet" ? (<span> 번개 만남 ⚡</span>) 
+            : Category === "bar" ? (<span>술 한잔 하실 분?🍺</span>)
+            : Category === "fashion" ? (<span>내 패션 어때요?😎</span>)
+            : null             
+            }
+            </CategoetTitle>
             {currentPosts?.map((item) => (<Card item={item} key={item?.postId} />))}
             <TopButton />
         </Wrapper>
@@ -186,11 +196,11 @@ const CategoryBox = styled.div`
     color: white;
     cursor: pointer;
     :hover {
-        background-color: #570657;
+        background-color: #E080C1;
     }
     
     a:visited {
-        background-color: #570657;
+        background-color: #E080C1;
     }
 
 `
@@ -213,11 +223,9 @@ const GoSearch = styled.div`
     width: 40px;
     height: 40px;
     border: 1px solid #9C7FCB;
-    /* background-color: #FAEAFF; */
     border-radius: 100%;
     box-shadow: 1px 1px 1px 1px #D4B4FF;
     margin-top: 5px;
-    /* margin-left: 82%; */
     cursor: pointer;
     margin-right: 15px;
     img {
@@ -270,4 +278,12 @@ const Content = styled.div`
     white-space: pre-wrap;
     font-size: 15px;
     margin-top: 15px;
+`
+
+const CategoetTitle = styled.div`
+    margin: 0 auto;
+    font-size: 15px;
+    font-weight: bold;
+    color : #9C7FCB;
+    align-items: center;
 `
