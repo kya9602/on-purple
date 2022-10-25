@@ -7,6 +7,7 @@ import GuideDeck from "../components/Main/GuideDeck";
 
 import LeftArrow from "../assets/icons/Left-arrow.png"
 import RightArrow from "../assets/icons/Right-arrow.png"
+import TutorialButton from "../components/Main/TutorialButton";
 
 function GuidePage() {
   return (
@@ -23,6 +24,7 @@ function GuidePage() {
             <img src={RightArrow} alt=""/>
           </Right>
         </ArrowBox>
+        <TutorialButton/>
       </Container>
     </BackImage>
   );

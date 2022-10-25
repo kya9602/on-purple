@@ -6,26 +6,26 @@ import Deck from "../components/Main/Deck";
 import image from "../assets/images/배경화면으로.jpg"
 import BrokenHeart from "../assets/icons/broken-heart.png"
 import Heart from "../assets/icons/heart.png"
-//import Test from "../components/Main/test";
+import TutorialButton from "../components/Main/TutorialButton";
 
 const MainPage = () => {
     return (
         <BackImage>
-
             <MainPageContainer>
                 <Header />
                 <Deck />
                 <HeartBox>
                     <Left>
                         <img src={BrokenHeart} alt=""/>
-                        <span>UnLike</span>
+                        <span>UnPurple</span>
                     </Left>
                     <Right>
                         <img src={Heart} alt=""/>
-                        <span>Like</span>
+                        <span>Purple</span>
                     </Right>
                 </HeartBox>
                 <Footer />
+                <TutorialButton/>
             </MainPageContainer>
         </BackImage>
 
@@ -35,17 +35,9 @@ const MainPage = () => {
 export default MainPage;
 
 const MainPageContainer = styled.div`
-    /* overscroll-behavior-y: contain; */
     max-width: 428px;
-   /*  height: 100%; */
     width: 100%;
     user-select: none;
-    
-
-    /* 
-    overflow-x: hidden;
-    position: fixed;
-     */
     margin: 0 auto;
     height: 100%;
     background-color: white;
@@ -67,6 +59,7 @@ const HeartBox = styled.div`
   justify-content: space-between;
   span{
     font-size: 15px;
+    color:#B7ABFF
   }
 `
 const Left = styled.div`
@@ -76,6 +69,7 @@ const Left = styled.div`
   width: 50px;
   height: 50px;
   text-align: center;
+  align-items: center;
   img{
     width: 100%;
     height: 100%;
@@ -90,6 +84,7 @@ const Right = styled.div`
   width: 50px;
   height: 50px;
   text-align: center;
+  align-items: center;
   img{
     width: 100%;
     height: 100%;
