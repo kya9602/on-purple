@@ -140,6 +140,16 @@ const CategoryContaier = styled.div`
     overflow-x:auto; 
     white-space:nowrap; 
     font-size:0;
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 6px;
+      border-radius: 6px;
+      background: rgba(248, 227, 227, 0.4);
+     }
+     &::-webkit-scrollbar-thumb {
+      background: rgba(225, 126, 255, 0.3);
+      border-radius: 6px;
+    }
 `
 const GoSearch = styled.div`
     width: 40px;
