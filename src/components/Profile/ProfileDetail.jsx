@@ -149,6 +149,17 @@ const Container = styled.div`
     align-items:center;
     height: 100vh;
     width: 100%;
+    overflow-y:auto ;
+    &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(250, 213, 213, 0.4);
+     }
+     &::-webkit-scrollbar-thumb {
+    background: rgba(252, 112, 112, 0.3);
+    border-radius: 6px;
+  }
     /* padding-bottom: 45vh; */
     background-color: white;
     .BackBtn{
@@ -176,7 +187,9 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items:center;
-    margin-top: 100px;
+    margin-top: 80px;
+    margin-bottom: 100px;
+    background-color: red;
 `
 
 const MatchingButton = styled.button`
@@ -205,6 +218,7 @@ const IntroduceCard = styled.div`
     padding-bottom: 20px;
     word-break: keep-all;
     border-radius:20px;
+    border: 1px solid pink;
     border: 1px solid gray;
     box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3)
 `

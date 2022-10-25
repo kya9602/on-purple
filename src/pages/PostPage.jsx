@@ -195,7 +195,17 @@ const Container = styled.div`
     height: 100%;
     margin: 0 auto;
     background-color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(250, 213, 213, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(252, 112, 112, 0.3);
+    border-radius: 6px;
+  }
 `
 const AddHeader = styled.div`
     display: flex;

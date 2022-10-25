@@ -8,77 +8,84 @@ import searchIcon from "../../../assets/icons/search.png"
 import SearchCard from "./SearchCard";
 import Notfound from "../../../assets/images/notfound.png"
 const Search = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [searchTerm, setSearchTerm] = useState("");
-    const { isLoading, error, post } = useSelector((state) => state?.post)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isLoading, error, post } = useSelector((state) => state?.post)
 
-    const searchEnter = (e) => {
-        //이벤트의 키 값이 엔터키와 일치할 때 다음을 실행한다
-        if (searchTerm && e.key === "Enter") {
-          const value = e.target.value;
-          dispatch(__searchPosts(searchTerm));
-          navigate("/search/" + value);
-        } else {
-          new Swal({
-            title: "키워드를 입력해주세요!",
-            icon: "warning",
-          });
-        }
-      };
+  const searchEnter = (e) => {
+    //이벤트의 키 값이 엔터키와 일치할 때 다음을 실행한다
+    if (searchTerm && e.key === "Enter") {
+      const value = e.target.value;
+      dispatch(__searchPosts(searchTerm));
+      navigate("/search/" + value);
+    } else {
+      new Swal({
+        title: "키워드를 입력해주세요!",
+        icon: "warning",
+      });
+    }
+  };
 
-    const getSearchTerm = () => {
-        //검색어가 공란인 채로 온클릭 이벤트 실행 안됨
-        if (searchTerm === "") {
-          new Swal({
-            title: "키워드를 입력해주세요!",
-            icon: "warning",
-          });
-          return;
-        }
-        dispatch(__searchPosts(searchTerm)).then((res) => {
-          navigate("/search/" + searchTerm);
-        });
-      };
+  const getSearchTerm = () => {
+    //검색어가 공란인 채로 온클릭 이벤트 실행 안됨
+    if (searchTerm === "") {
+      new Swal({
+        title: "키워드를 입력해주세요!",
+        icon: "warning",
+      });
+      return;
+    }
+    dispatch(__searchPosts(searchTerm)).then((res) => {
+      navigate("/search/" + searchTerm);
+    });
+  };
 
-    useEffect(() => {
-        dispatch(__searchPosts(searchTerm));
-    }, [dispatch]);
-    
-    if (isLoading) {
-        return (
-          <div>
-            로딩이미지~
-          </div>
-        );
-      }
-      if (error) {
-        return <div>{error.message}</div>;
-      } 
+  useEffect(() => {
+    dispatch(__searchPosts(searchTerm));
+  }, [dispatch]);
+
+  if (isLoading) {
     return (
-        <div style={{paddingTop:"90px", backgroundColor:"white", height:"100vh", width:"100%"}}>
-            <InputBtnWrap>
-            <SearchInput 
-                type="search"
-                name="search"
-                value={searchTerm || ""}
-                onChange={(e)=>{
-                    setSearchTerm(e.target.value)
-                }}
-                placeholder=" 검색어를 입력해주세요.." />
-            <GoSearch onClick={getSearchTerm}><img src={searchIcon} alt=""/></GoSearch>
-            </InputBtnWrap>
-           {post === null ?      
-             (<None>
-                <img src={Notfound} alt=""/>
-                <span>검색 결과가 없습니다 ☹️</span>
-            </None>)
-                : (post.map((item)=>(<SearchCard item={item} key={item?.postId}/>)))}
-        </div>
-    )
+      <div>
+        로딩이미지~
+      </div>
+    );
+  }
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+  return (
+    <Container>
+      <InputBtnWrap>
+        <SearchInput
+          type="search"
+          name="search"
+          value={searchTerm || ""}
+          onChange={(e) => {
+            setSearchTerm(e.target.value)
+          }}
+          placeholder=" 검색어를 입력해주세요.." />
+        <GoSearch onClick={getSearchTerm}><img src={searchIcon} alt="" /></GoSearch>
+      </InputBtnWrap>
+      {post === null ?
+        (<None>
+          <img src={Notfound} alt="" />
+          <span>검색 결과가 없습니다 ☹️</span>
+        </None>)
+        : (post.map((item) => (<SearchCard item={item} key={item?.postId} />)))}
+    </Container>
+  )
 };
 
 export default Search;
+
+const Container = styled.div`
+    background-color: white;
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+`
 
 const SearchInput = styled.input`
     width:65%;
@@ -117,6 +124,7 @@ const InputBtnWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+    padding-top: 90px;
 `
 
 const None = styled.div`
