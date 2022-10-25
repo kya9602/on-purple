@@ -46,13 +46,13 @@ const FooterContainer = styled.div`
   position: fixed;
   bottom: 0px;
   background-color: white;
-  border-top: 1px solid rgb(165, 165, 165);
+  border-top: 1px solid #9C7FCB;
   max-width: 428px;
   width: 100%;
-  height: 60px;
+  height: 50px;
   margin: auto;
   justify-content: space-evenly;
-    align-items:center;
+align-items:center;
   
   a:hover, a:active { text-decoration: none; }
   a { text-decoration: none;}
@@ -65,10 +65,12 @@ const MainContainer = styled.div `
     width: 80px;
     justify-content: center;
     img{
-        width: 40px;
+        width: 30px;
         margin: auto;
+        padding-top: 5px;
     }
     span{
-        margin: auto;
+        margin: 0 auto;
+        
     }
 `
