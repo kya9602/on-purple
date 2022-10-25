@@ -5,10 +5,10 @@ import ChatHeader from './ChatHeader';
 import image from "../../assets/images/배경화면으로.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { __getlastMessage } from '../../redux/modules/chatRoom';
-
+import { subMessage } from '../../redux/modules/chatRoom';
 /* import * as StompJs from "@stomp/stompjs";
-import * as SockJS from "sockjs-client";
- */
+import * as SockJS from "sockjs-client"; */
+
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
@@ -20,10 +20,10 @@ function ChatRoom() {
     const [text, setText] = useState("")
     /* console.log(typeof roomId) */
     const messages = useSelector((state) => state.chatroom.lastmessage)
-
     console.log(messages)
     useEffect(() => {
         let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
+        //1. SockJS를 내부에 들고있는 stomp를 내어줌
         let client = Stomp.over(sock);
         ws.current = client;
         dispatch(__getlastMessage(roomId))
@@ -39,7 +39,8 @@ function ChatRoom() {
     const ws = useRef();
 
     const token = localStorage.getItem("Authorization")
-    const writer = localStorage.getItem("nickname")
+
+    //2. connection이 맺어지면 실행
     function wsConnect() {
         try {
             console.log(`소켓 연결을 시도합니다.`);
@@ -49,16 +50,19 @@ function ChatRoom() {
             ws.current.connect({ Authorizaion: token, type: "TALK" }, () => {
                 // connect 이후 subscribe
                 console.log('연결 성공')
-                ws.current.subscribe(`/sub/chat/message`, (response) => {
-                    console.log(response)
+                //4. subscribe(path, callback)으로 메세지를 받을 수 있음
+                ws.current.subscribe(`/sub/chat/room/${roomId}`, (response) => {
                     const newMessage = JSON.parse(response.body);
+                    /* console.log(newMessage) */
+                    dispatch(subMessage(newMessage));
                 });
                 // 입장 시 enter 메시지 발신
-                // 이 메시지를 기준으로 서버에서 unReadCount 판별
                 const message = {
+                    type:"TALK",
                     roomId: roomId,
                 };
-                ws.current.send(`/pub/chat/enter`, { Authorizaion: token }, JSON.stringify(message));
+                //3. send(path, header, message)로 메세지를 보낼 수 있음
+                ws.current.send(`/pub/chat/enter`, { Authorizaion : token } , JSON.stringify(message));
             });
         } catch (error) {
             console.log('ERROR')
@@ -70,7 +74,7 @@ function ChatRoom() {
     function wsDisConnect() {
         try {
             ws.current.disconnect(() => {
-                ws.current.unsubscribe(roomId);
+                ws.current.unsubscribe("sub-0");
             });
         } catch (error) {
         }
@@ -80,6 +84,7 @@ function ChatRoom() {
         try {
             //send할 데이터
             const message = {
+                type:"TALK",
                 roomId: roomId,
                 message: text,
             };
@@ -99,11 +104,14 @@ function ChatRoom() {
         setText(e.target.value);
     }, []);
 
-
     return (
         <BackImage>
             <Container>
                 {/* <ChatHeader /> */}
+                {/* <Screenbox>
+                <MyMessage>안녕</MyMessage>
+                <YouMessage>안녕</YouMessage>
+                </Screenbox> */}
                 <ChatContainer>
                     <Input value={text}
                         onChange={onChangeChatHandler}
