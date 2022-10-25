@@ -265,8 +265,8 @@ const ImgBox = styled.div`
 
 const DefaultImage = styled.div`
   margin-top: 10px;
-  width: 400px;
-  height: 400px;
+  width: 380px;
+  height: 380px;
   background-image: url(${default_Img});
   background-repeat: no-repeat;
   background-position: center;
