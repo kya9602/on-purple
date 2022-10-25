@@ -21,7 +21,6 @@ function Card({ i, x, y, rot, scale, trans, bind, objs }) {
       dispatch(__getUser());
     }, [__getUser])
 
-
   const { nickname, age, area, introduction, imageUrl, userId, gender } = objs[i];
 
   return (
