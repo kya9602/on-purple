@@ -102,7 +102,7 @@ const List = () => {
                 <CategoryBox onClick={goTaste}>맛집</CategoryBox>
                 <CategoryBox onClick={goDate}>데이트 코스</CategoryBox>
                 <CategoryBox onClick={goMeet}>번개 만남</CategoryBox>
-                <CategoryBox onClick={goBar}>술 한잔?</CategoryBox>
+                <CategoryBox onClick={goBar}>술 한잔 ?</CategoryBox>
                 <CategoryBox onClick={goFashion}>패션</CategoryBox>
             </CategoryContaier>
             <SearchCautionWrap>
@@ -190,8 +190,8 @@ const CategoryBox = styled.div`
     margin-right:15px;
     border-radius: 10px;
     margin-bottom: 10px;
-    font-size: 11.5px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
     background-color: #9C7FCB;
     color: white;
     cursor: pointer;
