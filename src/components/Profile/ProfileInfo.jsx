@@ -140,8 +140,18 @@ const Container = styled.div`
     /* padding-top: 130px; */
     height: 100vh;
     /* padding-bottom: 45vh; */
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: white;
+    &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(250, 213, 213, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(252, 112, 112, 0.3);
+    border-radius: 6px;
+  }
     .BackBtn{
      cursor: pointer;   
     }
@@ -170,7 +180,7 @@ const IntroduceCard = styled.div`
     margin-bottom: 120px;
     word-break: keep-all;
     border-radius:20px;
-    border: 1px solid gray;
+    border: 1px solid pink;
     box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3)
 `
 
