@@ -89,6 +89,7 @@ const Image = styled.img`
     height: 66%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    border-bottom: 1px solid #9C7FCB;
 `
 
 const Title = styled.div`
