@@ -22,7 +22,7 @@ const ProfileDetail = () => {
     }, [dispatch])
 
 
-    // 채팅 방 들어가는 룸 
+    // 채팅 방 생성 
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         try {

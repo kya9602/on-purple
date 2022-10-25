@@ -25,7 +25,7 @@ const List = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost);
 
     useEffect(() => {
         dispatch(__getPosts(Category));
