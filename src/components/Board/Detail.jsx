@@ -160,6 +160,7 @@ const Container = styled.div`
     height: 100vh;
     background-color: white;
     overflow-y: scroll;
+    overflow-x: hidden;
     &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
