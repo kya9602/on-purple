@@ -318,7 +318,7 @@ export default function VerticalLinearStepper() {
                                     onChange={onChangeHandler}
                                     maxLength="10"
                                 />
-                                <StLine></StLine>
+                                <StsmallLabel> 영어와 숫자로만 4-12글자수로 적어주세요</StsmallLabel>                                <StLine></StLine>
                             </InputBox>
 
                             {/*정규표현식 충족 ? 사용가능한 아이디 : 정규표현식 알려주기 */}
@@ -332,7 +332,6 @@ export default function VerticalLinearStepper() {
                                     :
                                     (<div style={{ textAlign: "center" }}>
                                         <StSmallWorning>아이디 형식을 확인하세요</StSmallWorning>
-                                        <StsmallLabel>숫자는 선택적으로 영어를 포함하여 4-12글자수로 적어주세요</StsmallLabel>
                                     </div>))
 
                             }
@@ -348,7 +347,7 @@ export default function VerticalLinearStepper() {
                                     value={userinfo.password}
                                     maxLength="20"
                                 />
-                                <StLine></StLine>
+                                <StsmallLabel>영어와 숫자로 4-20글자수로 적어주세요</StsmallLabel>
                             </InputBox>
                             {
                                 userinfo.password &&
@@ -359,7 +358,6 @@ export default function VerticalLinearStepper() {
                                     :
                                     (<div style={{ textAlign: "center" }}>
                                         <StSmallWorning>비밀번호 형식을 확인하세요</StSmallWorning>
-                                        <StsmallLabel>영어와 숫자로 4-20글자수로 적어주세요</StsmallLabel>
                                     </div>
                                     )
                                 )
@@ -409,7 +407,7 @@ export default function VerticalLinearStepper() {
                                     value={userinfo.nickname}
                                     maxLength="6"
                                 />
-                                <StLine></StLine>
+                                <StsmallLabel>한글과 숫자로만 2-8자리로 적어주세요</StsmallLabel>
                             </InputBox>
 
                             {/* 정규표현식 충족 ? 사용가능한 아이디 : 정규표현식 알려주기*/}
@@ -423,7 +421,7 @@ export default function VerticalLinearStepper() {
                                     :
                                     (<div style={{ textAlign: "center" }}>
                                         <StSmallWorning>닉네임 형식을 확인하세요</StSmallWorning>
-                                        <StsmallLabel>한글과 숫자로만 2-8자리</StsmallLabel>
+
                                     </div>
                                     ))
 
@@ -865,7 +863,7 @@ const StLabel = styled.label`
   font-weight: bolder;
   padding: 1%;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
 `;
 
 //아이디 인풋창
@@ -912,10 +910,8 @@ const StsmallLabel = styled.label`
     display: flex;
     justify-content: center;
     font-size: 14px;
-    color:gray;
-    @media all and (max-width: 750px) {
-     font-size: 12px;
-  }
+    color:#426581;
+    font-weight: 600;
 `;
 
 //중복확인 안내 라벨

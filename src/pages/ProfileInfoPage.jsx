@@ -25,11 +25,9 @@ const Container = styled.div`
     max-width: 428px;
     width : 100%;
     margin:0 auto;
-    height: 100%;
-
 `
 const BackImage = styled.div`
 background: url(${image});
 background-size: cover;
-height: 100%;
+height: 100vh;
 `

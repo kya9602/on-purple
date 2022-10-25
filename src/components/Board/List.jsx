@@ -49,7 +49,7 @@ const List = () => {
     if (error) {
         return <div>{error.message}</div>;
     }
-    
+
     /* if (post.length === 0)  */
     //----------------------navigateButton------------------//
     const goDrive = () => {
@@ -70,13 +70,12 @@ const List = () => {
     const goFashion = () => {
         navigate(`/board/fashion`)
     }
-    const goSearch = () =>{
+    const goSearch = () => {
         navigate(`/search`)
     }
     // 게시판 이용 주의 사항 모달 만들 예정.
     return (
-        <div style={{height:"100vh"}}>
-
+        <>
             <Wrapper>
                 <CategoryContaier>
                     <Box onClick={goDrive}>드라이브 가실 분?</Box>
@@ -87,16 +86,15 @@ const List = () => {
                     <Box onClick={goFashion}>패션 질문</Box>
                 </CategoryContaier>
                 <SearchCautionWrap>
-                <span>게시판 이용 주의사항 📄</span>
-                <GoSearch onClick={goSearch}><img src={searchIcon} alt=""/></GoSearch>
+                    <span>게시판 이용 주의사항 📄</span>
+                    <GoSearch onClick={goSearch}><img src={searchIcon} alt="" /></GoSearch>
                 </SearchCautionWrap>
 
                 {currentPosts?.map((item) => (<Card item={item} key={item?.postId} />))}
                 <TopButton />
             </Wrapper>
-            <Pagination postsPerPage={postsPerPage} totalPosts={post?.length} paginate={paginate} /> 
-         
-        </div>
+            <Pagination postsPerPage={postsPerPage} totalPosts={post?.length} paginate={paginate} />
+        </>
     )
 }
 

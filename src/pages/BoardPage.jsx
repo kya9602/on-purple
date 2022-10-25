@@ -31,11 +31,11 @@ const Wrapper = styled.div`
     width : 100%;
     margin:0 auto;
     height: 100%;
-
+    overflow-y: scroll;
 `
 
 const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
-  height: 100%;
+  height: 100vh;
 `

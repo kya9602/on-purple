@@ -3,17 +3,19 @@ import styled from "styled-components";
 //마이페이지 큰박스
 export const MypageBox = styled.div`
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    width: 380px;
+    width:380px;
     height: auto;
-    padding-bottom: 10%;
-    margin: auto;
-    border: 1px solid #9C7FCB;
+    margin-top: 90px;
+    margin-bottom: 75px;
+    padding-bottom: 2vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #fdc2f0;
     border-radius: 15px;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 `
 
 //마이페이지 내정보박스 
@@ -281,7 +283,9 @@ export const StButton = styled.button`
 export const SecondMypageBox = styled.div`
     width:380px;
     height: auto;
-    padding-bottom: 10vh;
+    margin-top: 85px;
+    margin-bottom: 70px;
+    padding-bottom: 5vh;
     margin-left: auto;
     margin-right: auto;
     border: 3px solid #fdc2f0;
@@ -432,9 +436,5 @@ export const Container = styled.div`
   margin:0 auto;
   height: 100vh;
   background-color: white;
-  padding-top: 80px;
-  @media all and (min-height : 927px) {
-    height: 90vh;
-
-  }
+  overflow-y: scroll;
 `

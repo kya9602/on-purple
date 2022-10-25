@@ -23,13 +23,10 @@ const Container = styled.div`
   max-width: 428px;
   width : 100%;
   margin: 0 auto;
-  height: 100%;
+
 `
 const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
-  height:120vh;
-      @media all and (min-height : 927px) {
-        height:100vh;
-  }
+  height:100vh;
 `

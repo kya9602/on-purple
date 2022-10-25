@@ -34,7 +34,7 @@ function Deck() {
   // console.log(likeme.likeme.data)
 
   const likemeList = likeme?.likeme
-  console.log('제외되야하는', likemeList)
+  // console.log('제외되야하는', likemeList)
 
   useEffect(() => {
     dispatch(__getLikeme());
@@ -51,7 +51,7 @@ function Deck() {
     })
     return flag;
   });
-  console.log('제외할 거 다한', finalMyData)
+  // console.log('제외할 거 다한', finalMyData)
 
   /* 보여줄 카드 갯수. */
   const cards = [];
