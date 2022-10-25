@@ -51,7 +51,7 @@ export const __getlastMessage = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken") 
         },
       })
-      /* console.log(data.data) */
+     /*  console.log(data.data) */
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -85,8 +85,11 @@ const initialState = {
 export const chatroom = createSlice({
   name: "chatroom",
   initialState,
-  reducers: {},
-
+  reducers: {
+    subMessage(state, action) {
+        state.lastmessage.push(action.payload);
+    }
+  },
   extraReducers: {
     [__getChatrooms.pending]: (state) => {
       state.isLoading = true;
