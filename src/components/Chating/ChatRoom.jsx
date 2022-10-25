@@ -19,8 +19,9 @@ function ChatRoom() {
     const { roomId } = useParams();
     const [text, setText] = useState("")
     /* console.log(typeof roomId) */
-    const messages = useSelector((state) => state.chatroom.lastmessage)
-    console.log(messages)
+    /* const messages = useSelector((state) => state.chatroom.lastmessage)
+    console.log(messages) */
+
     useEffect(() => {
         let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
         //1. SockJS를 내부에 들고있는 stomp를 내어줌
@@ -53,8 +54,8 @@ function ChatRoom() {
                 //4. subscribe(path, callback)으로 메세지를 받을 수 있음
                 ws.current.subscribe(`/sub/chat/room/${roomId}`, (response) => {
                     const newMessage = JSON.parse(response.body);
-                    /* console.log(newMessage) */
-                    dispatch(subMessage(newMessage));
+                    console.log(newMessage)
+                   /*  dispatch(subMessage(newMessage)); */
                 });
                 // 입장 시 enter 메시지 발신
                 const message = {
@@ -86,6 +87,7 @@ function ChatRoom() {
             const message = {
                 type:"TALK",
                 roomId: roomId,
+                otherImageUrl : "이미지입니다",
                 message: text,
             };
 
@@ -108,12 +110,12 @@ function ChatRoom() {
         <BackImage>
             <Container>
                 <ChatHeader roomId={roomId}/>
-                {/* <Screenbox>
-                <MyMessage>안녕</MyMessage>
-                <YouMessage>안녕</YouMessage>
-                </Screenbox> */}
+                <Screenbox>
+                
+                </Screenbox>
                 <ChatContainer>
-                    <Input value={text}
+                    <Input 
+                        value={text}
                         onChange={onChangeChatHandler}
                         placeholder="메세지를 입력하세요..."
                         type="text"
