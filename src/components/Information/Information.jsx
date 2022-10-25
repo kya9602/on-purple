@@ -11,11 +11,10 @@ const Information = () => {
                 <ProfileDetailImg 
                 src="https://post-phinf.pstatic.net/MjAyMDAzMDFfMTIx/MDAxNTgzMDQ5ODEzODc5.eLwaHPGkxYlj-RGPp5zE7Ghs__H9tYjvXaxdZehOo_cg.yopbH7--a4HJPuHxo_6-gx-gojvo0V0dqSgaem-d1mwg.JPEG/%EC%95%88%EC%9C%A0%EC%A7%842.JPG?type=w1200"
                 ></ProfileDetailImg>
-                <h3>닉네임</h3>
+                <h2>닉네임</h2>
             </InformationDiv>
             <InformationButtonSet>
                 <h2>대화 기록 삭제</h2>
-                <h2>연결 해제</h2>
                 <h2
                 onClick={()=>{navigate('/report');}}
                 >신고하기</h2>
@@ -32,6 +31,10 @@ const InformationContainerDiv = styled.div`
     flex-direction: column; /*수직 정렬*/
     justify-content: center;
     align-items:center;
+    text-align: center;
+    h2{
+        
+    }
 `
 
 const InformationDiv = styled.div`
@@ -49,7 +52,7 @@ const ProfileDetailImg = styled.img`
 const InformationButtonSet = styled.div`
     flex:1;
     max-width: 100%;
-    margin-top: 100px;
+    margin-top: 50px;
     justify-content: center;
     align-items:center;
 `

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
-const ChatHeader = () => {
+const ChatHeader = (roomId) => {
+    console.log(roomId)
     const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>

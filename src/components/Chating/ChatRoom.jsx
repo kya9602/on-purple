@@ -107,7 +107,7 @@ function ChatRoom() {
     return (
         <BackImage>
             <Container>
-                {/* <ChatHeader /> */}
+                <ChatHeader roomId={roomId}/>
                 {/* <Screenbox>
                 <MyMessage>안녕</MyMessage>
                 <YouMessage>안녕</YouMessage>
