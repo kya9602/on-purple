@@ -32,7 +32,6 @@ const ProfileDetail = () => {
                     "RefreshToken": localStorage.getItem("RefreshToken")
                 },
             });
-            window.alert("😎생성😎");
             navigate(`/chat`);
         } catch (e) {
             // 서버에서 받은 에러 메시지 출력
