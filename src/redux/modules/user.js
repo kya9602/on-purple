@@ -1,17 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
+//유효성검사
+const regexUsername = /^[A-Za-z0-9+]{4,12}$/;
 
 export const __checkUsername = createAsyncThunk(
     "data/checkUsername",
+
     async (payload, thunkAPI) => {
+        console.log(regexUsername.test(payload))
+        console.log(payload)
         try {
             console.log(payload);
             const data = await axios.post(`${process.env.REACT_APP_HOST}/user/idCheck/${payload.username}`);
-            console.log(data.data);
-            if (data.data.success === false)
+
+            if (data.data.success === false) {
                 alert(data.data.error.message);
-            else alert("사용 가능한 아이디입니다.");
+            } else if (!regexUsername.test(payload.username)) {
+                alert("❌ 아이디 형식을 확인하세요!!! ❌");
+            }
+            else alert("👌 사용 가능한 아이디입니다. 👌");
+
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -21,6 +30,9 @@ export const __checkUsername = createAsyncThunk(
     }
 );
 
+//유효성검사
+const regexNickname = /^[가-힣0-9+]{2,8}$/;
+
 
 export const __checkNickname = createAsyncThunk(
     "data/checkNickname",
@@ -29,8 +41,12 @@ export const __checkNickname = createAsyncThunk(
             console.log(payload);
             const data = await axios.post(`${process.env.REACT_APP_HOST}/user/nicknameCheck/${payload.nickname}`);
             console.log(data.data);
-            if (data.data.success === false)
+            if (data.data.success === false) {
                 alert(data.data.error.message);
+            }
+            else if (!regexNickname.test(payload.nickname)) {
+                alert("❌ 닉네임 형식을 확인하세요!!! ❌");
+            }
             else alert("사용 가능한 닉네임입니다.");
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {

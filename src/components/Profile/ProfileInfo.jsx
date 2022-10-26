@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux/';
 import { __getProfileDetail } from "../../redux/modules/profile";
-import { __getChatrooms } from "../../redux/modules/chatRoom";
+import { __postLike } from "../../redux/modules/main";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
@@ -22,14 +22,6 @@ const ProfileInfo = () => {
         dispatch(__getProfileDetail(userId));
     }, [dispatch])
 
-
-    // 채팅 방 들어가는 룸 
-    // const roomkey = useSelector((state) => state.roomlist)
-    // console.log("채팅방", roomkey)
-    // useEffect(() => {
-    //     dispatch(__getChatrooms());
-    //     /* console.log("작동"); */
-    // }, []);
 
 
 
@@ -122,7 +114,14 @@ const ProfileInfo = () => {
                         <MiniBody> {userProfile?.pet}</MiniBody>
                     </MiniContainer>
                 }
-
+                <ButtonContainer>
+                    <MatchingButton
+                        onClick={() => {
+                            dispatch(__postLike(userProfile?.userId))
+                            navigate(-1)
+                        }}
+                    > 좋아요하기 </MatchingButton>
+                </ButtonContainer>
 
             </IntroduceCard>
         </Container>
@@ -184,6 +183,33 @@ const IntroduceCard = styled.div`
     box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3)
 `
 
+const ButtonContainer = styled.div` 
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-top: 80px;
+    margin-bottom: 100px;
+    gap:10px;
+    word-break: keep-all;
+`
+
+const MatchingButton = styled.button`
+    border: 1px solid skyblue;
+    padding: 4%;
+    cursor: pointer;
+    font-weight: 600;
+    font-size:16px;
+    background-color: white;
+
+    :hover{
+        border: 1px solid skyblue;
+        background-color: skyblue;
+        font-weight: 600;
+        font-size:16px;
+        padding: 4%;
+
+    }
+`
 const NicknameBox = styled.div`
     display: flex;
     justify-content: center;

@@ -261,7 +261,6 @@ export default function VerticalLinearStepper() {
                         <form style={{ marginTop: "10px" }} >
 
                             <ImgBox>
-
                                 {imageUrl !== "" ?
                                     <Avatar
                                         src={imageUrl}
@@ -269,13 +268,17 @@ export default function VerticalLinearStepper() {
                                         size={200}
                                         onClick={() => { inputRef.current.click() }} />
                                     :
-                                    <Avatar
-                                        src={profileImage}
-                                        alt="기본이미지"
-                                        style={{ margin: '7px' }}
-                                        size={200}
-                                        onClick={() => { inputRef.current.click() }}
-                                    />
+                                    <>
+                                        <StLabel> ❤ 사진을 골라주세요!!! ❤</StLabel>
+
+                                        <Avatar
+                                            src={profileImage}
+                                            alt="기본이미지"
+                                            style={{ margin: '7px' }}
+                                            size={200}
+                                            onClick={() => { inputRef.current.click() }}
+                                        />
+                                    </>
                                 }
 
 
@@ -839,8 +842,9 @@ const StRegisterBox = styled.div`
 //이미지 박스 
 const ImgBox = styled.div`
   display  : flex ;
-  justify-content: center;
   width: 300px;
+  flex-direction: column;
+  align-items: center;
 `;
 
 //이미지 input

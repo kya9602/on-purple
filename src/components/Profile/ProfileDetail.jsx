@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux/';
 import { __getProfileDetail } from "../../redux/modules/profile";
+import { __postLike } from "../../redux/modules/main";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import axios from "axios"
 
@@ -20,6 +21,7 @@ const ProfileDetail = () => {
     useEffect(() => {
         dispatch(__getProfileDetail(userId));
     }, [dispatch])
+
 
 
     // 채팅 방 생성 
@@ -134,6 +136,12 @@ const ProfileDetail = () => {
                 <MatchingButton
                     onClick={handleSubmit}
                 > 대화하기 💬 </MatchingButton>
+                <MatchingButton
+                    onClick={() => {
+                        dispatch(__postLike(userProfile?.userId))
+                        navigate(-1)
+                    }}
+                > 좋아요 취소하기 </MatchingButton>
             </ButtonContainer>
         </Container>
     )
@@ -188,7 +196,8 @@ const ButtonContainer = styled.div`
     align-items:center;
     margin-top: 80px;
     margin-bottom: 100px;
-    background-color: red;
+    gap:10px;
+    word-break: keep-all;
 `
 
 const MatchingButton = styled.button`
