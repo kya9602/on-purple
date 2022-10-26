@@ -5,16 +5,24 @@ import UserVideoComponent from './UserVideoComponent';
 import endcall from '../../assets/images/endcall.png'
 import styled from "styled-components";
 
+import { withRouter } from "react-router-dom";
+
 const OPENVIDU_SERVER_URL = `${process.env.REACT_APP_VCHAT_SEVER}` ;
 const OPENVIDU_SERVER_SECRET = `${process.env.REACT_APP_VCHAT_SECRET}`;
 
 class VideoChatConnect extends Component {
     constructor(props) {
         super(props);
+        /* console.log(window.location.href) */
+        const href = window.location.href;
+        let roomId = []
+        roomId = href.split('vchat/');        
+        console.log(roomId[1]);
+
 
         this.state = {
-            mySessionId: 'sessionA',
-            myUserName: 'Participant' + Math.floor(Math.random() * 100), //내 닉네임
+            mySessionId: `${roomId[1]}`,
+            myUserName: 'Participant' + Math.floor(Math.random() * 1000), //내 닉네임
             session: undefined,
             mainStreamManager: undefined,
             publisher: undefined,
@@ -181,7 +189,7 @@ class VideoChatConnect extends Component {
             session: undefined,
             subscribers: [],
             mySessionId: 'SessionA',
-            myUserName: 'Participant' + Math.floor(Math.random() * 100),
+            myUserName: 'Participant' + Math.floor(Math.random() * 1000),
             mainStreamManager: undefined,
             publisher: undefined
         });
@@ -236,9 +244,10 @@ class VideoChatConnect extends Component {
                             <img src="resources/images/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu logo" />
                         </div> */}
                         <div id="join-dialog" className="jumbotron vertical-center">
+                            
                             <form className="form-group" onSubmit={this.joinSession}>
                                 <p>
-                                    <label>Participant(닉네임): </label>
+                                    {/* <label>Participant(닉네임): </label> */}
                                     <input
                                         className="form-control"
                                         type="text"
@@ -246,10 +255,11 @@ class VideoChatConnect extends Component {
                                         value={myUserName}
                                         onChange={this.handleChangeUserName}
                                         required
+                                        style={{ display: "none" }}
                                     />
                                 </p>
                                 <p>
-                                    <label> Session(RoomID): </label>
+                                    {/* <label> Session(RoomID): </label> */}
                                     <input
                                         className="form-control"
                                         type="text"
@@ -257,12 +267,14 @@ class VideoChatConnect extends Component {
                                         value={mySessionId}
                                         onChange={this.handleChangeSessionId}
                                         required
+                                        style={{ display: "none" }}
                                     />
                                 </p>
                                 <p className="text-center">
-                                    <input className="btn btn-lg btn-success" name="commit" type="submit" value="JOIN" />
+                                    <JoinButton className="btn btn-lg btn-success" name="commit" type="submit" value="통화연결" ></JoinButton>
                                 </p>
                             </form>
+                            
                         </div>
                     </div>
                 ) : null}
@@ -461,4 +473,25 @@ const EndcallImg = styled.img`
     margin-left: 2px;
     width: 15px;
     height: 15px;
+`
+
+const JoinButton = styled.input`
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    border: 2px solid #6e96ee;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    height: 25px;
+    :hover{
+    border: none;
+    background-color: #4097df;
+    color:white;
+  }
 `

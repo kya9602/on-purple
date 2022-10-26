@@ -43,7 +43,7 @@ const Router = () => {
                 <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
                 <Route path="/guide" exact element={<GuidePage />} />
-                <Route path="/vchat" exact element={<VChatPage />} />
+                <Route path="/vchat/:roomId" exact element={<VChatPage />} />
                 <Route path="/reportInfo" exact element={<ReportInfoPage />} />
                 <Route path="/reportDetail/:reportId" exact element={<ReportDetailPage />} />
                 <Route path="/search" exact element={<SearchPage />} />
