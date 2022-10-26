@@ -27,7 +27,6 @@ const Header = () => {
   };
 
   const token = localStorage.getItem('RefreshToken')
-
   //object-fit : cover 이미지 설정시 사용해보기
 
 
@@ -35,10 +34,12 @@ const Header = () => {
 
 
   const userData = user;
-
-
-
   // console.log(userData)
+
+  // 관리자 확인용 
+  const admin = user?.role
+  // console.log(admin)
+
 
   useEffect(() => {
     dispatch(__getUser());
@@ -62,6 +63,7 @@ const Header = () => {
             <Menu isDropped={myPageIsOpen}>
               <Ul>
                 {token === null ?
+                  //로그인 안했을 때
                   <>
                     <Li>
                       <LinkWrapper onClick={() => navigate('/login')}>
@@ -76,24 +78,40 @@ const Header = () => {
                   </>
 
                   :
-                  <>
-                    <Li>
-                      <LinkWrapper
-                        onClick={() => navigate(`/mypage/${user?.userId}`)}
-                      >마이페이지 가기</LinkWrapper>
-                    </Li>
-                    <Li>
-                      <LinkWrapper onClick={() => navigate('/post')}>
-                        글쓰기
-                      </LinkWrapper>
-                    </Li>
-                    <Li>
-                      <LinkWrapper onClick={onClickHandler}>
-                        로그아웃
-                      </LinkWrapper>
-                    </Li>
-                  </>
-                }
+                  //로그인 했을 때 
+                  (admin !== "ADMIN" ?
+                    <>
+                      <Li>
+                        <LinkWrapper
+                          onClick={() => navigate(`/mypage/${user?.userId}`)}
+                        >마이페이지 가기</LinkWrapper>
+                      </Li>
+                      <Li>
+                        <LinkWrapper onClick={() => navigate('/post')}>
+                          글쓰기
+                        </LinkWrapper>
+                      </Li>
+                      <Li>
+                        <LinkWrapper onClick={onClickHandler}>
+                          로그아웃
+                        </LinkWrapper>
+                      </Li>
+                    </>
+                    :
+                    <>
+                      <Li>
+                        <LinkWrapper
+                          onClick={() => navigate(`/reportInfo`)}
+                        >신고목록 확인하기</LinkWrapper>
+                      </Li>
+
+                      <Li>
+                        <LinkWrapper onClick={onClickHandler}>
+                          관리자 로그아웃
+                        </LinkWrapper>
+                      </Li>
+                    </>
+                  )}
               </Ul>
             </Menu>
           </DropDownContainer>

@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { __deleteComments } from "../../redux/modules/comment";
-import { useDispatch } from "react-redux";
+import { __deleteComments, __deleteAdminComments } from "../../redux/modules/comment";
+import { useDispatch, useSelector } from "react-redux";
 import delete2 from "../../assets/icons/delete2.png"
 import edit from "../../assets/icons/edit.png"
 import { __likeComment } from "../../redux/modules/comment";
+//관리자 정보 받아오려고
+import { __getUser } from "../../redux/modules/signup";
 /* import Recomment from "./Recomment"; */
 const Comments = ({ item }) => {
     const dispatch = useDispatch();
     const id = item.commentId
     const getNickname = localStorage.getItem("nickname")
-  
+    const { user } = useSelector((state) => state.user);
+
+    useEffect(() => {
+        dispatch(__getUser())
+    }, [])
+
+
+
+    // 관리자 확인용 
+    const admin = user?.role
+    // console.log(admin)
+
     const onLike = (event) => {
         event.preventDefault();
         dispatch(__likeComment(id));
@@ -52,8 +65,18 @@ const Comments = ({ item }) => {
                             </DeleteBtn>
 
                         </>)
-                        : null
-                    }
+                        :
+                        //관리자만 보이기
+                        (admin !== "ADMIN" ?
+                            null :
+                            <>
+                                <DeleteBtn onClick={() => {
+                                    dispatch(__deleteAdminComments(id))
+                                }}><img src={delete2} alt="" />
+                                </DeleteBtn>
+
+                            </>
+                        )}
                 </div>
             </NameButtonContainer>
 
@@ -64,7 +87,7 @@ const Comments = ({ item }) => {
             <TRWrapper>
                 <Time>{timeForToday(item.createdAt)}</Time>
             </TRWrapper>
-           
+
         </div>
     )
 }

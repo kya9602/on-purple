@@ -1,11 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+
 const ChatHeader = (roomId) => {
-    /* console.log(roomId) */
-    const navigate = useNavigate();
+    /* console.log(roomId.roomId) */
+    const session = roomId.roomId
+
+const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>
             <ChatHeaderLeftDiv>
@@ -14,12 +19,20 @@ const ChatHeader = (roomId) => {
                 </ChatBackbuttonDiv>
                 <ProfileDetailImg
                     src="https://post-phinf.pstatic.net/MjAyMDAzMDFfMTIx/MDAxNTgzMDQ5ODEzODc5.eLwaHPGkxYlj-RGPp5zE7Ghs__H9tYjvXaxdZehOo_cg.yopbH7--a4HJPuHxo_6-gx-gojvo0V0dqSgaem-d1mwg.JPEG/%EC%95%88%EC%9C%A0%EC%A7%842.JPG?type=w1200"
-                    onClick={() => { navigate('/profile'); }}
+                    onClick={() => { 
+                    navigate('/profile');
+                }}
+                    
                 ></ProfileDetailImg>
                 <ProfileNicknameH3>닉네임</ProfileNicknameH3>
             </ChatHeaderLeftDiv>
 
             <ReportButtonDiv>
+                <VideoCallIcon fontSize="large" onClick={() => 
+                    { navigate(`/vchat/${session}`);
+                    }} 
+                    roomId={session}>
+                    </VideoCallIcon>
                 <ReportGmailerrorredIcon fontSize="large" onClick={() => { navigate('/information'); }}>신고하기icon</ReportGmailerrorredIcon>
             </ReportButtonDiv>
 
