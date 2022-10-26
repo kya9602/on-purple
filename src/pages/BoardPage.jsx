@@ -7,18 +7,18 @@ import image from "../assets/images/배경화면으로.jpg"
 
 const Board = () => {
 
-    return (
-        <BackImage>
-            <Wrapper>
-                <Header />
-                <div style={{ paddingTop: "35px" }}>
-                    <List />
-                </div>
-                <Footer />
-            </Wrapper>
-        </BackImage>
+  return (
+    <BackImage>
+      <Wrapper>
+        <Header />
+        <div style={{ paddingTop: "35px" }}>
+          <List />
+        </div>
+        <Footer />
+      </Wrapper>
+    </BackImage>
 
-    )
+  )
 }
 
 
@@ -42,6 +42,9 @@ const Wrapper = styled.div`
     background: rgba(252, 112, 112, 0.3);
     border-radius: 6px;
   }
+  @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 
 const BackImage = styled.div`

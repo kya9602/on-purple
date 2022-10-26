@@ -206,6 +206,9 @@ const Container = styled.div`
     background: rgba(252, 112, 112, 0.3);
     border-radius: 6px;
   }
+  @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 const AddHeader = styled.div`
     display: flex;

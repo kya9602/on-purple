@@ -305,8 +305,7 @@ export const SecondMyinfo = styled.div`
     height: 190px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* padding-bottom: 4%; */
+    justify-content: center;  
 `
 
 
@@ -355,10 +354,11 @@ export const MiniTitle = styled.div`
 
 //마이페이지 낱개 박스 인풋
 export const MiniInput = styled.input`
-  margin: 1%;
+  margin-top: 1%;
   text-align: center;
   width: 350px;
-  margin-left: 2vw;
+  margin-left: auto;
+  margin-right: auto;
   height: 1.5em;
   border-radius: 5px;
   border: 2px solid gray;
@@ -424,11 +424,7 @@ export const StSelect = styled.select`
       outline: none;
       border-bottom: 2px solid gray;
     }
-    /* @media all and (max-width : 750px) {
-    font-size: 12px; 
-    width : 200px;
-    height: 30px;
-  } */
+    
 `
 export const Container = styled.div`
   max-width: 428px;
@@ -447,4 +443,9 @@ export const Container = styled.div`
     background: rgba(252, 112, 112, 0.3);
     border-radius: 6px;
   }
+
+  //아이폰 화면크기
+  @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `

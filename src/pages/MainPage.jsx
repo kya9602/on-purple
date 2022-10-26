@@ -9,27 +9,27 @@ import Heart from "../assets/icons/heart.png"
 import TutorialButton from "../components/Main/TutorialButton";
 
 const MainPage = () => {
-    return (
-        <BackImage>
-            <MainPageContainer>
-                <Header />
-                <Deck />
-                <HeartBox>
-                    <Left>
-                        <img src={BrokenHeart} alt=""/>
-                        <span>UnPurple</span>
-                    </Left>
-                    <Right>
-                        <img src={Heart} alt=""/>
-                        <span>Purple</span>
-                    </Right>
-                </HeartBox>
-                <Footer />
-                <TutorialButton/>
-            </MainPageContainer>
-        </BackImage>
+  return (
+    <BackImage>
+      <MainPageContainer>
+        <Header />
+        <Deck />
+        <HeartBox>
+          <Left>
+            <img src={BrokenHeart} alt="" />
+            <span>UnPurple</span>
+          </Left>
+          <Right>
+            <img src={Heart} alt="" />
+            <span>Purple</span>
+          </Right>
+        </HeartBox>
+        <Footer />
+        <TutorialButton />
+      </MainPageContainer>
+    </BackImage>
 
-    )
+  )
 }
 
 export default MainPage;
@@ -41,6 +41,9 @@ const MainPageContainer = styled.div`
     margin: 0 auto;
     height: 100%;
     background-color: white;
+    @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 
 const BackImage = styled.div`
