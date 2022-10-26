@@ -40,7 +40,6 @@ const Router = () => {
                 <Route path="/detail/:postId" exact element={<DetailPage />} />
                 <Route path="/edit/:postId" exact element={<EditPage />} />
                 <Route path="/post" exact element={<PostPage />} />
-                <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
                 <Route path="/guide" exact element={<GuidePage />} />
                 <Route path="/vchat/:roomId" exact element={<VChatPage />} />
