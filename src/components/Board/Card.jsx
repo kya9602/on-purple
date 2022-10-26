@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import moment from "moment/moment";
 import 'moment/locale/ko';
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 
