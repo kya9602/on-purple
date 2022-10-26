@@ -9,7 +9,8 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 const ChatHeader = (roomId) => {
     /* console.log(roomId.roomId) */
     const session = roomId.roomId
-    const navigate = useNavigate();
+
+const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>
             <ChatHeaderLeftDiv>

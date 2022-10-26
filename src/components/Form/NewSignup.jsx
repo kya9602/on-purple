@@ -634,8 +634,9 @@ export default function VerticalLinearStepper() {
             return alert("비밀번호를 형식에 맞춰서 작성해주세요 ")
         } else if (userinfo.password !== userinfo.passwordConfirm) {
             return alert("비밀번호가 서로 일치하지않습니다")
-        }
-        ;
+        } else if (userinfo.gender.trim === "") {
+            return alert("성별을 등록해주세요 ")
+        };
 
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -1071,7 +1072,7 @@ const StBodyInput = styled.textarea`
 
 //마이페이지 추가 정보란 제일큰박스
 const AddMyinfo = styled.div`
-  width: 400px;
+  width: 390px;
   height: auto;
 `
 

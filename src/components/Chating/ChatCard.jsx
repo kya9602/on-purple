@@ -1,24 +1,15 @@
 import React from "react";
-import styled from "styled-components";
-const ChatCard = ({item}) =>{
-    /* console.log(item) */
-    return(
-        <>
-        <Sender>{item.sender}</Sender>
-        <Message>{item.message}</Message>
-        </>
+import "./styles.css"
+
+const ChatCard = ({ me, children }) => {
+    return (
+        <div className={me ? "sentMessage" : "receivedMessage"}>
+            <div className={me ? "sentMessageBox" : "receivedMessageBox"}>
+                {children}
+            </div>
+        </div>
     )
 }
 
 export default ChatCard;
 
-const Message = styled.div`
-    width: 100px;
-    height: 30px;
-    
-`
-
-const Sender = styled.div`
-    width: 100px;
-    height: 30px;
-`

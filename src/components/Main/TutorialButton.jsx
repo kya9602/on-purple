@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-const TutorialButton = () =>{
+const TutorialButton = () => {
     const navigate = useNavigate();
-    return(
+    return (
         <Container>
-            <GoTutorial onClick={()=>navigate(`/tutorial`)}>Guide 🧐</GoTutorial>
+            <GoTutorial onClick={() => navigate(`/tutorial`)}>Guide 🧐</GoTutorial>
         </Container>
     )
 }
@@ -17,6 +17,7 @@ const Container = styled.div`
 `
 
 const GoTutorial = styled.button`
+    cursor: pointer;
     display: flex;
     justify-content: center;
     color: white;

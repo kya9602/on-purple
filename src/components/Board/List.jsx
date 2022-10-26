@@ -46,7 +46,7 @@ const List = () => {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost);
-    
+
     useEffect(() => {
         dispatch(__getPosts(Category));
     }, [Category]);
@@ -69,7 +69,7 @@ const List = () => {
     if (error) {
         return <div>{error.message}</div>;
     }
-    
+
     //----------------------navigateButton------------------//
     const goDrive = () => {
         navigate(`/board/drive`)
@@ -92,76 +92,76 @@ const List = () => {
     const goSearch = () => {
         navigate(`/search`)
     }
-    
+
     return (
-    <>
-        <Wrapper>
-            <CategoryContaier>
-                <CategoryBox onClick={goDrive}>드라이브</CategoryBox>
-                <CategoryBox onClick={goTaste}>맛집</CategoryBox>
-                <CategoryBox onClick={goDate}>데이트 코스</CategoryBox>
-                <CategoryBox onClick={goMeet}>번개 만남</CategoryBox>
-                <CategoryBox onClick={goBar}>술 한잔 ?</CategoryBox>
-                <CategoryBox onClick={goFashion}>패션</CategoryBox>
-            </CategoryContaier>
-            <SearchCautionWrap>
-                <ModalSpan>
-                    <span onClick={handleOpen}>커뮤니티 가이드 라인 📄</span>
-                    <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={style}>
-                            <BoxContainer>
-                                <h2>커뮤니티 가이드 라인 📄</h2>
-                                <h3>가이드 라인을 위반하는 행동을 발견한다면 <br/>언제든지 <Link to={"/report"}>신고🚨</Link>해주세요.</h3>
-                                <ReportList>
-                                    <li>❗️ 나체 / 성적인 콘텐츠</li>
-                                    <Content> 나체 사진, 성적으로 노골적인 콘텐츠는 금지됩니다.</Content>
-                                    <li>❗️ 사칭</li>
-                                    <Content>자신을 있는 그대로 보여주세요! 타인인 척 행동하지 마세요</Content>
-                                    <li>❗️ 사기, 광고, 불법</li>
-                                    <Content>
-                                        On Purple 을 불법적인 행위를 위한 수단으로 사용하지 마세요.<br/>
-                                        사기 행위, 외부 앱으로 유도하는 광고 또한 금지 되어있습니다.
-                                    </Content>
-                                    <li>❗️ 미성년자</li>
-                                    <Content>
-                                        On Purple 을 이용하려면 만 18세 이상이어야 합니다. <br/>
-                                        미성년자의 독사진을 포함하고 있거나 미성년자 가해를 부추기거나,
-                                        미성년자를 성적이거나 성적인 암시가 포함된 방식으로 묘사하는 프로필을 발견한다면 신고해주세요.
-                                    </Content>
-                                    <li>❗️ 폭력, 위협</li>
-                                    <Content>
-                                        폭력적인 콘텐츠, 노골적인 콘텐츠 또는 유혈 콘텐츠가 허용되지 않습니다.  
-                                        신체적 폭행, 강압, 그리고 모든 종류의 폭력 행위는 엄격하게 금지됩니다.
-                                        자살이나 자해를 미화하거나 옹호하는 콘텐츠도 허용되지 않습니다
-                                    </Content>
-                                </ReportList>
-                            </BoxContainer>
-                        </Box>
-                    </Modal>
-                </ModalSpan>
-                <GoSearch onClick={goSearch}><img src={searchIcon} alt="" /></GoSearch>
-            </SearchCautionWrap>
-            <CategorytTitle>
-            {
-            Category === "taste" ? (<span>맛집 추천 !😋</span>)
-            : Category === "drive" ? (<span> 드라이브 가실 분? 🚗</span>) 
-            : Category === "dateCourse" ? (<span>데이트 코스 추천! 💑</span>)
-            : Category === "meet" ? (<span> 번개 만남 ⚡</span>) 
-            : Category === "bar" ? (<span>술 한잔 하실 분?🍺</span>)
-            : Category === "fashion" ? (<span>내 패션 어때요?😎</span>)
-            : null             
-            }
-            </CategorytTitle>
-            {currentPosts?.map((item) => (<Card item={item} key={item?.postId} />))}
-            <TopButton />
-        </Wrapper>
-        <Pagination postsPerPage={postsPerPage} totalPosts={post?.length} paginate={paginate} />
-    </>
+        <>
+            <Wrapper>
+                <CategoryContaier>
+                    <CategoryBox onClick={goDrive}>드라이브</CategoryBox>
+                    <CategoryBox onClick={goTaste}>맛집</CategoryBox>
+                    <CategoryBox onClick={goDate}>데이트 코스</CategoryBox>
+                    <CategoryBox onClick={goMeet}>번개 만남</CategoryBox>
+                    <CategoryBox onClick={goBar}>술 한잔 ?</CategoryBox>
+                    <CategoryBox onClick={goFashion}>패션</CategoryBox>
+                </CategoryContaier>
+                <SearchCautionWrap>
+                    <ModalSpan>
+                        <span onClick={handleOpen}>커뮤니티 가이드 라인 📄</span>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style}>
+                                <BoxContainer>
+                                    <h2>커뮤니티 가이드 라인 📄</h2>
+                                    <h3>가이드 라인을 위반하는 행동을 발견한다면 <br />언제든지 <Link to={"/report"}>신고🚨</Link>해주세요.</h3>
+                                    <ReportList>
+                                        <li>❗️ 나체 / 성적인 콘텐츠</li>
+                                        <Content> 나체 사진, 성적으로 노골적인 콘텐츠는 금지됩니다.</Content>
+                                        <li>❗️ 사칭</li>
+                                        <Content>자신을 있는 그대로 보여주세요! 타인인 척 행동하지 마세요</Content>
+                                        <li>❗️ 사기, 광고, 불법</li>
+                                        <Content>
+                                            On Purple 을 불법적인 행위를 위한 수단으로 사용하지 마세요.<br />
+                                            사기 행위, 외부 앱으로 유도하는 광고 또한 금지 되어있습니다.
+                                        </Content>
+                                        <li>❗️ 미성년자</li>
+                                        <Content>
+                                            On Purple 을 이용하려면 만 18세 이상이어야 합니다. <br />
+                                            미성년자의 독사진을 포함하고 있거나 미성년자 가해를 부추기거나,
+                                            미성년자를 성적이거나 성적인 암시가 포함된 방식으로 묘사하는 프로필을 발견한다면 신고해주세요.
+                                        </Content>
+                                        <li>❗️ 폭력, 위협</li>
+                                        <Content>
+                                            폭력적인 콘텐츠, 노골적인 콘텐츠 또는 유혈 콘텐츠가 허용되지 않습니다.
+                                            신체적 폭행, 강압, 그리고 모든 종류의 폭력 행위는 엄격하게 금지됩니다.
+                                            자살이나 자해를 미화하거나 옹호하는 콘텐츠도 허용되지 않습니다
+                                        </Content>
+                                    </ReportList>
+                                </BoxContainer>
+                            </Box>
+                        </Modal>
+                    </ModalSpan>
+                    <GoSearch onClick={goSearch}><img src={searchIcon} alt="" /></GoSearch>
+                </SearchCautionWrap>
+                <CategorytTitle>
+                    {
+                        Category === "taste" ? (<span>맛집 추천 !😋</span>)
+                            : Category === "drive" ? (<span> 드라이브 가실 분? 🚗</span>)
+                                : Category === "dateCourse" ? (<span>데이트 코스 추천! 💑</span>)
+                                    : Category === "meet" ? (<span> 번개 만남 ⚡</span>)
+                                        : Category === "bar" ? (<span>술 한잔 하실 분?🍺</span>)
+                                            : Category === "fashion" ? (<span>내 패션 어때요?😎</span>)
+                                                : null
+                    }
+                </CategorytTitle>
+                {currentPosts?.map((item) => (<Card item={item} key={item?.postId} />))}
+                <TopButton />
+            </Wrapper>
+            <Pagination postsPerPage={postsPerPage} totalPosts={post?.length} paginate={paginate} />
+        </>
     )
 }
 
@@ -176,6 +176,9 @@ const Wrapper = styled.div`
     width : 100%;
     margin:50px auto; 
     background-color: white;
+    @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 
 const CategoryBox = styled.div`

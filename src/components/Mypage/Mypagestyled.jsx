@@ -120,6 +120,8 @@ export const BtnBox = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  gap:10px
+
 `
 
 //수정버튼
@@ -129,7 +131,6 @@ export const ModifyBtn = styled.button`
     cursor: pointer;
     height: 44px;
     padding: 1%;
-    margin-left: 2vw;
     background-color: white;
     border: 2px solid #d87dd8;
     :hover{
@@ -141,7 +142,7 @@ export const ModifyBtn = styled.button`
 //리스트 전체 박스
 export const ListBox = styled.div`
   display: flex;
-  margin-top: 2vw;
+  margin-top: 10px;
   height: auto;
   width: 380px;
   justify-content: center;
@@ -152,7 +153,7 @@ export const Listtitle = styled.div`
     display: flex;
     width: 150px;
     justify-content: center;
-    margin-bottom: 1.5vw;
+    margin-bottom: 10px;
     font-size: 15px;
     font-weight: 600;
     margin-left: 10px;
@@ -305,8 +306,7 @@ export const SecondMyinfo = styled.div`
     height: 190px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* padding-bottom: 4%; */
+    justify-content: center;  
 `
 
 
@@ -355,10 +355,11 @@ export const MiniTitle = styled.div`
 
 //마이페이지 낱개 박스 인풋
 export const MiniInput = styled.input`
-  margin: 1%;
+  margin-top: 1%;
   text-align: center;
   width: 350px;
-  margin-left: 2vw;
+  margin-left: auto;
+  margin-right: auto;
   height: 1.5em;
   border-radius: 5px;
   border: 2px solid gray;
@@ -424,11 +425,7 @@ export const StSelect = styled.select`
       outline: none;
       border-bottom: 2px solid gray;
     }
-    /* @media all and (max-width : 750px) {
-    font-size: 12px; 
-    width : 200px;
-    height: 30px;
-  } */
+    
 `
 export const Container = styled.div`
   max-width: 428px;
@@ -447,4 +444,9 @@ export const Container = styled.div`
     background: rgba(252, 112, 112, 0.3);
     border-radius: 6px;
   }
+
+  //아이폰 화면크기
+  @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
