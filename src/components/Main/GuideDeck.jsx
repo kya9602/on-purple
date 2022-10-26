@@ -210,6 +210,7 @@ const BoxContainer = styled.div`
 const ModalButton1 = styled.button`
     margin-right: 10px;
     border: 2px solid #9966CC;
+    border-radius: 12px;
     color:white;
     background-color: #9966CC;
     font-weight: 600;
@@ -223,6 +224,7 @@ const ModalButton1 = styled.button`
 const ModalButton2 = styled.button`
     margin-left: 10px;
     border: 2px solid #9966CC;
+    border-radius: 12px;
     color:white;
     background-color: #9966CC;
     font-weight: 600;

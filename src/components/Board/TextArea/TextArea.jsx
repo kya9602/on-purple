@@ -9,7 +9,8 @@ const TextArea = ({ setTitle, setContent, title, content }) => {
                     setTitle(e.target.value);
                 }}
                 className="title"
-                placeholder="제목을 입력하세요"
+                maxLength={15}
+                placeholder="제목을 입력하세요(15자 이내)"
                 value={title}
             />
             <textarea
@@ -17,7 +18,8 @@ const TextArea = ({ setTitle, setContent, title, content }) => {
                     setContent(e.target.value);
                 }}
                 className="text"
-                placeholder="내용을 입력하세요"
+                maxLength={300}
+                placeholder="내용을 입력하세요(300자 이내)"
                 value={content}
             />
         </TextAreaWrapper>
@@ -34,7 +36,7 @@ const TextAreaWrapper = styled.div`
     }
     .text {
         width: 380px;
-        height: 400px;
+        height: 300px;
     }
 
     input, textarea {

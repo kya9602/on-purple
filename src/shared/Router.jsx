@@ -22,7 +22,7 @@ import ReportDetailPage from "../pages/ReportDetailPage";
 import SearchPage from "../pages/SearchPage";
 import ChatRoom from "../components/Chating/ChatRoom";
 import ProfileInfoPage from "../pages/ProfileInfoPage";
-
+import TutorialPage from "../pages/TutorialPage";
 const Router = () => {
     return (
         <BrowserRouter>
@@ -48,6 +48,7 @@ const Router = () => {
                 <Route path="/reportDetail/:reportId" exact element={<ReportDetailPage />} />
                 <Route path="/search" exact element={<SearchPage />} />
                 <Route path="/search/:searchTerm" element={<SearchPage />} exact />
+                <Route path="/tutorial" exact element={<TutorialPage />} />
                 {/* <Route path="/kakao" exact element={<Oauth2Handler />} /> */}
             </Routes>
         </BrowserRouter>

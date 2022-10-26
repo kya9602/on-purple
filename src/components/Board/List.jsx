@@ -46,7 +46,7 @@ const List = () => {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost);
-
+    
     useEffect(() => {
         dispatch(__getPosts(Category));
     }, [Category]);
@@ -69,8 +69,7 @@ const List = () => {
     if (error) {
         return <div>{error.message}</div>;
     }
-
-    /* if (post.length === 0)  */
+    
     //----------------------navigateButton------------------//
     const goDrive = () => {
         navigate(`/board/drive`)
@@ -147,7 +146,7 @@ const List = () => {
                 </ModalSpan>
                 <GoSearch onClick={goSearch}><img src={searchIcon} alt="" /></GoSearch>
             </SearchCautionWrap>
-            <CategoetTitle>
+            <CategorytTitle>
             {
             Category === "taste" ? (<span>맛집 추천 !😋</span>)
             : Category === "drive" ? (<span> 드라이브 가실 분? 🚗</span>) 
@@ -157,7 +156,7 @@ const List = () => {
             : Category === "fashion" ? (<span>내 패션 어때요?😎</span>)
             : null             
             }
-            </CategoetTitle>
+            </CategorytTitle>
             {currentPosts?.map((item) => (<Card item={item} key={item?.postId} />))}
             <TopButton />
         </Wrapper>
@@ -280,7 +279,7 @@ const Content = styled.div`
     margin-top: 15px;
 `
 
-const CategoetTitle = styled.div`
+const CategorytTitle = styled.div`
     margin: 0 auto;
     font-size: 15px;
     font-weight: bold;

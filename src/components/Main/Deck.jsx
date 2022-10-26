@@ -173,13 +173,6 @@ function Deck() {
   }
 
 
-
-
-
-
-
-
-
   return props.map(({ x, y, rot, scale, props }, i) => (
 
     <Card

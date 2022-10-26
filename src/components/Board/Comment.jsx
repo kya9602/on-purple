@@ -10,8 +10,7 @@ const Comments = ({ item }) => {
     const dispatch = useDispatch();
     const id = item.commentId
     const getNickname = localStorage.getItem("nickname")
-    /* const [showReplyInput, setshowReplyInput] = useState(false); */
-    /* console.log(showReplyInput) */
+  
     const onLike = (event) => {
         event.preventDefault();
         dispatch(__likeComment(id));
@@ -19,10 +18,8 @@ const Comments = ({ item }) => {
 
     //댓글 작성시간 표시
     function timeForToday(Day) {
-        console.log(Day)
         const today = new Date();
         const timeValue = new Date(Day);
-        console.log(timeValue)
         const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
         if (betweenTime < 1) return '방금전';
         if (betweenTime < 60) {
@@ -40,9 +37,6 @@ const Comments = ({ item }) => {
 
         return `${Math.floor(betweenTimeDay / 365)}년전`;
     }
-    /*  const onReplyClick = () => {
-         setshowReplyInput(!showReplyInput);
-       }; */
 
     return (
         <div style={{ margin: "10px", borderTop: "1px solid #cc9ce7" }}>
@@ -57,7 +51,6 @@ const Comments = ({ item }) => {
                             }}><img src={delete2} alt="" />
                             </DeleteBtn>
 
-                            {/* <EditBtn><img src={edit} alt=""/></EditBtn> */}
                         </>)
                         : null
                     }
@@ -71,7 +64,7 @@ const Comments = ({ item }) => {
             <TRWrapper>
                 <Time>{timeForToday(item.createdAt)}</Time>
             </TRWrapper>
-            {/* <Recomment item={item}/> */}
+           
         </div>
     )
 }

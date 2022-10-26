@@ -31,13 +31,10 @@ export default ChatHeader
 
 const ChatHeaderContainerDiv = styled.div`
     display: flex;
-    /* position: fixed; */
-    /* top: 0px; */
     background-color: white;
     max-width: 428px;
     width: 100%;
     height: 70px;
-    /* margin: 0 auto; */
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     justify-content: space-between;
 `

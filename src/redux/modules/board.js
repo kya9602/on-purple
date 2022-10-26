@@ -143,8 +143,7 @@ export const postSlice = createSlice({
       } else {
         state.detail.likes += 1;
       }
-      /* console.log("payload",action.payload)
-      console.log("state",current(state.detail)) */
+      
     },
     [__likePost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -157,7 +156,7 @@ export const postSlice = createSlice({
 
     [__deletePosts.fulfilled]: (state, action) => {
       state.post = action.payload;
-      /* console.log(action.payload) */
+  
     },
     [__deletePosts.rejected]: (state, action) => {
 
