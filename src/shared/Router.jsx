@@ -9,7 +9,6 @@ import ProfilePage from "../pages/ProfilePage";
 import BoardPage from "../pages/BoardPage";
 import DetailPage from "../pages/DetailPage";
 import PostPage from "../pages/PostPage";
-import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
 import GuidePage from "../pages/GuidePage";
 import EditPage from "../pages/EditPage";

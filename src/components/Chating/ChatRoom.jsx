@@ -1,16 +1,15 @@
-import React, { useEffect, useState, useRef, useCallback, Fragment } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import image from "../../assets/images/배경화면으로.jpg"
 import { useDispatch, useSelector } from "react-redux";
-
-
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
 import ChatCard from './ChatCard';
 import { __enterChatroom } from '../../redux/modules/chatRoom';
+import send from "../../assets/icons/send.png"
 
 function ChatRoom() {
     const dispatch = useDispatch();
@@ -69,7 +68,7 @@ function ChatRoom() {
                     type:"ENTER",
                     roomId: roomId,
                     sender: nickName,
-                    message : `${nickName}님이 입장하셨습니다.`,
+                    message : `${nickName} 님이 입장하셨습니다.`,
                     createdAt : userData.createdAt
                 };
                 //3. send(path, header, message)로 메세지를 보낼 수 있음
@@ -166,11 +165,12 @@ function ChatRoom() {
                         value={userData.message}
                         onChange={(event) => handleValue(event)}
                         onKeyDown={(event) => onKeyPress(event)}
-                        placeholder="메세지를 입력하세요.."
+                        placeholder="메세지를 입력하세요..(100자 이내)"
                         type="text"
+                        maxLength={100}
                     />
                     <InputButton onClick={sendMessage}>
-                            전송
+                            <img src={send} alt=""/>
                     </InputButton>
                 </ChatInputBox>
 
@@ -208,18 +208,22 @@ const BackImage = styled.div`
 const Input = styled.input`
     width: 73%;
     padding: 10px;
-    border: 1px solid #D4B4FF;
+    border: 1.5px solid #7049AE;
     border-radius: 20px;
     
 `
 
 const InputButton = styled.button`    
-    width: 70px;
-    border: 1px solid #D4B4FF;
-    border-radius: 20px;
+    border: 1.5px solid #7049AE;
+    border-radius: 100%;
     background-color: white;
     font-weight: bolder;
     cursor: pointer;
+    text-align: center;
+    img{
+        width:  100%;
+        height: 100%;
+    }
 `
 
 const ChatInputBox = styled.div`
@@ -233,7 +237,8 @@ const ChatInputBox = styled.div`
     bottom: 0;
     max-width: 428px;
     width: 400px;
-    border-top: 1px solid #D4B4FF;
+    border-top: 1px solid #7049AE;
+    height: 40px;
     margin: 0 auto;
     z-index: 1;
 `

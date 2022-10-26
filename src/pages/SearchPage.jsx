@@ -25,9 +25,10 @@ const Container = styled.div`
     margin:0 auto;
     background-color: white;
     overflow-y: auto;
+    overflow-x: hidden;
     height: 100%;
     @media all and (max-width : 390px) {
-   max-width : 390px;
+    max-width : 390px;
    }
 `
 

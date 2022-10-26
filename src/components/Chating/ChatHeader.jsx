@@ -1,10 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import report from "../../assets/icons/report.png"
+import videoCall from "../../assets/icons/videochat.png"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
-import VideoCallIcon from '@mui/icons-material/VideoCall';
 
 const ChatHeader = (roomId) => {
     const session = roomId?.roomId
@@ -13,29 +12,27 @@ const ChatHeader = (roomId) => {
 const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>
-            <ChatHeaderLeftDiv>
-                <ChatBackbuttonDiv>
-                    <ArrowBackIosIcon fontSize="large" onClick={() => { navigate(-1); }}></ArrowBackIosIcon>
-                </ChatBackbuttonDiv>
-                <ProfileDetailImg
-                    src={otherInfo?.otherImageUrl}
-                    onClick={() => { 
-                    navigate(`/profile/${otherInfo?.otherUserId}`);
-                }}
-                    
-                ></ProfileDetailImg>
-                <ProfileNicknameH3>{otherInfo?.otherUsername}</ProfileNicknameH3>
-            </ChatHeaderLeftDiv>
-
-            <ReportButtonDiv>
-                <VideoCallIcon fontSize="large" onClick={() => 
+            <ChatBackbuttonDiv>
+                <ArrowBackIosIcon style={{mariginBottom:"10px"}} fontSize="large" onClick={() => { navigate(-1); }}/>
+            
+            </ChatBackbuttonDiv>
+            <ImgBox>
+            <ProfileDetailImg
+                            src={otherInfo?.otherImageUrl}
+                            onClick={() => { 
+                            navigate(`/profile/${otherInfo?.otherUserId}`);
+                        }}/>
+            <ProfileNicknameH3>{otherInfo?.otherUsername}</ProfileNicknameH3>
+            </ImgBox>
+            <ButtonWrap>
+                <GoVideo onClick={() => 
                     { navigate(`/vchat/${session}`);
                     }} 
                     roomId={session}>
-                    </VideoCallIcon>
-                <ReportGmailerrorredIcon fontSize="large" onClick={() => { navigate('/information'); }}>신고하기icon</ReportGmailerrorredIcon>
-            </ReportButtonDiv>
-
+                    <img src={videoCall} alt=""/>    
+                </GoVideo>
+                <GoReport onClick={() => { navigate('/report'); }}><img src={report} alt=""/></GoReport>
+            </ButtonWrap>
         </ChatHeaderContainerDiv>
     )
 }
@@ -52,6 +49,7 @@ const ChatHeaderContainerDiv = styled.div`
     height: 70px;
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     justify-content: space-between;
+    align-items: center;
 `
 
 const ProfileDetailImg = styled.img`
@@ -59,34 +57,48 @@ const ProfileDetailImg = styled.img`
     height: 50px; 
     border-radius: 70%;
     overflow: hidden;
-    margin-left: 15px;
-    margin-top: auto;
-    margin-bottom:auto;
     cursor: pointer;
 `
 
-const ReportButtonDiv = styled.div`
-    text-decoration-line : none;
-    margin-top: auto;
-    margin-bottom:auto;
-    margin-right: 15px;
-    cursor: pointer;
-`
-
-const ChatHeaderLeftDiv = styled.div`
-    display: flex;
-    margin-top: auto;
-    margin-bottom:auto;
-`
 const ChatBackbuttonDiv = styled.div`
-    margin-top: 12px;
-    margin-bottom:12px;
-    margin-left: 10px;
+    text-align: center;
+    width: 50px;
+    margin-top: 35px;
+    height: 100%;
     cursor: pointer;
 `
 
 
-const ProfileNicknameH3 = styled.h3`
+const ProfileNicknameH3 = styled.span`
+    font-size: 18px;
+    font-weight: bold;
     margin-top: auto;
     margin-bottom:auto;
+`
+const GoVideo = styled.div`
+    cursor: pointer;
+    img{
+        width: 40px;
+        height: 40px;
+    }
+`
+
+const GoReport = styled.div`
+    cursor: pointer;
+    img{
+        width: 40px;
+        height: 40px;
+    }
+`
+const ButtonWrap = styled.div`
+    display: flex;
+    justify-content: right;
+    gap: 15px;
+    margin-right: 5px;
+`
+
+const ImgBox = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
 `

@@ -197,7 +197,6 @@ const Detail = () => {
                         </div>
                     }
 
-
                 </DialogContent>
             </Dialog>
         </Container>

@@ -32,6 +32,7 @@ const Wrapper = styled.div`
     margin:0 auto;
     height: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
     &::-webkit-scrollbar {
     width: 8px;
     height: 8px;

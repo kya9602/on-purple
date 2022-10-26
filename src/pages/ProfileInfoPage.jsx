@@ -24,6 +24,7 @@ export default ProfileInfoPage;
 const Container = styled.div`
     max-width: 428px;
     width : 100%;
+    overflow-x: hidden;
     margin:0 auto;
     @media all and (max-width : 390px) {
    max-width : 390px;
