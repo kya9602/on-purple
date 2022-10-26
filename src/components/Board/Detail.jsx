@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { __getPostsDetail } from "../../redux/modules/board";
 import AddComment from "./AddComment"
-import { __deletePosts, __likePost } from "../../redux/modules/board";
+import { __deletePosts, __likePost, __deleteAdminPosts } from "../../redux/modules/board";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
 import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
 import delete2 from "../../assets/icons/delete2.png"
@@ -18,17 +18,20 @@ import "./styles.css";
 import { Pagination } from "swiper";
 import Swal from "sweetalert2";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
+//관리자용
+import { __getUser } from "../../redux/modules/signup";
 
 const Detail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const { isLoading, error, detail } = useSelector((state) => state?.post);
+    const { user } = useSelector((state) => state.user);
     const { postId } = useParams();
 
     useEffect(() => {
         dispatch(__getPostsDetail(postId));
+        dispatch(__getUser())
     }, [])
 
     if (isLoading) return "😴로딩중이에요..😴"
@@ -59,6 +62,17 @@ const Detail = () => {
             (navigate('/login'))
         }, 2000);
     }
+
+
+
+    // 관리자 확인용 
+    const admin = user?.role
+    console.log(admin)
+
+
+
+
+
     return (
         <Container>
             <Btnbox>
@@ -76,8 +90,17 @@ const Detail = () => {
                             <EditButton onClick={goEdit}><img src={edit} alt="" /></EditButton>
                             <DeleteButton onClick={() => { setShow(true) }}><img src={delete2} alt="" /></DeleteButton>
                         </div>
-                    ) :
-                    <ReportButton onClick={goReport}><img src={report} alt="" /></ReportButton>}
+                    )
+                    :
+                    //관리자용 삭제버튼 보이기~
+                    (admin !== "ADMIN" ?
+
+                        <ReportButton onClick={goReport}><img src={report} alt="" /></ReportButton>
+                        :
+                        <div style={{ gap: "10px", marginRight: "10px" }}>
+                            <DeleteButton onClick={() => { setShow(true) }}><img src={delete2} alt="" /></DeleteButton>
+                        </div>
+                    )}
             </DateButtonWrapper>
 
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper" >
@@ -114,33 +137,67 @@ const Detail = () => {
                     >
                         <DisabledByDefaultOutlinedIcon />
                     </IconButton>
-                    <div className="modal">
-                        <div className="modal-title"> 정말 삭제하시겠습니까 ?</div>
-                        <div className="modal-button" style={{ paddingTop: "30px" }}>
-                            <ModalYesButton
-                                variant="outlined"
-                                color="error"
-                                onClick={async () => {
-                                    setShow(false);
-                                    // 모달의 예 버튼 클릭시 게시물 삭제
-                                    dispatch(__deletePosts(postId))
-                                    alert("게시물이 삭제되었습니다😎");
-                                    navigate("/board/taste");
-                                }}
-                            >
-                                예
-                            </ModalYesButton>
-                            <ModalCancleButton
-                                variant="outlined"
-                                color="primary"
-                                onClick={() => {
-                                    setShow(false)
-                                }}
-                            >
-                                아니오
-                            </ModalCancleButton>
+
+                    {/* 관리자일경우 삭제하는 url이 달라 변경해둠 */}
+                    {admin !== "ADMIN" ?
+                        <div className="modal">
+                            <div className="modal-title"> 정말 삭제하시겠습니까 ?</div>
+                            <div className="modal-button" style={{ paddingTop: "30px" }}>
+                                <ModalYesButton
+                                    variant="outlined"
+                                    color="error"
+                                    onClick={async () => {
+                                        setShow(false);
+                                        // 모달의 예 버튼 클릭시 게시물 삭제
+                                        dispatch(__deletePosts(postId))
+                                        alert("게시물이 삭제되었습니다😎");
+                                        navigate("/board/taste");
+                                    }}
+                                >
+                                    예
+                                </ModalYesButton>
+                                <ModalCancleButton
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+                                        setShow(false)
+                                    }}
+                                >
+                                    아니오
+                                </ModalCancleButton>
+                            </div>
                         </div>
-                    </div>
+                        :
+                        <div className="modal">
+                            <div className="modal-title"> 정말 삭제하시겠습니까 ?</div>
+                            <div className="modal-button" style={{ paddingTop: "30px" }}>
+                                <ModalYesButton
+                                    variant="outlined"
+                                    color="error"
+                                    onClick={async () => {
+                                        setShow(false);
+                                        // 모달의 예 버튼 클릭시 게시물 삭제
+                                        dispatch(__deleteAdminPosts(postId))
+                                        alert("관리자 권한으로 삭제되었습니다😎");
+                                        navigate("/board/taste");
+                                    }}
+                                >
+                                    예
+                                </ModalYesButton>
+                                <ModalCancleButton
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+                                        setShow(false)
+                                    }}
+                                >
+                                    아니오
+                                </ModalCancleButton>
+                            </div>
+                        </div>
+                    }
+
+
                 </DialogContent>
             </Dialog>
         </Container>
@@ -239,6 +296,7 @@ const NameLikeWrap = styled.div`
     flex-direction: column;
 `
 const EditButton = styled.button`
+    cursor: pointer;
     width: 40px;
     height: 30px;
     border: none;
@@ -253,6 +311,7 @@ const EditButton = styled.button`
 `;
 
 const DeleteButton = styled.button`
+    cursor: pointer;
     width: 40px;
     height: 30px;
     border: none;
