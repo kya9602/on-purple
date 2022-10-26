@@ -173,6 +173,9 @@ const Container = styled.div`
     .BackBtn{
      cursor: pointer;   
     }
+    @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 
 const Btnbox = styled.div`

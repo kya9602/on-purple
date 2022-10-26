@@ -26,6 +26,9 @@ const Container = styled.div`
     background-color: white;
     overflow-y: auto;
     height: 100%;
+    @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 
 const BackImage = styled.div`

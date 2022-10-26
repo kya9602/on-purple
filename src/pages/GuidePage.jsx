@@ -17,14 +17,14 @@ function GuidePage() {
         <GuideDeck />
         <ArrowBox>
           <Left>
-            <img src={LeftArrow} alt=""/>
+            <img src={LeftArrow} alt="" />
           </Left>
-           <span>카드를 좌우로 넘겨보세요 !</span> 
+          <span>카드를 좌우로 넘겨보세요 !</span>
           <Right>
-            <img src={RightArrow} alt=""/>
+            <img src={RightArrow} alt="" />
           </Right>
         </ArrowBox>
-        <TutorialButton/>
+        <TutorialButton />
       </Container>
     </BackImage>
   );
@@ -38,6 +38,9 @@ const Container = styled.div`
     margin:0 auto;
     height: 100%;
     background-color: white;
+    @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 
 const BackImage = styled.div`

@@ -3,12 +3,12 @@ import styled from "styled-components";
 import image from "../assets/images/배경화면으로.jpg"
 import Header from "../components/Header/Header";
 import Tutorial from "../components/Tutorial/Tutorial";
-const TutorialPage = () =>{
-    return(
+const TutorialPage = () => {
+    return (
         <BackImage>
             <Container>
-            <Header/>
-            <Tutorial/>    
+                <Header />
+                <Tutorial />
             </Container>
         </BackImage>
     )
@@ -22,6 +22,9 @@ const Container = styled.div`
     margin:0 auto;
     height: 100%;
     background-color: white;
+    @media all and (max-width : 390px) {
+   max-width : 390px;
+   }
 `
 
 const BackImage = styled.div`
