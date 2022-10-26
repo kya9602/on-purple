@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import image from "../../assets/images/배경화면으로.jpg"
-import { useDispatch, useSelector } from "react-redux";
-import { __getlastMessage, subMessage } from '../../redux/modules/chatRoom';
+import { useDispatch } from "react-redux";
+
 
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+
 import ChatCard from './ChatCard';
 
 function ChatRoom() {
@@ -15,8 +16,6 @@ function ChatRoom() {
     const navigate = useNavigate();
     const { roomId } = useParams();
     /* console.log(typeof roomId) */
-    const messages = useSelector((state) => state.chatroom.chatroom)
-    console.log(messages)
 
     const [chatList, setChatList] = useState([]); // 웹소켓 연결 시 메시지 저장
     const [userData, setUserData] = useState({
@@ -32,7 +31,6 @@ function ChatRoom() {
         //1. SockJS를 내부에 들고있는 stomp를 내어줌
         let client = Stomp.over(sock);
         ws.current = client;
-        dispatch(__getlastMessage(roomId))
     }, []);
 
     useEffect(() => {
@@ -49,13 +47,13 @@ function ChatRoom() {
     //2. connection이 맺어지면 실행
     function wsConnect() {
         try {
-            console.log(`소켓 연결을 시도합니다.`);
-            ws.current.debug = function (str) { console.log(str) };
+            /* console.log(`소켓 연결을 시도합니다.`); */
+            ws.current.debug = function (str) { /* console.log(str) */ };
             ws.current.debug();
 
             ws.current.connect({ Authorizaion: token, type: "TALK" }, () => {
                 // connect 이후 subscribe
-                console.log('연결 성공')
+               /*  console.log('연결 성공') */
                 //4. subscribe(path, callback)으로 메세지를 받을 수 있음
                 ws.current.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived );
                 // 입장 시 enter 메시지 발신
@@ -97,7 +95,7 @@ function ChatRoom() {
       };
 
       ws.current.send("/pub/chat/enter", { Authorizaion: token }, JSON.stringify(chatMessage));
-      console.log(chatMessage)
+      /* console.log(chatMessage) */
       setUserData({ ...userData, message: "" });
     }
     scrollToBottom();
@@ -106,7 +104,7 @@ function ChatRoom() {
     // 수신 메세지
     const onMessageReceived = (payload) => {
         let payloadData = JSON.parse(payload.body);
-        console.log(payloadData)
+        
         if (payloadData.type === "ENTER" || payloadData.type === "TALK") {
           chatList.push(payloadData);
           setChatList([...chatList]);
@@ -135,15 +133,21 @@ function ChatRoom() {
     return (
         <BackImage>
             <Container>
-                <ChatHeader roomId={roomId}/>
-                <Screenbox>
-                    <OtherMessage>
-                         {chatList.map((item, idx)=>(<ChatCard item={item} key={idx}/>))}
-                    </OtherMessage>
-                    <MyMessage>
-                        {chatList.map((item, idx)=>(<ChatCard item={item} key={idx}/>))}
-                    </MyMessage>
-                </Screenbox>
+                {/* <ChatHeader roomId={roomId}/> */}
+                         
+                {chatList.map((item, idx)=>(
+                    <ChatCard 
+                            item={item}  
+                            key={idx}
+                            me={
+                            item.sender === nickName
+                            } 
+                    >
+                        {item.message}
+                    </ChatCard>
+                ))}    
+
+
                 <ChatContainer>
                     <Input 
                         value={userData.message}
@@ -186,34 +190,6 @@ const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
   height: 100vh;
-`
-
-
-const Screenbox = styled.div`
-    display: flex;
-    align-items: center;
-    margin-bottom: 70px;
-`
-
-/* const ImgBox = styled.img`
-    width: 40px;
-    height: 40px; 
-    border-radius: 70%;
-    overflow: hidden;   
-` */
-
-const MyMessage = styled.div`
-    margin-left: auto;
-    background-color: #D4B4FF;
-    padding: 15px;
-    border-radius: 20px;
-    color: white;
-`
-
-const OtherMessage = styled.div`
-    background-color: lightgray;
-    padding: 15px;
-    border-radius: 20px;
 `
 
 const Input = styled.input`

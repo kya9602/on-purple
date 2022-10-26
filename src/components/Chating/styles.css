@@ -1,0 +1,38 @@
+.sentMessage{
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+
+.receivedMessage{
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
+.sentMessageBox{
+    display: inline-block;
+    background: black;
+    color: #D4B4FF;
+    max-width: 80%;
+    text-align: left;
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 22px 0px 22px 22px;
+}
+
+.receivedMessageBox{
+    display: inline-block;
+    background: #D4B4FF;
+    border-radius: 0px 22px 22px 22px;
+    max-width: 80%;
+    text-align: left;
+    padding: 10px;
+    margin-left: 20px;
+}
