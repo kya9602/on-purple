@@ -84,6 +84,25 @@ export const __searchPosts = createAsyncThunk(
     }
   }
 );
+
+//관리자용 포스트 삭제
+export const __deleteAdminPosts = createAsyncThunk(
+  // action 이름
+  "DELETE_ADMIN_POSTS",
+  // 처리할 비동기 함수
+  async (payload) => {
+    // 서버에서 데이터를 삭제
+    const res = await axios.delete(`${process.env.REACT_APP_HOST}/admin/post/${payload}`, {
+      headers: {
+        "Authorization": localStorage.getItem("Authorization"),
+        "RefreshToken": localStorage.getItem("RefreshToken")
+      }
+    });
+    return res.data;
+  }
+);
+
+
 const initialState = {
   post: [],
   detail: {
@@ -143,7 +162,7 @@ export const postSlice = createSlice({
       } else {
         state.detail.likes += 1;
       }
-      
+
     },
     [__likePost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -156,7 +175,7 @@ export const postSlice = createSlice({
 
     [__deletePosts.fulfilled]: (state, action) => {
       state.post = action.payload;
-  
+
     },
     [__deletePosts.rejected]: (state, action) => {
 
@@ -173,6 +192,18 @@ export const postSlice = createSlice({
     [__searchPosts.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+    },
+    //관리자용
+    [__deleteAdminPosts.pending]: (state, action) => {
+      state.isLoading = true
+    },
+
+    [__deleteAdminPosts.fulfilled]: (state, action) => {
+      state.post = action.payload;
+
+    },
+    [__deleteAdminPosts.rejected]: (state, action) => {
+
     },
   }
 })
