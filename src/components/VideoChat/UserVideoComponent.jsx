@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import OpenViduVideoComponent from './OvVideo';
 import './UserVideo.css';
+import styled from "styled-components";
 
 export default class UserVideoComponent extends Component {
 
@@ -11,15 +12,19 @@ export default class UserVideoComponent extends Component {
 
     render() {
         return (
-            <div>
+            <CamDiv>
                 {this.props.streamManager !== undefined ? (
                     <div className="streamcomponent">
                         <OpenViduVideoComponent streamManager={this.props.streamManager} />
                         {/* <div><p>{this.getNicknameTag()}</p></div> */}
                     </div>
                 ) : null}
-            </div>
+            </CamDiv>
         );
     }
     
 }
+const CamDiv = styled.div`
+    width: 370px;
+    height: 300px;
+`

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
 import UserVideoComponent from './UserVideoComponent';
-
+import endcall from '../../assets/images/endcall.png'
 import styled from "styled-components";
 
 const OPENVIDU_SERVER_URL = `${process.env.REACT_APP_VCHAT_SEVER}` ;
@@ -185,6 +185,8 @@ class VideoChatConnect extends Component {
             mainStreamManager: undefined,
             publisher: undefined
         });
+
+        window.location.reload()
     }
 
     async switchCamera() {
@@ -269,8 +271,8 @@ class VideoChatConnect extends Component {
                     <div id="session">
 
                         <SessionHeader>
-                            <h1>{mySessionId}</h1>
-                            {/* <SessionExit
+                            {/* <h1>{mySessionId}</h1> */}
+{/*                             <SessionExit
                                 className="btn btn-large btn-danger"
                                 type="button"
                                 id="buttonLeaveSession"
@@ -278,7 +280,11 @@ class VideoChatConnect extends Component {
                                 value="채팅방 나가기"
                             /> */}
                             <div>
-                                <SessionExit onClick={this.leaveSession}>채팅방 나가기</SessionExit>
+                                <SessionExit value="Leave session" onClick={this.leaveSession}>
+                                통화 종료
+                                <EndcallImg src={endcall} />
+                                </SessionExit>
+                                
                             </div>
                         </SessionHeader>
 
@@ -297,23 +303,28 @@ class VideoChatConnect extends Component {
                         ) : null} */}
 
                        
-                        <VideoContainer className="col-md-6">
+                        <VideoContainer>
 
-                         {/* 나의 캠 */}    
+                         {/* 나의 캠 */}
+                        <MyCamDiv>
                             {this.state.publisher !== undefined ? (
                                 <div className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
                                     <UserVideoComponent
                                         streamManager={this.state.publisher} />
                                 </div>
                             ) : null}
+                        </MyCamDiv>
 
                         {/* 상대 캠 */}
+                        <OtherCamDiv>
                             {this.state.subscribers.map((sub, i) => (
                                 <div key={i} className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
                                     <UserVideoComponent streamManager={sub} />
                                 </div>
                             ))}
+                        </OtherCamDiv>
                         </VideoContainer>
+                        
                     </div>
                 ) : null}
 
@@ -408,12 +419,19 @@ const SessionHeader = styled.div`
 `
 
 const SessionExit = styled.button`
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
     border: 2px solid #6e96ee;
     background-color: white;
     border-radius: 10px;
     font-weight: 600;
     font-size: 12px;
-    height: 30px;
+    height: 25px;
     :hover{
     border: none;
     background-color: #4097df;
@@ -425,7 +443,22 @@ const VideoContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
+`
 
-    width: 90%;
-    height: 90%;
+const MyCamDiv = styled.div`
+/*     width: 370px;
+    height: 250px; */
+`
+
+const OtherCamDiv = styled.div`
+margin-top: 10px;
+/*     width: 370px;
+    height: 250px; */
+`
+
+const EndcallImg = styled.img`
+    margin-left: 2px;
+    width: 15px;
+    height: 15px;
 `
