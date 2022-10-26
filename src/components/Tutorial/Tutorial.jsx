@@ -9,32 +9,35 @@ import "swiper/css/scrollbar";
 import { Pagination } from "swiper";
 import Guide1 from "../../assets/images/Guide1.jpg"
 import Guide2 from "../../assets/images/Guide2.jpg"
+import Guide3 from "../../assets/images/Guide 3.jpg"
+
 function Tutorial() {
     const navigate = useNavigate();
 
     return (
         <>
             <Container>
-            <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+                <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
                     <SwiperSlide>
                         <Title><span>Home</span></Title>
-                        <img src={Guide1} alt=""/>
+                        <img src={Guide1} alt="" />
                     </SwiperSlide>
                     <SwiperSlide>
                         <Title><span>My Page</span></Title>
-                        <img src={Guide2} alt=""/>
+                        <img src={Guide2} alt="" />
                     </SwiperSlide>
                     <SwiperSlide>
                         <Title><span>Chat</span></Title>
                     </SwiperSlide>
                     <SwiperSlide>
                         <Title><span>Board</span></Title>
+                        <img src={Guide3} alt="" />
                     </SwiperSlide>
-                    
+
                 </Swiper>
                 <ButtonWrap>
                     <SignupButton onClick={() => { navigate('/signup'); }}>회원가입 하러가기 !</SignupButton>
-                    <LoginButton onClick={()=>{ navigate('/login')}}>로그인 하러가기 !</LoginButton>
+                    <LoginButton onClick={() => { navigate('/login') }}>로그인 하러가기 !</LoginButton>
                 </ButtonWrap>
             </Container>
         </>
