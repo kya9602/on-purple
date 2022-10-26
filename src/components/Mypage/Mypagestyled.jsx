@@ -120,6 +120,8 @@ export const BtnBox = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  gap:10px
+
 `
 
 //수정버튼
@@ -129,7 +131,6 @@ export const ModifyBtn = styled.button`
     cursor: pointer;
     height: 44px;
     padding: 1%;
-    margin-left: 2vw;
     background-color: white;
     border: 2px solid #d87dd8;
     :hover{
@@ -141,7 +142,7 @@ export const ModifyBtn = styled.button`
 //리스트 전체 박스
 export const ListBox = styled.div`
   display: flex;
-  margin-top: 2vw;
+  margin-top: 10px;
   height: auto;
   width: 380px;
   justify-content: center;
@@ -152,7 +153,7 @@ export const Listtitle = styled.div`
     display: flex;
     width: 150px;
     justify-content: center;
-    margin-bottom: 1.5vw;
+    margin-bottom: 10px;
     font-size: 15px;
     font-weight: 600;
     margin-left: 10px;
