@@ -7,9 +7,9 @@ import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 
 const ChatHeader = (roomId) => {
-    /* console.log(roomId.roomId) */
-    const session = roomId.roomId
-
+    const session = roomId?.roomId
+    const otherInfo = roomId?.data
+    
 const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>
@@ -18,13 +18,13 @@ const navigate = useNavigate();
                     <ArrowBackIosIcon fontSize="large" onClick={() => { navigate(-1); }}></ArrowBackIosIcon>
                 </ChatBackbuttonDiv>
                 <ProfileDetailImg
-                    src="https://post-phinf.pstatic.net/MjAyMDAzMDFfMTIx/MDAxNTgzMDQ5ODEzODc5.eLwaHPGkxYlj-RGPp5zE7Ghs__H9tYjvXaxdZehOo_cg.yopbH7--a4HJPuHxo_6-gx-gojvo0V0dqSgaem-d1mwg.JPEG/%EC%95%88%EC%9C%A0%EC%A7%842.JPG?type=w1200"
+                    src={otherInfo?.otherImageUrl}
                     onClick={() => { 
-                    navigate('/profile');
+                    navigate(`/profile/${otherInfo?.otherUserId}`);
                 }}
                     
                 ></ProfileDetailImg>
-                <ProfileNicknameH3>닉네임</ProfileNicknameH3>
+                <ProfileNicknameH3>{otherInfo?.otherUsername}</ProfileNicknameH3>
             </ChatHeaderLeftDiv>
 
             <ReportButtonDiv>

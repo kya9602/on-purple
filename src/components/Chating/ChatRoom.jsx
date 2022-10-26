@@ -1,21 +1,24 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef, useCallback, Fragment } from 'react'
 import styled from 'styled-components'
 import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import image from "../../assets/images/배경화면으로.jpg"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
 import ChatCard from './ChatCard';
+import { __enterChatroom } from '../../redux/modules/chatRoom';
 
 function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { roomId } = useParams();
     /* console.log(typeof roomId) */
+    const data = useSelector((state) => state?.chatroom.enter)
+    /* console.log(data) */
 
     const [chatList, setChatList] = useState([]); // 웹소켓 연결 시 메시지 저장
     const [userData, setUserData] = useState({
@@ -25,6 +28,10 @@ function ChatRoom() {
       message: "",
       createdAt: "",
     });
+    
+    useEffect(()=>{
+        dispatch(__enterChatroom(roomId))
+    },[])
 
     useEffect(() => {
         let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
@@ -139,8 +146,8 @@ function ChatRoom() {
     return (
         <BackImage>
             <Container ref={scrollRef}>
-                <ChatHeader roomId={roomId}/>
-                         
+                <ChatHeader roomId={roomId} data={data}/>
+                <>     
                 {chatList.map((item, idx)=>(
                     <ChatCard 
                             item={item}  
@@ -152,7 +159,7 @@ function ChatRoom() {
                         {item.message}
                     </ChatCard>
                 ))}    
-
+                </>
 
                 <ChatInputBox>
                     <Input 
