@@ -4,23 +4,28 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import image from "../../assets/images/배경화면으로.jpg"
 import { useDispatch, useSelector } from "react-redux";
-import { __getlastMessage } from '../../redux/modules/chatRoom';
-import { subMessage } from '../../redux/modules/chatRoom';
-/* import * as StompJs from "@stomp/stompjs";
-import * as SockJS from "sockjs-client"; */
+import { __getlastMessage, subMessage } from '../../redux/modules/chatRoom';
 
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-
+import ChatCard from './ChatCard';
 
 function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { roomId } = useParams();
-    const [text, setText] = useState("")
     /* console.log(typeof roomId) */
-    /* const messages = useSelector((state) => state.chatroom.lastmessage)
-    console.log(messages) */
+    const messages = useSelector((state) => state.chatroom.chatroom)
+    console.log(messages)
+
+    const [chatList, setChatList] = useState([]); // 웹소켓 연결 시 메시지 저장
+    const [userData, setUserData] = useState({
+      type: "",
+      roomId: roomId,
+      sender: "",
+      message: "",
+      createdAt: "",
+    });
 
     useEffect(() => {
         let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
@@ -40,7 +45,7 @@ function ChatRoom() {
     const ws = useRef();
 
     const token = localStorage.getItem("Authorization")
-
+    const nickName = localStorage.getItem("nickname")
     //2. connection이 맺어지면 실행
     function wsConnect() {
         try {
@@ -52,15 +57,14 @@ function ChatRoom() {
                 // connect 이후 subscribe
                 console.log('연결 성공')
                 //4. subscribe(path, callback)으로 메세지를 받을 수 있음
-                ws.current.subscribe(`/sub/chat/room/${roomId}`, (response) => {
-                    const newMessage = JSON.parse(response.body);
-                    console.log(newMessage)
-                   /*  dispatch(subMessage(newMessage)); */
-                });
+                ws.current.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived );
                 // 입장 시 enter 메시지 발신
                 const message = {
-                    type:"TALK",
+                    type:"ENTER",
                     roomId: roomId,
+                    sender: nickName,
+                    message : `${nickName}님이 입장하셨습니다.`,
+                    createdAt : userData.createdAt
                 };
                 //3. send(path, header, message)로 메세지를 보낼 수 있음
                 ws.current.send(`/pub/chat/enter`, { Authorizaion : token } , JSON.stringify(message));
@@ -71,7 +75,7 @@ function ChatRoom() {
     }
 
     // 소켓 연결 해제
-
+    
     function wsDisConnect() {
         try {
             ws.current.disconnect(() => {
@@ -81,46 +85,76 @@ function ChatRoom() {
         }
     };
 
-    const onSend = async () => {
-        try {
-            //send할 데이터
-            const message = {
-                type:"TALK",
-                roomId: roomId,
-                otherImageUrl : "이미지입니다",
-                message: text,
-            };
+    // 웹소켓 메시지 송신
+    const sendMessage = () => {
+    if (ws.current && userData.message) {
+      let chatMessage = {
+        type: "TALK",
+        roomId: roomId,
+        sender: nickName,
+        message: userData.message,
+        createdAt : userData.createdAt
+      };
 
-            if (text.trim() === "") {
-                window.alert("메시지를 입력해주세요")
-                return;
-            }
-            // send message
-            ws.current.send("/pub/chat/enter", { Authorizaion: token }, JSON.stringify(message));
-            setText("");
-        } catch (error) {
+      ws.current.send("/pub/chat/enter", { Authorizaion: token }, JSON.stringify(chatMessage));
+      console.log(chatMessage)
+      setUserData({ ...userData, message: "" });
+    }
+    scrollToBottom();
+};
+
+    // 수신 메세지
+    const onMessageReceived = (payload) => {
+        let payloadData = JSON.parse(payload.body);
+        console.log(payloadData)
+        if (payloadData.type === "ENTER" || payloadData.type === "TALK") {
+          chatList.push(payloadData);
+          setChatList([...chatList]);
         }
+        scrollToBottom();
+      };
+
+    const scrollToBottom = () => {
+        window.document.body.querySelector("#chat-content")
+        ?.scrollTo(0, document.body.querySelector("#chat-content").scrollHeight);
     };
 
-    const onChangeChatHandler = useCallback((e) => {
-        setText(e.target.value);
-    }, []);
+    // Input Value
+    const handleValue = (event) => {
+        const { value } = event.target;
+        setUserData({ ...userData, message: value });
+    };
 
+    // Input Enterkey Event
+    const onKeyPress = (event) => {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      };
+    
     return (
         <BackImage>
             <Container>
                 <ChatHeader roomId={roomId}/>
                 <Screenbox>
-                
+                    <OtherMessage>
+                         {chatList.map((item, idx)=>(<ChatCard item={item} key={idx}/>))}
+                    </OtherMessage>
+                    <MyMessage>
+                        {chatList.map((item, idx)=>(<ChatCard item={item} key={idx}/>))}
+                    </MyMessage>
                 </Screenbox>
                 <ChatContainer>
                     <Input 
-                        value={text}
-                        onChange={onChangeChatHandler}
-                        placeholder="메세지를 입력하세요..."
+                        value={userData.message}
+                        onChange={(event) => handleValue(event)}
+                        onKeyDown={(event) => onKeyPress(event)}
+                        placeholder="메세지를 입력하세요.."
                         type="text"
                     />
-                    <InputButton onClick={onSend}>전송</InputButton>
+                    <InputButton onClick={sendMessage}>
+                            전송
+                    </InputButton>
                 </ChatContainer>
 
             </Container>
@@ -130,6 +164,24 @@ function ChatRoom() {
 
 export default ChatRoom
 
+const Container = styled.div`
+    max-width: 428px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    background-color: white;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(250, 213, 213, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(252, 112, 112, 0.3);
+    border-radius: 6px;
+  }
+`
 const BackImage = styled.div`
   background: url(${image});
   background-size: cover;
@@ -140,7 +192,7 @@ const BackImage = styled.div`
 const Screenbox = styled.div`
     display: flex;
     align-items: center;
-    padding: 20px;
+    margin-bottom: 70px;
 `
 
 /* const ImgBox = styled.img`
@@ -150,50 +202,47 @@ const Screenbox = styled.div`
     overflow: hidden;   
 ` */
 
-const MyMessage = styled.p`
+const MyMessage = styled.div`
     margin-left: auto;
-    background-color: #29b3cd;
+    background-color: #D4B4FF;
     padding: 15px;
     border-radius: 20px;
     color: white;
 `
 
-const YouMessage = styled.p`
+const OtherMessage = styled.div`
     background-color: lightgray;
     padding: 15px;
     border-radius: 20px;
 `
 
 const Input = styled.input`
-    width: 60%;
+    width: 73%;
     padding: 10px;
-    border: none;
+    border: 1px solid #D4B4FF;
+    border-radius: 20px;
+    
 `
 
 const InputButton = styled.button`    
-    width: 100px;
-    border: none;
+    width: 70px;
+    border: 1px solid #D4B4FF;
+    border-radius: 20px;
+    background-color: white;
     font-weight: bolder;
-    color: #fe3d71;
     cursor: pointer;
 `
 
 const ChatContainer = styled.div`
     display:flex;
     justify-content: space-between;
+    background-color: white;
     padding: 10px;
     position: fixed;
     bottom: 0;
     max-width: 428px;
     width: 400px;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid #D4B4FF;
     margin: 0 auto;
-    gap:10px;
-`
-const Container = styled.div`
-    max-width: 428px;
-    width: 100%;
-    margin: 0 auto;
-    height: 100vh;
-    background-color: white;
+    z-index: 1;
 `
