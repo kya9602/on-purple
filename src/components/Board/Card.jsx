@@ -12,7 +12,7 @@ const Card = ({ item }) => {
     const moment = require('moment');
     const today = moment();
     /*  console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
-
+    /* console.log(item) */
     function timeForToday(Day) {
         /* console.log(Day) */
         const today = new Date();
