@@ -40,8 +40,9 @@ function ChatRoom() {
         }
     }, []);
 
+    const scrollRef = useRef();
+    
     const ws = useRef();
-
     const token = localStorage.getItem("Authorization")
     const nickName = localStorage.getItem("nickname")
     //2. connection이 맺어지면 실행
@@ -113,9 +114,14 @@ function ChatRoom() {
       };
 
     const scrollToBottom = () => {
-        window.document.body.querySelector("#chat-content")
-        ?.scrollTo(0, document.body.querySelector("#chat-content").scrollHeight);
-    };
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+        }
+      };
+    
+    useEffect(() => {
+        scrollToBottom();
+      }, [chatList]);
 
     // Input Value
     const handleValue = (event) => {
@@ -132,8 +138,8 @@ function ChatRoom() {
     
     return (
         <BackImage>
-            <Container>
-                {/* <ChatHeader roomId={roomId}/> */}
+            <Container ref={scrollRef}>
+                <ChatHeader roomId={roomId}/>
                          
                 {chatList.map((item, idx)=>(
                     <ChatCard 
@@ -148,7 +154,7 @@ function ChatRoom() {
                 ))}    
 
 
-                <ChatContainer>
+                <ChatInputBox>
                     <Input 
                         value={userData.message}
                         onChange={(event) => handleValue(event)}
@@ -159,7 +165,7 @@ function ChatRoom() {
                     <InputButton onClick={sendMessage}>
                             전송
                     </InputButton>
-                </ChatContainer>
+                </ChatInputBox>
 
             </Container>
         </BackImage>
@@ -187,9 +193,9 @@ const Container = styled.div`
   }
 `
 const BackImage = styled.div`
-  background: url(${image});
-  background-size: cover;
-  height: 100vh;
+    background: url(${image});
+    background-size: cover;
+    height: 100vh;
 `
 
 const Input = styled.input`
@@ -209,8 +215,10 @@ const InputButton = styled.button`
     cursor: pointer;
 `
 
-const ChatContainer = styled.div`
+const ChatInputBox = styled.div`
     display:flex;
+    position: fixed;
+    z-index: 3;
     justify-content: space-between;
     background-color: white;
     padding: 10px;

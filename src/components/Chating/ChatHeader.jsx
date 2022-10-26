@@ -44,6 +44,8 @@ export default ChatHeader
 
 const ChatHeaderContainerDiv = styled.div`
     display: flex;
+    position: fixed;
+    z-index: 3;
     background-color: white;
     max-width: 428px;
     width: 100%;
