@@ -162,7 +162,7 @@ export const commentSlice = createSlice({
       let index = state.comment.findIndex(
         (comment) => comment.id === action.payload
       );
-      console.log(index);
+      // console.log(index);
       state.comment.splice(index, 1);
     },
     [__deleteAdminComments.rejected]: (state, action) => {
