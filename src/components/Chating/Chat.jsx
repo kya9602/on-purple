@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { __getChatrooms, __enterChatroom } from "../../redux/modules/chatRoom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+
 
 const Chat = () => {
     const dispatch = useDispatch();
