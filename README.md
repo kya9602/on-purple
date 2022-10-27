@@ -5,6 +5,8 @@
 👨‍👩‍👧 **Front-End** : 강민택, 김태균, 박정서
 
 👨‍👩‍👧 **Back-End** : 김규수, 이지수 , 박수정
+# 와이어프레임
+![실전프로젝트! (1)](https://user-images.githubusercontent.com/110080748/192676235-e32f6c86-012c-45e9-98da-6fd601010b79.jpg)
 
 <h1>💡 Notion</h1>
 https://www.notion.so/6-fb30c578bc024c55ae1acbf5166af548
@@ -13,7 +15,7 @@ https://www.notion.so/6-fb30c578bc024c55ae1acbf5166af548
  https://on-purple.com
 
 <h1>🔖 서비스 개요</h1>
-💜 매칭 서비스 기반의 데이팅 플랫폼 💜
+## 💜 매칭 서비스 기반의 데이팅 플랫폼 💜
 
 # 📑 Service Architecture
 
@@ -42,8 +44,5 @@ Backend
 <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white"> 
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white"> 
 
-
-# 와이어프레임
-![실전프로젝트! (1)](https://user-images.githubusercontent.com/110080748/192676235-e32f6c86-012c-45e9-98da-6fd601010b79.jpg)
 
 
