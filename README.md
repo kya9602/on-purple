@@ -22,12 +22,17 @@ https://on-purple.com/
 # 메인 페이지
 ![main](https://user-images.githubusercontent.com/109732299/198250056-8c37948f-83cb-42f0-84c7-9227a72b6849.png)
 
+<h3>💜 상대 프로필을 확인하고 좋아요를 보낼 수 있음 💜</h3>
+
+
 # 마이 페이지
 ![mypage](https://user-images.githubusercontent.com/109732299/198250420-17f5afff-f642-4e66-a145-51ee70765484.png)
 
 
 # 채팅
 ![chatList](https://user-images.githubusercontent.com/109732299/198250525-47f61288-21f2-4092-9ab8-a32401d09ffc.png)
+
+
 
 ![chatRoom](https://user-images.githubusercontent.com/109732299/198250583-77a1ce2b-ecbc-4ce7-91ce-5436499645d1.png)
 
