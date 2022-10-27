@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 const ReportCard = ({item}) => {
-    console.log(item)
+    
     const navigate = useNavigate();
     const goDetail = () =>{
         navigate(`/reportDetail/${item.reportId}`)

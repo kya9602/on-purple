@@ -9,7 +9,6 @@ import ProfilePage from "../pages/ProfilePage";
 import BoardPage from "../pages/BoardPage";
 import DetailPage from "../pages/DetailPage";
 import PostPage from "../pages/PostPage";
-import InformationPage from "../pages/InformationPage";
 import ReportPage from "../pages/ReportPage";
 import GuidePage from "../pages/GuidePage";
 import EditPage from "../pages/EditPage";
@@ -40,7 +39,6 @@ const Router = () => {
                 <Route path="/detail/:postId" exact element={<DetailPage />} />
                 <Route path="/edit/:postId" exact element={<EditPage />} />
                 <Route path="/post" exact element={<PostPage />} />
-                <Route path="/information" exact element={<InformationPage />} />
                 <Route path="/report" exact element={<ReportPage />} />
                 <Route path="/guide" exact element={<GuidePage />} />
                 <Route path="/vchat/:roomId" exact element={<VChatPage />} />

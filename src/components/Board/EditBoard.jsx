@@ -30,8 +30,6 @@ const EditBoard = () => {
   const { postId } = useParams();
   const [formData] = useState(new FormData())
 
-  /* console.log(detail) */
-
   useEffect(() => {
     dispatch(__getPostsDetail(postId));
   }, [dispatch])

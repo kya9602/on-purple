@@ -1,21 +1,23 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { useParams, useNavigate } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import image from "../../assets/images/배경화면으로.jpg"
-import { useDispatch } from "react-redux";
-
-
+import { useDispatch, useSelector } from "react-redux";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
 import ChatCard from './ChatCard';
+import { __enterChatroom } from '../../redux/modules/chatRoom';
+import send from "../../assets/icons/send.png"
 
 function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { roomId } = useParams();
     /* console.log(typeof roomId) */
+    const data = useSelector((state) => state?.chatroom.enter)
+    /* console.log(data) */
 
     const [chatList, setChatList] = useState([]); // 웹소켓 연결 시 메시지 저장
     const [userData, setUserData] = useState({
@@ -25,6 +27,10 @@ function ChatRoom() {
         message: "",
         createdAt: "",
     });
+    
+    useEffect(()=>{
+        dispatch(__enterChatroom(roomId))
+    },[])
 
     useEffect(() => {
         let sock = new SockJS(process.env.REACT_APP_CHAT_SOCK);
@@ -62,8 +68,10 @@ function ChatRoom() {
                     type: "ENTER",
                     roomId: roomId,
                     sender: nickName,
-                    message: `${nickName}님이 입장하셨습니다.`,
-                    createdAt: userData.createdAt
+
+                    message : `${nickName} 님이 입장하셨습니다.`,
+                    createdAt : userData.createdAt
+
                 };
                 //3. send(path, header, message)로 메세지를 보낼 수 있음
                 ws.current.send(`/pub/chat/enter`, { Authorizaion: token }, JSON.stringify(message));
@@ -139,6 +147,7 @@ function ChatRoom() {
     return (
         <BackImage>
             <Container ref={scrollRef}>
+
                 <ChatHeader roomId={roomId} />
                 <ChatBox>
                     {chatList.map((item, idx) => (
@@ -206,18 +215,22 @@ const ChatBox = styled.div`
 const Input = styled.input`
     width: 73%;
     padding: 10px;
-    border: 1px solid #D4B4FF;
+    border: 1.5px solid #7049AE;
     border-radius: 20px;
     
 `
 
 const InputButton = styled.button`    
-    width: 70px;
-    border: 1px solid #D4B4FF;
-    border-radius: 20px;
+    border: 1.5px solid #7049AE;
+    border-radius: 100%;
     background-color: white;
     font-weight: bolder;
     cursor: pointer;
+    text-align: center;
+    img{
+        width:  100%;
+        height: 100%;
+    }
 `
 
 const ChatInputBox = styled.div`
@@ -231,7 +244,8 @@ const ChatInputBox = styled.div`
     bottom: 0;
     max-width: 428px;
     width: 400px;
-    border-top: 1px solid #D4B4FF;
+    border-top: 1px solid #7049AE;
+    height: 40px;
     margin: 0 auto;
     z-index: 1;
 `
