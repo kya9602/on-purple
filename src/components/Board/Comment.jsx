@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { __deleteComments, __deleteAdminComments } from "../../redux/modules/comment";
 import { useDispatch, useSelector } from "react-redux";
 import delete2 from "../../assets/icons/delete2.png"
-import edit from "../../assets/icons/edit.png"
 import { __likeComment } from "../../redux/modules/comment";
 //관리자 정보 받아오려고
 import { __getUser } from "../../redux/modules/signup";
