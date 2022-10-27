@@ -281,15 +281,14 @@ class VideoChatConnect extends Component {
                             <BackLink to= '/chat/' className="links"><p>뒤로가기</p></BackLink>
                             </VchatHeaderButtonSet>
                             <VChatGuide>
-                                <h2 style={{marginLeft:'35px'}}>1. 권한을 허용 해 주세요</h2>
+                                <GuideH2>1. 권한을 허용 해 주세요</GuideH2>
                                 <Guide1Img src={guide1}></Guide1Img>
-                                <h2 style={{marginLeft:'25px'}}>2. 허용창이 뜨지 않는다면?</h2>
+                                <GuideH2>2. 허용창이 뜨지 않는다면?</GuideH2>
                                 <Guide2Img src={guide2}></Guide2Img>
-                                <h4 style={{marginLeft:'70px'}}>1. 자물쇠 모양을 눌러</h4>
-                                <h4 style={{marginLeft:'35px',marginTop:'-5px'}}>2. 사이트 설정으로 이동해 주세요.</h4>
+                                <GuideH4>1. 자물쇠 모양을 눌러</GuideH4>
+                                <GuideH4 style={{marginTop:'-5px'}}>2. 사이트 설정으로 이동해 주세요.</GuideH4>
                                 <Guide3Img src={guide3}></Guide3Img>
-                                <h4>3. 카메라와 마이크를 허용으로 변경 해 주세요.</h4>
-                                
+                                <GuideH4>3. 카메라와 마이크를 허용으로 변경 해 주세요.</GuideH4>
                             </VChatGuide>
                         </VchatContainer>
                         
@@ -462,9 +461,17 @@ const VChatGuide = styled.div`
     margin-top: 25px;
     margin-left: 64px;
 `
-const Guide1Img = styled.img`
+const GuideH2 = styled.h2`
     display: flex;
     justify-content: center;
+`
+const GuideH4 = styled.h4`
+    display: flex;
+    justify-content: center;
+`
+const Guide1Img = styled.img`
+    display: flex;
+    align-items: center;
 
 `
 const Guide2Img = styled.img`
