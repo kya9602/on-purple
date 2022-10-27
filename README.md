@@ -9,8 +9,8 @@
 💡 Notion
 https://www.notion.so/6-fb30c578bc024c55ae1acbf5166af548
 
-💻 Service domain
-![체험하러 가보기!] https://on-purple.com
+<h1>💻 Service domain</h1>
+ https://on-purple.com
 
 # ⚔️ 기술 스택
 
