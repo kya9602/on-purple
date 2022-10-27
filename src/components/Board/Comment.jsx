@@ -22,7 +22,6 @@ const Comments = ({ item }) => {
 
     // 관리자 확인용 
     const admin = user?.role
-    // console.log(admin)
 
     const onLike = (event) => {
         event.preventDefault();

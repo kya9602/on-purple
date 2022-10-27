@@ -5,7 +5,7 @@ import { __getReComments } from "../../redux/modules/comment";
 import axios from "axios";
 
 const Recomment = ({item}) =>{
-    /* console.log(item.commentId) */
+    
     const Id = item.commentId
     const dispatch = useDispatch();
     useEffect(()=>{

@@ -12,7 +12,6 @@ const CommentList = () => {
     
     const {postId} = useParams();
     const {isLoading, error, comment} = useSelector((state)=> state?.comment)
-    /* console.log(comment) */
     
     useEffect(()=>{
         dispatch(__getComments(postId));
@@ -22,7 +21,6 @@ const CommentList = () => {
         const fetchPosts = async () => {
           setLoading(true);
           const res = await axios.get(`${process.env.REACT_APP_HOST}/comment/${postId}`);
-          /* console.log(res.data.data) */
         setPosts(res.data.data);
           setLoading(false);
     };

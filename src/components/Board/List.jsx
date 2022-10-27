@@ -55,7 +55,6 @@ const List = () => {
         const fetchPosts = async () => {
             setLoading(true);
             const res = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${Category}`);
-            /* console.log(res.data.data) */
             setPosts(res?.data?.data);
             setLoading(false);
         };

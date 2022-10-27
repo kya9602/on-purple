@@ -196,6 +196,7 @@ const Container = styled.div`
     margin: 0 auto;
     background-color: white;
     overflow-y: auto;
+    overflow-x: hidden;
     &::-webkit-scrollbar {
     width: 8px;
     height: 8px;

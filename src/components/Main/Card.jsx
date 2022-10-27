@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { animated, interpolate } from "react-spring";
-import { __getMypage } from "../../redux/modules/mypage";
 import { __getUser } from "../../redux/modules/signup";
 
 
