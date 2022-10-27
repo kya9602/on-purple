@@ -20,7 +20,8 @@ https://on-purple.com/
 # 📑 Service Architecture
 
 # 메인 페이지
-![메인화면](https://user-images.githubusercontent.com/109732299/198250056-8c37948f-83cb-42f0-84c7-9227a72b6849.png)
+![main](https://user-images.githubusercontent.com/109732299/198250056-8c37948f-83cb-42f0-84c7-9227a72b6849.png)
+
 # 마이 페이지
 # 채팅
 # 화상채팅
