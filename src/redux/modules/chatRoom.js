@@ -13,7 +13,6 @@ export const __getChatrooms = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken") 
         },
       });
-      /* console.log('chat room '+data.data) */
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -24,7 +23,6 @@ export const __getChatrooms = createAsyncThunk(
 export const __enterChatroom = createAsyncThunk(
   "ENTER_CHATROOMS",
   async (payload, thunkAPI) =>{
-    /* console.log(payload) */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/rooms/enter/${payload}`,{
         headers: {
@@ -32,7 +30,6 @@ export const __enterChatroom = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken") 
         },
       })
-      console.log("채팅방입장" , data.data)
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -43,7 +40,6 @@ export const __enterChatroom = createAsyncThunk(
 export const __getlastMessage = createAsyncThunk(
   "GET_LAST_MESSAGE",
   async (payload, thunkAPI) =>{
-    /* console.log(payload) */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/chat/rooms/${payload}/messages`,{
         headers: {
@@ -51,7 +47,6 @@ export const __getlastMessage = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken") 
         },
       })
-     /*  console.log(data.data) */
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -119,7 +114,6 @@ export const chatroom = createSlice({
     [__getlastMessage.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.lastmessage = action.payload;
-      /* console.log(action.payload) */
     },
     [__getlastMessage.rejected]: (state, action) => {
       state.isLoading = false;

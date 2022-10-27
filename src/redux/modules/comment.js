@@ -6,7 +6,6 @@ export const __getComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/comment/${payload}`);
-      /* console.log(data.data.data) */
       return thunkAPI.fulfillWithValue(data?.data?.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -18,10 +17,8 @@ export const __getComments = createAsyncThunk(
 export const __getReComments = createAsyncThunk(
   "GET_RECOMMENTS",
   async (payload, thunkAPI) => {
-    /*  console.log(payload) */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/reComment/${payload}`);
-      console.log(data.data.data)
       return thunkAPI.fulfillWithValue(data?.data?.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -52,7 +49,6 @@ export const __deleteComments = createAsyncThunk(
 export const __likeComment = createAsyncThunk(
   "LIKE_COMMENT",
   async (payload, thunkAPI) => {
-    /* console.log(payload) */
     try {
       const data = await axios.post(`${process.env.REACT_APP_HOST}/comment/like/${payload}`, {}, {
         headers: {
@@ -66,7 +62,6 @@ export const __likeComment = createAsyncThunk(
         window.alert("본인 댓글은 좋아요를 할 수 없습니다")
         window.location = document.URL;
       }
-      console.log(data.data)
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -128,7 +123,6 @@ export const commentSlice = createSlice({
       let index = state.comment.findIndex(
         (comment) => comment.id === action.payload
       );
-      /*  console.log(index); */
       state.comment.splice(index, 1);
     },
     [__deleteComments.rejected]: (state, action) => {
@@ -144,14 +138,13 @@ export const commentSlice = createSlice({
     },
     [__likeComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      /* state.comment = action.payload; */
-      /*  if (action.payload == false && undefined) {
+      state.comment = action.payload;
+       if (action.payload == false && undefined) {
          action.payload.likes -= 1;
        } else {
          action.payload.likes += 1;
-       } */
-      console.log("payload", action.payload.likes)
-      console.log("state", current(state.comment))
+       }
+
     },
     [__likeComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -162,7 +155,6 @@ export const commentSlice = createSlice({
       let index = state.comment.findIndex(
         (comment) => comment.id === action.payload
       );
-      // console.log(index);
       state.comment.splice(index, 1);
     },
     [__deleteAdminComments.rejected]: (state, action) => {

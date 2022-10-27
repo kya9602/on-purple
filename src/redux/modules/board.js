@@ -4,10 +4,8 @@ import axios from "axios";
 export const __getPosts = createAsyncThunk(
   "GET_POSTS",
   async (payload, thunkAPI) => {
-    /* console.log(payload) */ /* 무한스크롤&page=0&size=10 */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/post?category=${payload}`);
-      /*  console.log(data.data.data) */
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -18,10 +16,8 @@ export const __getPosts = createAsyncThunk(
 export const __getPostsDetail = createAsyncThunk(
   "GET_POSTS_DETAIL",
   async (payload, thunkAPI) => {
-    /* console.log(payload) */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/post/${payload}`);
-      /* console.log(data.data.data) */
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -51,7 +47,6 @@ export const __deletePosts = createAsyncThunk(
 export const __likePost = createAsyncThunk(
   "LIKE_POST",
   async (payload, thunkAPI) => {
-    /* console.log(payload) */
     try {
       const data = await axios.post(`${process.env.REACT_APP_HOST}/post/like/${payload}`, {}, {
         headers: {
@@ -63,7 +58,6 @@ export const __likePost = createAsyncThunk(
         window.alert("본인 게시글엔 좋아요를 할 수 없습니다")
         window.location.reload()
       }
-      /* console.log(data.data) */
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -74,10 +68,8 @@ export const __likePost = createAsyncThunk(
 export const __searchPosts = createAsyncThunk(
   "GET_POSTS",
   async (payload, thunkAPI) => {
-    console.log(payload)
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/post/search?keyword=${payload}`);
-      /*  console.log(data.data.data) */
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -182,11 +174,10 @@ export const postSlice = createSlice({
     },
 
     [__searchPosts.pending]: (state) => {
-      state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
+      state.isLoading = true; 
     },
     [__searchPosts.fulfilled]: (state, action) => {
-      // console.log(action.payload);
-      state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
+      state.isLoading = false; 
       state.post = action.payload;
     },
     [__searchPosts.rejected]: (state, action) => {

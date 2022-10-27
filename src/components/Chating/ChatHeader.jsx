@@ -8,7 +8,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 const ChatHeader = (props) => {
     const session = props?.roomId
     const otherInfo = props?.data
-    console.log(otherInfo)
 const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>

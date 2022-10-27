@@ -49,7 +49,7 @@ const List = () => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     //각 페이지에서 보여질 포스트 배열
     const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost);
-
+    
     useEffect(() => {
         dispatch(__getPosts(Category));
     }, [Category]);
