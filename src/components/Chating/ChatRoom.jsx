@@ -21,11 +21,11 @@ function ChatRoom() {
 
     const [chatList, setChatList] = useState([]); // 웹소켓 연결 시 메시지 저장
     const [userData, setUserData] = useState({
-      type: "",
-      roomId: roomId,
-      sender: "",
-      message: "",
-      createdAt: "",
+        type: "",
+        roomId: roomId,
+        sender: "",
+        message: "",
+        createdAt: "",
     });
     
     useEffect(()=>{
@@ -47,7 +47,7 @@ function ChatRoom() {
     }, []);
 
     const scrollRef = useRef();
-    
+
     const ws = useRef();
     const token = localStorage.getItem("Authorization")
     const nickName = localStorage.getItem("nickname")
@@ -60,19 +60,21 @@ function ChatRoom() {
 
             ws.current.connect({ Authorizaion: token, type: "TALK" }, () => {
                 // connect 이후 subscribe
-               /*  console.log('연결 성공') */
+                /*  console.log('연결 성공') */
                 //4. subscribe(path, callback)으로 메세지를 받을 수 있음
-                ws.current.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived );
+                ws.current.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived);
                 // 입장 시 enter 메시지 발신
                 const message = {
-                    type:"ENTER",
+                    type: "ENTER",
                     roomId: roomId,
                     sender: nickName,
+
                     message : `${nickName} 님이 입장하셨습니다.`,
                     createdAt : userData.createdAt
+
                 };
                 //3. send(path, header, message)로 메세지를 보낼 수 있음
-                ws.current.send(`/pub/chat/enter`, { Authorizaion : token } , JSON.stringify(message));
+                ws.current.send(`/pub/chat/enter`, { Authorizaion: token }, JSON.stringify(message));
             });
         } catch (error) {
             console.log('ERROR')
@@ -80,7 +82,7 @@ function ChatRoom() {
     }
 
     // 소켓 연결 해제
-    
+
     function wsDisConnect() {
         try {
             ws.current.disconnect(() => {
@@ -92,42 +94,42 @@ function ChatRoom() {
 
     // 웹소켓 메시지 송신
     const sendMessage = () => {
-    if (ws.current && userData.message) {
-      let chatMessage = {
-        type: "TALK",
-        roomId: roomId,
-        sender: nickName,
-        message: userData.message,
-        createdAt : userData.createdAt
-      };
+        if (ws.current && userData.message) {
+            let chatMessage = {
+                type: "TALK",
+                roomId: roomId,
+                sender: nickName,
+                message: userData.message,
+                createdAt: userData.createdAt
+            };
 
-      ws.current.send("/pub/chat/enter", { Authorizaion: token }, JSON.stringify(chatMessage));
-      /* console.log(chatMessage) */
-      setUserData({ ...userData, message: "" });
-    }
-    scrollToBottom();
-};
+            ws.current.send("/pub/chat/enter", { Authorizaion: token }, JSON.stringify(chatMessage));
+            /* console.log(chatMessage) */
+            setUserData({ ...userData, message: "" });
+        }
+        scrollToBottom();
+    };
 
     // 수신 메세지
     const onMessageReceived = (payload) => {
         let payloadData = JSON.parse(payload.body);
-        
+
         if (payloadData.type === "ENTER" || payloadData.type === "TALK") {
-          chatList.push(payloadData);
-          setChatList([...chatList]);
+            chatList.push(payloadData);
+            setChatList([...chatList]);
         }
         scrollToBottom();
-      };
+    };
 
     const scrollToBottom = () => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
-      };
-    
+    };
+
     useEffect(() => {
         scrollToBottom();
-      }, [chatList]);
+    }, [chatList]);
 
     // Input Value
     const handleValue = (event) => {
@@ -138,42 +140,42 @@ function ChatRoom() {
     // Input Enterkey Event
     const onKeyPress = (event) => {
         if (event.key === "Enter") {
-          sendMessage();
+            sendMessage();
         }
-      };
-    
+    };
+
     return (
         <BackImage>
             <Container ref={scrollRef}>
-                <ChatHeader roomId={roomId} data={data}/>
-                <>     
-                {chatList.map((item, idx)=>(
-                    <ChatCard 
-                            item={item}  
+
+                <ChatHeader roomId={roomId} />
+                <ChatBox>
+                    {chatList.map((item, idx) => (
+                        <ChatCard
+                            item={item}
                             key={idx}
                             me={
-                            item.sender === nickName
-                            } 
-                    >
-                        {item.message}
-                    </ChatCard>
-                ))}    
-                </>
+                                item.sender === nickName
+                            }
+                        >
+                            {item.message}
+                        </ChatCard>
+                    ))}
 
-                <ChatInputBox>
-                    <Input 
-                        value={userData.message}
-                        onChange={(event) => handleValue(event)}
-                        onKeyDown={(event) => onKeyPress(event)}
-                        placeholder="메세지를 입력하세요..(100자 이내)"
-                        type="text"
-                        maxLength={100}
-                    />
-                    <InputButton onClick={sendMessage}>
-                            <img src={send} alt=""/>
-                    </InputButton>
-                </ChatInputBox>
 
+                    <ChatInputBox>
+                        <Input
+                            value={userData.message}
+                            onChange={(event) => handleValue(event)}
+                            onKeyDown={(event) => onKeyPress(event)}
+                            placeholder="메세지를 입력하세요.."
+                            type="text"
+                        />
+                        <InputButton onClick={sendMessage}>
+                            전송
+                        </InputButton>
+                    </ChatInputBox>
+                </ChatBox>
             </Container>
         </BackImage>
     )
@@ -203,6 +205,11 @@ const BackImage = styled.div`
     background: url(${image});
     background-size: cover;
     height: 100vh;
+`
+
+const ChatBox = styled.div`
+    padding-top: 70px;
+    padding-bottom: 70px;
 `
 
 const Input = styled.input`
