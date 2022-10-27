@@ -5,10 +5,9 @@ import report from "../../assets/icons/report.png"
 import videoCall from "../../assets/icons/videochat.png"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-const ChatHeader = (roomId) => {
-    const session = roomId?.roomId
-    const otherInfo = roomId?.data
-    
+const ChatHeader = (props) => {
+    const session = props?.roomId
+    const otherInfo = props?.data
 const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>

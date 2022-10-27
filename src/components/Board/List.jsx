@@ -39,14 +39,17 @@ const List = () => {
     const [loading, setLoading] = useState(false);
     // 현재 페이지
     const [currentPage, setCurrentPage] = useState(1);
-    // 페이지당 아이템 개수 
+    // 페이지당 아이템 개수 (5) 
     const [postsPerPage] = useState(5);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    //해당 페이지에서 마지막 post의 index 번호
     const indexOfLastPost = currentPage * postsPerPage;
+    //해당 페이지에서 첫번째 post의 index 번호
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    //각 페이지에서 보여질 포스트 배열
     const currentPosts = post?.slice(indexOfFirstPost, indexOfLastPost);
-
+    
     useEffect(() => {
         dispatch(__getPosts(Category));
     }, [Category]);

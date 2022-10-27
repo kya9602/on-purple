@@ -8,8 +8,6 @@ import Swal from "sweetalert2";
 const Card = ({ item }) => {
     const navigate = useNavigate();
     const nickname = localStorage.getItem("nickname")
-
-    const moment = require('moment');
    
     function timeForToday(Day) {
         
