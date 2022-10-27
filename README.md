@@ -6,14 +6,24 @@
 
 👨‍👩‍👧 **Back-End** : 김규수, 이지수 , 박수정
 
-💡 Notion
+<h1>💡 Notion</h1>
 https://www.notion.so/6-fb30c578bc024c55ae1acbf5166af548
 
 <h1>💻 Service domain</h1>
  https://on-purple.com
 
-# ⚔️ 기술 스택
+<h1>🔖 서비스 개요</h1>
+💜 매칭 서비스 기반의 데이팅 플랫폼 💜
 
+# 📑 Service Architecture
+
+# 메인 페이지
+# 마이 페이지
+# 채팅
+# 화상채팅
+# 
+
+# ⚔️ 기술 스택
 
 Frontend    
 <img src="https://img.shields.io/badge/CSS Modules-000000?style=for-the-badge&logo=CSS Modules&logoColor=white">
