@@ -12,7 +12,7 @@
 https://www.notion.so/6-fb30c578bc024c55ae1acbf5166af548
 
 <h1>💻 Service domain</h1>
- https://on-purple.com
+https://on-purple.com/
 
 <h1>🔖 서비스 개요</h1>
 <h3>💜 매칭 서비스 기반의 데이팅 플랫폼 💜</h3>
