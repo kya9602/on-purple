@@ -10,6 +10,7 @@ import { Pagination } from "swiper";
 import Guide1 from "../../assets/images/Guide1.jpg"
 import Guide2 from "../../assets/images/Guide2.jpg"
 import Guide3 from "../../assets/images/Guide 3.jpg"
+import Guide4 from "../../assets/images/Guide4.jpg"
 
 function Tutorial() {
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ function Tutorial() {
                     </SwiperSlide>
                     <SwiperSlide>
                         <Title><span>Chat</span></Title>
+                        <img src={Guide4} alt="" />
                     </SwiperSlide>
                     <SwiperSlide>
                         <Title><span>Board</span></Title>
