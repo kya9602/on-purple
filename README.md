@@ -28,6 +28,7 @@ https://on-purple.com/
 # 마이 페이지
 ![mypage](https://user-images.githubusercontent.com/109732299/198250420-17f5afff-f642-4e66-a145-51ee70765484.png)
 
+<h3>💜 나와 매칭된 사람을 확인할 수 있고, 내정보를 수정할  💜</h3>
 
 # 채팅
 ![chatList](https://user-images.githubusercontent.com/109732299/198250525-47f61288-21f2-4092-9ab8-a32401d09ffc.png)
@@ -50,6 +51,9 @@ https://on-purple.com/
 ![vChat](https://user-images.githubusercontent.com/109732299/198251256-1eb928ab-816c-4e26-919f-3b80c5c63b54.png)
 
 
+
+
+
 <h3>💜 매칭된 상대와 채팅방에서 화상채팅을 시도할 수 있음 💜</h3>
 
 
@@ -63,13 +67,19 @@ https://on-purple.com/
  # 포스트
  ![포스트 상세](https://user-images.githubusercontent.com/109732299/198251834-73ec00d3-3bd4-417a-acc8-c44b2d544679.png)
 
+
+
  
  
 <h3>💜 게시글을 등록하여 추천 맛집이나 데이트 코스 등 커뮤니티가 가능함. 💜</h3>
  
  
+ 
+ 
 
 ![댓글창](https://user-images.githubusercontent.com/109732299/198251903-5a717ca8-7172-40e2-a48e-e03c7b8c948b.png)
+
+
 
 
 <h3>💜 댓글 기능으로 커뮤니티 활성화 💜</h3>
