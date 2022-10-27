@@ -156,8 +156,7 @@ const Mypage = () => {
                             <LovemeBox>
                                 <LoveCard>
                                     {userInfo?.likedResponseDtoList?.map((likeMeitem) => {
-                                        console.log(likeMeitem)
-                                        return <LikeMeCard key={likeMeitem?.profileId} likeMeitem={likeMeitem} />
+                                        return <LikeMeCard key={likeMeitem.userId} likeMeitem={likeMeitem} />
                                     })}
 
                                 </LoveCard>
@@ -171,8 +170,7 @@ const Mypage = () => {
                             <MatchingBox>
                                 <MatchingCard>
                                     {userInfo?.otherLikeResponseDtoList?.map((loveMeitem) => {
-                                        console.log(loveMeitem)
-                                        return <LoveweCard key={loveMeitem?.profileId} loveMeitem={loveMeitem} />
+                                        return <LoveweCard key={loveMeitem.userId} loveMeitem={loveMeitem} />
                                     })}
                                 </MatchingCard>
                             </MatchingBox>
