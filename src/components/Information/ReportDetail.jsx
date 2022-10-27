@@ -10,7 +10,7 @@ const ReportDetail = () => {
     const navigate = useNavigate();
     const { reportId } = useParams();
     const { isLoading, error, detail } = useSelector((state) => state?.report);
-    console.log(detail)
+
 
     useEffect(() => {
         dispatch(__getReportsDetail(reportId))

@@ -29,14 +29,14 @@ const Report = () => {
         { value: "violence", name: "폭력, 위협" },
     ];
     const handleSelectChange = (e) => {
-        console.log(e.target.value);
+        
         setCategory(e.target.value);
     };
 
     //image
     const inputRef = useRef(null);
     const handleAddImage = (e) => {
-        // console.log(e.target.files);
+        
         setImageUrl(e.target.files[0]);
         setPreview(URL.createObjectURL(e.target.files[0]));
     };

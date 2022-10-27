@@ -9,7 +9,7 @@ import recommend from "../../assets/images/recommend.png"
 const Category = ({setCategory, category}) => {
     
     const handelClickRadioBtn = (e) => {
-         console.log(e.target.value)
+        
          setCategory(e.target.value)
     }
     

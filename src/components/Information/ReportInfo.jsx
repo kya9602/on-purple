@@ -6,7 +6,7 @@ import ReportCard from "./ReportCard";
 const ReportInfo = () => {
     const dispatch = useDispatch();
     const { isLoading, error, report } = useSelector((state) => state?.report)
-    /* console.log(report) */
+    
     useEffect(() => {
         dispatch(__getReports());
     }, []);

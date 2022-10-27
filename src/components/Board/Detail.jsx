@@ -64,14 +64,8 @@ const Detail = () => {
     }
 
 
-
     // 관리자 확인용 
     const admin = user?.role
-    console.log(admin)
-
-
-
-
 
     return (
         <Container>

@@ -9,11 +9,11 @@ const Chat = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const data = useSelector((state) => state?.chatroom?.chatroom)
-    console.log(data)
+    
     
     useEffect(() => {
         dispatch(__getChatrooms("1"));
-        /* console.log("작동"); */
+       
     }, []);
     
     return (

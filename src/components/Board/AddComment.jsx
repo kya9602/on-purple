@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { createComment } from "../../redux/modules/comment";
 import writecomment from "../../assets/icons/writecomment.png"
 const AddComment = (detail) => {
-  /* console.log(detail) */
+  
   const dispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState(false);
   const [comment, setComment] = useState({

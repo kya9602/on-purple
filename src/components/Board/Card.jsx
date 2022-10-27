@@ -10,14 +10,12 @@ const Card = ({ item }) => {
     const nickname = localStorage.getItem("nickname")
 
     const moment = require('moment');
-    const today = moment();
-    /*  console.log(today.format('YYYY-MM-DD, h:mm:ss')); */
-    /* console.log(item) */
+   
     function timeForToday(Day) {
-        /* console.log(Day) */
+        
         const today = new Date();
         const timeValue = new Date(Day);
-        /* console.log(timeValue) */
+        
         const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
         if (betweenTime < 1) return '방금전';
         if (betweenTime < 60) {
