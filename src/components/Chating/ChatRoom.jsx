@@ -148,7 +148,7 @@ function ChatRoom() {
         <BackImage>
             <Container ref={scrollRef}>
 
-                <ChatHeader roomId={roomId} />
+                <ChatHeader roomId={roomId} data={data} />
                 <ChatBox>
                     {chatList.map((item, idx) => (
                         <ChatCard
@@ -172,7 +172,7 @@ function ChatRoom() {
                             type="text"
                         />
                         <InputButton onClick={sendMessage}>
-                            전송
+                            <img src={send} alt=""/>
                         </InputButton>
                     </ChatInputBox>
                 </ChatBox>
