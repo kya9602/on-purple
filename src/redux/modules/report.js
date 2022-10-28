@@ -4,10 +4,8 @@ import axios from "axios";
 export const __getReports = createAsyncThunk(
     "GET_REPORTS",
     async (payload, thunkAPI) => {
-      /* console.log(payload) */ /* 무한스크롤&page=0&size=10 */
         try {
             const data = await axios.get(`${process.env.REACT_APP_HOST}/report`);
-            /* console.log(data.data.data) */
             return thunkAPI.fulfillWithValue(data.data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.code);

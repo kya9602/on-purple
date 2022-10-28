@@ -37,7 +37,7 @@ function GuideDeck() {
 
   /* 모든DB */
   const { data, isLoading, error } = useSelector((state) => state.main)
-  /* console.log('모든 DB',data) */
+  
   const filterData = data.slice(0,5)
 
   /* 보여줄 카드 갯수. */
@@ -45,7 +45,8 @@ function GuideDeck() {
   for (let i = 0; i < filterData.length; i++) {
     cards.push(i);
   }
-//console.log('data',filterMyData)
+
+
   /* 
   -to와 from
   just helper, 보간(날라오고 회전하는)되는 값의 데이터
@@ -115,14 +116,11 @@ function GuideDeck() {
         
         /* like rigth swipe(회원 좋아요) */
         if (x > 600) {
-          console.log('userId',filterData[i].userId,'좋아요(실행안됨)')
           handleOpen()
         /* unlike left swipe(회원 싫어요) */
         } if (x < -600) {
-          console.log('userId',filterData[i].userId,'싫어요(실행안됨)')
           handleOpen()
         } /* if(x===0){
-          console.log(objs[i].name)
         } */
 
 

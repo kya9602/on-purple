@@ -16,25 +16,24 @@ function Deck() {
 
   /* 모든DB */
   const { data, isLoading, error } = useSelector((state) => state.main)
-  // console.log('모든 DB', data)
+  
 
   /* 내 닉네임 */
   const Nickname = localStorage.getItem("nickname")
-  /* console.log('mynickname', Nickname) */
+  
 
   /* 모든 DB에서 내 요소 제거 */
   let filterMyData = data.filter(function (data) {
     return data.nickname !== Nickname;
   });
-  // console.log('나를 제외한 DB', filterMyData);
+  
 
 
   //내가 좋아요한 사람 가져오기
   const likeme = useSelector((state) => state.likeme)
-  // console.log(likeme.likeme.data)
+  
 
   const likemeList = likeme?.likeme
-  // console.log('제외되야하는', likemeList)
 
   useEffect(() => {
     dispatch(__getLikeme());
@@ -51,14 +50,12 @@ function Deck() {
     })
     return flag;
   });
-  // console.log('제외할 거 다한', finalMyData)
 
   /* 보여줄 카드 갯수. */
   const cards = [];
   for (let i = 0; i < finalMyData.length; i++) {
     cards.push(i);
   }
-  //console.log('data',filterMyData)
 
   /* 
   -to와 from
@@ -133,16 +130,13 @@ function Deck() {
 
         /* like rigth swipe(회원 좋아요) */
         if (x > 600) {
-          console.log('userId', finalMyData[i].userId, '좋아요')
           dispatch(__postLike(finalMyData[i].userId));
 
           /* unlike left swipe(회원 싫어요) */
         } if (x < -600) {
-          console.log('userId', finalMyData[i].userId, '싫어요')
           dispatch(__postUnLike(finalMyData[i].userId));
 
         } /* if(x===0){
-          console.log(objs[i].name)
         } */
 
 

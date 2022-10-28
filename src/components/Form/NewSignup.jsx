@@ -58,7 +58,7 @@ export default function VerticalLinearStepper() {
         formData.append('imageUrl', fileBlob);
 
         for (const keyValue of formData) {
-            console.log(keyValue[0] + ", " + keyValue[1])
+         
         };
 
         const reader = new FileReader();
@@ -134,8 +134,6 @@ export default function VerticalLinearStepper() {
         const { name, value } = e.target;
         setInput({ ...input, [name]: value, });
     };
-
-    console.log("input is ", input.age)
 
 
     // axios
@@ -231,7 +229,6 @@ export default function VerticalLinearStepper() {
         localStorage.setItem("RefreshToken", data.headers.refreshtoken)   //refreshtoken 
         localStorage.setItem("nickname", data.data.data.nickname)
 
-        console.log(data);
 
         if (data.data.success) {
             alert('회원가입이 완료되었습니다.');

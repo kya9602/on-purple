@@ -6,7 +6,6 @@ export const __getMain = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/main`);
-      // console.log(data.data.data)
 
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
@@ -26,7 +25,6 @@ export const __postLike = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken"),
         }
       });
-      // console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -44,7 +42,6 @@ export const __postUnLike = createAsyncThunk(
           "RefreshToken": localStorage.getItem("RefreshToken"),
         }
       });
-      // console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);

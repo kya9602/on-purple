@@ -15,11 +15,9 @@ function ChatRoom() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { roomId } = useParams();
-    /* console.log(typeof roomId) */
     const data = useSelector((state) => state?.chatroom.enter)
-    /* console.log(data) */
-
-    const [chatList, setChatList] = useState([]); // 웹소켓 연결 시 메시지 저장
+    // 웹소켓 연결 시 메시지 저장
+    const [chatList, setChatList] = useState([]); 
     const [userData, setUserData] = useState({
         type: "",
         roomId: roomId,
@@ -54,13 +52,13 @@ function ChatRoom() {
     //2. connection이 맺어지면 실행
     function wsConnect() {
         try {
-            /* console.log(`소켓 연결을 시도합니다.`); */
+            
             ws.current.debug = function (str) { /* console.log(str) */ };
             ws.current.debug();
 
             ws.current.connect({ Authorizaion: token, type: "TALK" }, () => {
                 // connect 이후 subscribe
-                /*  console.log('연결 성공') */
+                
                 //4. subscribe(path, callback)으로 메세지를 받을 수 있음
                 ws.current.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived);
                 // 입장 시 enter 메시지 발신
@@ -104,7 +102,7 @@ function ChatRoom() {
             };
 
             ws.current.send("/pub/chat/enter", { Authorizaion: token }, JSON.stringify(chatMessage));
-            /* console.log(chatMessage) */
+           
             setUserData({ ...userData, message: "" });
         }
         scrollToBottom();

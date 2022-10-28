@@ -28,7 +28,6 @@ const Test = () => {
   }, []);
 
 	// data fetching이 정상적으로 되었는지 콘솔을 통해 확인합니다.
-  console.log(cards.length); // App.js:16
 
   const [gone] = useState(() => new Set()) // The set flags all the cards that are flicked out
   const [props, set] = useSprings(cards?.length, i => ({ ...to(i), from: from(i) })) // Create a bunch of springs using the helpers above

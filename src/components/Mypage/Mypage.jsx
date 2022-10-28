@@ -57,7 +57,6 @@ const Mypage = () => {
 
     //마이페이지 인포 정보
     const userInfo = mypage.mypage.data
-    console.log(userInfo)
 
     useEffect(() => {
         dispatch(__getMypage(profileId));
@@ -92,7 +91,6 @@ const Mypage = () => {
                     "RefreshToken": localStorage.getItem("RefreshToken"),
                 }
             });
-        console.log(a.data);
         if (a.data.success) {
             alert('정보가 수정되었습니다.');
             window.location.reload();

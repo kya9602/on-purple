@@ -17,8 +17,6 @@ const Comments = ({ item }) => {
         dispatch(__getUser())
     }, [])
 
-
-
     // 관리자 확인용 
     const admin = user?.role
 
@@ -132,19 +130,6 @@ const DeleteBtn = styled.button`
     width: 40px;
     height: 30px;
     border: none;
-    background-color: white;
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-`
-const EditBtn = styled.button`
-    width: 40px;
-    height: 30px;
-    border: none;
-    margin: 0 0 auto 0;
-    margin-top: 5px;
     background-color: white;
     img{
         width: 100%;
