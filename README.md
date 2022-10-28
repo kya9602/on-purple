@@ -8,6 +8,10 @@
 # 와이어프레임
 ![실전프로젝트! (1)](https://user-images.githubusercontent.com/110080748/192676235-e32f6c86-012c-45e9-98da-6fd601010b79.jpg)
 
+# Architecture
+![Architecture](https://user-images.githubusercontent.com/85295433/198506751-0c7ec51c-cfbe-42b6-a24b-b3f11b63ac36.png)
+
+
 <h1>💡 Notion</h1>
 https://www.notion.so/6-fb30c578bc024c55ae1acbf5166af548
 
