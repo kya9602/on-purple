@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 // import required modules
 import { Pagination } from "swiper";
-import Guide1 from "../../assets/images/Guide1.jpg"
+import Guide1 from "../../assets/images/Guide 1.jpg"
 import Guide2 from "../../assets/images/Guide2.jpg"
 import Guide3 from "../../assets/images/Guide 3.jpg"
 import Guide4 from "../../assets/images/Guide4.jpg"
