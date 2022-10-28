@@ -4,7 +4,6 @@ import axios from "axios";
 export const __getProfileDetail = createAsyncThunk(
   "GET_ProfileDetail",
   async (payload, thunkAPI) => {
-    /* console.log("payload is ", payload) */
     try {
       const data = await axios.get(`${process.env.REACT_APP_HOST}/profile/${payload}`,
         {
@@ -13,7 +12,6 @@ export const __getProfileDetail = createAsyncThunk(
             "RefreshToken": localStorage.getItem("RefreshToken"),
           }
         });
-      //console.log(data)
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Gender = ({ setGender, gender }) => {
 
     const handelClickRadioBtn = (e) => {
-        //console.log(e.target.value)
+       
         setGender(e.target.value)
     }
 

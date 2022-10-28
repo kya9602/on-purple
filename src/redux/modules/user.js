@@ -8,10 +8,7 @@ export const __checkUsername = createAsyncThunk(
     "data/checkUsername",
 
     async (payload, thunkAPI) => {
-        console.log(regexUsername.test(payload))
-        console.log(payload)
         try {
-            console.log(payload);
             const data = await axios.post(`${process.env.REACT_APP_HOST}/user/idCheck/${payload.username}`);
 
             if (data.data.success === false) {
@@ -38,9 +35,7 @@ export const __checkNickname = createAsyncThunk(
     "data/checkNickname",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload);
             const data = await axios.post(`${process.env.REACT_APP_HOST}/user/nicknameCheck/${payload.nickname}`);
-            console.log(data.data);
             if (data.data.success === false) {
                 alert(data.data.error.message);
             }
@@ -70,7 +65,6 @@ export const __logout = createAsyncThunk(
                     }
                 });
         } catch (error) {
-            console.log('로그아웃 실패')
         }
     }
 );

@@ -8,15 +8,7 @@ export const __getUser = createAsyncThunk(
   "GET_USER",
   async (payload, thunkAPI) => {
     try {
-      // 
-      // const userToken = localStorage.getItem("Authorization")
-
-      // var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NDcwNjUyNn0.z4A64I9f088GtowfubT6mgvvfNMzhUKXdFeOvjjDJxg";
-      // var decoded = jwt_decode(token);
-
-      // console.log('decoded is', decoded);
-
-
+      
       const data = await axios.get(`${process.env.REACT_APP_HOST}/user/me`, {
         headers: {
           "Authorization": localStorage.getItem("Authorization"),   //accesstoken

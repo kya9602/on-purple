@@ -36,7 +36,7 @@ const KakaoAddSignup = () => {
         const { name, value } = e.target;
         setInput({ ...input, [name]: value, });
     };
-    console.log(input)
+    
 
 
     const accessToken = localStorage.getItem("Authorization"); //accesstoken 
@@ -50,7 +50,7 @@ const KakaoAddSignup = () => {
 
 
     const userData = user.data;
-    console.log("data is", userData)
+  
 
     useEffect(() => {
         dispatch(__getUser(userId));
@@ -80,7 +80,7 @@ const KakaoAddSignup = () => {
             smoke: smoke,
             likeMovieType: likeMovieType,
         };
-        console.log("user is ", user)
+       
 
 
 
@@ -93,7 +93,7 @@ const KakaoAddSignup = () => {
             }
         });
 
-        console.log(data.data);
+  
 
         if (data.data.success) {
             alert('모든 정보입력이 완료되었습니다~~');
@@ -256,7 +256,7 @@ const KakaoAddSignup = () => {
                     </AddMyinfo>
                 </form>
                 <StBtbBox>
-                    <StButton onClick={() => { addHandler(); console.log("input is", input) }}> 추가 필수정보도 작성완료 😘 👆</StButton>
+                    <StButton onClick={() => { addHandler()}}> 추가 필수정보도 작성완료 😘 👆</StButton>
                 </StBtbBox>
             </SecondMypageBox>
         </>
