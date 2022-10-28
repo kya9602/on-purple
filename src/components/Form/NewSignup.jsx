@@ -637,7 +637,7 @@ export default function VerticalLinearStepper() {
             return alert("비밀번호를 형식에 맞춰서 작성해주세요 ")
         } else if (userinfo.password !== userinfo.passwordConfirm) {
             return alert("비밀번호가 서로 일치하지않습니다")
-        } else if (userinfo.gender.trim === "") {
+        } else if (userinfo.gender === "") {
             return alert("성별을 등록해주세요 ")
         };
 
