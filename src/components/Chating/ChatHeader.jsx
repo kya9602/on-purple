@@ -12,7 +12,7 @@ const navigate = useNavigate();
     return (
         <ChatHeaderContainerDiv>
             <ChatBackbuttonDiv>
-                <ArrowBackIosIcon style={{mariginBottom:"10px"}} fontSize="large" onClick={() => { navigate(-1); }}/>
+                <ArrowBackIosIcon style={{mariginBottom:"10px"}} fontSize="large" onClick={() => { navigate('/chat'); }}/>
             
             </ChatBackbuttonDiv>
             <ImgBox>

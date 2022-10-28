@@ -239,6 +239,10 @@ class VideoChatConnect extends Component {
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
+        const href = window.location.href;
+        let roomId = []
+        roomId = href.split('vchat/');        
+        console.log(roomId[1]);
         return (
             <div className="container">
                 {this.state.session === undefined ? (
@@ -278,7 +282,7 @@ class VideoChatConnect extends Component {
                                     <JoinButton className="btn btn-lg btn-success" name="commit" type="submit" value="통화하기" ></JoinButton>
                                 </p>
                             </form>
-                            <BackLink to= '/chat/' className="links"><p>뒤로가기</p></BackLink>
+                            <BackLink to= {{pathname:`/chat/${roomId[1]}`}} className="links"><p>뒤로가기</p></BackLink>
                             </VchatHeaderButtonSet>
                             <VChatGuide>
                                 <GuideH2>1. 권한을 허용 해 주세요</GuideH2>
