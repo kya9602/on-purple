@@ -623,7 +623,7 @@ export default function VerticalLinearStepper() {
     const handleNext = () => {
         if (userinfo.username.trim() === "" || userinfo.nickname.trim() === "" || userinfo.password.trim() === "" || userinfo.passwordConfirm.trim() === "") {
             return alert("모든 칸을 채워주세요! 👀 ")
-        } else if (userinfo.imageUrl.trim === "") {
+        } else if (userinfo.imageUrl === "") {
             return alert("사진을 등록해주세요! 😎")
         } else if (usernameCheck === false) {
             return alert("아이디 중복확인을 해주세요!!!");
