@@ -226,6 +226,7 @@ const StLoginInput = styled.input`
   border-radius: 5px;
   font-size: 18px; 
   padding:1%;
+  width: 200px;
 `
 
 //작은 박스안에 "아이디 비밀번호"
@@ -233,13 +234,10 @@ const StLaber = styled.label`
   margin-top: 5px;
   color : #6d0488;
   font-weight: bolder;
-  font-size: 18px;
-  @media all and (max-width: 750px) {
-    font-size : 14px;
-  }
-  @media all and (max-width : 400px) {
-    font-size : 12px;
-  }
+  font-size: 14px;
+  width: 70px;
+  text-align: center;
+  
 `;
 
 //버튼들 박스
