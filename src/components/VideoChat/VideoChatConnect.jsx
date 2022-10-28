@@ -1,11 +1,16 @@
 import axios from 'axios';
-import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+
+import { OpenVidu } from 'openvidu-browser';
 import UserVideoComponent from './UserVideoComponent';
-import endcall from '../../assets/images/endcall.png'
+import endcall from '../../assets/images/endcall.png';
+import guide1 from '../../assets/images/vchatguide1.png';
+import guide2 from '../../assets/images/vchatguide2.png';
+import guide3 from '../../assets/images/vchatguide3.png';
+
 import styled from "styled-components";
 
-import { withRouter } from "react-router-dom";
 
 const OPENVIDU_SERVER_URL = `${process.env.REACT_APP_VCHAT_SEVER}` ;
 const OPENVIDU_SERVER_SECRET = `${process.env.REACT_APP_VCHAT_SECRET}`;
@@ -18,7 +23,6 @@ class VideoChatConnect extends Component {
         let roomId = []
         roomId = href.split('vchat/');        
         console.log(roomId[1]);
-
 
         this.state = {
             mySessionId: `${roomId[1]}`,
@@ -235,7 +239,10 @@ class VideoChatConnect extends Component {
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
-
+        const href = window.location.href;
+        let roomId = []
+        roomId = href.split('vchat/');        
+        console.log(roomId[1]);
         return (
             <div className="container">
                 {this.state.session === undefined ? (
@@ -243,8 +250,8 @@ class VideoChatConnect extends Component {
                         {/* <div id="img-div">
                             <img src="resources/images/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu logo" />
                         </div> */}
-                        <div id="join-dialog" className="jumbotron vertical-center">
-                            
+                        <VchatContainer>
+                            <VchatHeaderButtonSet>
                             <form className="form-group" onSubmit={this.joinSession}>
                                 <p>
                                     {/* <label>Participant(닉네임): </label> */}
@@ -270,13 +277,27 @@ class VideoChatConnect extends Component {
                                         style={{ display: "none" }}
                                     />
                                 </p>
+                                
                                 <p className="text-center">
-                                    <JoinButton className="btn btn-lg btn-success" name="commit" type="submit" value="통화연결" ></JoinButton>
+                                    <JoinButton className="btn btn-lg btn-success" name="commit" type="submit" value="통화하기" ></JoinButton>
                                 </p>
                             </form>
-                            
-                        </div>
+                            <BackLink to= {{pathname:`/chat/${roomId[1]}`}} className="links"><p>뒤로가기</p></BackLink>
+                            </VchatHeaderButtonSet>
+                            <VChatGuide>
+                                <GuideH2>1. 권한을 허용 해 주세요</GuideH2>
+                                <Guide1Img src={guide1}></Guide1Img>
+                                <GuideH2>2. 허용창이 뜨지 않는다면?</GuideH2>
+                                <Guide2Img src={guide2}></Guide2Img>
+                                <GuideH4>1. 자물쇠 모양을 눌러</GuideH4>
+                                <GuideH4 style={{marginTop:'-5px'}}>2. 사이트 설정으로 이동해 주세요.</GuideH4>
+                                <Guide3Img src={guide3}></Guide3Img>
+                                <GuideH4>3. 카메라와 마이크를 허용으로 변경 해 주세요.</GuideH4>
+                            </VChatGuide>
+                        </VchatContainer>
+                        
                     </div>
+                    
                 ) : null}
 
                 {this.state.session !== undefined ? (
@@ -430,6 +451,44 @@ const SessionHeader = styled.div`
     flex-direction: column;
 `
 
+const VchatContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+const VchatHeaderButtonSet = styled.div`
+`
+const VChatGuide = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    margin-top: 25px;
+    margin-left: 64px;
+`
+const GuideH2 = styled.h2`
+    display: flex;
+    justify-content: center;
+`
+const GuideH4 = styled.h4`
+    display: flex;
+    justify-content: center;
+`
+const Guide1Img = styled.img`
+    display: flex;
+    align-items: center;
+
+`
+const Guide2Img = styled.img`
+display: flex;
+justify-content: center;
+
+`
+const Guide3Img = styled.img`
+display: flex;
+justify-content: center;
+
+`
+
 const SessionExit = styled.button`
     float: right;
     margin-top: 5px;
@@ -450,6 +509,7 @@ const SessionExit = styled.button`
     color:white;
   }
 `
+
 
 const VideoContainer = styled.div`
     display: flex;
@@ -488,7 +548,34 @@ const JoinButton = styled.input`
     border-radius: 10px;
     font-weight: 600;
     font-size: 12px;
+    height: 28px;
+    width: 100px;
+    :hover{
+    border: none;
+    background-color: #4097df;
+    color:white;
+  }
+  cursor:pointer
+`
+
+const BackLink = styled(Link)`
+    align-items: center;
+    text-decoration-line: none;
+    float: left;
+    margin-top: 5px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    color: inherit;
+
+    border: 2px solid #6e96ee;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
     height: 25px;
+    width: 100px;
     :hover{
     border: none;
     background-color: #4097df;
