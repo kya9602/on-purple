@@ -16,7 +16,6 @@ const ProfileInfo = () => {
     const { userId } = useParams();
 
     const userProfile = profileDetail?.posts?.data
-    console.log(profileDetail?.posts?.data)
 
     useEffect(() => {
         dispatch(__getProfileDetail(userId));

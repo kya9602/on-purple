@@ -30,7 +30,6 @@ const EditModal = (props) => {
                     "RefreshToken": localStorage.getItem("RefreshToken"),
                 }
             });
-        console.log(a.data);
         if (a.data.success) {
             alert('정보가 수정되었습니다.');
             window.location.reload();

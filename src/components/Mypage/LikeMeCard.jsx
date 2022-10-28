@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const LikeMeCard = ({ likeMeitem }) => {
     const navigate = useNavigate();
     // key=1 post=json{}, props에 들어가잇음
-    // console.log(likeMeitem)
     return (
         <>
             <Item onClick={() => { navigate(`/profileInfo/${likeMeitem?.userId}`) }}>

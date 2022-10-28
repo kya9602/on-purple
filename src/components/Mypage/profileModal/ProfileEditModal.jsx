@@ -19,7 +19,6 @@ const ProfileEditModal = (props) => {
 
     //마이페이지 인포 정보
     const userInfo = mypage.mypage.data
-    // console.log(userInfo)
 
     useEffect(() => {
         dispatch(__getMypage(profileId));
@@ -35,7 +34,6 @@ const ProfileEditModal = (props) => {
         formData.append('imageUrl', fileBlob);
 
         for (const keyValue of formData) {
-            console.log(keyValue[0] + ", " + keyValue[1])
         };
 
         const reader = new FileReader();
@@ -62,7 +60,6 @@ const ProfileEditModal = (props) => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-        console.log(a.data);
         if (a.data.success) {
             alert('정보가 수정되었습니다.');
             window.location.reload();
