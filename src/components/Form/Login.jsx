@@ -180,21 +180,11 @@ const StLoginContainer = styled.div`
   margin-top: 120px;
   background-color: white;
   max-width: 428px;
-  width: 98.5%;
-  height: auto;
+  width: 370px;
   padding-top: 10px;
   padding-bottom: 5%;
   border: 3px solid #adaaad;
   /* background-color: red; */
-  @media all and (max-width: 880px) {
-     width: 600px;
-  }
-  @media all and (max-width : 680px) {
-    width: 400px;
-  }
-  @media all and (max-width : 480px) {
-    width: 350px;
-  }
 `;
 
 
@@ -211,13 +201,8 @@ const StPwBox = styled.div`
   display: flex;
   justify-content:center;
   margin-top: 20px;
-  margin-bottom: 30px;
-  @media all and (max-width: 750px) {
-    margin-bottom: 15px;
-  }
-  @media all and (max-width : 400px) {
-    margin-bottom: 10px;
-  }
+  margin-bottom: 20px;
+
 `;
 
 //인풋창 디자인
@@ -226,6 +211,7 @@ const StLoginInput = styled.input`
   border-radius: 5px;
   font-size: 18px; 
   padding:1%;
+  width: 200px;
 `
 
 //작은 박스안에 "아이디 비밀번호"
@@ -233,13 +219,10 @@ const StLaber = styled.label`
   margin-top: 5px;
   color : #6d0488;
   font-weight: bolder;
-  font-size: 18px;
-  @media all and (max-width: 750px) {
-    font-size : 14px;
-  }
-  @media all and (max-width : 400px) {
-    font-size : 12px;
-  }
+  font-size: 14px;
+  width: 70px;
+  text-align: center;
+  
 `;
 
 //버튼들 박스
@@ -247,12 +230,7 @@ const StBtnBox = styled.div`
   justify-content: center;
   display: flex;
   margin-top: 20px;
-  @media all and (max-width : 750px) {
-    margin-top: 10px;
-  }
-  @media all and (max-width : 400px) {
-    margin-top: 10px;
-  }
+ 
 `;
 
 //로그인버튼 디자인
@@ -262,40 +240,14 @@ const StBtn = styled.button`
   border: none;
   padding: 1%;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 14px;
   border-bottom-style:solid; 
   border-bottom-color:#80036f;
   border-bottom-width:2px;
   cursor: pointer;
-@media all and (max-width: 750px) {
-    font-size : 14px;
-  }
+
 `
 
-// const StBtnKaka = styled.button`
-//   margin-top: 10px;
-//   background-color: white;
-//   border:none;
-//   cursor: pointer;
-//   @media all and (max-width: 750px) {
-//     img{
-//   width: 140px;
-//       }
-//   }
-
-// `;
-
-// const StBtnNaver = styled.button`
-//   background-color: white;
-//   border:none;
-//   margin-bottom: 10px;
-//   cursor: pointer;
-//   @media all and (max-width: 750px) {
-//     img{
-//   width: 140px;
-//       }
-//   }
-// `;
 
 //회원가입 버튼 박스
 const StJoinBtnBox = styled.div`
