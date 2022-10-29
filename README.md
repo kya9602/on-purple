@@ -42,6 +42,7 @@ https://on-purple.com/
 <h3>💜 생성된 채팅방 목록을 확인 할 수 있음 💜</h3>
 
 
+![채팅](https://user-images.githubusercontent.com/110080748/198822018-901bbb3f-b05b-491e-b25a-c48fb200e35b.gif)
 
 
 ![chatRoom](https://user-images.githubusercontent.com/109732299/198250583-77a1ce2b-ecbc-4ce7-91ce-5436499645d1.png)
