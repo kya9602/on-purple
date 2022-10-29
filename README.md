@@ -41,12 +41,9 @@ https://on-purple.com/
 
 <h3>💜 생성된 채팅방 목록을 확인 할 수 있음 💜</h3>
 
-
-![채팅](https://user-images.githubusercontent.com/110080748/198822018-901bbb3f-b05b-491e-b25a-c48fb200e35b.gif)
-
-
 ![chatRoom](https://user-images.githubusercontent.com/109732299/198250583-77a1ce2b-ecbc-4ce7-91ce-5436499645d1.png)
 
+![채팅](https://user-images.githubusercontent.com/110080748/198822018-901bbb3f-b05b-491e-b25a-c48fb200e35b.gif)
 
 
 <h3>💜 선택한 채팅방으로 들어가서 대화를 나눌 수 있음 💜</h3>
@@ -73,17 +70,14 @@ https://on-purple.com/
  ![포스트 상세](https://user-images.githubusercontent.com/109732299/198251834-73ec00d3-3bd4-417a-acc8-c44b2d544679.png)
 
 
-
  
  
 <h3>💜 게시글을 등록하여 추천 맛집이나 데이트 코스 등 커뮤니티가 가능함. 💜</h3>
  
- 
- 
- 
+
+
 
 ![댓글창](https://user-images.githubusercontent.com/109732299/198251903-5a717ca8-7172-40e2-a48e-e03c7b8c948b.png)
-
 
 
 
