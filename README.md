@@ -85,6 +85,8 @@ https://on-purple.com/
 
 ![검색](https://user-images.githubusercontent.com/110080748/198822105-aa4934dd-ecfc-4983-b5fc-4f112309b4a9.gif)
 <h3>💜 제목에 포함된 키워드를 기준으로 검색가능 💜</h3>
+
+
 # 사용자 가이드 화면
 ![가이드 안에 내용](https://user-images.githubusercontent.com/109732299/198252109-acebe1d7-d899-4766-bb82-0cf4af5ec999.png)
 
