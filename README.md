@@ -18,7 +18,8 @@
 https://www.notion.so/6-fb30c578bc024c55ae1acbf5166af548
 
 <h1>💻 Service domain</h1>
-__ https://on-purple.com/ __
+~~ https://on-purple.com/ ~~
+서버 금액 문제로 현재는 도메인을 닫았습니다.
 
 <h1>🔖 서비스 개요</h1>
 <h3>💜 매칭 서비스 기반의 데이팅 플랫폼 💜</h3>
